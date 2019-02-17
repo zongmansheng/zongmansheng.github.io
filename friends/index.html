@@ -264,200 +264,280 @@
     </nav>
 </header>
 
-
-
-
-
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover  about-cover" style="background-image: url('/medias/cover.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col s12 m12 l12">
+            <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        friends
+                    <div class="title center-align">
+                    
+                        一个来自IT界的菜鸟007
+                    
+                    </div>
+
+                    <div class="description center-align">
+                    
+                        IT界从来没有真正的绝境，只有心灵的迷途
+                    
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 
+<script>
+// Dynamically switch banner pictures every day.
+$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+</script>
+<style>
+    .friends-container {
+        margin-top: -100px;
+    }
 
+    .frind-ship img {
+        border-radius: 50%;
+    }
 
-<main class="container content">
+    /* 一下是按钮样式 */
 
-    
-    <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                </div>
-            </div>
+    .frind-ship {
+        padding: 10px 20px;
+    }
 
-            <div class="post-info">
-                <div class="post-date info-break-policy">
-                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-02-17
-                </div>
+    .frind-ship .title {
+        display: flex;
+        align-items: center;
+    }
 
-                
-                    
-                    <div class="info-break-policy">
-                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
-                    </div>
-                    
+    .frind-ship .title div {
+        color: #fff;
+        padding-left: 10px;
+    }
 
-                    
-                    <div class="info-break-policy">
-                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
-                    </div>
-                    
-                
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
-            </div>
-        </div>
-        <hr class="clearfix">
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                
-            </div>
-            <hr>
+    .frind-ship .title img {
+        width: 100px;
+        height: 100px;
+        flex-shrink: 0;
+    }
 
+    .frind-ship .title h1 {
+        line-height: 0.8rem;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #fff;
+    }
+
+    .friend-button {
+        display: flex;
+        justify-content: center;
+        margin-bottom: -27px;
+    }
+
+    .friend-button a {
+        border-radius: 40px;
+    }
+
+    .friend-all .tag-post {
+        margin-bottom: 30px;
+    }
+
+    .button-caution {
+        background-color: #FF4351;
+        border-color: #FF4351;
+        color: #FFF;
+    }
+
+    .button {
+        font-weight: 300;
+        font-size: 16px;
+        font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        text-decoration: none;
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+        padding: 0 40px;
+        margin: 0;
+        display: inline-block;
+        appearance: none;
+        cursor: pointer;
+        border: none;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-transition-property: all;
+        transition-property: all;
+        -webkit-transition-duration: .3s;
+        transition-duration: .3s;
+    }
+
+    .title {
+        margin-bottom: 0rem !important;
+    }
+
+    .card {
+        margin: 3rem 0 1rem 0 !important;
+    }
+
+    .button-glow.button-caution {
+        -webkit-animation-name: glowing-caution;
+        animation-name: glowing-caution;
+    }
+
+    @-webkit-keyframes glowing-caution {
+        from {
+            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+        }
+
+        50% {
+            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+        }
+
+        to {
+            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+        }
+    }
+
+    @keyframes glowing-caution {
+        from {
+            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+        }
+
+        50% {
+            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
+        }
+
+        to {
+            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
+        }
+    }
+
+    .button-caution:hover {
+        background-color: #ff7680;
+        border-color: #ff7680;
+        color: #FFF;
+        text-decoration: none;
+    }
+
+    .frind-card1 {
+        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .frind-card2 {
+        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .frind-card3 {
+        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+    }
+
+    .frind-card4 {
+        background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    }
+
+    .frind-card5 {
+        background-image: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
+    }
+
+    .frind-card6 {
+        background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+    }
+
+    .frind-card7 {
+        background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+    }
+
+    .frind-card8 {
+        background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);
+    }
+
+    .frind-card9 {
+        background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    }
+
+    .frind-card10 {
+        background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    }
+</style>
+
+<main class="content">
+    <div class="container friends-container">
+        <article>
             
-
-            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-
-<div id="article-share">
-    
-    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
-    
-</div>
-
-<script src="/libs/share/js/social-share.min.js"></script>
-
-            <div class="reprint">
-                <p>
-                    <span class="reprint-tip">
-                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
-                    </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
-                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/friends/index.html" class="b-link-green">friends</a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
-            <div class="card">
-                <a href="/friends/index.html">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
-                        
-                        <span class="card-title">friends</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary"></div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-17
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-user fa-fw"></i>
-                            ZongMan
-                            
-                        </span>
+            
+            <div class="row tags-posts friend-all">
+                
+                
+                <div class=" col s12 m6 l4" data-aos="zoom-in-up">
+                    <div class="card frind-card1">
+                        <div class="frind-ship">
+                            <div class="title">
+                                <img src="http://image.luokangyuan.com/1_qq_27922023.jpg" alt="img">
+                                <div>
+                                    <h1 class="friend-name">�뽴</h1>
+                                    <p>�Ҳ��Ǵ��У�ֻ����׷Ѱ���еĽŲ�</p>
+                                </div>
+                            </div>
+                            <div class="friend-button">
+                                <a href="http://luokangyuan.com/" target="_blank" class="button button-glow button-rounded button-caution">
+                                    ǰȥѧϰ
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
                 
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div class="card">
-                <a href="/friends/index.html">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
-                        
-                        <span class="card-title">friends</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary"></div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-17
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-user fa-fw"></i>
-                            ZongMan
-                            
-                        </span>
+                
+                <div class=" col s12 m6 l4" data-aos="zoom-in-up">
+                    <div class="card frind-card2">
+                        <div class="frind-ship">
+                            <div class="title">
+                                <img src="http://image.luokangyuan.com/4027734.jpeg" alt="img">
+                                <div>
+                                    <h1 class="friend-name">��˸֮��</h1>
+                                    <p>��̽���У�����ţ���˻��ر�ã������Ķ�������̴���</p>
+                                </div>
+                            </div>
+                            <div class="friend-button">
+                                <a href="https://blinkfox.github.io/" target="_blank" class="button button-glow button-rounded button-caution">
+                                    ǰȥѧϰ
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                
+                
+                <div class=" col s12 m6 l4" data-aos="zoom-in-up">
+                    <div class="card frind-card3">
+                        <div class="frind-ship">
+                            <div class="title">
+                                <img src="http://image.luokangyuan.com/avatar.jpg" alt="img">
+                                <div>
+                                    <h1 class="friend-name">ja_rome</h1>
+                                    <p>ƽ���ĽŲ�Ҳ�����߳�ΰ����г�</p>
+                                </div>
+                            </div>
+                            <div class="friend-button">
+                                <a href="ttps://me.csdn.net/jlh912008548" target="_blank" class="button button-glow button-rounded button-caution">
+                                    ǰȥѧϰ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
-        </div>
-        
+            
+        </article>
     </div>
-</article>
-</div>
-
-
-    
-
 </main>
-
-
 <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
