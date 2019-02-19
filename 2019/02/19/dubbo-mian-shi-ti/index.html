@@ -5,9 +5,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="晓笙的BLOG">
-    <meta name="description" content="Dubbo面试题总结一、Dubbo是什么？Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布式服务框架，现已成为 Apache 基金会孵化项目。
-二、远程过程调用协议RPC:(Remote Procedure Call)
-  ">
+    <meta name="description" content="title: 悲观锁与乐观锁的区别
+date: 2019-02-18 08:53:25
+tags: Mysql基础   java基础
+Dubbo面试题总结一、Dubbo是什么？Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -279,7 +280,10 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Dubbo面试题总结"><a href="#Dubbo面试题总结" class="headerlink" title="Dubbo面试题总结"></a>Dubbo面试题总结</h1><h4 id="一、Dubbo是什么？"><a href="#一、Dubbo是什么？" class="headerlink" title="一、Dubbo是什么？"></a>一、Dubbo是什么？</h4><pre><code>Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布式服务框架，现已成为 Apache 基金会孵化项目。
+                <pre><code>title: 悲观锁与乐观锁的区别
+date: 2019-02-18 08:53:25
+tags: Mysql基础   java基础
+</code></pre><h1 id="Dubbo面试题总结"><a href="#Dubbo面试题总结" class="headerlink" title="Dubbo面试题总结"></a>Dubbo面试题总结</h1><h4 id="一、Dubbo是什么？"><a href="#一、Dubbo是什么？" class="headerlink" title="一、Dubbo是什么？"></a>一、Dubbo是什么？</h4><pre><code>Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布式服务框架，现已成为 Apache 基金会孵化项目。
 </code></pre><h4 id="二、远程过程调用协议"><a href="#二、远程过程调用协议" class="headerlink" title="二、远程过程调用协议"></a>二、远程过程调用协议</h4><pre><code>RPC:(Remote Procedure Call)
     它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。RPC协议假定某些传输协议的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI网络通信模型中，RPC跨越了传输层和应用层。RPC使得开发包括网络分布式多程序在内的应用程序更加容易。
 
@@ -291,9 +295,9 @@ RPC采用客户机/服务器模式。请求程序就是一个客户机，而服�
     使用 Dubbo 可以将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，可用于提高业务复用灵活扩展，使前端应用能更快速的响应多变的市场需求。
 
 下面这张图可以很清楚的诠释，最重要的一点是，分布式架构可以承受更大规模的并发流量。
-</code></pre><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554002964.png" alt="1550554002964"></p>
+</code></pre><p><img src="typora-user-images\1550554002964.png" alt="1550554002964"></p>
 <p>下面是 Dubbo 的服务治理图。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554034880.png" alt="1550554034880"></p>
+<p><img src="\typora-user-images\1550554034880.png" alt="1550554034880"></p>
 <h4 id="四、Dubbo-和-Spring-Cloud-有什么区别？"><a href="#四、Dubbo-和-Spring-Cloud-有什么区别？" class="headerlink" title="四、Dubbo 和 Spring Cloud 有什么区别？"></a>四、Dubbo 和 Spring Cloud 有什么区别？</h4><pre><code>两个没关联，如果硬要说区别，有以下几点。
 
 1）通信方式不同
@@ -316,15 +320,15 @@ rest://
 Jetty Container
 Log4j Container
 Dubbo 的服务容器只是一个简单的 Main 方法，并加载一个简单的 Spring 容器，用于暴露服务。
-</code></pre><h4 id="八、Dubbo里面有哪几种节点角色？"><a href="#八、Dubbo里面有哪几种节点角色？" class="headerlink" title="八、Dubbo里面有哪几种节点角色？"></a>八、Dubbo里面有哪几种节点角色？</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554250039.png" alt="1550554250039"></p>
-<h4 id="九、画一画服务注册与发现的流程图"><a href="#九、画一画服务注册与发现的流程图" class="headerlink" title="九、画一画服务注册与发现的流程图"></a>九、画一画服务注册与发现的流程图</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554288101.png" alt="1550554288101"></p>
+</code></pre><h4 id="八、Dubbo里面有哪几种节点角色？"><a href="#八、Dubbo里面有哪几种节点角色？" class="headerlink" title="八、Dubbo里面有哪几种节点角色？"></a>八、Dubbo里面有哪几种节点角色？</h4><p><img src="typora-user-images\1550554250039.png" alt="1550554250039"></p>
+<h4 id="九、画一画服务注册与发现的流程图"><a href="#九、画一画服务注册与发现的流程图" class="headerlink" title="九、画一画服务注册与发现的流程图"></a>九、画一画服务注册与发现的流程图</h4><p><img src="typora-user-images\1550554288101.png" alt="1550554288101"></p>
 <h4 id="十、Dubbo默认使用什么注册中心，还有别的选择吗？"><a href="#十、Dubbo默认使用什么注册中心，还有别的选择吗？" class="headerlink" title="十、Dubbo默认使用什么注册中心，还有别的选择吗？"></a>十、Dubbo默认使用什么注册中心，还有别的选择吗？</h4><pre><code>推荐使用 Zookeeper 作为注册中心，还有 Redis、Multicast、Simple 注册中心，但不推荐。
 </code></pre><h4 id="十一、Dubbo有哪几种配置方式？"><a href="#十一、Dubbo有哪几种配置方式？" class="headerlink" title="十一、Dubbo有哪几种配置方式？"></a>十一、Dubbo有哪几种配置方式？</h4><pre><code>1）Spring 配置方式
 
 2）Java API 配置方式
-</code></pre><h4 id="十二、Dubbo-核心的配置有哪些？"><a href="#十二、Dubbo-核心的配置有哪些？" class="headerlink" title="十二、Dubbo 核心的配置有哪些？"></a>十二、Dubbo 核心的配置有哪些？</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554406352.png" alt="1550554406352"></p>
+</code></pre><h4 id="十二、Dubbo-核心的配置有哪些？"><a href="#十二、Dubbo-核心的配置有哪些？" class="headerlink" title="十二、Dubbo 核心的配置有哪些？"></a>十二、Dubbo 核心的配置有哪些？</h4><p><img src="typora-user-images\1550554406352.png" alt="1550554406352"></p>
 <p>配置之间的关系见下图。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554429525.png" alt="1550554429525"></p>
+<p><img src="\Typora\typora-user-images\1550554429525.png" alt="1550554429525"></p>
 <h4 id="十三、在-Provider-上可以配置的-Consumer-端的属性有哪些？"><a href="#十三、在-Provider-上可以配置的-Consumer-端的属性有哪些？" class="headerlink" title="十三、在 Provider 上可以配置的 Consumer 端的属性有哪些？"></a>十三、在 Provider 上可以配置的 Consumer 端的属性有哪些？</h4><pre><code>1）timeout：方法调用超时
 
 2）retries：失败重试次数，默认重试 2 次
@@ -335,8 +339,8 @@ Dubbo 的服务容器只是一个简单的 Main 方法，并加载一个简单�
 </code></pre><h4 id="十四、Dubbo启动时如果依赖的服务不可用会怎样？"><a href="#十四、Dubbo启动时如果依赖的服务不可用会怎样？" class="headerlink" title="十四、Dubbo启动时如果依赖的服务不可用会怎样？"></a>十四、Dubbo启动时如果依赖的服务不可用会怎样？</h4><pre><code>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，默认 check=&quot;true&quot;，可以通过 check=&quot;false&quot; 关闭检查。
 </code></pre><h4 id="十五、Dubbo默认使用的是什么通信框架，还有别的选择吗？"><a href="#十五、Dubbo默认使用的是什么通信框架，还有别的选择吗？" class="headerlink" title="十五、Dubbo默认使用的是什么通信框架，还有别的选择吗？"></a>十五、Dubbo默认使用的是什么通信框架，还有别的选择吗？</h4><pre><code>Dubbo 默认使用 Netty 框架，也是推荐的选择，另外内容还集成有Mina、Grizzly。
 </code></pre><h4 id="十六、Dubbo推荐使用什么序列化框架，你知道的还有哪些？"><a href="#十六、Dubbo推荐使用什么序列化框架，你知道的还有哪些？" class="headerlink" title="十六、Dubbo推荐使用什么序列化框架，你知道的还有哪些？"></a>十六、Dubbo推荐使用什么序列化框架，你知道的还有哪些？</h4><pre><code>推荐使用Hessian序列化，还有Duddo、FastJson、Java自带序列化。
-</code></pre><h4 id="十七、Dubbo有哪几种集群容错方案，默认是哪种？"><a href="#十七、Dubbo有哪几种集群容错方案，默认是哪种？" class="headerlink" title="十七、Dubbo有哪几种集群容错方案，默认是哪种？"></a>十七、Dubbo有哪几种集群容错方案，默认是哪种？</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554627446.png" alt="1550554627446"></p>
-<h4 id="十八、Dubbo有哪几种负载均衡策略，默认是哪种？"><a href="#十八、Dubbo有哪几种负载均衡策略，默认是哪种？" class="headerlink" title="十八、Dubbo有哪几种负载均衡策略，默认是哪种？"></a>十八、Dubbo有哪几种负载均衡策略，默认是哪种？</h4><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554672227.png" alt="1550554672227"></p>
+</code></pre><h4 id="十七、Dubbo有哪几种集群容错方案，默认是哪种？"><a href="#十七、Dubbo有哪几种集群容错方案，默认是哪种？" class="headerlink" title="十七、Dubbo有哪几种集群容错方案，默认是哪种？"></a>十七、Dubbo有哪几种集群容错方案，默认是哪种？</h4><p><img src="\typora-user-images\1550554627446.png" alt="1550554627446"></p>
+<h4 id="十八、Dubbo有哪几种负载均衡策略，默认是哪种？"><a href="#十八、Dubbo有哪几种负载均衡策略，默认是哪种？" class="headerlink" title="十八、Dubbo有哪几种负载均衡策略，默认是哪种？"></a>十八、Dubbo有哪几种负载均衡策略，默认是哪种？</h4><p><img src="\typora-user-images\1550554672227.png" alt="1550554672227"></p>
 <h4 id="十九、注册了多个同一样的服务，如果测试指定的某一个服务呢？"><a href="#十九、注册了多个同一样的服务，如果测试指定的某一个服务呢？" class="headerlink" title="十九、注册了多个同一样的服务，如果测试指定的某一个服务呢？"></a>十九、注册了多个同一样的服务，如果测试指定的某一个服务呢？</h4><pre><code>可以配置环境点对点直连，绕过注册中心，将以服务接口为单位，忽略注册中心的提供者列表。
 </code></pre><h4 id="二十、Dubbo支持服务多协议吗？"><a href="#二十、Dubbo支持服务多协议吗？" class="headerlink" title="二十、Dubbo支持服务多协议吗？"></a>二十、Dubbo支持服务多协议吗？</h4><pre><code>Dubbo 允许配置多协议，在不同服务上支持不同协议或者同一服务上同时支持多种协议。
 </code></pre><h4 id="二十一、当一个服务接口有多种实现时怎么做？"><a href="#二十一、当一个服务接口有多种实现时怎么做？" class="headerlink" title="二十一、当一个服务接口有多种实现时怎么做？"></a>二十一、当一个服务接口有多种实现时怎么做？</h4><pre><code>当一个接口有多种实现时，可以用 group 属性来分组，服务提供方和消费方都指定同一个 group 即可。
@@ -345,7 +349,7 @@ Dubbo 的服务容器只是一个简单的 Main 方法，并加载一个简单�
 </code></pre><h4 id="二十四、Dubbo服务之间的调用是阻塞的吗？"><a href="#二十四、Dubbo服务之间的调用是阻塞的吗？" class="headerlink" title="二十四、Dubbo服务之间的调用是阻塞的吗？"></a>二十四、Dubbo服务之间的调用是阻塞的吗？</h4><pre><code>默认是同步等待结果阻塞的，支持异步调用。
 
 Dubbo 是基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小，异步调用会返回一个 Future 对象。
-</code></pre><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554946569.png" alt="1550554946569"></p>
+</code></pre><p><img src="\typora-user-images\1550554946569.png" alt="1550554946569"></p>
 <h4 id="二十五、Dubbo支持分布式事务吗？"><a href="#二十五、Dubbo支持分布式事务吗？" class="headerlink" title="二十五、Dubbo支持分布式事务吗？"></a>二十五、Dubbo支持分布式事务吗？</h4><p>目前暂时不支持，后续可能采用基于 JTA/XA 规范实现，如以图所示。</p>
 <p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1550554990475.png" alt="1550554990475"></p>
 <h4 id="二十六、Dubbo-telnet-命令能做什么？"><a href="#二十六、Dubbo-telnet-命令能做什么？" class="headerlink" title="二十六、Dubbo telnet 命令能做什么？"></a>二十六、Dubbo telnet 命令能做什么？</h4><pre><code>dubbo 通过 telnet 命令来进行服务治理，具体使用看这篇文章《dubbo服务调试管理实用命令》。
@@ -423,9 +427,10 @@ telnet localhost 8090
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Dubbo面试题总结一、Dubbo是什么？Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布式服务框架，现已成为 Apache 基金会孵化项目。
-二、远程过程调用协议RPC:(Remote Procedure Call)
-  </div>
+                    <div class="summary">title: 悲观锁与乐观锁的区别
+date: 2019-02-18 08:53:25
+tags: Mysql基础   java基础
+Dubbo面试题总结一、Dubbo是什么？Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布</div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-19
@@ -504,7 +509,7 @@ telnet localhost 8090
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">4.2k</span>
+                <span class="white-color">4.3k</span>
             
 
             
