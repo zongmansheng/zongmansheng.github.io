@@ -282,7 +282,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="悲观锁和乐观锁的区别"><a href="#悲观锁和乐观锁的区别" class="headerlink" title="悲观锁和乐观锁的区别"></a>悲观锁和乐观锁的区别</h1><p><img src="/2019/02/18/bei-guan-suo-yu-le-guan-suo-de-qu-bie/typora-user-images\1548728392358.png" alt="1548728392358"></p>
+                <h1 id="悲观锁和乐观锁的区别"><a href="#悲观锁和乐观锁的区别" class="headerlink" title="悲观锁和乐观锁的区别"></a>悲观锁和乐观锁的区别</h1><p><img src="\typora-user-images\1548728392358.png" alt="1548728392358"></p>
 <h4 id="一、悲观锁-Pessimistic-Lock"><a href="#一、悲观锁-Pessimistic-Lock" class="headerlink" title="一、悲观锁(Pessimistic Lock)"></a>一、悲观锁(Pessimistic Lock)</h4><pre><code>    总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程）。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中synchronized和ReentrantLock等独占锁就是悲观锁思想的实现。
     它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。
 </code></pre><h4 id="二、乐观锁-Optimistic-Lock"><a href="#二、乐观锁-Optimistic-Lock" class="headerlink" title="二、乐观锁(Optimistic Lock)"></a>二、乐观锁(Optimistic Lock)</h4><pre><code>    总是假设最好的情况，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号机制和CAS算法实现。乐观锁适用于多读的应用类型，这样可以提高吞吐量，像数据库提供的类似于write_condition机制，其实都是提供的乐观锁。在Java中java.util.concurrent.atomic包下面的原子变量类就是使用了乐观锁的一种实现方式CAS实现的。
@@ -367,26 +367,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/03/24/mybatis-huan-cun-jie-shao/">
+                <a href="/2019/02/19/dubbo-chang-jian-mian-shi-ti-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Mybatis缓存介绍">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Dubbo常见面试题总结">
                         
-                        <span class="card-title">Mybatis缓存介绍</span>
+                        <span class="card-title">Dubbo常见面试题总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Mybatis缓存的介绍    缓存：合理使用缓存是优化中最常见的，将从数据库中查询出来的数据放入缓存中，下次使用时不必从数据库查询，而是直接从缓存中读取，避免频繁操作数据库，减轻数据库压力，同时提高系统性能。
-一、一级缓存    一级缓存</div>
+                    <div class="summary">Dubbo面试题总结一、Dubbo是什么？Dubbo是阿里巴巴开源的基于 Java 的高性能 RPC 分布式服务框架，现已成为 Apache 基金会孵化项目。
+二、远程过程调用协议RPC:(Remote Procedure Call)
+  </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-24
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-19
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            ZongMan
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/面试题/" class="post-category" target="_blank">
+                                    面试题
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -394,8 +399,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Mybatis-框架/" target="_blank">
-                        <span class="chip bg-color">Mybatis 框架</span>
+                    <a href="/tags/Dubbo/" target="_blank">
+                        <span class="chip bg-color">Dubbo</span>
+                    </a>
+                    
+                    <a href="/tags/Zookeeper/" target="_blank">
+                        <span class="chip bg-color">Zookeeper</span>
+                    </a>
+                    
+                    <a href="/tags/RPC/" target="_blank">
+                        <span class="chip bg-color">RPC</span>
                     </a>
                     
                 </div>
@@ -455,7 +468,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">3.2k</span>
+                <span class="white-color">5.3k</span>
             
 
             

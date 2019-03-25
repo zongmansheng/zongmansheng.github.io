@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, 晓笙的BLOG">
-    <meta name="description" content="friends | 晓笙的BLOG">
+    <meta name="keywords" content="标签: Zookeeper, 晓笙的BLOG">
+    <meta name="description" content="标签: Zookeeper | 晓笙的BLOG">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>friends | 晓笙的BLOG</title>
+    <title>标签: Zookeeper | 晓笙的BLOG</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -231,253 +231,108 @@
 // Dynamically switch banner pictures every day.
 $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
 </script>
-<style>
-    .friends-container {
-        margin-top: -100px;
-    }
-
-    .frind-ship img {
-        border-radius: 50%;
-    }
-
-    /* 一下是按钮样式 */
-
-    .frind-ship {
-        padding: 10px 20px;
-    }
-
-    .frind-ship .title {
-        display: flex;
-        align-items: center;
-    }
-
-    .frind-ship .title div {
-        color: #fff;
-        padding-left: 10px;
-    }
-
-    .frind-ship .title img {
-        width: 100px;
-        height: 100px;
-        flex-shrink: 0;
-    }
-
-    .frind-ship .title h1 {
-        line-height: 0.8rem;
-        padding-bottom: 16px;
-        border-bottom: 2px solid #fff;
-    }
-
-    .friend-button {
-        display: flex;
-        justify-content: center;
-        margin-bottom: -27px;
-    }
-
-    .friend-button a {
-        border-radius: 40px;
-    }
-
-    .friend-all .tag-post {
-        margin-bottom: 30px;
-    }
-
-    .button-caution {
-        background-color: #FF4351;
-        border-color: #FF4351;
-        color: #FFF;
-    }
-
-    .button {
-        font-weight: 300;
-        font-size: 16px;
-        font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        text-decoration: none;
-        text-align: center;
-        line-height: 40px;
-        height: 40px;
-        padding: 0 40px;
-        margin: 0;
-        display: inline-block;
-        appearance: none;
-        cursor: pointer;
-        border: none;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        -webkit-transition-property: all;
-        transition-property: all;
-        -webkit-transition-duration: .3s;
-        transition-duration: .3s;
-    }
-
-    .title {
-        margin-bottom: 0rem !important;
-    }
-
-    .card {
-        margin: 3rem 0 1rem 0 !important;
-    }
-
-    .button-glow.button-caution {
-        -webkit-animation-name: glowing-caution;
-        animation-name: glowing-caution;
-    }
-
-    @-webkit-keyframes glowing-caution {
-        from {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-
-        50% {
-            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-        }
-
-        to {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-    }
-
-    @keyframes glowing-caution {
-        from {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-
-        50% {
-            -webkit-box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-            box-shadow: 0 0 20px rgba(255, 67, 81, 0.8);
-        }
-
-        to {
-            -webkit-box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-            box-shadow: 0 0 0 rgba(255, 67, 81, 0.3);
-        }
-    }
-
-    .button-caution:hover {
-        background-color: #ff7680;
-        border-color: #ff7680;
-        color: #FFF;
-        text-decoration: none;
-    }
-
-    .frind-card1 {
-        background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    }
-
-    .frind-card2 {
-        background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    .frind-card3 {
-        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
-    }
-
-    .frind-card4 {
-        background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-    }
-
-    .frind-card5 {
-        background-image: linear-gradient(to top, #c471f5 0%, #fa71cd 100%);
-    }
-
-    .frind-card6 {
-        background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
-    }
-
-    .frind-card7 {
-        background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
-    }
-
-    .frind-card8 {
-        background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);
-    }
-
-    .frind-card9 {
-        background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
-    }
-
-    .frind-card10 {
-        background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
-    }
-</style>
 
 <main class="content">
-    <div class="container friends-container">
+
+    
+
+<div id="tags" class="container chip-container">
+    <div class="card">
+        <div class="card-content">
+            <div class="tag-title center-align">
+                <i class="fa fa-tags"></i>&nbsp;&nbsp;文章标签
+            </div>
+            <div class="tag-chips">
+                
+                
+                <a href="/tags/Mybatis-框架/" title="Mybatis 框架: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " data-tagname="Mybatis 框架" style="background-color: #F9EBEA;">Mybatis 框架
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Mysql基础-java基础/" title="Mysql基础 java基础: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " data-tagname="Mysql基础 java基础" style="background-color: #F5EEF8;">Mysql基础 java基础
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Dubbo/" title="Dubbo: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " data-tagname="Dubbo" style="background-color: #D5F5E3;">Dubbo
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Zookeeper/" title="Zookeeper: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active " data-tagname="Zookeeper" style="background-color: #E8F8F5;">Zookeeper
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/RPC/" title="RPC: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " data-tagname="RPC" style="background-color: #FEF9E7;">RPC
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+
         <article>
-            
-            
-            <div class="row tags-posts friend-all">
+            <div class="row tags-posts">
                 
                 
-                <div class=" col s12 m6 l4" data-aos="zoom-in-up">
-                    <div class="card frind-card1">
-                        <div class="frind-ship">
-                            <div class="title">
-                                <img src="http://image.luokangyuan.com/1_qq_27922023.jpg" alt="img">
-                                <div>
-                                    <h1 class="friend-name">hah</h1>
-                                    <p>来自IT界的小菜鸟</p>
-                                </div>
+                <div class="article tag-post col s12 m6 l4" data-tags="Dubbo, Zookeeper, RPC" data-aos="fade-up">
+                    <div class="card">
+                        <a href="/2019/02/19/dubbo-chang-jian-mian-shi-ti-zong-jie/">
+                            <div class="card-image tag-image">
+                                
+                                
+                                <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Dubbo常见面试题总结">
+                                
+                                <span class="card-title">Dubbo常见面试题总结</span>
                             </div>
-                            <div class="friend-button">
-                                <a href="http://www.zhangwenhai.cn" target="_blank" class="button button-glow button-rounded button-caution">
-                                    程序员中的菜鸡
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class=" col s12 m6 l4" data-aos="zoom-in-up">
-                    <div class="card frind-card2">
-                        <div class="frind-ship">
-                            <div class="title">
-                                <img src="http://image.luokangyuan.com/4027734.jpeg" alt="img">
-                                <div>
-                                    <h1 class="friend-name">点我啊</h1>
-                                    <p>http://www.zongmansheng.club</p>
-                                </div>
-                            </div>
-                            <div class="friend-button">
-                                <a href="https://blinkfox.github.io/" target="_blank" class="button button-glow button-rounded button-caution">
-                                    说什么王权富贵
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class=" col s12 m6 l4" data-aos="zoom-in-up">
-                    <div class="card frind-card3">
-                        <div class="frind-ship">
-                            <div class="title">
-                                <img src="http://image.luokangyuan.com/avatar.jpg" alt="img">
-                                <div>
-                                    <h1 class="friend-name">使劲点啊</h1>
-                                    <p>http://www.zongmansheng.club</p>
-                                </div>
-                            </div>
-                            <div class="friend-button">
-                                <a href="ttps://me.csdn.net/jlh912008548" target="_blank" class="button button-glow button-rounded button-caution">
-                                    怕什么戒律清规
-                                </a>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="fa fa-clock-o fa-fw icon-date"></i>2019-02-19
+                                </span>
+                                <span class="publish-author">
+                                    
+                                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                    
+                                    <a href="/categories/面试题/" class="post-category" target="_blank">
+                                    面试题
+                                    </a>
+                                    
+                                    
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
             </div>
-            
         </article>
     </div>
 </main>
+
+
 <footer class="page-footer bg-color">
     <div class="container row center-align">
         <div class="col s12 m8 l8 copy-right">
