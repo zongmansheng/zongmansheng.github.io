@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zongmansheng.club/"/>
-  <updated>2019-04-01T12:39:39.932Z</updated>
+  <updated>2019-04-02T12:49:14.619Z</updated>
   <id>http://zongmansheng.club/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>详解JDK、JRE、JVM</title>
+    <link href="http://zongmansheng.club/2019/04/02/xiang-jie-jdk-jre-jvm/"/>
+    <id>http://zongmansheng.club/2019/04/02/xiang-jie-jdk-jre-jvm/</id>
+    <published>2019-04-02T12:20:32.000Z</published>
+    <updated>2019-04-02T12:49:14.619Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="详解JDK-JRE-JVM之间的区别与联系"><a href="#详解JDK-JRE-JVM之间的区别与联系" class="headerlink" title="详解JDK JRE JVM之间的区别与联系"></a>详解JDK JRE JVM之间的区别与联系</h1><p><img src="//zongmansheng.club/2019/04/02/xiang-jie-jdk-jre-jvm/001.png" alt="001"></p><h4 id="一、JDK（Java-Development-ToolKit）Java开发工具"><a href="#一、JDK（Java-Development-ToolKit）Java开发工具" class="headerlink" title="一、JDK（Java Development ToolKit）Java开发工具"></a>一、JDK（Java Development ToolKit）Java开发工具</h4><pre><code>    JDK包含了jre，它除了包含jre之外还包含了一些javac的工具类，把java源文件编译成class文件，java文件是用来运行这个程序的。除此之外，里边还包含了java源生的API等。</code></pre><h5 id="JDK常用的包："><a href="#JDK常用的包：" class="headerlink" title="JDK常用的包："></a>JDK常用的包：</h5><pre><code>java.lang：这个是系统的基础类，比如：String，Math,Integer,system,thread提供常用的功能。Java.io这里面是所用输入输出有关的类，比如:文件操作。java.net:这里面是与网络有关的类，比如URL,URLVonnection等。Java.util：这个是系统辅助类，特别是集合类conllection,list,map等。Java.sql:这个是数据操作的类，connection，statememt,resultset等。JDK有以下三种版本：J2SE，standard edition，标准版；J2EE，enterpsise edtion，企业版；J2ME，micro edtion，主要用于移动设备上的java应用程序总之，JDK是整个JAVA的核心，包括了Java运行环境（Java Runtime Envirnment），一堆Java工具（javac/java/jdb等）和Java基础的类库（即Java API 包括rt.jar）。</code></pre><h4 id="二、JRE（Java-Runtime-Enviroment）Java运行环境"><a href="#二、JRE（Java-Runtime-Enviroment）Java运行环境" class="headerlink" title="二、JRE（Java Runtime Enviroment）Java运行环境"></a>二、JRE（Java Runtime Enviroment）Java运行环境</h4><pre><code>JRE包含JVMJRE，是为了保证java程序能够运行时，所必备的一基础环境，也就是它只是保证java程序运行的，不能用来开发，而jdk才是用来开发的，而想要开发Java，必须包含能够运行的环境，因此，JDK是包含JVM的。并且所有的Java程序都要在JRE下才能运行。</code></pre><pre><code>JDK包括JVM和JAVA核心类库和支持文件。与JDK相比，它不包含开发工具——编译器、调试器和其它工具。</code></pre><h4 id="三、JVM（Java-Virtual-Mechine）Java虚拟机"><a href="#三、JVM（Java-Virtual-Mechine）Java虚拟机" class="headerlink" title="三、JVM（Java Virtual Mechine）Java虚拟机"></a>三、JVM（Java Virtual Mechine）Java虚拟机</h4><pre><code>    JRE是Java运行时环境，Java运行靠的就是底层的依赖于JVM，即java虚拟机，Java虚拟机用来加载类文件，Java中之所以有跨平台的作用，JVM是按照不同的平台所写的，因此，Java具有跨平台性，但是JVM确实依赖于平台的。</code></pre><p><img src="//zongmansheng.club/2019/04/02/xiang-jie-jdk-jre-jvm/002.png" alt="002"></p><pre><code>    JVM是JRE的一部分，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。JVM有自己完善的硬件架构，如处理器、堆栈、寄存器等，还具有相应的指令系统。JVM 的主要工作是解释自己的指令集（即字节码）并映射到本地的 CPU 的指令集或 OS 的系统调用。Java语言是跨平台运行的，其实就是不同的操作系统，使用不同的JVM映射规则，让其与操作系统无关，完成了跨平台性。JVM 对上层的 Java 源文件是不关心的，它关注的只是由源文件生成的类文件（ class file）。类文件的组成包括 JVM 指令集，符号表以及一些补助信息。</code></pre><h4 id="JDK-JRE-JVM三者间的关系"><a href="#JDK-JRE-JVM三者间的关系" class="headerlink" title="JDK,JRE,JVM三者间的关系"></a>JDK,JRE,JVM三者间的关系</h4><pre><code>    其实在JDK的安装目录下有一个名为jre的目录，里面有两个文件夹bin和lib，在这里可以认为bin里的就是jvm，lib中则是jvm工作所需要的类库。</code></pre><p><img src="//zongmansheng.club/2019/04/02/xiang-jie-jdk-jre-jvm/003.png" alt="003"></p><pre><code>本文部分转载头条@波波说运维</code></pre><pre><code>有兴趣的小伙伴可以关注我的博客，只要有时间每天更新！ </code></pre><p><a href="http://www.zongmansheng.club" target="_blank" rel="noopener">www.zongmansheng.club</a></p><p><img src="//zongmansheng.club/2019/04/02/xiang-jie-jdk-jre-jvm/004.gif" alt="004"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;详解JDK-JRE-JVM之间的区别与联系&quot;&gt;&lt;a href=&quot;#详解JDK-JRE-JVM之间的区别与联系&quot; class=&quot;headerlink&quot; title=&quot;详解JDK JRE JVM之间的区别与联系&quot;&gt;&lt;/a&gt;详解JDK JRE JVM之间的区别与联系&lt;/
+      
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://zongmansheng.club/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="JDK" scheme="http://zongmansheng.club/tags/JDK/"/>
+    
+      <category term="JRK" scheme="http://zongmansheng.club/tags/JRK/"/>
+    
+      <category term="JVM" scheme="http://zongmansheng.club/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web.xml组件加载顺序</title>
+    <link href="http://zongmansheng.club/2019/04/02/web-xml-zu-jian-jia-zai-shun-xu/"/>
+    <id>http://zongmansheng.club/2019/04/02/web-xml-zu-jian-jia-zai-shun-xu/</id>
+    <published>2019-04-02T11:53:06.000Z</published>
+    <updated>2019-04-02T12:18:42.199Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java的web-xml组件加载顺序"><a href="#Java的web-xml组件加载顺序" class="headerlink" title="Java的web.xml组件加载顺序"></a>Java的web.xml组件加载顺序</h1><pre><code>在我们日常开发中，配置项目组件可以说是家常便饭，了解Tomcat加载组件顺序很有必要。例如：    Quartz的集群功能需要数据库的支持，数据库的加载肯定要在框架组件加载之前。</code></pre><pre><code>web.xm组件加载顺序为：context-param -&gt; listener -&gt; filter -&gt; servlet(同类则按编写顺序执行)。</code></pre><p><strong>web.xml常用组件解析：</strong> </p><pre><code>&lt;web-app&gt;&lt;display-name&gt;&lt;/display-name&gt;WEB应用的名字&lt;description&gt;&lt;/description&gt; WEB应用的描述&lt;context-param&gt;&lt;/context-param&gt; context-param元素声明应用范围内的初始化参数&lt;!– 指定spring配置文件位置 –&gt;&lt;context-param&gt;&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;&lt;param-value&gt;&lt;!–加载多个spring配置文件 –&gt;/WEB-INF/applicationContext.xml, /WEB-INF/action-servlet.xml&lt;/param-value&gt;&lt;/context-param&gt;&lt;filter&gt;&lt;/filter&gt; 过滤器将一个名字与一个实现javax.servlet.Filter接口的类相关联&lt;filter-mapping&gt;&lt;/filter-mapping&gt; 一旦命名了一个过滤器，就要利用filter-mapping元素把它与一个或多个servlet或JSP页面相关联&lt;listener&gt;&lt;/listener&gt; 事件监听程序在建立、修改和删除会话或servlet环境时得到通知。Listener元素指出事件监听程序类。如Log4j这个广泛使用的监听和&lt;!– 定义SPRING监听器，加载spring –&gt;&lt;listener&gt;&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;&lt;/listener&gt;&lt;servlet&gt;&lt;/servlet&gt; 在向servlet或JSP页面制定初始化参数或定制URL时，必须首先命名servlet或JSP页面。Servlet元素就是用来完成此项任务的。&lt;servlet-mapping&gt;&lt;/servlet-mapping&gt; 服务器一般为servlet提供一个缺省的URL：http://host/webAppPrefix/servlet/ServletName。但是，常常会更改这个URL，以便servlet可以访问初始化参数或更容易地处理相对URL。在更改缺省URL时，使用servlet-mapping元素&lt;session-config&gt;&lt;/session-config&gt; 如果某个会话在一定时间内未被访问，服务器可以抛弃它以节省内存。 可通过使用HttpSession的setMaxInactiveInterval方法明确设置单个会话对象的超时值，或者可利用session-config元素制定缺省超时值&lt;mime-mapping&gt;&lt;/mime-mapping&gt;如果Web应用具有想到特殊的文件，希望能保证给他们分配特定的MIME类型，则mime-mapping元素提供这种保证&lt;welcome-file-list&gt;&lt;/welcome-file-list&gt; 指示服务器在收到引用一个目录名而不是文件名的URL时，使用哪个文件(其实就是欢迎界面或者说入口界面一般为index.*)&lt;error-page&gt;&lt;/error-page&gt; 在返回特定HTTP状态代码时，或者特定类型的异常被抛出时，能够制定将要显示的页面。&lt;taglib&gt;&lt;/taglib&gt; 对标记库描述符文件（Tag Libraryu Descriptor file）指定别名。此功能使你能够更改TLD文件的位置， 而不用编辑使用这些文件的JSP页面。&lt;resource-env-ref&gt;&lt;/resource-env-ref&gt;声明与资源相关的一个管理对象。&lt;resource-ref&gt;&lt;/resource-ref&gt; 声明一个资源工厂使用的外部资源。&lt;security-constraint&gt;&lt;/security-constraint&gt; 制定应该保护的URL。它与login-config元素联合使用&lt;login-config&gt;&lt;/login-config&gt; 指定服务器应该怎样给试图访问受保护页面的用户授权。它与sercurity-constraint元素联合使用。&lt;security-role&gt;&lt;/security-role&gt;给出安全角色的一个列表，这些角色将出现在servlet元素内的security-role-ref元素的role-name子元素中。分别地声明角色可使高级IDE处理安全信息更为容易&lt;env-entry&gt;&lt;/env-entry&gt;声明Web应用的环境项&lt;/web-app&gt;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Java的web-xml组件加载顺序&quot;&gt;&lt;a href=&quot;#Java的web-xml组件加载顺序&quot; class=&quot;headerlink&quot; title=&quot;Java的web.xml组件加载顺序&quot;&gt;&lt;/a&gt;Java的web.xml组件加载顺序&lt;/h1&gt;&lt;pre&gt;&lt;cod
+      
+    
+    </summary>
+    
+      <category term="web基础" scheme="http://zongmansheng.club/categories/web%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="xml" scheme="http://zongmansheng.club/tags/xml/"/>
+    
+      <category term="配置文件" scheme="http://zongmansheng.club/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>数据库索引</title>
