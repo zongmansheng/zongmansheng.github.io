@@ -1,0 +1,616 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="jdbc和mybatis的区别, 晓笙的BLOG">
+    <meta name="description" content="jdbc和mybatis的区别mybatis也是基于JDBC的。Java与数据库操作仅能通过JDBC完成。 mybatis也要通过JDBC完成数据查询、更新这些动作。
+
+mybatis仅仅是在JDBC基础上做了，OO化、封装事务管理接口这些">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>jdbc和mybatis的区别 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        jdbc和mybatis的区别
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/jdbc/" target="_blank">
+                                <span class="chip bg-color">jdbc</span>
+                            </a>
+                        
+                            <a href="/tags/mybatis/" target="_blank">
+                                <span class="chip bg-color">mybatis</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                日常学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-05
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.3k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        8 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="jdbc和mybatis的区别"><a href="#jdbc和mybatis的区别" class="headerlink" title="jdbc和mybatis的区别"></a>jdbc和mybatis的区别</h1><pre><code>mybatis也是基于JDBC的。Java与数据库操作仅能通过JDBC完成。 mybatis也要通过JDBC完成数据查询、更新这些动作。
+
+mybatis仅仅是在JDBC基础上做了，OO化、封装事务管理接口这些东西。
+</code></pre><p><img src="//zongmansheng.club/2019/04/05/jdbc-he-mybatis-de-qu-bie/001.png" alt="001"></p>
+<pre><code>JDBC是地基,mybatis/Hibernate 是两栋外形各自有特点的楼房，楼房之间可以比较！地基就这一种。
+</code></pre><h4 id="传统JDBC操作数据"><a href="#传统JDBC操作数据" class="headerlink" title="传统JDBC操作数据"></a>传统JDBC操作数据</h4><pre><code>1.使用JDBC编程需要连接数据库，注册驱动和数据库信息
+2.操作Connection，打开 Statement 对象 。
+3.通过Statement执行SQL， 返回结果到ResultSet对象。
+4.使用ResultSet读取数据，然后通过代码转化为具体的POJO对象。
+5.关闭数据库的相关资源。
+</code></pre><h5 id="jdbc存在弊端："><a href="#jdbc存在弊端：" class="headerlink" title="jdbc存在弊端："></a>jdbc存在弊端：</h5><pre><code>1.工作量相对较大，每次都要去创建，关闭，获取
+2.JDBC编程可能产生的异常进行捕捉处理并正确关闭资源
+</code></pre><h4 id="对象关系映射（Object-Relational-Mapping）简称-ORM"><a href="#对象关系映射（Object-Relational-Mapping）简称-ORM" class="headerlink" title="对象关系映射（Object Relational Mapping）简称 ORM"></a>对象关系映射（Object Relational Mapping）简称 ORM</h4><pre><code>ORM模型就是数据库的表和简单Java对象（Plain Ordinary Java Object，简称POJO）的映射关系模型。
+</code></pre><pre><code>ORM模型提供了统一的规则使得数据库的数据通过配置便可轻易的映射到POJO上
+</code></pre><h4 id="常见的有两种"><a href="#常见的有两种" class="headerlink" title="常见的有两种"></a>常见的有两种</h4><h5 id="mybatis"><a href="#mybatis" class="headerlink" title="mybatis"></a>mybatis</h5><pre><code>1.易于上手和掌握。
+2.sql写在xml里，便于统一管理和优化。
+3.解除sql与程序代码的耦合。
+4.提供映射标签，支持对象与数据库的orm字段关系映射
+5.提供对象关系映射标签，支持对象关系组建维护
+6.提供xml标签，支持编写动态sql。
+</code></pre><h5 id="hibernate"><a href="#hibernate" class="headerlink" title="hibernate"></a>hibernate</h5><pre><code>1.消除了代码的映射规则，它全部被分离到XML或者注解里面去配置。
+2.无需再管理数据库连接，它也配置到XML里面。
+3.一个会话中，不要操作多个对象，只要操作Sesison即可。
+4.关闭资源只需要关闭一个Session即可。
+</code></pre><h4 id="Mybatis常见的面试题"><a href="#Mybatis常见的面试题" class="headerlink" title="Mybatis常见的面试题"></a>Mybatis常见的面试题</h4><h5 id="1-和-的区别是什么？"><a href="#1-和-的区别是什么？" class="headerlink" title="1. #{}和${}的区别是什么？"></a>1. #{}和${}的区别是什么？</h5><pre><code>#{}是预编译处理，${}是字符串替换。
+
+Mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值；
+
+Mybatis在处理${}时，就是把${}替换成变量的值。
+
+使用#{}可以有效的防止SQL注入，提高系统安全性。
+
+在我们日常开发中，能用#的地方都尽量用#。
+</code></pre><h5 id="2-通常一个Xml映射文件，都会写一个Dao接口与之对应，请问，这个Dao接口的工作原理是什么？Dao接口里的方法，参数不同时，方法能重载吗？"><a href="#2-通常一个Xml映射文件，都会写一个Dao接口与之对应，请问，这个Dao接口的工作原理是什么？Dao接口里的方法，参数不同时，方法能重载吗？" class="headerlink" title="2. 通常一个Xml映射文件，都会写一个Dao接口与之对应，请问，这个Dao接口的工作原理是什么？Dao接口里的方法，参数不同时，方法能重载吗？"></a>2. 通常一个Xml映射文件，都会写一个Dao接口与之对应，请问，这个Dao接口的工作原理是什么？Dao接口里的方法，参数不同时，方法能重载吗？</h5><p><img src="//zongmansheng.club/2019/04/05/jdbc-he-mybatis-de-qu-bie/002.png" alt="002"></p>
+<p><img src="//zongmansheng.club/2019/04/05/jdbc-he-mybatis-de-qu-bie/003.png" alt="003"></p>
+<pre><code>    Dao接口，就是人们常说的Mapper接口，接口的全限名，就是映射文件中的namespace的值，接口的方法名，就是映射文件中MappedStatement的id值，接口方法内的参数，就是传递给sql的参数。Mapper接口是没有实现类的，当调用接口方法时，接口全限名+方法名拼接字符串作为key值，可唯一定位一个MappedStatement，举例：com.mybatis3.mappers.StudentDao.findStudentById，可以唯一找到namespace为com.mybatis3.mappers.StudentDao下面id = findStudentById的MappedStatement。在Mybatis中，每一个&lt;select&gt;、&lt;insert&gt;、&lt;update&gt;、&lt;delete&gt;标签，都会被解析为一个MappedStatement对象。
+
+Dao接口里的方法，是不能重载的，因为是全限名+方法名的保存和寻找策略。
+
+    Dao接口的工作原理是JDK动态代理，Mybatis运行时会使用JDK动态代理为Dao接口生成代理proxy对象，代理对象proxy会拦截接口方法，转而执行MappedStatement所代表的sql，然后将sql执行结果返回。
+</code></pre><h4 id="3-Mybatis是如何进行分页的？分页插件的原理是什么？"><a href="#3-Mybatis是如何进行分页的？分页插件的原理是什么？" class="headerlink" title="3. Mybatis是如何进行分页的？分页插件的原理是什么？"></a>3. Mybatis是如何进行分页的？分页插件的原理是什么？</h4><pre><code>    Mybatis使用RowBounds对象进行分页，它是针对ResultSet结果集执行的内存分页，而非物理分页，可以在sql内直接书写带有物理分页的参数来完成物理分页功能，也可以使用分页插件来完成物理分页。
+
+    分页插件(pagehelper)的基本原理是使用Mybatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的sql，然后重写sql，根据dialect方言，添加对应的物理分页语句和物理分页参数。
+</code></pre><h5 id="4-Mybatis是如何将sql执行结果封装为目标对象并返回的？都有哪些映射形式？"><a href="#4-Mybatis是如何将sql执行结果封装为目标对象并返回的？都有哪些映射形式？" class="headerlink" title="4. Mybatis是如何将sql执行结果封装为目标对象并返回的？都有哪些映射形式？"></a>4. Mybatis是如何将sql执行结果封装为目标对象并返回的？都有哪些映射形式？</h5><pre><code>    第一种是使用&lt;resultMap&gt;标签，逐一定义列名和对象属性名之间的映射关系。第二种是使用sql列的别名功能，将列别名书写为对象属性名，比如T_NAME AS NAME，对象属性名一般是name，小写，但是列名不区分大小写，Mybatis会忽略列名大小写，智能找到与之对应对象属性名，你甚至可以写成T_NAME AS NaMe，Mybatis一样可以正常工作。
+
+    有了列名与属性名的映射关系后，Mybatis通过反射创建对象，同时使用反射给对象的属性逐一赋值并返回，那些找不到映射关系的属性，是无法完成赋值的。
+</code></pre><h5 id="5-Xml映射文件中，除了常见的select-insert-update-delete标签之外，还有哪些标签？"><a href="#5-Xml映射文件中，除了常见的select-insert-update-delete标签之外，还有哪些标签？" class="headerlink" title="5. Xml映射文件中，除了常见的select|insert|update|delete标签之外，还有哪些标签？"></a>5. Xml映射文件中，除了常见的select|insert|update|delete标签之外，还有哪些标签？</h5><pre><code>还有很多其他的标签，加上动态sql的9个标签，trim|where|set|foreach|if|choose|when|otherwise|bind等，其中为sql片段标签，通过标签引入sql片段，为不支持自增的主键生成策略标签。
+</code></pre><h5 id="6-简述Mybatis的插件运行原理，以及如何编写一个插件"><a href="#6-简述Mybatis的插件运行原理，以及如何编写一个插件" class="headerlink" title="6. 简述Mybatis的插件运行原理，以及如何编写一个插件"></a>6. 简述Mybatis的插件运行原理，以及如何编写一个插件</h5><pre><code>    Mybatis仅可以编写针对ParameterHandler、ResultSetHandler、StatementHandler、Executor这4种接口的插件，Mybatis使用JDK的动态代理，为需要拦截的接口生成代理对象以实现接口方法拦截功能，每当执行这4种接口对象的方法时，就会进入拦截方法，具体就是InvocationHandler的invoke()方法，当然，只会拦截那些你指定需要拦截的方法。实现Mybatis的Interceptor接口并复写intercept()方法，然后在给插件编写注解，指定要拦截哪一个接口的哪些方法即可，记住，还需要在配置文件中配置你编写的插件。
+</code></pre><h5 id="7-一级、二级缓存"><a href="#7-一级、二级缓存" class="headerlink" title="7. 一级、二级缓存"></a>7. 一级、二级缓存</h5><pre><code>1）一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session，当 Session flush 或 close 之后，该 Session 中的所有 Cache 就将清空。
+
+2）二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap 存储，不同在于其存储作用域为 Mapper(Namespace)，并且可自定义存储源，如 Ehcache。要开启二级缓存，你需要在你的 SQL 映射文件中添加一行：&lt;cache/&gt;
+
+3）对于缓存数据更新机制，当某一个作用域(一级缓存 Session/二级缓存Namespaces)的进行了C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear。
+</code></pre><h5 id="8-Mybatis是否支持延迟加载？如果支持，它的实现原理是什么？"><a href="#8-Mybatis是否支持延迟加载？如果支持，它的实现原理是什么？" class="headerlink" title="8. Mybatis是否支持延迟加载？如果支持，它的实现原理是什么？"></a>8. Mybatis是否支持延迟加载？如果支持，它的实现原理是什么？</h5><pre><code>    Mybatis仅支持association关联对象和collection关联集合对象的延迟加载，association指的就是一对一，collection指的就是一对多查询。在Mybatis配置文件中，可以配置是否启用延迟加载lazyLoadingEnabled=true|false。
+
+    它的原理是，使用CGLIB创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，比如调用a.getB().getName()，拦截器invoke()方法发现a.getB()是null值，那么就会单独发送事先保存好的查询关联B对象的sql，把B查询上来，然后调用a.setB(b)，于是a的对象b属性就有值了，接着完成a.getB().getName()方法的调用。这就是延迟加载的基本原理。
+</code></pre><h5 id="9-Mybatis映射文件中，如果A标签通过include引用了B标签的内容，请问，B标签能否定义在A标签的后面，还是说必须定义在A标签的前面？"><a href="#9-Mybatis映射文件中，如果A标签通过include引用了B标签的内容，请问，B标签能否定义在A标签的后面，还是说必须定义在A标签的前面？" class="headerlink" title="9. Mybatis映射文件中，如果A标签通过include引用了B标签的内容，请问，B标签能否定义在A标签的后面，还是说必须定义在A标签的前面？"></a>9. Mybatis映射文件中，如果A标签通过include引用了B标签的内容，请问，B标签能否定义在A标签的后面，还是说必须定义在A标签的前面？</h5><pre><code>    虽然Mybatis解析Xml映射文件是按照顺序解析的，但是，被引用的B标签依然可以定义在任何地方，Mybatis都可以正确识别。
+
+    原理是，Mybatis解析A标签，发现A标签引用了B标签，但是B标签尚未解析到，尚不存在，此时，Mybatis会将A标签标记为未解析状态，然后继续解析余下的标签，包含B标签，待所有标签解析完毕，Mybatis会重新解析那些被标记为未解析的标签，此时再解析A标签时，B标签已经存在，A标签也就可以正常解析完成了。
+</code></pre><h5 id="10-简述Mybatis的Xml映射文件和Mybatis内部数据结构之间的映射关系？"><a href="#10-简述Mybatis的Xml映射文件和Mybatis内部数据结构之间的映射关系？" class="headerlink" title="10. 简述Mybatis的Xml映射文件和Mybatis内部数据结构之间的映射关系？"></a>10. 简述Mybatis的Xml映射文件和Mybatis内部数据结构之间的映射关系？</h5><pre><code>    Mybatis将所有Xml配置信息都封装到All-In-One重量级对象Configuration内部。在Xml映射文件中，&lt;parameterMap&gt;标签会被解析为ParameterMap对象，其每个子元素会被解析为ParameterMapping对象。&lt;resultMap&gt;标签会被解析为ResultMap对象，其每个子元素会被解析为ResultMapping对象。每一个&lt;select&gt;、&lt;insert&gt;、&lt;update&gt;、&lt;delete&gt;标签均会被解析为MappedStatement对象，标签内的sql会被解析为BoundSql对象。
+</code></pre>
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/04/05/jdbc-he-mybatis-de-qu-bie/" class="b-link-green">jdbc和mybatis的区别</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/04/05/jdbc-he-mybatis-de-qu-bie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="jdbc和mybatis的区别">
+                        
+                        <span class="card-title">jdbc和mybatis的区别</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">jdbc和mybatis的区别mybatis也是基于JDBC的。Java与数据库操作仅能通过JDBC完成。 mybatis也要通过JDBC完成数据查询、更新这些动作。
+
+mybatis仅仅是在JDBC基础上做了，OO化、封装事务管理接口这些</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                    日常学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/jdbc/" target="_blank">
+                        <span class="chip bg-color">jdbc</span>
+                    </a>
+                    
+                    <a href="/tags/mybatis/" target="_blank">
+                        <span class="chip bg-color">mybatis</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/02/xiang-jie-jdk-jre-jvm/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="详解JDK、JRE、JVM">
+                        
+                        <span class="card-title">详解JDK、JRE、JVM</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">详解JDK JRE JVM之间的区别与联系
+一、JDK（Java Development ToolKit）Java开发工具    JDK包含了jre，它除了包含jre之外还包含了一些javac的工具类，把java源文件编译成class文件，</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java基础/" class="post-category" target="_blank">
+                                    Java基础
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JDK/" target="_blank">
+                        <span class="chip bg-color">JDK</span>
+                    </a>
+                    
+                    <a href="/tags/JRK/" target="_blank">
+                        <span class="chip bg-color">JRK</span>
+                    </a>
+                    
+                    <a href="/tags/JVM/" target="_blank">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">26.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
