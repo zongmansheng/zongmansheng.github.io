@@ -1,0 +1,861 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="30道java面试题, 晓笙的BLOG">
+    <meta name="description" content="30道java面试题1、Spring DAO 中最常用的类是（）A，JdbcTemplate ，SimpleJdbcTemplate
+
+B，SimpleJdbcInsert，SimpleJdbcProcedure
+
+C，SimpleJdbc">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>30道java面试题 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        30道java面试题
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/java/" target="_blank">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                            <a href="/tags/面试题/" target="_blank">
+                                <span class="chip bg-color">面试题</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/面试题/" class="post-category" target="_blank">
+                                面试题
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-13
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="30道java面试题"><a href="#30道java面试题" class="headerlink" title="30道java面试题"></a>30道java面试题</h1><h4 id="1、Spring-DAO-中最常用的类是（）"><a href="#1、Spring-DAO-中最常用的类是（）" class="headerlink" title="1、Spring DAO 中最常用的类是（）"></a>1、Spring DAO 中最常用的类是（）</h4><pre><code>A，JdbcTemplate ，SimpleJdbcTemplate
+
+B，SimpleJdbcInsert，SimpleJdbcProcedure
+
+C，SimpleJdbcInsert ，SimpleJdbcStoredProc
+
+D，SimpleJdbcQuery ，SimpleJdbcExec
+
+正确答案：A
+</code></pre><h4 id="2、Spring-AOP-中，-织入（Weaving）-可以在下面什么时间完成（）"><a href="#2、Spring-AOP-中，-织入（Weaving）-可以在下面什么时间完成（）" class="headerlink" title="2、Spring AOP 中， 织入（Weaving） 可以在下面什么时间完成（）"></a>2、Spring AOP 中， 织入（Weaving） 可以在下面什么时间完成（）</h4><pre><code>A，全部选项
+
+B，Run time
+
+C，Load time
+
+D，Compile time
+
+正确答案：A
+</code></pre><h4 id="3、下面关于Spring-MVC-描述正确的是（）"><a href="#3、下面关于Spring-MVC-描述正确的是（）" class="headerlink" title="3、下面关于Spring MVC 描述正确的是（）"></a>3、下面关于Spring MVC 描述正确的是（）</h4><pre><code>A，DispatcherServlet在 Spring MVC 中是核心servlet , 它负责接收请求并将请求分发给适合的控制器
+
+B，在Spring MVC 中,可以配置多个DispatcherServlet
+
+C，全部选项
+
+D，要使Spring MVC可用，DispatcherServlet需要在web.xml中配置
+
+正确答案：C
+</code></pre><h4 id="4、下面哪项是Spring自动装载模式（）"><a href="#4、下面哪项是Spring自动装载模式（）" class="headerlink" title="4、下面哪项是Spring自动装载模式（）"></a>4、下面哪项是Spring自动装载模式（）</h4><pre><code>A，autodetect
+
+B，全部选项
+
+C，constructor
+
+D，byname, byType
+
+正确答案：B
+</code></pre><h4 id="5、Spring-中，下面哪一项不是使用事务的方法（）"><a href="#5、Spring-中，下面哪一项不是使用事务的方法（）" class="headerlink" title="5、Spring 中，下面哪一项不是使用事务的方法（）"></a>5、Spring 中，下面哪一项不是使用事务的方法（）</h4><pre><code>A，proxies
+
+B，declaratively
+
+C，programmaticly
+
+正确答案：A
+</code></pre><h4 id="6、Spring提供了JMS层的抽象，正确吗（）"><a href="#6、Spring提供了JMS层的抽象，正确吗（）" class="headerlink" title="6、Spring提供了JMS层的抽象，正确吗（）"></a>6、Spring提供了JMS层的抽象，正确吗（）</h4><pre><code>A，正确
+
+B，错误
+
+正确答案：A
+</code></pre><h4 id="7、关于”-Order”注解，最正确的描述是（）"><a href="#7、关于”-Order”注解，最正确的描述是（）" class="headerlink" title="7、关于”@Order”注解，最正确的描述是（）"></a>7、关于”@Order”注解，最正确的描述是（）</h4><pre><code>A，实现org.springframework.core.Ordered接口
+
+B，指定一个bean的范围
+
+C，通常用于注入域对象的属性
+
+D，全不正确
+
+正确答案：A
+</code></pre><h4 id="8、如何在Spring应用中使用SLF4J（）"><a href="#8、如何在Spring应用中使用SLF4J（）" class="headerlink" title="8、如何在Spring应用中使用SLF4J（）"></a>8、如何在Spring应用中使用SLF4J（）</h4><pre><code>A，作为日志框架
+
+B，全不正确
+
+C，作为一个bean
+
+D，作为JDBC框架
+
+正确答案：A
+</code></pre><h4 id="9、Spring-bean-的默认作用范围是（）"><a href="#9、Spring-bean-的默认作用范围是（）" class="headerlink" title="9、Spring bean 的默认作用范围是（）"></a>9、Spring bean 的默认作用范围是（）</h4><pre><code>A，全不正确
+
+B，Singleton
+
+C，Prototype
+
+D，Session
+
+E， Abstract
+
+正确答案：B
+</code></pre><h4 id="10、Spring中，单例意味着每-只有一个实例（）"><a href="#10、Spring中，单例意味着每-只有一个实例（）" class="headerlink" title="10、Spring中，单例意味着每_只有一个实例（）"></a>10、Spring中，单例意味着每<strong>_</strong>只有一个实例（）</h4><pre><code>A，Context
+
+B， JVM
+
+C，Thread
+
+正确答案：A
+</code></pre><h4 id="11、使用Spring-MVC-处理普通页面请求，-下面哪个排序是正确的（）"><a href="#11、使用Spring-MVC-处理普通页面请求，-下面哪个排序是正确的（）" class="headerlink" title="11、使用Spring MVC 处理普通页面请求， 下面哪个排序是正确的（）"></a>11、使用Spring MVC 处理普通页面请求， 下面哪个排序是正确的（）</h4><pre><code>1.请求：请求提交给服务器
+
+2.分发：分发器通过web 应用配置信息 ， 将请求分发至适当的控制器
+
+3.服务调用：控制器与业务层交互
+
+4.响应：控制器更新模型，将执行结果返回给客户端展现
+
+A，1-2-3-4
+
+B，1-4-3-2
+
+C，1-4-2-3
+
+D，1-3-2-4
+
+正确答案：A
+</code></pre><h4 id="12、以下哪个不是-Spring-AOP-的注解（）"><a href="#12、以下哪个不是-Spring-AOP-的注解（）" class="headerlink" title="12、以下哪个不是 Spring AOP 的注解（）"></a>12、以下哪个不是 Spring AOP 的注解（）</h4><pre><code>A，@Before
+
+B，@Around
+
+C，@BeforeReturning
+
+D，@AfterThrowing
+
+正确答案：C
+</code></pre><h4 id="13、”-RequestMapping是Spring中的哪一部分（）"><a href="#13、”-RequestMapping是Spring中的哪一部分（）" class="headerlink" title="13、”@RequestMapping是Spring中的哪一部分（）"></a>13、”@RequestMapping是Spring中的哪一部分（）</h4><pre><code>A，DAO
+
+B，Security
+
+C，Web MVC
+
+D，Web
+
+正确答案：C
+</code></pre><h4 id="14、下面关于spring和struts2的描述，错误的是（）"><a href="#14、下面关于spring和struts2的描述，错误的是（）" class="headerlink" title="14、下面关于spring和struts2的描述，错误的是（）"></a>14、下面关于spring和struts2的描述，错误的是（）</h4><pre><code>A，spring mvc的入口是filter，而struts2是servlet
+
+B，spring mvc是基于方法的设计，而struts2是基于类的设计
+
+C，struts2有以自己的interceptor机制，spring mvc用的是独立的AOP方式
+
+D， spring mvc的方法之间基本上独立的，独享request response数据，struts2所有Action变量是共享的
+
+正确答案：A
+</code></pre><h4 id="15、Spring中，下面哪个选项支持ORM（）"><a href="#15、Spring中，下面哪个选项支持ORM（）" class="headerlink" title="15、Spring中，下面哪个选项支持ORM（）"></a>15、Spring中，下面哪个选项支持ORM（）</h4><pre><code>A，OJB
+
+B，TopLink
+
+C，全部选项
+
+D，Java Data Objects(JDO)
+
+E，iBatis
+
+正确答案：C
+</code></pre><h4 id="16、Spring和Hibernate的集成中，下面哪项是SessionFactory-正确的实现（）"><a href="#16、Spring和Hibernate的集成中，下面哪项是SessionFactory-正确的实现（）" class="headerlink" title="16、Spring和Hibernate的集成中，下面哪项是SessionFactory 正确的实现（）"></a>16、Spring和Hibernate的集成中，下面哪项是SessionFactory 正确的实现（）</h4><pre><code>A，LocalSessionFactoryBean
+
+B，LocalFactoryBean
+
+C，SessionFactory
+
+D，SessionFactoryBean
+
+正确答案：A
+</code></pre><h4 id="17、下面哪个是Spring最核心的servlet（）"><a href="#17、下面哪个是Spring最核心的servlet（）" class="headerlink" title="17、下面哪个是Spring最核心的servlet（）"></a>17、下面哪个是Spring最核心的servlet（）</h4><pre><code>A，WebServlet
+
+B，SpringServlet
+
+C，DispatcherServlet
+
+D，IoCServlet
+
+正确答案：C
+</code></pre><h4 id="18、Spring-test-用什么约定在测试中使用HTTP会话和HTTP-请求对象（）"><a href="#18、Spring-test-用什么约定在测试中使用HTTP会话和HTTP-请求对象（）" class="headerlink" title="18、Spring-test 用什么约定在测试中使用HTTP会话和HTTP 请求对象（）"></a>18、Spring-test 用什么约定在测试中使用HTTP会话和HTTP 请求对象（）</h4><pre><code>A，MVC
+
+B，Open-closed principle
+
+C，DAOs
+
+D，Mock objects
+
+正确答案：D
+</code></pre><h4 id="19、Spring-中，”-Cacheable”的key生成方式，以下哪个是正确的（）"><a href="#19、Spring-中，”-Cacheable”的key生成方式，以下哪个是正确的（）" class="headerlink" title="19、Spring 中，”@Cacheable”的key生成方式，以下哪个是正确的（）"></a>19、Spring 中，”@Cacheable”的key生成方式，以下哪个是正确的（）</h4><pre><code>A，可以是方法参数及其成员变量的任意表达式
+
+B，只能使用所有方法参数，但可以调整次序
+
+C，只能使用所有方法参数，且不能调整次序
+
+D，只能指定方法参数是否参与key的生成，不能控制参数的成员变量
+
+正确答案：A
+</code></pre><h4 id="20、使用-Required但不关联bean-来注解setter方法，将会发生（）"><a href="#20、使用-Required但不关联bean-来注解setter方法，将会发生（）" class="headerlink" title="20、使用@Required但不关联bean 来注解setter方法，将会发生（）"></a>20、使用@Required但不关联bean 来注解setter方法，将会发生（）</h4><pre><code>A，bean被设置为null
+
+B，启动异常
+
+C，Spring 将创建bean
+
+D，什么也不发生
+
+正确答案：B
+</code></pre><h4 id="21，有关线程的哪些叙述是对的（-）"><a href="#21，有关线程的哪些叙述是对的（-）" class="headerlink" title="21，有关线程的哪些叙述是对的（ ）"></a>21，有关线程的哪些叙述是对的（ ）</h4><pre><code>A，一旦一个线程被创建，它就立即开始运行。
+
+B，使用start()方法可以使一个线程成为可运行的，但是它不一定立即开始运行。
+
+C，当一个线程因为抢先机制而停止运行，它被放在可运行队列的前面。
+
+D，一个线程可能因为不同的原因停止并进入就绪状态。
+
+答案：BCD
+在抢占式线程模型中，操作系统可以在任何时候打断线程。通常会在它运行了一段时间（就是所谓的一个时间片）后才打断它。这样的结果自然是没有线程能够不公平地长时间霸占处理器。
+</code></pre><hr>
+<h4 id="22，哪个关键字可以对对象加互斥锁-（）"><a href="#22，哪个关键字可以对对象加互斥锁-（）" class="headerlink" title="22，哪个关键字可以对对象加互斥锁 （）"></a>22，哪个关键字可以对对象加互斥锁 （）</h4><pre><code>A，serialize
+
+B，synchronized
+
+C，transient
+
+D，static
+
+答案：B
+
+A是对象串行化、C是关键字transient修饰的属性将不被串行化、D是静态的
+</code></pre><h4 id="23，下列关于线程优先级的说法中，正确的是（）"><a href="#23，下列关于线程优先级的说法中，正确的是（）" class="headerlink" title="23，下列关于线程优先级的说法中，正确的是（）"></a>23，下列关于线程优先级的说法中，正确的是（）</h4><pre><code>A、线程的优先级是不能改变的
+
+B、线程的优先级是在创建线程时设置的
+
+C、在创建线程后的任何时候都可以设置
+
+D、B和C
+
+答案：C
+
+    Java语言中线程的优先级是用一个介于MIN_PRIORITY和MAX_PRIORITY之间的整数来表示的。可以在创建线程后的任何时候修改线程的优先级。
+</code></pre><h4 id="24，为了使模块尽可能独立，要求"><a href="#24，为了使模块尽可能独立，要求" class="headerlink" title="24，为了使模块尽可能独立，要求( )"></a>24，为了使模块尽可能独立，要求( )</h4><pre><code>A．模块的内聚程度要尽量高，且耦合程度要尽量强
+
+B．模块的内聚程度要尽量高，且耦合程度要尽量弱
+
+C．模块的内聚程度要尽量低，且耦合程度要尽量弱
+
+D．模块的内聚程度要尽量低，且耦合程度要尽量强
+
+答案：B
+
+    系统设计的质量主要反映在模块的独立性上。评价模块独立性的主要标准有两个：一是模块之间的耦合，它表明两个模块之间互相独立的程度；二是模块内部之间的关系是否紧密，称为内聚。一般来说，要求模块之间的耦合尽可能地弱，即模块尽可能独立，而要求模块的内聚程度尽量高。
+</code></pre><h4 id="25，下列对于线性链表的描述中正确的是（）"><a href="#25，下列对于线性链表的描述中正确的是（）" class="headerlink" title="25，下列对于线性链表的描述中正确的是（）"></a>25，下列对于线性链表的描述中正确的是（）</h4><pre><code>A．存储空间不一定是连续，且各元素的存储顺序是任意的
+
+B．存储空间不一定是连续，且前件元素一定存储在后件元素的前面
+
+C．存储空间必须连续，且前件元素一定存储在后件元素的前面
+
+D．存储空间必须连续，且各元素的存储顺序是任意的
+
+答案：A
+
+在链式存储结构中，存储数据结构的存储空间可以不连续，各数据结点的存储顺序与数据元素之间 的逻辑关系可以不一致，而数据元素之间的逻辑关系是由指针域来确定的。
+</code></pre><h4 id="26，下列叙述中错误的是"><a href="#26，下列叙述中错误的是" class="headerlink" title="26，下列叙述中错误的是( )"></a>26，下列叙述中错误的是( )</h4><pre><code>A.线性表是由n个元素组成的一个有限序列
+
+B.线性表是一种线性结构
+
+C.线性表的所有结点有且仅有一个前件和后件
+
+D.线性表可以是空表
+
+答案：C
+
+线性表是一种线性结构，由n(n≥0)个元素组成，所以线性表可以是空表。但是在线性表中，第一个结点没有前驱，最后一个结点没有后继，其他结点有且只有一个前驱和后继，所以选项C是错误的。
+</code></pre><h4 id="27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为"><a href="#27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为" class="headerlink" title="27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为( )"></a>27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为( )</h4><pre><code>A.GEDHFBCA
+
+B.DGEBHFCA
+
+C.ABCDEFGH
+
+D.ACBFEDHG
+
+答案：B
+
+二叉树的遍历有3种：前序、中序和后序。
+
+先序：先访问根结点、左结点、右结点
+
+中序：先访问左结点、根结点、右结点
+
+后序：先访问左结点、右结点、根结点
+
+本题根据前序遍历和中序遍历的结果可以得出二叉树的结构，然后再对其进行后序遍历。
+</code></pre><h4 id="28，面向对象方法中，继承是指"><a href="#28，面向对象方法中，继承是指" class="headerlink" title="28，面向对象方法中，继承是指( )"></a>28，面向对象方法中，继承是指( )</h4><pre><code>A.一组对象所具有的相似性质
+
+B.一个对象具有另一个对象的性质
+
+C.各对象之间的共同性质
+
+D.类之间共享属性和操作的机制
+
+答案：D
+
+继承：在程序设计中，继承是指子类自动享用父类的属性和方法，并可以增加新的属性和方法的一种机制。它是实现代码共享的重要手段，可以使软件更具有开放性、可扩充性，这是信息组织与分类的行之有效的方法，也是面向对象的主要优点之一。
+
+继承又分为单重继承和多重继承，单重继承是指子类只能继承一个父类的属性和操作；而多重继承是指子类可以继承了多个父类的属性和操作。
+
+扩展：Java是一种单重继承语言，而C++是一种多重继承语言。
+</code></pre><h4 id="29，栈和队列的共同点是"><a href="#29，栈和队列的共同点是" class="headerlink" title="29，栈和队列的共同点是( )"></a>29，栈和队列的共同点是( )</h4><pre><code>A.都是先进先出
+
+B.都是先进后出
+
+C.只允许在端点处插入和删除元素
+
+D.没有共同特点
+
+答案：C
+
+栈是只允许在表的一端进行插入和删除的操作，队列是允许在表的一端进行插入，另一端进行删除的操作。
+</code></pre><h4 id="30，下列关于修饰符混用的说法，错误的是（）"><a href="#30，下列关于修饰符混用的说法，错误的是（）" class="headerlink" title="30，下列关于修饰符混用的说法，错误的是（）"></a>30，下列关于修饰符混用的说法，错误的是（）</h4><pre><code>A.abstract不能与final并列修饰同一个类
+
+B.abstract类中不可以有private的成员
+
+C.abstract方法必须在abstract类中
+
+D.static方法中能处理非static的数据
+
+答案：D
+
+静态方法是属于类的，而普通方法是属于对象的。
+
+属于类的静态方法可以在对象不存在的时候就能访问到，而普通方法必须先new一个对象才能用这个对象访问。当我们访问调用静态方法的时候（使用类名.静态方法名）这个时候就没有对象创建，所以普通方法是访问不到的。为了避免这种错误，所以java就不允许在静态方法中访问非静态方法。
+</code></pre>
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/04/13/30-dao-java-mian-shi-ti/" class="b-link-green">30道java面试题</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/04/13/30-dao-java-mian-shi-ti/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="30道java面试题">
+                        
+                        <span class="card-title">30道java面试题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">30道java面试题1、Spring DAO 中最常用的类是（）A，JdbcTemplate ，SimpleJdbcTemplate
+
+B，SimpleJdbcInsert，SimpleJdbcProcedure
+
+C，SimpleJdbc</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/面试题/" class="post-category" target="_blank">
+                                    面试题
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                    <a href="/tags/面试题/" target="_blank">
+                        <span class="chip bg-color">面试题</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/12/mysql-zhong-suo-de-li-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="MySql中锁的理解">
+                        
+                        <span class="card-title">MySql中锁的理解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">
+锁注：MySQL是一个支持插件式存储引擎的数据库系统。本文下面的所有介绍，都是基于InnoDB存储引擎，其他引擎的表现，会有较大的区别。
+存储引擎查看MySQL给开发者提供了查询存储引擎的功能，我这里使用的是MySQL5.6.4，可以使用</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数据库/" class="post-category" target="_blank">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/乐观锁，悲观锁，共享锁，排它锁，行锁，表锁/" target="_blank">
+                        <span class="chip bg-color">乐观锁，悲观锁，共享锁，排它锁，行锁，表锁</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">36.1k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>30道java面试题</title>
+      <link href="/2019/04/13/30-dao-java-mian-shi-ti/"/>
+      <url>/2019/04/13/30-dao-java-mian-shi-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="30道java面试题"><a href="#30道java面试题" class="headerlink" title="30道java面试题"></a>30道java面试题</h1><h4 id="1、Spring-DAO-中最常用的类是（）"><a href="#1、Spring-DAO-中最常用的类是（）" class="headerlink" title="1、Spring DAO 中最常用的类是（）"></a>1、Spring DAO 中最常用的类是（）</h4><pre><code>A，JdbcTemplate ，SimpleJdbcTemplateB，SimpleJdbcInsert，SimpleJdbcProcedureC，SimpleJdbcInsert ，SimpleJdbcStoredProcD，SimpleJdbcQuery ，SimpleJdbcExec正确答案：A</code></pre><h4 id="2、Spring-AOP-中，-织入（Weaving）-可以在下面什么时间完成（）"><a href="#2、Spring-AOP-中，-织入（Weaving）-可以在下面什么时间完成（）" class="headerlink" title="2、Spring AOP 中， 织入（Weaving） 可以在下面什么时间完成（）"></a>2、Spring AOP 中， 织入（Weaving） 可以在下面什么时间完成（）</h4><pre><code>A，全部选项B，Run timeC，Load timeD，Compile time正确答案：A</code></pre><h4 id="3、下面关于Spring-MVC-描述正确的是（）"><a href="#3、下面关于Spring-MVC-描述正确的是（）" class="headerlink" title="3、下面关于Spring MVC 描述正确的是（）"></a>3、下面关于Spring MVC 描述正确的是（）</h4><pre><code>A，DispatcherServlet在 Spring MVC 中是核心servlet , 它负责接收请求并将请求分发给适合的控制器B，在Spring MVC 中,可以配置多个DispatcherServletC，全部选项D，要使Spring MVC可用，DispatcherServlet需要在web.xml中配置正确答案：C</code></pre><h4 id="4、下面哪项是Spring自动装载模式（）"><a href="#4、下面哪项是Spring自动装载模式（）" class="headerlink" title="4、下面哪项是Spring自动装载模式（）"></a>4、下面哪项是Spring自动装载模式（）</h4><pre><code>A，autodetectB，全部选项C，constructorD，byname, byType正确答案：B</code></pre><h4 id="5、Spring-中，下面哪一项不是使用事务的方法（）"><a href="#5、Spring-中，下面哪一项不是使用事务的方法（）" class="headerlink" title="5、Spring 中，下面哪一项不是使用事务的方法（）"></a>5、Spring 中，下面哪一项不是使用事务的方法（）</h4><pre><code>A，proxiesB，declarativelyC，programmaticly正确答案：A</code></pre><h4 id="6、Spring提供了JMS层的抽象，正确吗（）"><a href="#6、Spring提供了JMS层的抽象，正确吗（）" class="headerlink" title="6、Spring提供了JMS层的抽象，正确吗（）"></a>6、Spring提供了JMS层的抽象，正确吗（）</h4><pre><code>A，正确B，错误正确答案：A</code></pre><h4 id="7、关于”-Order”注解，最正确的描述是（）"><a href="#7、关于”-Order”注解，最正确的描述是（）" class="headerlink" title="7、关于”@Order”注解，最正确的描述是（）"></a>7、关于”@Order”注解，最正确的描述是（）</h4><pre><code>A，实现org.springframework.core.Ordered接口B，指定一个bean的范围C，通常用于注入域对象的属性D，全不正确正确答案：A</code></pre><h4 id="8、如何在Spring应用中使用SLF4J（）"><a href="#8、如何在Spring应用中使用SLF4J（）" class="headerlink" title="8、如何在Spring应用中使用SLF4J（）"></a>8、如何在Spring应用中使用SLF4J（）</h4><pre><code>A，作为日志框架B，全不正确C，作为一个beanD，作为JDBC框架正确答案：A</code></pre><h4 id="9、Spring-bean-的默认作用范围是（）"><a href="#9、Spring-bean-的默认作用范围是（）" class="headerlink" title="9、Spring bean 的默认作用范围是（）"></a>9、Spring bean 的默认作用范围是（）</h4><pre><code>A，全不正确B，SingletonC，PrototypeD，SessionE， Abstract正确答案：B</code></pre><h4 id="10、Spring中，单例意味着每-只有一个实例（）"><a href="#10、Spring中，单例意味着每-只有一个实例（）" class="headerlink" title="10、Spring中，单例意味着每_只有一个实例（）"></a>10、Spring中，单例意味着每<strong>_</strong>只有一个实例（）</h4><pre><code>A，ContextB， JVMC，Thread正确答案：A</code></pre><h4 id="11、使用Spring-MVC-处理普通页面请求，-下面哪个排序是正确的（）"><a href="#11、使用Spring-MVC-处理普通页面请求，-下面哪个排序是正确的（）" class="headerlink" title="11、使用Spring MVC 处理普通页面请求， 下面哪个排序是正确的（）"></a>11、使用Spring MVC 处理普通页面请求， 下面哪个排序是正确的（）</h4><pre><code>1.请求：请求提交给服务器2.分发：分发器通过web 应用配置信息 ， 将请求分发至适当的控制器3.服务调用：控制器与业务层交互4.响应：控制器更新模型，将执行结果返回给客户端展现A，1-2-3-4B，1-4-3-2C，1-4-2-3D，1-3-2-4正确答案：A</code></pre><h4 id="12、以下哪个不是-Spring-AOP-的注解（）"><a href="#12、以下哪个不是-Spring-AOP-的注解（）" class="headerlink" title="12、以下哪个不是 Spring AOP 的注解（）"></a>12、以下哪个不是 Spring AOP 的注解（）</h4><pre><code>A，@BeforeB，@AroundC，@BeforeReturningD，@AfterThrowing正确答案：C</code></pre><h4 id="13、”-RequestMapping是Spring中的哪一部分（）"><a href="#13、”-RequestMapping是Spring中的哪一部分（）" class="headerlink" title="13、”@RequestMapping是Spring中的哪一部分（）"></a>13、”@RequestMapping是Spring中的哪一部分（）</h4><pre><code>A，DAOB，SecurityC，Web MVCD，Web正确答案：C</code></pre><h4 id="14、下面关于spring和struts2的描述，错误的是（）"><a href="#14、下面关于spring和struts2的描述，错误的是（）" class="headerlink" title="14、下面关于spring和struts2的描述，错误的是（）"></a>14、下面关于spring和struts2的描述，错误的是（）</h4><pre><code>A，spring mvc的入口是filter，而struts2是servletB，spring mvc是基于方法的设计，而struts2是基于类的设计C，struts2有以自己的interceptor机制，spring mvc用的是独立的AOP方式D， spring mvc的方法之间基本上独立的，独享request response数据，struts2所有Action变量是共享的正确答案：A</code></pre><h4 id="15、Spring中，下面哪个选项支持ORM（）"><a href="#15、Spring中，下面哪个选项支持ORM（）" class="headerlink" title="15、Spring中，下面哪个选项支持ORM（）"></a>15、Spring中，下面哪个选项支持ORM（）</h4><pre><code>A，OJBB，TopLinkC，全部选项D，Java Data Objects(JDO)E，iBatis正确答案：C</code></pre><h4 id="16、Spring和Hibernate的集成中，下面哪项是SessionFactory-正确的实现（）"><a href="#16、Spring和Hibernate的集成中，下面哪项是SessionFactory-正确的实现（）" class="headerlink" title="16、Spring和Hibernate的集成中，下面哪项是SessionFactory 正确的实现（）"></a>16、Spring和Hibernate的集成中，下面哪项是SessionFactory 正确的实现（）</h4><pre><code>A，LocalSessionFactoryBeanB，LocalFactoryBeanC，SessionFactoryD，SessionFactoryBean正确答案：A</code></pre><h4 id="17、下面哪个是Spring最核心的servlet（）"><a href="#17、下面哪个是Spring最核心的servlet（）" class="headerlink" title="17、下面哪个是Spring最核心的servlet（）"></a>17、下面哪个是Spring最核心的servlet（）</h4><pre><code>A，WebServletB，SpringServletC，DispatcherServletD，IoCServlet正确答案：C</code></pre><h4 id="18、Spring-test-用什么约定在测试中使用HTTP会话和HTTP-请求对象（）"><a href="#18、Spring-test-用什么约定在测试中使用HTTP会话和HTTP-请求对象（）" class="headerlink" title="18、Spring-test 用什么约定在测试中使用HTTP会话和HTTP 请求对象（）"></a>18、Spring-test 用什么约定在测试中使用HTTP会话和HTTP 请求对象（）</h4><pre><code>A，MVCB，Open-closed principleC，DAOsD，Mock objects正确答案：D</code></pre><h4 id="19、Spring-中，”-Cacheable”的key生成方式，以下哪个是正确的（）"><a href="#19、Spring-中，”-Cacheable”的key生成方式，以下哪个是正确的（）" class="headerlink" title="19、Spring 中，”@Cacheable”的key生成方式，以下哪个是正确的（）"></a>19、Spring 中，”@Cacheable”的key生成方式，以下哪个是正确的（）</h4><pre><code>A，可以是方法参数及其成员变量的任意表达式B，只能使用所有方法参数，但可以调整次序C，只能使用所有方法参数，且不能调整次序D，只能指定方法参数是否参与key的生成，不能控制参数的成员变量正确答案：A</code></pre><h4 id="20、使用-Required但不关联bean-来注解setter方法，将会发生（）"><a href="#20、使用-Required但不关联bean-来注解setter方法，将会发生（）" class="headerlink" title="20、使用@Required但不关联bean 来注解setter方法，将会发生（）"></a>20、使用@Required但不关联bean 来注解setter方法，将会发生（）</h4><pre><code>A，bean被设置为nullB，启动异常C，Spring 将创建beanD，什么也不发生正确答案：B</code></pre><h4 id="21，有关线程的哪些叙述是对的（-）"><a href="#21，有关线程的哪些叙述是对的（-）" class="headerlink" title="21，有关线程的哪些叙述是对的（ ）"></a>21，有关线程的哪些叙述是对的（ ）</h4><pre><code>A，一旦一个线程被创建，它就立即开始运行。B，使用start()方法可以使一个线程成为可运行的，但是它不一定立即开始运行。C，当一个线程因为抢先机制而停止运行，它被放在可运行队列的前面。D，一个线程可能因为不同的原因停止并进入就绪状态。答案：BCD在抢占式线程模型中，操作系统可以在任何时候打断线程。通常会在它运行了一段时间（就是所谓的一个时间片）后才打断它。这样的结果自然是没有线程能够不公平地长时间霸占处理器。</code></pre><hr><h4 id="22，哪个关键字可以对对象加互斥锁-（）"><a href="#22，哪个关键字可以对对象加互斥锁-（）" class="headerlink" title="22，哪个关键字可以对对象加互斥锁 （）"></a>22，哪个关键字可以对对象加互斥锁 （）</h4><pre><code>A，serializeB，synchronizedC，transientD，static答案：BA是对象串行化、C是关键字transient修饰的属性将不被串行化、D是静态的</code></pre><h4 id="23，下列关于线程优先级的说法中，正确的是（）"><a href="#23，下列关于线程优先级的说法中，正确的是（）" class="headerlink" title="23，下列关于线程优先级的说法中，正确的是（）"></a>23，下列关于线程优先级的说法中，正确的是（）</h4><pre><code>A、线程的优先级是不能改变的B、线程的优先级是在创建线程时设置的C、在创建线程后的任何时候都可以设置D、B和C答案：C    Java语言中线程的优先级是用一个介于MIN_PRIORITY和MAX_PRIORITY之间的整数来表示的。可以在创建线程后的任何时候修改线程的优先级。</code></pre><h4 id="24，为了使模块尽可能独立，要求"><a href="#24，为了使模块尽可能独立，要求" class="headerlink" title="24，为了使模块尽可能独立，要求( )"></a>24，为了使模块尽可能独立，要求( )</h4><pre><code>A．模块的内聚程度要尽量高，且耦合程度要尽量强B．模块的内聚程度要尽量高，且耦合程度要尽量弱C．模块的内聚程度要尽量低，且耦合程度要尽量弱D．模块的内聚程度要尽量低，且耦合程度要尽量强答案：B    系统设计的质量主要反映在模块的独立性上。评价模块独立性的主要标准有两个：一是模块之间的耦合，它表明两个模块之间互相独立的程度；二是模块内部之间的关系是否紧密，称为内聚。一般来说，要求模块之间的耦合尽可能地弱，即模块尽可能独立，而要求模块的内聚程度尽量高。</code></pre><h4 id="25，下列对于线性链表的描述中正确的是（）"><a href="#25，下列对于线性链表的描述中正确的是（）" class="headerlink" title="25，下列对于线性链表的描述中正确的是（）"></a>25，下列对于线性链表的描述中正确的是（）</h4><pre><code>A．存储空间不一定是连续，且各元素的存储顺序是任意的B．存储空间不一定是连续，且前件元素一定存储在后件元素的前面C．存储空间必须连续，且前件元素一定存储在后件元素的前面D．存储空间必须连续，且各元素的存储顺序是任意的答案：A在链式存储结构中，存储数据结构的存储空间可以不连续，各数据结点的存储顺序与数据元素之间 的逻辑关系可以不一致，而数据元素之间的逻辑关系是由指针域来确定的。</code></pre><h4 id="26，下列叙述中错误的是"><a href="#26，下列叙述中错误的是" class="headerlink" title="26，下列叙述中错误的是( )"></a>26，下列叙述中错误的是( )</h4><pre><code>A.线性表是由n个元素组成的一个有限序列B.线性表是一种线性结构C.线性表的所有结点有且仅有一个前件和后件D.线性表可以是空表答案：C线性表是一种线性结构，由n(n≥0)个元素组成，所以线性表可以是空表。但是在线性表中，第一个结点没有前驱，最后一个结点没有后继，其他结点有且只有一个前驱和后继，所以选项C是错误的。</code></pre><h4 id="27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为"><a href="#27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为" class="headerlink" title="27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为( )"></a>27，已知一棵二叉树前序遍历和中序遍历分别为ABDEGCFH和DBGEACHF，则该二叉树的后序遍历为( )</h4><pre><code>A.GEDHFBCAB.DGEBHFCAC.ABCDEFGHD.ACBFEDHG答案：B二叉树的遍历有3种：前序、中序和后序。先序：先访问根结点、左结点、右结点中序：先访问左结点、根结点、右结点后序：先访问左结点、右结点、根结点本题根据前序遍历和中序遍历的结果可以得出二叉树的结构，然后再对其进行后序遍历。</code></pre><h4 id="28，面向对象方法中，继承是指"><a href="#28，面向对象方法中，继承是指" class="headerlink" title="28，面向对象方法中，继承是指( )"></a>28，面向对象方法中，继承是指( )</h4><pre><code>A.一组对象所具有的相似性质B.一个对象具有另一个对象的性质C.各对象之间的共同性质D.类之间共享属性和操作的机制答案：D继承：在程序设计中，继承是指子类自动享用父类的属性和方法，并可以增加新的属性和方法的一种机制。它是实现代码共享的重要手段，可以使软件更具有开放性、可扩充性，这是信息组织与分类的行之有效的方法，也是面向对象的主要优点之一。继承又分为单重继承和多重继承，单重继承是指子类只能继承一个父类的属性和操作；而多重继承是指子类可以继承了多个父类的属性和操作。扩展：Java是一种单重继承语言，而C++是一种多重继承语言。</code></pre><h4 id="29，栈和队列的共同点是"><a href="#29，栈和队列的共同点是" class="headerlink" title="29，栈和队列的共同点是( )"></a>29，栈和队列的共同点是( )</h4><pre><code>A.都是先进先出B.都是先进后出C.只允许在端点处插入和删除元素D.没有共同特点答案：C栈是只允许在表的一端进行插入和删除的操作，队列是允许在表的一端进行插入，另一端进行删除的操作。</code></pre><h4 id="30，下列关于修饰符混用的说法，错误的是（）"><a href="#30，下列关于修饰符混用的说法，错误的是（）" class="headerlink" title="30，下列关于修饰符混用的说法，错误的是（）"></a>30，下列关于修饰符混用的说法，错误的是（）</h4><pre><code>A.abstract不能与final并列修饰同一个类B.abstract类中不可以有private的成员C.abstract方法必须在abstract类中D.static方法中能处理非static的数据答案：D静态方法是属于类的，而普通方法是属于对象的。属于类的静态方法可以在对象不存在的时候就能访问到，而普通方法必须先new一个对象才能用这个对象访问。当我们访问调用静态方法的时候（使用类名.静态方法名）这个时候就没有对象创建，所以普通方法是访问不到的。为了避免这种错误，所以java就不允许在静态方法中访问非静态方法。</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试题 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 面试题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MySql中锁的理解</title>
       <link href="/2019/04/12/mysql-zhong-suo-de-li-jie/"/>
       <url>/2019/04/12/mysql-zhong-suo-de-li-jie/</url>
@@ -56,6 +83,31 @@
     
     
     <entry>
+      <title>装饰者设计模式</title>
+      <link href="/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/"/>
+      <url>/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/</url>
+      
+        <content type="html"><![CDATA[<h1 id="装饰者设计模式"><a href="#装饰者设计模式" class="headerlink" title="装饰者设计模式"></a>装饰者设计模式</h1><h4 id="一、装饰者模式的概念"><a href="#一、装饰者模式的概念" class="headerlink" title="一、装饰者模式的概念"></a>一、装饰者模式的概念</h4><p>​    装饰者模式又名包装(Wrapper)模式。装饰者模式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案。</p><h4 id="二、装饰者模式的结构"><a href="#二、装饰者模式的结构" class="headerlink" title="二、装饰者模式的结构"></a>二、装饰者模式的结构</h4><p>​    装饰者模式以对客户透明的方式动态地给一个对象附加上更多的责任。换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰者模式可以在不使用创造更多子类的情况下，将对象的功能加以扩展。<img src="//zongmansheng.club/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/个人学习文档\装饰者设计模式\Snipaste_2019-01-14_22-44-24.png" alt="Snipaste_2019-01-14_22-44-24"></p><p>在装饰模式中的角色有：</p><p>●　　抽象构件(Component)角色：给出一个抽象接口，以规范准备接收附加责任的对象。</p><p>●　　具体构件(ConcreteComponent)角色：定义一个将要接收附加责任的类。</p><p>●　　装饰(Decorator)角色：持有一个构件(Component)对象的实例，并定义一个与抽象构件接口一致的接口。</p><p>●　　具体装饰(ConcreteDecorator)角色：负责给构件对象“贴上”附加的责任。</p><h4 id="三、装饰者模式实例演示"><a href="#三、装饰者模式实例演示" class="headerlink" title="三、装饰者模式实例演示"></a>三、装饰者模式实例演示</h4><h5 id="齐天大圣的例子"><a href="#齐天大圣的例子" class="headerlink" title="齐天大圣的例子"></a>齐天大圣的例子</h5><p>​    孙悟空有七十二般变化，他的每一种变化都给他带来一种附加的本领。他变成鱼儿时，就可以到水里游泳；他变成鸟儿时，就可以在天上飞行。</p><p>​    本例中，Component的角色便由鼎鼎大名的齐天大圣扮演；ConcreteComponent的角色属于大圣的本尊，就是猢狲本人；Decorator的角色由大圣的七十二变扮演。而ConcreteDecorator的角色便是鱼儿、鸟儿等七十二般变化</p><p><img src="//zongmansheng.club/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/Snipaste_2019-01-14_22-47-58.png" alt="Snipaste_2019-01-14_22-47-58"></p><h4 id="四、装饰者模式的优缺点"><a href="#四、装饰者模式的优缺点" class="headerlink" title="四、装饰者模式的优缺点"></a>四、装饰者模式的优缺点</h4><h5 id="装饰模式的优点"><a href="#装饰模式的优点" class="headerlink" title="装饰模式的优点"></a>装饰模式的优点</h5><p>（1）装饰模式与继承关系的目的都是要扩展对象的功能，但是装饰模式可以提供比继承更多的灵活性。装    饰模式允许系统动态决定“贴上”一个需要的“装饰”，或者除掉一个不需要的“装饰”。继承关系则不同，继承关系是静态的，它在系统运行前就决定了。</p><p>（2）通过使用不同的具体装饰类以及这些装饰类的排列组合，设计师可以创造出很多不同行为的组合。</p><h5 id="装饰模式的缺点"><a href="#装饰模式的缺点" class="headerlink" title="装饰模式的缺点"></a>装饰模式的缺点</h5><p>由于使用装饰模式，可以比使用继承关系需要较少数目的类。使用较少的类，当然使设计比较易于进行。但是，在另一方面，使用装饰模式会产生比使用继承关系更多的对象。更多的对象会使得查错变得困难，特别是这些对象看上去都很相像。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Wrapper，装饰者 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>单例设计模式</title>
       <link href="/2019/04/09/dan-li-she-ji-mo-shi/"/>
       <url>/2019/04/09/dan-li-she-ji-mo-shi/</url>
@@ -73,6 +125,33 @@
         <tags>
             
             <tag> 设计模式，singleton </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>http的各种状态</title>
+      <link href="/2019/04/08/http-de-ge-chong-zhuang-tai/"/>
+      <url>/2019/04/08/http-de-ge-chong-zhuang-tai/</url>
+      
+        <content type="html"><![CDATA[<h1 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h1><pre><code>HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。我们可以通过查看HTTP状态码来判断服务器状态，常见的有404 、502等；但是其他不是很常见的状态码都代表什么状态呢？下面有两张有趣的图片，让你瞬间都能理解了。</code></pre><p><img src="http的各种状态\Snipaste_2019-01-18_08-34-19.png" alt="Snipaste_2019-01-18_08-34-19"></p><pre><code>301—永久移动。被请求的资源已被永久移动位置；302—请求的资源现在临时从不同的 URI 响应请求；305—使用代理。被请求的资源必须通过指定的代理才能被访问；307—临时跳转。被请求的资源在临时从不同的URL响应请求；400—错误请求；402—需要付款。该状态码是为了将来可能的需求而预留的，用于一些数字货币或者是微支付；403—禁止访问。服务器已经理解请求，但是拒绝执行它；404—找不到对象。请求失败，资源不存在；406—不可接受的。请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体；</code></pre><p><img src="http的各种状态\Snipaste_2019-01-18_08-36-12.png" alt="Snipaste_2019-01-18_08-36-12"></p><pre><code>408—请求超时；409—冲突。由于和被请求的资源的当前状态之间存在冲突，请求无法完成；410—遗失的。被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址；413—响应实体太大。服务器拒绝处理当前请求，请求超过服务器所能处理和允许的最大值。417—期望失败。在请求头 Expect 中指定的预期内容无法被服务器满足；418—我是一个茶壶。超文本咖啡罐控制协议，但是并没有被实际的HTTP服务器实现；420—方法失效。422—不可处理的实体。请求格式正确，但是由于含有语义错误，无法响应；500—服务器内部错误。服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理；</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> http </tag>
+            
+            <tag> 状态码 </tag>
             
         </tags>
       
@@ -442,19 +521,6 @@
             <tag> RPC </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/02/17/hello-world/"/>
-      <url>/2019/02/17/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
       
     </entry>
     
