@@ -1,0 +1,731 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="原型模式, 晓笙的BLOG">
+    <meta name="description" content="原型模式一 原型模式介绍在面向对象系统中，使用原型模式来复制一个对象自身，从而克隆出多个与原型对象一模一样的对象。
+
+另外在软件系统中，有些对象的创建过程较为复杂，而且有时候需要频繁创建，原型模式通过给出一个原型对象来指明所要创建的对象的类">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>原型模式 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        原型模式
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/原型，复制/" target="_blank">
+                                <span class="chip bg-color">原型，复制</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/设计模式/" class="post-category" target="_blank">
+                                设计模式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-19
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.3k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><h4 id="一-原型模式介绍"><a href="#一-原型模式介绍" class="headerlink" title="一 原型模式介绍"></a>一 原型模式介绍</h4><pre><code>在面向对象系统中，使用原型模式来复制一个对象自身，从而克隆出多个与原型对象一模一样的对象。
+
+另外在软件系统中，有些对象的创建过程较为复杂，而且有时候需要频繁创建，原型模式通过给出一个原型对象来指明所要创建的对象的类型，然后用复制这个原型对象的办法创建出更多同类型的对象，这就是原型模式的意图所在。
+</code></pre><p><img src="//zongmansheng.club/2019/04/19/yuan-xing-mo-shi/001.jpg" alt="001"></p>
+<h5 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h5><p>GOF给出的原型模式定义如下：</p>
+<pre class=" language-java"><code class="language-java">Specify the kind of objects to create using a prototypical instance<span class="token punctuation">,</span> and create <span class="token keyword">new</span> <span class="token class-name">objects</span> by copying <span class="token keyword">this</span> prototype<span class="token punctuation">.</span> （使用原型实例指定将要创建的对象类型，通过复制这个实例创建新的对象。）
+</code></pre>
+<h5 id="1-2-原型模式适用场景"><a href="#1-2-原型模式适用场景" class="headerlink" title="1.2 原型模式适用场景"></a>1.2 原型模式适用场景</h5><pre><code>我们现在一般会使用new关键字指定类名生成类的实例（PS：我们以前使用java.lang.Cloneable的一个很大原因是使用new创建对象的速度相对来说会慢一些，随着JVM性能的提升，new的速度和Object的clone（）方法的速度差不多了。）。
+
+使用new关键字创建类的时候必须指定类名，但是在开发过程中也会有“在不指定类名的前提下生成实例”的需求。例如，在下面这些情况下，就需要根据现有的实例来生成新的实例。
+
+1) 对象种类繁多，无法将他们整合到一个类的时候；
+
+2) 难以根据类生成实例时；
+
+3) 想解耦框架与生成的实例时。
+
+如果想要让生成实例的框架不再依赖于具体的类，这时，不能指定类名来生成实例，而要事先“注册”一个“原型”实例，然后通过复制该实例来生成新的实例。
+</code></pre><h5 id="1-3-模式分析"><a href="#1-3-模式分析" class="headerlink" title="1.3 模式分析"></a>1.3 模式分析</h5><pre><code>在原型模式结构中定义了一个抽象原型类，所有的Java类都继承自java.lang.Object，而Object类提供一个clone()方法，可以将一个Java对象复制一份。因此在Java中可以直接使用Object提供的clone()方法来实现对象的克隆，Java语言中的原型模式实现很简单。
+
+能够实现克隆的Java类必须实现一个标识接口Cloneable，表示这个Java类支持复制。如果一个类没有实现这个接口但是调用了clone()方法，Java编译器将抛出一个CloneNotSupportedException异常。
+
+注意： `java.lang.Cloneable 只是起到告诉程序可以调用clone方法的作用，它本身并没有定义任何方法。
+
+在使用原型模式克隆对象时，根据其成员对象是否也克隆，原型模式可以分为两种形式：深克隆 和 浅克隆 。
+</code></pre><h5 id="1-4-模式优缺点分析"><a href="#1-4-模式优缺点分析" class="headerlink" title="1.4 模式优缺点分析"></a>1.4 模式优缺点分析</h5><p>原型模式的优点：</p>
+<pre><code>1、当创建新的对象实例较为复杂时，使用原型模式可以简化对象的创建过程，通过一个已有实例可以提高新实例的创建效率。
+
+2、可以动态增加或减少产品类。
+3、原型模式提供了简化的创建结构。
+4、可以使用深克隆的方式保存对象的状态。
+</code></pre><p>原型模式的缺点：</p>
+<pre><code>1、需要为每一个类配备一个克隆方法，而且这个克隆方法需要对类的功能进行通盘考虑，这对全新的类来说不是很难，但对已有的类进行改造时，不一定是件容易的事，必须修改其源代码，违背了“开闭原则”。
+
+2、在实现深克隆时需要编写较为复杂的代码。
+</code></pre><h4 id="二-示例程序"><a href="#二-示例程序" class="headerlink" title="二 示例程序"></a>二 示例程序</h4><p>下面示例程序的作用是将字符串放入方框中显示出来或者是加了下划线显示出来。</p>
+<p>类和接口一览表：</p>
+<p><img src="//zongmansheng.club/2019/04/19/yuan-xing-mo-shi/002.jpg" alt="002"></p>
+<p>示例程序类图：</p>
+<p><img src="//zongmansheng.club/2019/04/19/yuan-xing-mo-shi/003.jpg" alt="003"></p>
+<h5 id="2-1-Product接口-（Prototype）"><a href="#2-1-Product接口-（Prototype）" class="headerlink" title="2.1 Product接口 （Prototype）"></a>2.1 Product接口 （Prototype）</h5><pre><code>    Product接口是复制功能接口，该接口继承了java.lang.Cloneable(只有实现了该接口的类的实例才可以调用clone()方法复制实例,否则会抛出异常). 
+    另外需要注意：`java.lang.Cloneable 只是起到告诉程序可以调用clone方法的作用，它本身并没有定义任何方法。
+</code></pre><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * @author ZongMan
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Product</span> <span class="token keyword">extends</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
+
+    <span class="token comment" spellcheck="true">//use方法是用于“使用”的方法，具体怎么“使用”，则被交给子类去实现</span>
+    <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">use</span><span class="token punctuation">(</span>String str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//creatClone方法是用于复制实例的方法</span>
+    <span class="token keyword">abstract</span> Product <span class="token function">creatClone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="2-2-Manager类（Client）"><a href="#2-2-Manager类（Client）" class="headerlink" title="2.2 Manager类（Client）"></a>2.2 Manager类（Client）</h5><pre><code>Manager类使用Product接口来复制实例。
+
+Product接口以及Manager类的代码完全没有出现在MessageBox类和UnderlinePen类的名字，因此这意味着我们可以独立地修改Product接口以及Manager类，不受MessageBox类和UnderlinePen类的影响。这是非常重要的，因为 一旦在类中使用到了别的类名，就意味着该类与其他类紧密的地耦合在了一起 。在Manager类中，并没有写明具体的类名， 仅仅使用了Product这个接口名。也就是说，Product接口成为了连接Manager类与其他具体类之间的桥梁。
+</code></pre><pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>HashMap<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/**
+ * @author ZongMan
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Manager</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//保存实例的“名字”和“实例”之间的对应关系</span>
+    <span class="token keyword">private</span> HashMap<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Product<span class="token operator">></span> showcase <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/*
+    register方法将接收到的一组“名字”和“Product接口”注册到showcase中。
+    这里Product是实现Product接口的实例，具体还未确定
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">register</span><span class="token punctuation">(</span>String name<span class="token punctuation">,</span> Product product<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        showcase<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> Product <span class="token function">create</span><span class="token punctuation">(</span>String productname<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Product p <span class="token operator">=</span> showcase<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>productname<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> p<span class="token punctuation">.</span><span class="token function">creatClone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="2-3-MessageBox类（ConcreteProtorype）"><a href="#2-3-MessageBox类（ConcreteProtorype）" class="headerlink" title="2.3 MessageBox类（ConcreteProtorype）"></a>2.3 MessageBox类（ConcreteProtorype）</h5><p>装饰方框样式的具体原型，实现了Product接口，实现复制现有实例并生成新实例的方法。</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * @author ZongMan
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MessageBox</span> <span class="token keyword">implements</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//保存的是装饰方框使用的字符样式</span>
+    <span class="token keyword">private</span> <span class="token keyword">char</span> decochar<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">MessageBox</span><span class="token punctuation">(</span><span class="token keyword">char</span> decochar<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>decochar <span class="token operator">=</span> decochar<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">use</span><span class="token punctuation">(</span>String str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> length <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> length <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"--------->"</span> <span class="token operator">+</span> decochar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>decochar <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> str <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> decochar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> length <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>decochar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">/**
+     * 该方法用于复制自己
+     * @return
+     */</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Product <span class="token function">creatClone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Product p <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            p <span class="token operator">=</span> <span class="token punctuation">(</span>Product<span class="token punctuation">)</span> <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">CloneNotSupportedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<pre><code>只有类自己（或是它的子类）能够调用Java语言中定义的clone方法。当其他类要求复制实例时，必须先调用createClone这样的方法，然后在该方法内部在调用clone方法。
+</code></pre><h5 id="2-4-UnderlinePen类（ConcreteProtorype）"><a href="#2-4-UnderlinePen类（ConcreteProtorype）" class="headerlink" title="2.4 UnderlinePen类（ConcreteProtorype）"></a>2.4 UnderlinePen类（ConcreteProtorype）</h5><pre><code>    下划线样式的具体原型，实现了Product接口，用于实现复制现有实例并生成新实例的方法。UnderlinePen类的实现几乎和MessageBox类一样，不同的可能只是use方法的实现。
+</code></pre><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * @author ZongMan
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UnderlinePen</span> <span class="token keyword">implements</span> <span class="token class-name">Product</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">char</span> ulchar<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token function">UnderlinePen</span><span class="token punctuation">(</span><span class="token keyword">char</span> ulchar<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ulchar <span class="token operator">=</span> ulchar<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">use</span><span class="token punctuation">(</span>String str<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> length <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"\""</span> <span class="token operator">+</span> str <span class="token operator">+</span> <span class="token string">"\""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> length <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>ulchar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Product <span class="token function">creatClone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Product p <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            p <span class="token operator">=</span> <span class="token punctuation">(</span>Product<span class="token punctuation">)</span> <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">CloneNotSupportedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> p<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="2-5-Main类"><a href="#2-5-Main类" class="headerlink" title="2.5 Main类"></a>2.5 Main类</h5><pre><code>Main类首先生成Manager实例。接着，在Manager实例中通过`register方法注册了UnderlinePen类的实例（带名字）和MessageBox类的实例（带名字）。
+</code></pre><pre><code>package clone;
+
+/**
+ * @author ZongMan
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        Manager manager = new Manager();
+        UnderlinePen underlinePen=new UnderlinePen(&#39;~&#39;);
+        MessageBox mbox=new MessageBox(&#39;*&#39;);
+        MessageBox sbox=new MessageBox(&#39;#&#39;);
+        manager.register(&quot;Strong message&quot;, underlinePen);
+        manager.register(&quot;Waring Box&quot;, mbox);
+        manager.register(&quot;Slash Box&quot;, sbox);
+        Product p1=manager.create(&quot;Strong message&quot;);
+        p1.use(&quot;hello world&quot;);
+        Product p2=manager.create(&quot;Waring Box&quot;);
+        p2.use(&quot;hello world&quot;);
+        Product p3=manager.create(&quot;Slash Box&quot;);
+        p3.use(&quot;hello world&quot;);
+    }
+}
+</code></pre><p>运行结果：</p>
+<p><img src="//zongmansheng.club/2019/04/19/yuan-xing-mo-shi/004.jpg" alt="004"></p>
+<h4 id="三-原型模式的角色分析"><a href="#三-原型模式的角色分析" class="headerlink" title="三 原型模式的角色分析"></a>三 原型模式的角色分析</h4><h5 id="3-1-Prototype（抽象原型类）"><a href="#3-1-Prototype（抽象原型类）" class="headerlink" title="3.1 Prototype（抽象原型类）"></a>3.1 Prototype（抽象原型类）</h5><pre><code>Product角色负责定义用于复制现有实例来生成新实例的方法。在示例程序中的Product接口就是该角色。
+</code></pre><h5 id="3-2-ConcretePrototype（具体原型类）"><a href="#3-2-ConcretePrototype（具体原型类）" class="headerlink" title="3.2 ConcretePrototype（具体原型类）"></a>3.2 ConcretePrototype（具体原型类）</h5><pre><code>ConcretePrototype角色负责实现复制现有实例并生成新实例的方法。在示例程序中，MessageBox和UnderlinePen都是该角色。
+</code></pre><h5 id="3-3-Client（客户类-使用者）"><a href="#3-3-Client（客户类-使用者）" class="headerlink" title="3.3 Client（客户类/使用者）"></a>3.3 Client（客户类/使用者）</h5><pre><code>Client角色负责使用复制实例的方法生成新的实例。在示例程序中，Manager类扮演的就是该角色。
+</code></pre><p>Prototype模式的类图：</p>
+<p><img src="//zongmansheng.club/2019/04/19/yuan-xing-mo-shi/005.jpg" alt="005"></p>
+<h4 id="四-原型模式的实际应用案例"><a href="#四-原型模式的实际应用案例" class="headerlink" title="四 原型模式的实际应用案例"></a>四 原型模式的实际应用案例</h4><pre><code>(1) 原型模式应用于很多软件中，如果每次创建一个对象要花大量时间，原型模式是最好的解决方案。很多软件提供的复制(Ctrl + C)和粘贴(Ctrl + V)操作就是原型模式的应用，复制得到的对象与原型对象是两个类型相同但内存地址不同的对象，通过原型模式可以大大提高对象的创建效率。
+
+(2) 在Struts2中为了保证线程的安全性，Action对象的创建使用了原型模式，访问一个已经存在的`Action对象时将通过克隆的方式创建出一个新的对象，从而保证其中定义的变量无须进行加锁实现同步，每一个Action中都有自己的成员变量，避免Struts1因使用单例模式而导致的并发和同步问题。
+
+(3) 在Spring中，用户也可以采用原型模式来创建新的bean实例，从而实现每次获取的是通过克隆生成的新实例，对其进行修改时对原有实例对象不造成任何影响。
+</code></pre>
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/04/19/yuan-xing-mo-shi/" class="b-link-green">原型模式</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/20/san-ci-wo-shou-he-si-ci-hui-shou/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="三次握手和四次挥手">
+                        
+                        <span class="card-title">三次握手和四次挥手</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">三次握手和四次挥手常用的熟知端口号
+TCP的概述TCP把连接作为最基本的对象，每一条TCP连接都有两个端点，这种断点我们叫作套接字（socket），它的定义为端口号拼接到IP地址即构成了套接字，例如，若IP地址为192.3.4.16 而端口</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/计算机网络/" class="post-category" target="_blank">
+                                    计算机网络
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/TCP/" target="_blank">
+                        <span class="chip bg-color">TCP</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/18/leetcode/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="LeetCode">
+                        
+                        <span class="card-title">LeetCode</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">LeetCode上的算法题题目描述：/**
+ * @author ZongMan
+ * @version 1.0
+ * @date 2019/4/18 0018 8:31
+ * 在给定的整数数组中，总有一个最大的元素。查找数组中的最大元素是</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/每日算法/" class="post-category" target="_blank">
+                                    每日算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/LeetCode/" target="_blank">
+                        <span class="chip bg-color">LeetCode</span>
+                    </a>
+                    
+                    <a href="/tags/算法/" target="_blank">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">52.8k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
