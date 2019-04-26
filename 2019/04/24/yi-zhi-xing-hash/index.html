@@ -4,8 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="MySQL事务及ACID特性的实现原理, 晓笙的BLOG">
-    <meta name="description" content="MySQL事务及ACID特性的实现原理 | 晓笙的BLOG">
+    <meta name="keywords" content="一致性Hash, 晓笙的BLOG">
+    <meta name="description" content="一致性Hash
+一致性Hash是分布式架构最重要最基础的东西，作为一个后端必须要了解，这里以分布式图片缓存服务器为例进行讲述。
+
+原始问题：假设我们需要对一堆图片做缓存，缓存的图片放在了2台服务器上，当到来一个请求，应该如何知道请求的图片在">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>MySQL事务及ACID特性的实现原理 | 晓笙的BLOG</title>
+    <title>一致性Hash | 晓笙的BLOG</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -208,13 +211,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        MySQL事务及ACID特性的实现原理
+                        一致性Hash
                     </div>
                 </div>
             </div>
@@ -236,8 +239,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/MYSQL，ACID/" target="_blank">
-                                <span class="chip bg-color">MYSQL，ACID</span>
+                            <a href="/tags/算法/" target="_blank">
+                                <span class="chip bg-color">算法</span>
+                            </a>
+                        
+                            <a href="/tags/Hash/" target="_blank">
+                                <span class="chip bg-color">Hash</span>
                             </a>
                         
                     </div>
@@ -248,8 +255,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/MYSQL基础/" class="post-category" target="_blank">
-                                MYSQL基础
+                            <a href="/categories/后端/" class="post-category" target="_blank">
+                                后端
                             </a>
                         
                     </div>
@@ -260,21 +267,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-04-25
+                    2019-04-24
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        1.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -290,7 +297,82 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h1><blockquote>
+<p>一致性Hash是分布式架构最重要最基础的东西，作为一个后端必须要了解，这里以分布式图片缓存服务器为例进行讲述。</p>
+</blockquote>
+<p><strong>原始问题：假设我们需要对一堆图片做缓存，缓存的图片放在了2台服务器上，当到来一个请求，应该如何知道请求的图片在哪台上面呢？</strong></p>
+<blockquote>
+<p>暴力遍历就不要去想了，否则缓存就没有意义了。一个自然的想法就是根据图片的名字做一个映射（Hash），将图片名字映射到0，1两个数字上面，例如有这样的映射函数：</p>
+</blockquote>
+<blockquote>
+<p>f(图片名称) = md5(图片名称) % 2</p>
+</blockquote>
+<blockquote>
+<p>md5是一个典型的哈希函数，会产生128bit的值，模2后只可能是0或1，那么我们就根据这个值把图片存入0、1两台服务器，当请求过来，根据图片名称计算出值，就可以知道图片缓存放在第几号服务器了：</p>
+</blockquote>
+<p><img src="/一致性Hash\001.jpg" alt="001"></p>
+<blockquote>
+<p>但假设现在我们图片太多了，需要再增加一台服务器分担压力，哈希函数必须更改成0、1、2映射，我们改为：</p>
+</blockquote>
+<blockquote>
+<p>f(图片名称) = md5(图片名称) % 3</p>
+</blockquote>
+<blockquote>
+<p>理论上讲，会有(N-1)/N的缓存会失效，其中N是服务器的数量，例如上述图片缓存，除了0图片、1图片，其余图片的存放位置都变了，失效的缓存有 2/3 * 6 = 4张图片：</p>
+</blockquote>
+<p><img src="/一致性Hash\002.jpg" alt="002"></p>
+<p>减少图片服务器数量造成的后果亦是如此——在同一个时刻将会有大量缓存同时失效，称为“缓存雪崩”。失效了就会直接去后端服务器取，大量的请求直接透过缓存打到后端服务器，后端服务器极有可能承受不住压力而接连崩溃，最终造成整个系统瘫痪。</p>
+<p><strong>所以出现进阶问题：当缓存服务器数量发生变化时，如何尽可能避免大量缓存同时失效？</strong></p>
+<p>答案就是一致性Hash。</p>
+<h4 id="一、一致性Hash原理"><a href="#一、一致性Hash原理" class="headerlink" title="一、一致性Hash原理"></a>一、一致性Hash原理</h4><h5 id="1、放置服务器"><a href="#1、放置服务器" class="headerlink" title="1、放置服务器"></a><strong>1、放置服务器</strong></h5><blockquote>
+<p>我们将服务器像图片一样也进行哈希，服务器的“图片名称”一般就使用固定IP地址，Hash取模也不再是服务器数量，而是2^32，Hash的方法也不局限于md5，用一个抽象的函数表示：</p>
+</blockquote>
+<blockquote>
+<p>f(服务器IP地址) = Hash(服务器IP地址) % 2^32</p>
+</blockquote>
+<blockquote>
+<p>于是服务器被放置到了0~2^32-1某个数字对应的位置上去：</p>
+</blockquote>
+<p><img src="/一致性Hash\003.jpg" alt="003"></p>
+<blockquote>
+<p>为什么是2^32-1呢？因为第一次提出一致性Hash的论文是1997年发表的，那时候32位机器还是主流，2^32-1是最大的Integer。而现在64位早就普及了，完全可以将这个值扩大到2^64-1。</p>
+</blockquote>
+<h5 id="2、放置数据"><a href="#2、放置数据" class="headerlink" title="2、放置数据"></a><strong>2、放置数据</strong></h5><blockquote>
+<p>我们将数据也按照相同的方式放到0~2^32-1的某个数字上去：</p>
+</blockquote>
+<blockquote>
+<p>f(图片名称) = Hash(图片名称) % 2^32</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/04/24/yi-zhi-xing-hash/004.jpg" alt="004"></p>
+<h5 id="3、把数据放到服务器上"><a href="#3、把数据放到服务器上" class="headerlink" title="3、把数据放到服务器上"></a><strong>3、把数据放到服务器上</strong></h5><blockquote>
+<p>对于每个数据，从映射的位置开始，顺时针行走，放置到碰到的第一个服务器上。例如3、230将会放到0号图片服务器，232将会放到1号图片服务器，4175556547将会放到2号图片服务器：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/04/24/yi-zhi-xing-hash/005.jpg" alt="005"></p>
+<blockquote>
+<p>这样一致性Hash就完成了。查找数据也是先映射、再顺时针行走找到第一台服务器。</p>
+</blockquote>
+<h4 id="二、一致性Hash如何缓解数据失效问题"><a href="#二、一致性Hash如何缓解数据失效问题" class="headerlink" title="二、一致性Hash如何缓解数据失效问题"></a>二、一致性Hash如何缓解数据失效问题</h4><blockquote>
+<p>假设现在1号服务器崩溃，图片232找不到1号服务器，顺时针行走的第一台服务器是2号服务器，于是232的缓存位置发生了改变，变为了2号：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/04/24/yi-zhi-xing-hash/006.jpg" alt="006"></p>
+<blockquote>
+<p>而对于其他图片来说，缓存位置并没有发生变化，影响的数据量从（N-1）/ N 降为了 M，其中M是0号图片服务器到1号图片服务器之间的图片数量。需要重新获取的缓存数据量降低了，雪崩问题自然也就能够得到缓解。</p>
+</blockquote>
+<h4 id="三、Hash环偏斜和虚拟节点"><a href="#三、Hash环偏斜和虚拟节点" class="headerlink" title="三、Hash环偏斜和虚拟节点"></a>三、Hash环偏斜和虚拟节点</h4><blockquote>
+<p>前面讨论得太理想了，实际的服务器分布和数据分布很可能是这样的：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/04/24/yi-zhi-xing-hash/007.jpg" alt="007"></p>
+<blockquote>
+<p>0、1、2三台服务器并没有均匀分布在环上，大量的图片数据都被放到了0号服务器上，而很少数据放到1、2号等其他图片服务器上，这种情况称之为Hash环偏斜。如果存放的是缓存则0号服务器崩溃就会引起缓存雪崩，如果存放的是数据则0号服务器就可能单点故障。</p>
+</blockquote>
+<blockquote>
+<p>很自然可以想到，增加多台服务器就好了嘛。我们在Hash环上生成0、1、2三台服务器的虚拟节点：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/04/24/yi-zhi-xing-hash/008.jpg" alt="008"></p>
+<blockquote>
+<p>具体的做法是，在服务器IP后面增加编号，每一台服务器产生多个Hash值，就能放置在0~2^32-1的多个位置上了。这样一来，顺时针行走能找到不同的服务器概率将会大大提高，避免了偏斜问题。虚拟的服务器节点数越多，偏斜出现的概率就越低。通常都需要设置32或以上的虚拟节点数目，我见过甚至有设置500的。</p>
+</blockquote>
+
             </div>
             <hr>
 
@@ -313,7 +395,7 @@
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/04/25/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/" class="b-link-green">MySQL事务及ACID特性的实现原理</a>
+                    <a href="/2019/04/24/yi-zhi-xing-hash/" class="b-link-green">一致性Hash</a>
                 </p>
             </div>
         </div>
@@ -452,7 +534,7 @@ TCP的概述TCP把连接作为最基本的对象，每一条TCP连接都有两�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">53.6k</span>
+                <span class="white-color">59.9k</span>
             
 
             
