@@ -39,10 +39,10 @@
   
   <entry>
     <title>SQL注入XSS和CSRF</title>
-    <link href="http://zongmansheng.club/2019/04/26/sql-zhu-ru-xss-he-csrf/"/>
-    <id>http://zongmansheng.club/2019/04/26/sql-zhu-ru-xss-he-csrf/</id>
-    <published>2019-04-26T00:31:32.000Z</published>
-    <updated>2019-04-26T12:30:58.142Z</updated>
+    <link href="http://zongmansheng.club/2019/04/25/sql-zhu-ru-xss-he-csrf/"/>
+    <id>http://zongmansheng.club/2019/04/25/sql-zhu-ru-xss-he-csrf/</id>
+    <published>2019-04-25T00:31:32.000Z</published>
+    <updated>2019-04-26T13:34:18.699Z</updated>
     
     <content type="html"><![CDATA[<h1 id="SQL注入、XSS和CSRF"><a href="#SQL注入、XSS和CSRF" class="headerlink" title="SQL注入、XSS和CSRF"></a>SQL注入、XSS和CSRF</h1><h4 id="一、SQL注入"><a href="#一、SQL注入" class="headerlink" title="一、SQL注入"></a>一、SQL注入</h4><pre><code>SQL注入是属于注入式攻击，这种攻击是因为在项目中没有将代码与数据（比如用户敏感数据）隔离，在读取数据的时候，错误的将数据作为代码的一部分执行而导致的。典型的例子就是当对SQL语句进行字符串拼接的时候，直接使用未转义的用户输入内容作为变量。这时，只要在sql语句的中间做修改，比如加上drop、delete等关键字，执行之后后果不堪设想。说到这里，那么该怎么处理这种情况呢？三个方面：1、过滤用户输入参数中的特殊字符，降低风险。2、禁止通过字符串拼接sql语句，要严格使用参数绑定来传入参数。3、合理使用数据库框架提供的机制。就比如Mybatis提供的传入参数的方式 #{}，禁止使用${}，后者相当于是字符串拼接sql，要使用参数化的语句。总结下，就是要正确使用参数化绑定sql变量。</code></pre><h4 id="二、XSS"><a href="#二、XSS" class="headerlink" title="二、XSS"></a>二、XSS</h4><p>​    </p><blockquote><p>​       XSS：跨站脚本攻击，Cross-Site Scripting，为了和前端的css避免重名，简称为XSS，是指通过技术手段，向正常用户请求的HTML页面中插入恶意脚本，执行。</p></blockquote><blockquote><p>​    这种攻击主要是用于信息窃取和破坏等目的。比如2011年的微博XSS攻击事件，攻击者利用了微博发布功能中未对action-data漏洞做有效的过滤，在发布微博信息的时候带上了包含攻击脚本的URL，用户访问就会加载恶意脚本，导致大量用户被攻击。</p></blockquote><blockquote><p>​    关于防范XSS上，主要就是通过对用户输入的数据做过滤或者是转义，可以使用框架提供的工具类HtmlUtil。另外前端在浏览器展示数据的时候，要使用安全的API展示数据。比如使用innerText而不是innerHTML。</p></blockquote><h4 id="三、CSRF"><a href="#三、CSRF" class="headerlink" title="三、CSRF"></a>三、CSRF</h4><blockquote><p>​    跨站请求伪造，在用户并不知情的情况下，冒充用户发送请求，在当前已经登录的web网站上执行恶意操作，比如恶意发帖，修改密码等。</p></blockquote><blockquote><p>​    大致来看，与XSS有重合的地方，前者是黑客盗用用户浏览器中的登录信息，冒充用户去执行操作。后者是在正常用户请求的HTML中放入恶意代码，</p></blockquote><blockquote><p>​    XSS问题出在用户数据没有转义，过滤；CSRF问题出现在HTTP接口没有防范不守信用的调用。</p></blockquote><blockquote><p>防范CSRF的漏洞方式：</p></blockquote><blockquote><p>​    1、CSRF Token验证，利用浏览器的同源限制，在HTTP接口执行前验证Cookie中的Token，验证通过才会继续执行请求。</p></blockquote><blockquote><p>​    2、人机交互，例如短信验证码、界面的滑块。</p></blockquote><blockquote><p>之前在会议上也有一个思考，在人机验证这块，如果不用验证码的方式，用界面上的滑块这种方式，而且滑块还是第三方的。在APP的注册、登录使用这种人机验证的方式的话，如果第三方出现了问题，那么自己的APP就完全崩掉了，发版之后的APP什么也改不了。</p></blockquote>]]></content>
     
