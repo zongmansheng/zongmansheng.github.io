@@ -1,0 +1,726 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="nginx惊群, 晓笙的BLOG">
+    <meta name="description" content="nginx惊群一、什么是惊群
+​    多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应这一个事">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>nginx惊群 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        nginx惊群
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/nginx/" target="_blank">
+                                <span class="chip bg-color">nginx</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/进阶/" class="post-category" target="_blank">
+                                进阶
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-28
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="nginx惊群"><a href="#nginx惊群" class="headerlink" title="nginx惊群"></a>nginx惊群</h1><h4 id="一、什么是惊群"><a href="#一、什么是惊群" class="headerlink" title="一、什么是惊群"></a>一、什么是惊群</h4><blockquote>
+<p>​    多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应这一个事件，当然只有一个进程能处理事件成功，其他的进程在处理该事件失败后重新休眠（也有其他选择）。这种性能浪费现象就是惊群。</p>
+</blockquote>
+<blockquote>
+<p>​    惊群通常发生在server 上，当父进程绑定一个端口监听socket，然后fork出多个子进程，子进程们开始循环处理（比如accept）这个socket。每当用户发起一个TCP连接时，多个子进程同时被唤醒，然后其中一个子进程accept新连接成功，余者皆失败，重新休眠。</p>
+</blockquote>
+<h4 id="二、如何解决惊群问题-post事件处理机制"><a href="#二、如何解决惊群问题-post事件处理机制" class="headerlink" title="二、如何解决惊群问题-post事件处理机制"></a>二、如何解决惊群问题-post事件处理机制</h4><blockquote>
+<p>​    很多操作系统的最新版本的内核已经在事件驱动机制中解决了惊群问题，但Nginx作为可移植性极高的web服务器，还是在自身的应用层面上较好的解决了这一问题。<br>Nginx规定了同一时刻只有唯一一个worker子进程监听web端口，这一就不会发生惊群了，此时新连接事件只能唤醒唯一的正在监听端口的worker子进程。</p>
+<p>​    如何限制在某一时刻是有一个子进程监听web端口呢？在打开accept_mutex锁的情况下，只有调用ngx_trylock_accept_mutex方法后，当前的worker进程才会去试着监听web端口。</p>
+<p>​    那么，什么时候释放ngx_accept_mutex锁呢？<br>​    显然不能等到这批事件全部执行完。因为这个worker进程上可能有许多活跃的连接，处理这些连接上的事件会占用很长时间，其他worker进程很难得到处理新连接的机会。</p>
+<p>​    如何解决长时间占用ngx_accept_mutex的问题呢？</p>
+<p>​    这就要依靠post事件处理机制，Nginx设计了两个队列：ngx_posted_accept_events队列（存放新连接事件的队列）和ngx_posted_events队列（存放普通事件的队列）。这两个队列都是ngx_event_t类型的双链表。定义如下：</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">ngx_thread_volatile ngx_event_t  <span class="token operator">*</span>ngx_posted_accept_events<span class="token punctuation">;</span>
+ngx_thread_volatile ngx_event_t  <span class="token operator">*</span>ngx_posted_events<span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>​    下面结合具体代码进行分析惊群问题的解决。</p>
+<p>​    首先看worker进程中ngx_process_events_and_timers事件处理函数（src/event/ngx.event.c），它处于worker进程的ngx_worker_process_cycle方法中，循环处理时间，是事件驱动机制的核心，既会处理普通的网络事件，也会处理定时器事件。ngx_process_events_and_timers是Nginx实际处理web业务的方法，所有业务的执行都是由它开始的，它涉及Nginx完整的事件驱动机制！！特别重要~</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">
+<span class="token keyword">void</span>
+<span class="token function">ngx_process_events_and_timers</span><span class="token punctuation">(</span>ngx_cycle_t <span class="token operator">*</span>cycle<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ngx_uint_t  flags<span class="token punctuation">;</span>
+    ngx_msec_t  timer<span class="token punctuation">,</span> delta<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_timer_resolution<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        timer <span class="token operator">=</span> NGX_TIMER_INFINITE<span class="token punctuation">;</span>
+        flags <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        timer <span class="token operator">=</span> <span class="token function">ngx_event_find_timer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        flags <span class="token operator">=</span> NGX_UPDATE_TIME<span class="token punctuation">;</span>
+
+#<span class="token keyword">if</span> <span class="token punctuation">(</span>NGX_THREADS<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>timer <span class="token operator">==</span> NGX_TIMER_INFINITE <span class="token operator">||</span> timer <span class="token operator">></span> <span class="token number">500</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            timer <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+#endif
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/*ngx_use_accept_mutex表示是否需要通过对accept加锁来解决惊群问题。当使用了master模式，nginx worker进程数>1时且配置文件中打开accept_mutex时，这个标志置为1 
+    它在函数ngx_event_process_int中被设置，源代码为：
+    if (ccf->master &amp;&amp; ccf->worker_processes > 1 &amp;&amp; ecf->accept_mutex) {
+        ngx_use_accept_mutex = 1;
+        ngx_accept_mutex_held = 0;
+        ngx_accept_mutex_delay = ecf->accept_mutex_delay;
+    } else {
+        ngx_use_accept_mutex = 0;
+    }*/</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_use_accept_mutex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//负载均衡处理</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_accept_disabled <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ngx_accept_disabled<span class="token operator">--</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//调用ngx_trylock_accept_mutex方法，尝试获取accept锁</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ngx_trylock_accept_mutex</span><span class="token punctuation">(</span>cycle<span class="token punctuation">)</span> <span class="token operator">==</span> NGX_ERROR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token comment" spellcheck="true">//拿到锁</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_accept_mutex_held<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">/*给flags增加标记NGX_POST_EVENTS，这个标记作为处理时间核心函数ngx_process_events的一个参数，这个函数中所有事件将延后处理。会把accept事件都放到ngx_posted_accept_events链表中，epollin|epollout普通事件都放到ngx_posted_events链表中 */</span>
+                flags <span class="token operator">|=</span> NGX_POST_EVENTS<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">/*获取锁失败，意味着既不能让当前worker进程频繁的试图抢锁，也不能让它经过太长事件再去抢锁
+                下面的代码：即使开启了timer_resolution时间精度，牙需要让ngx_process_change方法在没有新事件的时候至少等待ngx_accept_mutex_delay毫秒之后再去试图抢锁
+                而没有开启时间精度时，如果最近一个定时器事件的超时时间距离现在超过了ngx_accept_mutex_delay毫秒，也要把timer设置为ngx_accept_mutex_delay毫秒，这是因为当前进程虽然没有抢到accept_mutex锁，但也不能让ngx_process_change方法在没有新事件的时候等待的时间超过ngx_accept_mutex_delay，这会影响整个负载均衡机制*/</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>timer <span class="token operator">==</span> NGX_TIMER_INFINITE
+                    <span class="token operator">||</span> timer <span class="token operator">></span> ngx_accept_mutex_delay<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    timer <span class="token operator">=</span> ngx_accept_mutex_delay<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//计算ngx_process_events消耗的时间</span>
+    delta <span class="token operator">=</span> ngx_current_msec<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//事件处理核心函数</span>
+    <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token function">ngx_process_events</span><span class="token punctuation">(</span>cycle<span class="token punctuation">,</span> timer<span class="token punctuation">,</span> flags<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    delta <span class="token operator">=</span> ngx_current_msec <span class="token operator">-</span> delta<span class="token punctuation">;</span>
+
+    <span class="token function">ngx_log_debug1</span><span class="token punctuation">(</span>NGX_LOG_DEBUG_EVENT<span class="token punctuation">,</span> cycle<span class="token operator">-</span><span class="token operator">></span>log<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                   <span class="token string">"timer delta: %M"</span><span class="token punctuation">,</span> delta<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//ngx_posted_accept_events链表有数据，开始accept新连接</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_posted_accept_events<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">ngx_event_process_posted</span><span class="token punctuation">(</span>cycle<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ngx_posted_accept_events<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//释放锁后再处理ngx_posted_events链表中的普通事件</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_accept_mutex_held<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">ngx_shmtx_unlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ngx_accept_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//如果ngx_process_events消耗的时间大于0，那么这是可能有新的定时器事件触发</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>delta<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//处理定时器事件</span>
+        <span class="token function">ngx_event_expire_timers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">ngx_log_debug1</span><span class="token punctuation">(</span>NGX_LOG_DEBUG_EVENT<span class="token punctuation">,</span> cycle<span class="token operator">-</span><span class="token operator">></span>log<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                   <span class="token string">"posted events %p"</span><span class="token punctuation">,</span> ngx_posted_events<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//ngx_posted_events链表中有数据，进行处理</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_posted_events<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_threaded<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">ngx_wakeup_worker_thread</span><span class="token punctuation">(</span>cycle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">ngx_event_process_posted</span><span class="token punctuation">(</span>cycle<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ngx_posted_events<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>​    上面代码中要进行说明的是，flags被设置后作为函数ngx_process_events方法的一个参数，在epoll模块中这个接口的实现方法是ngx_epoll_process_events（其具体代码见<a href="http://blog.csdn.net/xiajun07061225/article/details/9250341）。当falgs标志位含有nGX_POST_EVENTS时是不会立即调用事件的handler回调方法的，代码如下所示：" target="_blank" rel="noopener">http://blog.csdn.net/xiajun07061225/article/details/9250341）。当falgs标志位含有nGX_POST_EVENTS时是不会立即调用事件的handler回调方法的，代码如下所示：</a></p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//事件需要延后处理</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>flags <span class="token operator">&amp;</span> NGX_POST_EVENTS<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">/*如果要在post队列中延后处理该事件，首先要判断它是新连接时间还是普通事件
+                以确定是把它加入到ngx_posted_accept_events队列或者ngx_posted_events队列中。*/</span>
+                queue <span class="token operator">=</span> <span class="token punctuation">(</span>ngx_event_t <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>rev<span class="token operator">-</span><span class="token operator">></span>accept <span class="token operator">?</span>
+                               <span class="token operator">&amp;</span>ngx_posted_accept_events <span class="token operator">:</span> <span class="token operator">&amp;</span>ngx_posted_events<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//将该事件添加到相应的延后队列中</span>
+                <span class="token function">ngx_locked_post_event</span><span class="token punctuation">(</span>rev<span class="token punctuation">,</span> queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//立即调用事件回调方法来处理这个事件</span>
+                rev<span class="token operator">-</span><span class="token operator">></span><span class="token function">handler</span><span class="token punctuation">(</span>rev<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>通过上面的代码可以看出，先处理ngx_posted_accept_events队列中的事件，处理完毕后立即释放ngx_accept_mutex锁，接着再处理ngx_posted_events队列中事件。这样大大减少了ngx_accept_mutex锁占用的时间</p>
+<p>下面看看ngx_trylock_accept_mutex的具体实现（src/event/ngx_event_accept.c）：</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">ngx_int_t
+<span class="token function">ngx_trylock_accept_mutex</span><span class="token punctuation">(</span>ngx_cycle_t <span class="token operator">*</span>cycle<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//尝试获取accept_mutex锁。注意是非阻塞的。返回1表示成功，返回0表示失败。</span>
+    <span class="token comment" spellcheck="true">//ngx_accept_mutex 定义：ngx_shmtx_t    ngx_accept_mutex;（ngx_shmtx_t是Nginx封装的互斥锁，用于经常间同步）</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ngx_shmtx_trylock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ngx_accept_mutex<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token function">ngx_log_debug0</span><span class="token punctuation">(</span>NGX_LOG_DEBUG_EVENT<span class="token punctuation">,</span> cycle<span class="token operator">-</span><span class="token operator">></span>log<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                       <span class="token string">"accept mutex locked"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//获取到锁，但是标志位ngx_accept_mutex_held为1，表示当前进程已经获取到锁了，立即返回。</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_accept_mutex_held
+            <span class="token operator">&amp;&amp;</span> ngx_accept_events <span class="token operator">==</span> <span class="token number">0</span>
+            <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token punctuation">(</span>ngx_event_flags <span class="token operator">&amp;</span> NGX_USE_RTSIG_EVENT<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> NGX_OK<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">//将所有监听事件添加到当前的epoll等事件驱动模块中</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ngx_enable_accept_events</span><span class="token punctuation">(</span>cycle<span class="token punctuation">)</span> <span class="token operator">==</span> NGX_ERROR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//添加失败，必须释放互斥锁</span>
+            <span class="token function">ngx_shmtx_unlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ngx_accept_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> NGX_ERROR<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//标志位设置</span>
+        ngx_accept_events <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//当前进程已经获取到锁</span>
+        ngx_accept_mutex_held <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> NGX_OK<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">ngx_log_debug1</span><span class="token punctuation">(</span>NGX_LOG_DEBUG_EVENT<span class="token punctuation">,</span> cycle<span class="token operator">-</span><span class="token operator">></span>log<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                   <span class="token string">"accept mutex lock failed: %ui"</span><span class="token punctuation">,</span> ngx_accept_mutex_held<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//获取锁失败，但是标志位ngx_accept_mutex_held仍然为1，即当前进程还处在获取到锁的状态，这是不正确的</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ngx_accept_mutex_held<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//将所有监听事件从事件驱动模块中移除</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">ngx_disable_accept_events</span><span class="token punctuation">(</span>cycle<span class="token punctuation">)</span> <span class="token operator">==</span> NGX_ERROR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> NGX_ERROR<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//没有获取到锁，设置标志位</span>
+        ngx_accept_mutex_held <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> NGX_OK<span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>​    调用这个方法的结果是，要么唯一获取到锁且其epoll等事件驱动模块开始监控web端口上的新连接事件。这种情况下调用process_events方法时就会既处理已有连接上的事件，也处理新连接的事件。要么没有获取到锁，当前进程不会收到新连接事件。这种情况下process_events只处理已有连接上的事件。</p>
+</blockquote>
+<h4 id="三、参考资料"><a href="#三、参考资料" class="headerlink" title="三、参考资料"></a>三、参考资料</h4><blockquote>
+<p><a href="http://russelltao.iteye.com/blog/1405352" target="_blank" rel="noopener">http://russelltao.iteye.com/blog/1405352</a></p>
+<p>《深入理解Nginx》</p>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/04/28/nginx-liang-qun/" class="b-link-green">nginx惊群</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/04/28/nginx-liang-qun/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="nginx惊群">
+                        
+                        <span class="card-title">nginx惊群</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">nginx惊群一、什么是惊群
+​    多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应这一个事</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/进阶/" class="post-category" target="_blank">
+                                    进阶
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/nginx/" target="_blank">
+                        <span class="chip bg-color">nginx</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt>
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">MySQL事务及ACID特性的实现原理一、MySQL 事务基础概念
+​    事务(Transaction)是访问和更新数据库的程序执行单元;事务中可能包含一个或多个 sql 语句，这些语句要么都执行，要么都不执行。
+
+
+​    作为一个</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            ZongMan
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">61.9k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
