@@ -1,0 +1,529 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="分类: java高级, 晓笙的BLOG">
+    <meta name="description" content="分类: java高级 | 晓笙的BLOG">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>分类: java高级 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+<div class="bg-cover  about-cover" style="background-image: url('/medias/cover.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+                <div class="brand">
+                    <div class="title center-align">
+                    
+                        一个来自IT界的菜鸟007
+                    
+                    </div>
+
+                    <div class="description center-align">
+                    
+                        有人共享，快乐会加倍，忧愁会减半！
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+// Dynamically switch banner pictures every day.
+$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+</script>
+
+<main class="content">
+
+    
+
+<div id="category-cloud" class="container chip-container">
+    <div class="card">
+        <div class="card-content">
+            <div class="tag-title center-align">
+                <i class="fa fa-bookmark"></i>&nbsp;&nbsp;文章分类
+            </div>
+            <div class="tag-chips">
+                
+                
+                
+                <a href="/categories/进阶/" title="进阶: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #F9EBEA;">进阶
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/基础底层/" title="基础底层: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #F5EEF8;">基础底层
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/每日算法/" title="每日算法: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #D5F5E3;">每日算法
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/日常学习/" title="日常学习: 10">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #E8F8F5;">日常学习
+                        <span class="tag-length">10</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/web基础/" title="web基础: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #FEF9E7;">web基础
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/java基础/" title="java基础: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #F8F9F9;">java基础
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/计算机网络/" title="计算机网络: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #82E0AA;">计算机网络
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/后端/" title="后端: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #D7BDE2;">后端
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/java高级/" title="java高级: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active " style="background-color: #A3E4D7;">java高级
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/设计模式/" title="设计模式: 3">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #85C1E9;">设计模式
+                        <span class="tag-length">3</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/Java基础/" title="Java基础: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #F8C471;">Java基础
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/数据库/" title="数据库: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #F9E79F;">数据库
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/面试/" title="面试: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #F9EBEA;">面试
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/面试题/" title="面试题: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #FFF;">面试题
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/Spring/" title="Spring: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default " style="background-color: #F9E79F;">Spring
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
+            
+            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="消息队列的高可用">
+                            
+                            <span class="card-title">消息队列的高可用</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="summary">
+                            
+                                消息队列的高可用一、RabbitMQ 的高可用性
+​    RabbitMQ 是比较有代表性的，因为是基于主从（非分布式）做高可用性的，我们
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-05
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/java高级/" class="post-category" target="_blank">
+                                    java高级
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/分布式，MQ/" target="_blank">
+                            <span class="chip bg-color">分布式，MQ</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </article>
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">63.4k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
