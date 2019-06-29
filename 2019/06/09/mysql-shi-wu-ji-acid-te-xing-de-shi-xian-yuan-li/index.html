@@ -251,7 +251,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-04-26
+                    2019-06-09
                 </div>
 
                 
@@ -287,7 +287,7 @@
 <blockquote>
 <p>​    作为一个关系型数据库，MySQL 支持事务，本文介绍基于 MySQL 5.6。首先回顾一下 MySQL 事务的基础知识。</p>
 </blockquote>
-<h4 id="二、逻辑架构和存储引擎"><a href="#二、逻辑架构和存储引擎" class="headerlink" title="二、逻辑架构和存储引擎"></a>二、逻辑架构和存储引擎</h4><p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/001.jpg" alt="001"></p>
+<h4 id="二、逻辑架构和存储引擎"><a href="#二、逻辑架构和存储引擎" class="headerlink" title="二、逻辑架构和存储引擎"></a>二、逻辑架构和存储引擎</h4><p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/001.jpg" alt="001"></p>
 <blockquote>
 <p>如上图所示，MySQL 服务器逻辑架构从上往下可以分为三层：</p>
 </blockquote>
@@ -319,7 +319,7 @@ commit<span class="token punctuation">;</span>
 <h4 id="四、自动提交"><a href="#四、自动提交" class="headerlink" title="四、自动提交"></a>四、自动提交</h4><blockquote>
 <p>MySQL 中默认采用的是自动提交(autocommit)模式，如下所示：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/002.jpg" alt="002"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/002.jpg" alt="002"></p>
 <blockquote>
 <p>在自动提交模式下，如果没有 start transaction 显式地开始一个事务，那么每个 sql 语句都会被当做一个事务执行提交操作。</p>
 </blockquote>
@@ -327,7 +327,7 @@ commit<span class="token punctuation">;</span>
 <p>通过如下方式，可以关闭 autocommit;需要注意的是，autocommit 参数是针对连接的，在一个连接中修改了参数，不会对其他连接产生影响。</p>
 </blockquote>
 <blockquote>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/003.jpg" alt="003"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/003.jpg" alt="003"></p>
 </blockquote>
 <blockquote>
 <p>如果关闭了 autocommit，则所有的 sql 语句都在一个事务中，直到执行了 commit 或 rollback，该事务结束，同时开始了另外一个事务。</p>
@@ -536,9 +536,9 @@ start transaction;
 update account SET balance = 2000 where id = 1; 
 </code></pre>
 <p>此时查看锁的情况：</p>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/004.jpg" alt="004"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/004.jpg" alt="004"></p>
 <p>show engine innodb status 查看锁相关的部分：</p>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/005.jpg" alt="005"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/005.jpg" alt="005"></p>
 <blockquote>
 <p>通过上述命令可以查看事务 24052 和 24053 占用锁的情况;其中 lock_type 为 RECORD，代表锁为行锁(记录锁);lock_mode 为 X，代表排它锁(写锁)。</p>
 </blockquote>
@@ -555,7 +555,7 @@ update account SET balance = 2000 where id = 1;
 <p>①脏读：当前事务(A)中可以读到其他事务(B)未提交的数据(脏数据)，这种现象是脏读。</p>
 </blockquote>
 <p>举例如下(以账户余额表为例)：</p>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/006.jpg" alt="006"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/006.jpg" alt="006"></p>
 <blockquote>
 <p>②不可重复读：在事务 A 中先后两次读取同一个数据，两次读取的结果不一样，这种现象称为不可重复读。</p>
 </blockquote>
@@ -563,7 +563,7 @@ update account SET balance = 2000 where id = 1;
 <p>脏读与不可重复读的区别在于：前者读到的是其他事务未提交的数据，后者读到的是其他事务已提交的数据。</p>
 </blockquote>
 <p>举例如下：</p>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/007.jpg" alt="007"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/007.jpg" alt="007"></p>
 <blockquote>
 <p>③幻读：在事务 A 中按照某个条件先后两次查询数据库，两次查询结果的条数不同，这种现象称为幻读。</p>
 </blockquote>
@@ -571,7 +571,7 @@ update account SET balance = 2000 where id = 1;
 <p>不可重复读与幻读的区别可以通俗的理解为：前者是数据变了，后者是数据的行数变了。</p>
 </blockquote>
 <p>举例如下：</p>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/008.jpg" alt="008"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/008.jpg" alt="008"></p>
 <h5 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a><strong>事务隔离级别</strong></h5><blockquote>
 <p>sql 标准中定义了四种隔离级别，并规定了每种隔离级别下上述几个问题是否存在。</p>
 </blockquote>
@@ -581,7 +581,7 @@ update account SET balance = 2000 where id = 1;
 <blockquote>
 <p>隔离级别与读问题的关系如下：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/009.jpg" alt="009"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/009.jpg" alt="009"></p>
 <blockquote>
 <p>在实际应用中，读未提交在并发时会导致很多问题，而性能相对于其他隔离级别提高却很有限，因此使用较少。</p>
 </blockquote>
@@ -594,14 +594,14 @@ update account SET balance = 2000 where id = 1;
 <blockquote>
 <p>可以通过如下两个命令分别查看全局隔离级别和本次会话的隔离级别：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/010.jpg" alt="010"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/010.jpg" alt="010"></p>
 <h4 id="八、MVCC"><a href="#八、MVCC" class="headerlink" title="八、MVCC"></a>八、MVCC</h4><blockquote>
 <p>RR 解决脏读、不可重复读、幻读等问题，使用的是 MVCC：MVCC 全称 Multi-Version Concurrency Control，即多版本的并发控制协议。</p>
 </blockquote>
 <blockquote>
 <p>下面的例子很好的体现了 MVCC 的特点：在同一时刻，不同的事务读取到的数据可能是不同的(即多版本)——在 T5 时刻，事务 A 和事务 C 可以读取到不同版本的数据。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/011.jpg" alt="011"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/011.jpg" alt="011"></p>
 <blockquote>
 <p>MVCC 最大的优点是读不加锁，因此读写不冲突，并发性能好。InnoDB 实现 MVCC，多个版本的数据可以共存，主要是依靠数据的隐藏列(也可以称之为标记位)和 undo log。</p>
 </blockquote>
@@ -614,14 +614,14 @@ update account SET balance = 2000 where id = 1;
 <blockquote>
 <p>下面结合前文提到的几个问题分别说明。</p>
 </blockquote>
-<h5 id="①脏读"><a href="#①脏读" class="headerlink" title="①脏读"></a><strong>①脏读</strong></h5><p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/012.jpg" alt="012"></p>
+<h5 id="①脏读"><a href="#①脏读" class="headerlink" title="①脏读"></a><strong>①脏读</strong></h5><p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/012.jpg" alt="012"></p>
 <blockquote>
 <p>当事务 A 在 T3 时间节点读取 zhangsan 的余额时，会发现数据已被其他事务修改，且状态为未提交。</p>
 </blockquote>
 <blockquote>
 <p>此时事务 A 读取最新数据后，根据数据的 undo log 执行回滚操作，得到事务 B 修改前的数据，从而避免了脏读。</p>
 </blockquote>
-<h5 id="②不可重复读"><a href="#②不可重复读" class="headerlink" title="②不可重复读"></a>②不可重复读</h5><p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/013.jpg" alt="013"></p>
+<h5 id="②不可重复读"><a href="#②不可重复读" class="headerlink" title="②不可重复读"></a>②不可重复读</h5><p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/013.jpg" alt="013"></p>
 <blockquote>
 <p>当事务 A 在 T2 节点第一次读取数据时，会记录该数据的版本号(数据的版本号是以 row 为单位记录的)，假设版本号为 1;当事务 B 提交时，该行记录的版本号增加，假设版本号为 2。</p>
 </blockquote>
@@ -640,7 +640,7 @@ update account SET balance = 2000 where id = 1;
 <blockquote>
 <p>还是以前面的例子来说明：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/014.jpg" alt="014"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/014.jpg" alt="014"></p>
 <blockquote>
 <p>当事务 A 在 T2 节点第一次读取 0</p>
 </blockquote>
@@ -656,7 +656,7 @@ update account SET balance = 2000 where id = 1;
 <blockquote>
 <p>下面是一个例子，大家可以自己验证一下：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/015.jpg" alt="015"></p>
+<p><img src="//zongmansheng.club/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/015.jpg" alt="015"></p>
 <p><strong>一致性</strong></p>
 <p><strong>基本概念</strong></p>
 <p>一致性是指事务执行结束后，数据库的完整性约束没有被破坏，事务执行的前后都是合法的数据状态。</p>
@@ -719,7 +719,7 @@ update account SET balance = 2000 where id = 1;
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/04/26/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/" class="b-link-green"></a>
+                    <a href="/2019/06/09/mysql-shi-wu-ji-acid-te-xing-de-shi-xian-yuan-li/" class="b-link-green"></a>
                 </p>
             </div>
         </div>
@@ -744,69 +744,21 @@ update account SET balance = 2000 where id = 1;
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/04/28/nginx-liang-qun/">
+                <a href="/2019/06/17/java8-zhi-lambda-biao-da-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="nginx惊群">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Java8之lambda表达式">
                         
-                        <span class="card-title">nginx惊群</span>
+                        <span class="card-title">Java8之lambda表达式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">nginx惊群一、什么是惊群
-​    多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应这一个事</div>
+                    <div class="summary">Lambda表达式一、java重要的函数式接口1、什么是函数式接口        函数接口是只有一个抽象方法的接口，用作 Lambda 表达式的类型。使用@FunctionalInterface注解修饰的类，编译器会检测该类是否只有一个抽象</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-28
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-17
                         </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/进阶/" class="post-category" target="_blank">
-                                    进阶
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/04/25/sql-zhu-ru-xss-he-csrf/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="SQL注入XSS和CSRF">
-                        
-                        <span class="card-title">SQL注入XSS和CSRF</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary">SQL注入、XSS和CSRF一、SQL注入SQL注入是属于注入式攻击，这种攻击是因为在项目中没有将代码与数据（比如用户敏感数据）隔离，在读取数据的时候，错误的将数据作为代码的一部分执行而导致的。
-
-典型的例子就是当对SQL语句进行字符串拼接</div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-25
-                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -822,16 +774,55 @@ update account SET balance = 2000 where id = 1;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SQL/" target="_blank">
-                        <span class="chip bg-color">SQL</span>
+                    <a href="/tags/Lambda/" target="_blank">
+                        <span class="chip bg-color">Lambda</span>
                     </a>
                     
-                    <a href="/tags/XSS/" target="_blank">
-                        <span class="chip bg-color">XSS</span>
-                    </a>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/05/10/jian-zao-zhe-mo-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="建造者模式">
+                        
+                        <span class="card-title">建造者模式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">建造者模式一、介绍
+意图：将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。
+主要解决：主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/设计模式/" class="post-category" target="_blank">
+                                    设计模式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
                     
-                    <a href="/tags/CSRF/" target="_blank">
-                        <span class="chip bg-color">CSRF</span>
+                    <a href="/tags/Builder-Pattern/" target="_blank">
+                        <span class="chip bg-color">Builder Pattern</span>
                     </a>
                     
                 </div>
@@ -858,7 +849,7 @@ update account SET balance = 2000 where id = 1;
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">63.4k</span>
+                <span class="white-color">69k</span>
             
 
             
