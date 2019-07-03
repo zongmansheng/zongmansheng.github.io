@@ -1,0 +1,737 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="JVM的垃圾回收机制, 晓笙的BLOG">
+    <meta name="description" content="JVM的垃圾回收机制一、 技术背景
+说起垃圾回收（GC），大部分人都把这项技术当做Java语言的伴生产物。
+事实上，GC的历史比Java久远，早在1960年Lisp这门语言中就使用了内存动态分配和垃圾回收技术。
+
+二、 哪些内存需要回收？
+">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>JVM的垃圾回收机制 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        JVM的垃圾回收机制
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JVM/" target="_blank">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                            <a href="/tags/回收机制/" target="_blank">
+                                <span class="chip bg-color">回收机制</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                日常学习
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-06-20
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        13 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="JVM的垃圾回收机制"><a href="#JVM的垃圾回收机制" class="headerlink" title="JVM的垃圾回收机制"></a>JVM的垃圾回收机制</h1><h4 id="一、-技术背景"><a href="#一、-技术背景" class="headerlink" title="一、 技术背景"></a>一、 技术背景</h4><blockquote>
+<p>说起垃圾回收（GC），大部分人都把这项技术当做Java语言的伴生产物。</p>
+<p>事实上，GC的历史比Java久远，早在1960年Lisp这门语言中就使用了内存动态分配和垃圾回收技术。</p>
+</blockquote>
+<h4 id="二、-哪些内存需要回收？"><a href="#二、-哪些内存需要回收？" class="headerlink" title="二、 哪些内存需要回收？"></a>二、 哪些内存需要回收？</h4><blockquote>
+<p>JVM的内存结构包括五大区域：程序计数器、虚拟机栈、本地方法栈、堆区、方法区。</p>
+<p>其中程序计数器、虚拟机栈、本地方法栈3个区域随线程而生、随线程而灭，因此这几个区域的内存分配和回收都具备确定性，就不需要过多考虑回收的问题，因为方法结束或者线程结束时，内存自然就跟随着回收了。</p>
+<p>而Java堆区和方法区则不一样，这部分内存的分配和回收是动态的，正是垃圾收集器所需关注的部分。</p>
+<p>垃圾收集器在对堆区和方法区进行回收前，首先要确定这些区域的对象哪些可以被回收，哪些暂时还不能回收，这就要用到判断对象是否存活的算法！</p>
+</blockquote>
+<h5 id="2-1-引用计数算法"><a href="#2-1-引用计数算法" class="headerlink" title="2.1 引用计数算法"></a>2.1 引用计数算法</h5><h6 id="2-1-1-算法分析"><a href="#2-1-1-算法分析" class="headerlink" title="2.1.1 算法分析"></a>2.1.1 算法分析</h6><blockquote>
+<p>引用计数是垃圾收集器中的早期策略。在这种方法中，堆中每个对象实例都有一个引用计数。</p>
+<p>当一个对象被创建时，就将该对象实例分配给一个变量，该变量计数设置为1。</p>
+<p>当任何其它变量被赋值为这个对象的引用时，计数加1（a = b,则b引用的对象实例的计数器+1），但当一个对象实例的某个引用超过了生命周期或者被设置为一个新值时，对象实例的引用计数器减1。</p>
+<p>任何引用计数器为0的对象实例可以被当作垃圾收集。当一个对象实例被垃圾收集时，它引用的任何对象实例的引用计数器减1。</p>
+</blockquote>
+<h6 id="2-1-2-优缺点"><a href="#2-1-2-优缺点" class="headerlink" title="2.1.2 优缺点"></a>2.1.2 优缺点</h6><blockquote>
+<p><strong>优点</strong>：引用计数收集器可以很快的执行，交织在程序运行中。对程序需要不被长时间打断的实时环境比较有利。</p>
+<p><strong>缺点</strong>：无法检测出循环引用。如父对象有一个对子对象的引用，子对象反过来引用父对象。这样，他们的引用计数永远不可能为0。</p>
+</blockquote>
+<p>2.1.3 示例代码</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ReferenceFindTest</span> <span class="token punctuation">{</span>
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         MyObject object1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         MyObject object2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         object1<span class="token punctuation">.</span>object <span class="token operator">=</span> object2<span class="token punctuation">;</span>
+         object2<span class="token punctuation">.</span>object <span class="token operator">=</span> object1<span class="token punctuation">;</span>
+         object1 <span class="token operator">=</span> null<span class="token punctuation">;</span>
+         object2 <span class="token operator">=</span> null<span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>这段代码是用来验证引用计数算法不能检测出循环引用。最后面两句将object1和object2赋值为null</p>
+<p>也就是说object1和object2指向的对象已经不可能再被访问，但是由于它们互相引用对方，导致它们的引用计数器都不为0，那么垃圾收集器就永远不会回收它们。</p>
+</blockquote>
+<h5 id="2-2-可达性分析算法"><a href="#2-2-可达性分析算法" class="headerlink" title="2.2 可达性分析算法"></a>2.2 可达性分析算法</h5><blockquote>
+<p>可达性分析算法是从离散数学中的图论引入的，程序把所有的引用关系看作一张图，从一个节点GC ROOT开始，寻找对应的引用节点</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/001.png" alt></p>
+<blockquote>
+<p>找到这个节点以后，继续寻找这个节点的引用节点，当所有的引用节点寻找完毕之后，剩余的节点则被认为是没有被引用到的节点，即无用的节点，无用的节点将会被判定为是可回收的对象。</p>
+</blockquote>
+<blockquote>
+<p>在Java语言中，可作为GC Roots的对象包括下面几种：</p>
+<ul>
+<li>虚拟机栈中引用的对象（栈帧中的本地变量表）；</li>
+<li>方法区中类静态属性引用的对象；</li>
+<li>方法区中常量引用的对象；</li>
+<li>本地方法栈中JNI（Native方法）引用的对象。</li>
+</ul>
+</blockquote>
+<h5 id="2-3-Java中的引用"><a href="#2-3-Java中的引用" class="headerlink" title="2.3 Java中的引用"></a>2.3 Java中的引用</h5><blockquote>
+<p>无论是通过引用计数算法判断对象的引用数量，还是通过可达性分析算法判断对象的引用链是否可达，判定对象是否存活都与“引用”有关。</p>
+<p>在Java语言中，将引用又分为强引用、软引用、弱引用、虚引用4种，这四种引用强度依次逐渐减弱。</p>
+</blockquote>
+<h6 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h6><blockquote>
+<p>在程序代码中普遍存在的，类似 Object obj = new Object() 这类引用，只要强引用还存在，垃圾收集器永远不会回收掉被引用的对象。</p>
+</blockquote>
+<h6 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h6><blockquote>
+<p>用来描述一些还有用但并非必须的对象。</p>
+<p>对于软引用关联着的对象，在系统将要发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收。如果这次回收后还没有足够的内存，才会抛出内存溢出异常。</p>
+</blockquote>
+<h6 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h6><blockquote>
+<p>也是用来描述非必需对象的，但是它的强度比软引用更弱一些，被弱引用关联的对象只能生存到下一次垃圾收集发生之前。</p>
+<p>当垃圾收集器工作时，无论当前内存是否足够，都会回收掉只被弱引用关联的对象。</p>
+</blockquote>
+<h6 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h6><blockquote>
+<p>也叫幽灵引用或幻影引用（名字真会取，很魔幻的样子），是最弱的一种引用关系。</p>
+<p>一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。</p>
+<p>它的作用是能在这个对象被收集器回收时收到一个系统通知。</p>
+<p>不要被概念吓到，也别担心，还没跑题，再深入，可就不好说了。小编罗列这四个概念的目的是为了说明，无论引用计数算法还是可达性分析算法都是基于强引用而言的。</p>
+</blockquote>
+<h5 id="2-4-对象死亡（被回收）前的最后一次挣扎"><a href="#2-4-对象死亡（被回收）前的最后一次挣扎" class="headerlink" title="2.4 对象死亡（被回收）前的最后一次挣扎"></a>2.4 对象死亡（被回收）前的最后一次挣扎</h5><blockquote>
+<p>即使在可达性分析算法中不可达的对象，也并非是“非死不可”，这时候它们暂时处于“缓刑”阶段，要真正宣告一个对象死亡，至少要经历两次标记过程。</p>
+<p><strong>第一次标记</strong>：如果对象在进行可达性分析后发现没有与GC Roots相连接的引用链，那它将会被第一次标记；</p>
+<p><strong>第二次标记</strong>：第一次标记后接着会进行一次筛选，筛选的条件是此对象是否有必要执行finalize()方法。在finalize()方法中没有重新与引用链建立关联关系的，将被进行第二次标记。</p>
+<p>第二次标记成功的对象将真的会被回收，如果对象在finalize()方法中重新与引用链建立了关联关系，那么将会逃离本次回收，继续存活。</p>
+</blockquote>
+<h5 id="2-5-方法区如何判断是否需要回收"><a href="#2-5-方法区如何判断是否需要回收" class="headerlink" title="2.5 方法区如何判断是否需要回收"></a>2.5 方法区如何判断是否需要回收</h5><blockquote>
+<p>方法区存储内容是否需要回收的判断可就不一样咯。方法区主要回收的内容有：废弃常量和无用的类。</p>
+<p>对于废弃常量也可通过引用的可达性来判断，但是对于无用的类则需要同时满足下面3个条件：</p>
+<ul>
+<li>该类所有的实例都已经被回收，也就是Java堆中不存在该类的任何实例；</li>
+<li>加载该类的ClassLoader已经被回收；</li>
+<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ul>
+</blockquote>
+<h4 id="三、常用的垃圾收集算法"><a href="#三、常用的垃圾收集算法" class="headerlink" title="三、常用的垃圾收集算法"></a>三、常用的垃圾收集算法</h4><h5 id="3-1-标记-清除算法"><a href="#3-1-标记-清除算法" class="headerlink" title="3.1 标记-清除算法"></a>3.1 标记-清除算法</h5><blockquote>
+<p>标记-清除算法采用从根集合（GC Roots）进行扫描，对存活的对象进行标记</p>
+<p>标记完毕后，再扫描整个空间中未被标记的对象，进行回收，如下图所示。</p>
+<p>标记-清除算法不需要进行对象的移动，只需对不存活的对象进行处理，在存活对象比较多的情况下极为高效</p>
+<p>但由于标记-清除算法直接回收不存活的对象，因此会造成<strong>内存碎片</strong></p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/002.png" alt></p>
+<h5 id="3-2-复制算法"><a href="#3-2-复制算法" class="headerlink" title="3.2 复制算法"></a>3.2 复制算法</h5><blockquote>
+<p>复制算法的提出是为了克服句柄的开销和解决内存碎片的问题。</p>
+<p>它开始时把堆分成 一个对象面和多个空闲面， 程序从对象面为对象分配空间，当对象满了，基于copying算法的垃圾收集就从根集合（GC Roots）中扫描活动对象，并将每个活动对象复制到空闲面(使得活动对象所占的内存之间没有空闲洞)</p>
+<p>这样空闲面变成了对象面，原来的对象面变成了空闲面，程序会在新的对象面中分配内存。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/003.png" alt></p>
+<h5 id="3-3-标记-整理算法"><a href="#3-3-标记-整理算法" class="headerlink" title="3.3 标记-整理算法"></a>3.3 标记-整理算法</h5><blockquote>
+<p>标记-整理算法采用标记-清除算法一样的方式进行对象的标记，但在清除时不同，在回收不存活的对象占用的空间后，会将所有的存活对象往左端空闲空间移动，并更新对应的指针。</p>
+<p>标记-整理算法是在标记-清除算法的基础上，又进行了对象的移动，因此成本更高，但是却解决了内存碎片的问题。</p>
+<p>具体流程见下图：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/004.png" alt></p>
+<h5 id="3-4-分代收集算法"><a href="#3-4-分代收集算法" class="headerlink" title="3.4 分代收集算法"></a>3.4 分代收集算法</h5><blockquote>
+<p>分代收集算法是目前大部分JVM的垃圾收集器采用的算法。它的核心思想是根据对象存活的生命周期将内存划分为若干个不同的区域。</p>
+<p>一般情况下将堆区划分为老年代（Tenured Generation）和新生代（Young Generation），在堆区之外还有一个代就是永久代（Permanet Generation）。</p>
+<p>老年代的特点是每次垃圾收集时只有少量对象需要被回收，而新生代的特点是每次垃圾回收时都有大量的对象需要被回收，那么就可以根据不同代的特点采取最适合的收集算法。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/005.png" alt></p>
+<h6 id="3-4-1-年轻代（Young-Generation）的回收算法"><a href="#3-4-1-年轻代（Young-Generation）的回收算法" class="headerlink" title="3.4.1 年轻代（Young Generation）的回收算法"></a>3.4.1 年轻代（Young Generation）的回收算法</h6><blockquote>
+<p><strong>a)</strong> 所有新生成的对象首先都是放在年轻代的。年轻代的目标就是尽可能快速的收集掉那些生命周期短的对象。</p>
+<p><strong>b)</strong> 新生代内存按照8:1:1的比例分为一个eden区和两个survivor(survivor0,survivor1)区。</p>
+<p>大部分对象在Eden区中生成，回收时先将eden区存活对象复制到一个survivor0区，然后清空eden区。</p>
+<p>当这个survivor0区也存放满了时，则将eden区和survivor0区存活对象复制到另一个survivor1区，然后清空eden和这个survivor0区，此时survivor0区是空的</p>
+<p>然后将survivor0区和survivor1区交换，即保持survivor1区为空， 如此往复。</p>
+<p><strong>c)</strong> 当survivor1区不足以存放 eden和survivor0的存活对象时，就将存活对象直接存放到老年代。</p>
+<p>若是老年代也满了就会触发一次Full GC，也就是新生代、老年代都进行回收。</p>
+<p><strong>d)</strong> 新生代发生的GC也叫做Minor GC，MinorGC发生频率比较高(不一定等Eden区满了才触发)。</p>
+</blockquote>
+<h6 id="3-4-2-年老代（Old-Generation）的回收算法"><a href="#3-4-2-年老代（Old-Generation）的回收算法" class="headerlink" title="3.4.2 年老代（Old Generation）的回收算法"></a><strong>3.4.2 年老代（Old Generation）的回收算法</strong></h6><blockquote>
+<p><strong>a)</strong> 在年轻代中经历了N次垃圾回收后仍然存活的对象，就会被放到年老代中。</p>
+<p>因此，可以认为年老代中存放的都是一些生命周期较长的对象。</p>
+<p><strong>b)</strong> 内存比新生代也大很多(大概比例是1:2)，当老年代内存满时触发Major GC即Full GC，Full GC发生频率比较低，老年代对象存活时间比较长，存活率标记高。</p>
+</blockquote>
+<h6 id="3-4-3-持久代（Permanent-Generation）的回收算法"><a href="#3-4-3-持久代（Permanent-Generation）的回收算法" class="headerlink" title="3.4.3 持久代（Permanent Generation）的回收算法"></a><strong>3.4.3 持久代（Permanent Generation）的回收算法</strong></h6><blockquote>
+<p>用于存放静态文件，如Java类、方法等。持久代对垃圾回收没有显著影响，但是有些应用可能动态生成或者调用一些class，例如Hibernate 等，</p>
+<p>在这种时候需要设置一个比较大的持久代空间来存放这些运行过程中新增的类。</p>
+<p>持久代也称方法区，具体的回收可参见上文2.5节。</p>
+</blockquote>
+<h4 id="四、常见的垃圾收集器"><a href="#四、常见的垃圾收集器" class="headerlink" title="四、常见的垃圾收集器"></a><strong>四、常见的垃圾收集器</strong></h4><blockquote>
+<p>下面一张图是HotSpot虚拟机包含的所有收集器:</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/006.png" alt></p>
+<blockquote>
+<ul>
+<li><strong>Serial收集器（复制算法)</strong></li>
+<li>新生代单线程收集器，标记和清理都是单线程，优点是简单高效。是client级别默认的GC方式，可以通过-XX:+UseSerialGC来强制指定。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Serial Old收集器(标记-整理算法)</strong></li>
+<li>老年代单线程收集器，Serial收集器的老年代版本</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>ParNew收集器(停止-复制算法)</strong>　</li>
+<li>新生代收集器，可以认为是Serial收集器的多线程版本,在多核CPU环境下有着比Serial更好的表现。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Parallel Scavenge收集器(停止-复制算法)</strong></li>
+<li>并行收集器，追求高吞吐量，高效利用CPU。吞吐量一般为99%， 吞吐量= 用户线程时间/(用户线程时间+GC线程时间)。适合后台应用等对交互相应要求不高的场景。是server级别默认采用的GC方式，可用-XX:+UseParallelGC来强制指定，用-XX:ParallelGCThreads=4来指定线程数</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Parallel Old收集器(停止-复制算法)</strong></li>
+<li>Parallel Scavenge收集器的老年代版本，并行收集器，吞吐量优先。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>CMS(Concurrent Mark Sweep)收集器（标记-清理算法）</strong></li>
+<li>高并发、低停顿，追求最短GC回收停顿时间，cpu占用比较高，响应时间快，停顿时间短，多核cpu 追求高响应时间的选择。</li>
+</ul>
+</blockquote>
+<h4 id="五、GC什么时候触发的"><a href="#五、GC什么时候触发的" class="headerlink" title="五、GC什么时候触发的"></a><strong>五、GC什么时候触发的</strong></h4><blockquote>
+<p>由于对象进行了分代处理，因此垃圾回收区域、时间也不一样。GC有两种类型：Scavenge GC和Full GC。</p>
+</blockquote>
+<h5 id="5-1-Scavenge-GC"><a href="#5-1-Scavenge-GC" class="headerlink" title="5.1 Scavenge GC"></a><strong>5.1 Scavenge GC</strong></h5><blockquote>
+<p>一般情况下，当新对象生成，并且在Eden申请空间失败时，就会触发Scavenge GC，对Eden区域进行GC，清除非存活对象，并且把尚且存活的对象移动到Survivor区。然后整理Survivor的两个区。</p>
+<p>这种方式的GC是对年轻代的Eden区进行，不会影响到年老代。因为大部分对象都是从Eden区开始的，同时Eden区不会分配的很大，所以Eden区的GC会频繁进行。</p>
+<p>因而，一般在这里需要使用速度快、效率高的算法，使Eden去能尽快空闲出来。</p>
+</blockquote>
+<h5 id="5-2-Full-GC"><a href="#5-2-Full-GC" class="headerlink" title="5.2 Full GC"></a><strong>5.2 Full GC</strong></h5><blockquote>
+<p>对整个堆进行整理，包括Young、Tenured和Perm。</p>
+<p>Full GC因为需要对整个堆进行回收，所以比Scavenge GC要慢，因此应该尽可能减少Full GC的次数。</p>
+<p>在对JVM调优的过程中，很大一部分工作就是对于Full GC的调节。</p>
+<p>有如下原因可能导致Full GC：</p>
+<ul>
+<li>老年代（Tenured）被写满；</li>
+<li>持久代（Perm）被写满；</li>
+<li>System.gc()被显示调用；</li>
+<li>上一次GC之后Heap的各域分配策略动态变化；</li>
+</ul>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/" class="b-link-green">JVM的垃圾回收机制</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="平衡二叉树、B树、B+树，B*树的区别">
+                        
+                        <span class="card-title">平衡二叉树、B树、B+树，B*树的区别</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">平衡二叉树、B树、B+树，B*树的区别平衡二叉树
+定义：基于二分法的策略提高数据的查找速度**的一种二叉树数据结构；
+特点：平衡二叉树是采用二分法思想把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                    日常学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/平衡二叉树-B树-B-树/" target="_blank">
+                        <span class="chip bg-color">平衡二叉树 B树 B+树</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/06/17/java8-zhi-lambda-biao-da-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Java8之lambda表达式">
+                        
+                        <span class="card-title">Java8之lambda表达式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Lambda表达式一、java重要的函数式接口1、什么是函数式接口        函数接口是只有一个抽象方法的接口，用作 Lambda 表达式的类型。使用@FunctionalInterface注解修饰的类，编译器会检测该类是否只有一个抽象</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                    日常学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Lambda/" target="_blank">
+                        <span class="chip bg-color">Lambda</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">87k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
