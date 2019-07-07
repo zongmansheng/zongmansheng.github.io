@@ -8,7 +8,8 @@
     <meta name="description" content="Java虚拟机jvm类加载初始化一、Classloader的作用
 概括来说就是将编译后的class装载、加载到机器内存中，为了以后的程序的执行提供前提条件。
 
-">
+二、java类在虚拟机（jvm）中的工作原理
+1）类加载load：从字节码二进制">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -270,14 +271,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        53
+                        1.9k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        7 分
                     </div>
                     
                 
@@ -295,6 +296,157 @@
             <div id="articleContent">
                 <h1 id="Java虚拟机jvm类加载初始化"><a href="#Java虚拟机jvm类加载初始化" class="headerlink" title="Java虚拟机jvm类加载初始化"></a>Java虚拟机jvm类加载初始化</h1><h4 id="一、Classloader的作用"><a href="#一、Classloader的作用" class="headerlink" title="一、Classloader的作用"></a>一、Classloader的作用</h4><blockquote>
 <p>概括来说就是将编译后的class装载、加载到机器内存中，为了以后的程序的执行提供前提条件。</p>
+</blockquote>
+<h4 id="二、java类在虚拟机（jvm）中的工作原理"><a href="#二、java类在虚拟机（jvm）中的工作原理" class="headerlink" title="二、java类在虚拟机（jvm）中的工作原理"></a>二、java类在虚拟机（jvm）中的工作原理</h4><blockquote>
+<p>1）类加载load：从字节码二进制文件——.class文件将类加载到内存，从而达到类的从硬盘上到内存上的一个迁移，所有的程序必须加载到内存才能工作。将内存中的class放到运行时数据区的方法区内，之后在堆区建立一个java.lang.Class对象，用来封装方法区的数据结构。这个时候就体现出了万事万物皆对象了，干什么事情都得有个对象。就是到了最底层究竟是鸡生蛋，还是蛋生鸡呢？类加载的最终产物就是堆中的一个java.lang.Class对象。</p>
+</blockquote>
+<blockquote>
+<p><strong>2）连接：连接又分为以下小步骤</strong></p>
+<p><strong>验证：</strong>出于安全性的考虑，验证内存中的字节码是否符合JVM的规范，类的结构规范、语义检查、字节码操作是否合法、这个是为了防止用户自己建立一个非法的XX.class文件就进行工作了，或者是JVM版本冲突的问题，比如在JDK6下面编译通过的class（其中包含注解特性的类），是不能在JDK1.4的JVM下运行的。</p>
+<p><strong>准备：</strong>将类的静态变量进行分配内存空间、初始化默认值。（对象还没生成呢，所以这个时候没有实例变量什么事情）</p>
+<p><strong>解析：</strong>把类的符号引用转为直接引用（保留）</p>
+</blockquote>
+<blockquote>
+<p><strong>3）类的初始化：</strong> 将类的静态变量赋予正确的初始值，这个初始值是开发者自己定义时赋予的初始值，而不是默认值。</p>
+</blockquote>
+<h4 id="三、类的主动使用与被动使用"><a href="#三、类的主动使用与被动使用" class="headerlink" title="三、类的主动使用与被动使用"></a>三、类的主动使用与被动使用</h4><blockquote>
+<p>以下是视为主动使用一个类，其他情况均视为被动使用！</p>
+<p>1）初学者最为常用的new一个类的实例对象（声明不叫主动使用）</p>
+<p>2）对类的静态变量进行读取、赋值操作的。</p>
+<p>3）直接调用类的静态方法。</p>
+<p>4）反射调用一个类的方法。</p>
+<p>5）初始化一个类的子类的时候，父类也相当于被程序主动调用了（如果调用子类的静态变量是从父类继承过来并没有复写的，那么也就相当于只用到了父类的东东，和子类无关，所以这个时候子类不需要进行类初始化）。</p>
+<p>6）直接运行一个main函数入口的类。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/05/java-xu-ni-ji-jvm-lei-jia-zai-chu-shi-hua/001.png" alt></p>
+<blockquote>
+<p>所有的JVM实现（不同的厂商有不同的实现，有人就说IBM的实现比Sun的要好……）在首次主动调用类和接口的时候才会初始化他们。</p>
+</blockquote>
+<h4 id="四、-类的加载方式"><a href="#四、-类的加载方式" class="headerlink" title="四、 类的加载方式"></a>四、 类的加载方式</h4><blockquote>
+<p>1）：本地编译好的class中直接加载</p>
+<p>2）：网络加载：java.net.URLClassLoader可以加载url指定的类</p>
+<p>3）：从jar、zip等等压缩文件加载类，自动解析jar文件找到class文件去加载util类</p>
+<p>4）：从java源代码文件动态编译成为class文件</p>
+</blockquote>
+<h4 id="五、类加载器"><a href="#五、类加载器" class="headerlink" title="五、类加载器"></a>五、类加载器</h4><blockquote>
+<p>JVM自带的默认加载器</p>
+<p>1）：根类加载器：bootstrap，由C++编写，所有Java程序无法获得。</p>
+<p>2）：扩展类加载器：由Java编写。</p>
+<p>3）：系统类、应用类加载器：由Java编写。</p>
+<p>用户自定义的类加载器：java.lang.ClassLoader的子类，用户可以定制类的加载方式。每一个类都包含了加载他的ClassLoader的一个引用——getClass().getClassLoader()。如果返回的是null，证明加载他的ClassLoader是根加载器bootstrap。</p>
+<p>如下代码</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> ClassNotFoundException <span class="token punctuation">{</span>
+         Class <span class="token class-name">clazz</span> <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"java.lang.String"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>clazz<span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>结果是null，证明java.lang.String是根类加载器去加载的。</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         Singleton mysingleton <span class="token operator">=</span> Singleton<span class="token punctuation">.</span><span class="token function">GetInstence</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>mysingleton<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>结果是sun.misc.Launcher$AppClassLoader@19821f，证明是AppClassLoader（系统类、应用类加载器）去加载的。像jre的rt.jar下面的java.lang.*都是默认的根类加载器去加载这些运行时的类。</p>
+</blockquote>
+<h4 id="六、解释类连接阶段的准备"><a href="#六、解释类连接阶段的准备" class="headerlink" title="六、解释类连接阶段的准备"></a>六、解释类连接阶段的准备</h4><blockquote>
+<p>类的如下代码片段</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> a<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>在这个阶段，加载器会按照结构化似的，从上到下流程将静态变量int类型分配4个字节的空间，并且为其赋予默认值0，而像b = 10这段代码在此阶段是不起作用的，b仍然是默认值0。</p>
+</blockquote>
+<h4 id="七、解释类连接阶段的解析"><a href="#七、解释类连接阶段的解析" class="headerlink" title="七、解释类连接阶段的解析"></a>七、解释类连接阶段的解析</h4><blockquote>
+<p>这里面的指针就是C++的指针</p>
+</blockquote>
+<h4 id="八、ClassLoader的剖析"><a href="#八、ClassLoader的剖析" class="headerlink" title="八、ClassLoader的剖析"></a>八、ClassLoader的剖析</h4><blockquote>
+<p>ClassLoader的loadClass方法加载一个类不属于主动调用，不会导致类的初始化。如下代码块</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">  ClassLoader classLoader <span class="token operator">=</span> ClassLoader<span class="token punctuation">.</span><span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> clazz <span class="token operator">=</span> classLoader<span class="token punctuation">.</span><span class="token function">loadClass</span><span class="token punctuation">(</span><span class="token string">"test01.ClassDemo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>并不会让类加载器初始化test01.ClassDemo，因为这不属于主动调用此类。</p>
+</blockquote>
+<p><strong>lassLoader的关系：</strong></p>
+<blockquote>
+<p><strong>根加载器——》扩展类加载器——》应用类加载器——》用户自定义类加载器</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>加载类的过程是首先从根加载器开始加载、根加载器加载不了的，由扩展类加载器加载，再加载不了的有应用加载器加载，应用加载器如果还加载不了就由自定义的加载器（一定继承自java.lang. ClassLoader）加载、如果自定义的加载器还加载不了。</strong>而且下面已经没有再特殊的类加载器了，就会抛出ClassNotFoundException，表面上异常是类找不到，实际上是class加载失败，更不能创建该类的Class对象。</p>
+<p>若一个类能在某一层类加载器成功加载，那么这一层的加载器称为定义类加载器。那么在这层类生成的Class引用返回下一层加载器叫做初始类加载器。因为加载成功后返回一个Class引用给它的服务对象——也就是调用它的类加载器。考虑到安全，父委托加载机制。</p>
+<p>ClassLoader加载类的原代码如下</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">protected</span> <span class="token keyword">synchronized</span> Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> <span class="token function">loadClass</span><span class="token punctuation">(</span>String name<span class="token punctuation">,</span> <span class="token keyword">boolean</span> resolve<span class="token punctuation">)</span> <span class="token keyword">throws</span> ClassNotFoundException<span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// First, check if the class has already been loaded</span>
+        Class <span class="token class-name">c</span> <span class="token operator">=</span> <span class="token function">findLoadedClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>parent <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    c <span class="token operator">=</span> parent<span class="token punctuation">.</span><span class="token function">loadClass</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                    c <span class="token operator">=</span> <span class="token function">findBootstrapClassOrNull</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ClassNotFoundException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// ClassNotFoundException thrown if class not found</span>
+                <span class="token comment" spellcheck="true">// from the non-null parent class loader</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// If still not found, then invoke findClass in order</span>
+                <span class="token comment" spellcheck="true">// to find the class.</span>
+                c <span class="token operator">=</span> <span class="token function">findClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>resolve<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">resolveClass</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>初始化系统ClassLoader代码如下</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">initSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>sclSet<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>scl <span class="token operator">!=</span> null<span class="token punctuation">)</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalStateException</span><span class="token punctuation">(</span><span class="token string">"recursive invocation"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sun<span class="token punctuation">.</span>misc<span class="token punctuation">.</span>Launcher l <span class="token operator">=</span> sun<span class="token punctuation">.</span>misc<span class="token punctuation">.</span>Launcher<span class="token punctuation">.</span><span class="token function">getLauncher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>l <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                Throwable oops <span class="token operator">=</span> null<span class="token punctuation">;</span>
+                scl <span class="token operator">=</span> l<span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    PrivilegedExceptionAction a<span class="token punctuation">;</span>
+                    a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SystemClassLoaderAction</span><span class="token punctuation">(</span>scl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    scl <span class="token operator">=</span> <span class="token punctuation">(</span>ClassLoader<span class="token punctuation">)</span> AccessController<span class="token punctuation">.</span><span class="token function">doPrivileged</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">PrivilegedActionException</span> pae<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    oops <span class="token operator">=</span> pae<span class="token punctuation">.</span><span class="token function">getCause</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>oops <span class="token keyword">instanceof</span> <span class="token class-name">InvocationTargetException</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        oops <span class="token operator">=</span> oops<span class="token punctuation">.</span><span class="token function">getCause</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>oops <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>oops <span class="token keyword">instanceof</span> <span class="token class-name">Error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">throw</span> <span class="token punctuation">(</span>Error<span class="token punctuation">)</span> oops<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                        <span class="token comment" spellcheck="true">// wrap the exception</span>
+                        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>oops<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            sclSet <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>它里面调用了很多native的方法，也就是通过JNI调用底层C++的代码。</p>
+</blockquote>
+<h4 id="九、类（class）的生命周期"><a href="#九、类（class）的生命周期" class="headerlink" title="九、类（class）的生命周期"></a>九、类（class）的生命周期</h4><blockquote>
+<p>当一个类被加载、连接、初始化后，它的生命周期就开始了，当代表该类的Class对象不再被引用、即已经不可触及的时候，Class对象的生命周期结束。那么该类的方法区内的数据也会被卸载，从而结束该类的生命周期。一个类的生命周期取决于它Class对象的生命周期。由Java虚拟机自带的默认加载器（根加载器、扩展加载器、系统加载器）所加载的类在JVM生命周期中始终不被卸载。所以这些类的Class对象（我称其为实例的模板对象）始终能被触及！而由用户自定义的类加载器所加载的类会被卸载掉！</p>
 </blockquote>
 
             </div>
@@ -342,30 +494,48 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/07/05/untitled/">
+                <a href="/2019/07/05/java-xu-ni-ji-jvm-lei-jia-zai-chu-shi-hua/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt>
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Java虚拟机jvm类加载初始化">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">Java虚拟机jvm类加载初始化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">Java虚拟机jvm类加载初始化一、Classloader的作用
+概括来说就是将编译后的class装载、加载到机器内存中，为了以后的程序的执行提供前提条件。
+
+二、java类在虚拟机（jvm）中的工作原理
+1）类加载load：从字节码二进制</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-05
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            ZongMan
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                    日常学习
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JVM/" target="_blank">
+                        <span class="chip bg-color">JVM</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -439,7 +609,7 @@ ruby -e “$(curl -fsSL https://raw</div>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">89.1k</span>
+                <span class="white-color">97.8k</span>
             
 
             
