@@ -1,0 +1,676 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="MySQL索引为什么要用B+树实现, 晓笙的BLOG">
+    <meta name="description" content="MySQL索引为什么要用B+树实现一、前言
+在从一堆数据中查找指定的数据时，我们常用的数据结构是哈希表和二叉查找树，表本质上就是一堆数据的集合，所以MySQL数据库用了B+树和哈希表来实现索引
+B+树是通过二叉查找树，再由平衡二叉树，B树（">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>MySQL索引为什么要用B+树实现 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        MySQL索引为什么要用B+树实现
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySql，B/" target="_blank">
+                                <span class="chip bg-color">MySql，B+</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/数据库/" class="post-category" target="_blank">
+                                数据库
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-12
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="MySQL索引为什么要用B-树实现"><a href="#MySQL索引为什么要用B-树实现" class="headerlink" title="MySQL索引为什么要用B+树实现"></a>MySQL索引为什么要用B+树实现</h1><h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><blockquote>
+<p>在从一堆数据中查找指定的数据时，我们常用的数据结构是哈希表和二叉查找树，表本质上就是一堆数据的集合，所以MySQL数据库用了B+树和哈希表来实现索引</p>
+<p>B+树是通过二叉查找树，再由平衡二叉树，B树（又名B-树）演化而来的，B+树中的B不是代表二叉（binary），而是代表平衡（balance），因为B+树是从最早的平衡二叉树演化而来，但是B+树不是一个二叉树</p>
+</blockquote>
+<h3 id="二、二叉查找树和平衡二叉树"><a href="#二、二叉查找树和平衡二叉树" class="headerlink" title="二、二叉查找树和平衡二叉树"></a>二、二叉查找树和平衡二叉树</h3><blockquote>
+<p>二叉查找树的效率和平衡二叉树的查找效率已经很高了，为什么不用这两种数据结构来实现索引呢？慢慢来分析</p>
+<p>二叉查找树是带有特殊属性的二叉树，需要满足以下属性</p>
+<ol>
+<li>非叶子节点最多拥有两个子节点</li>
+<li>非叶子节值大于左边子节点、小于右边子节点</li>
+<li>没有值相等重复的节点;</li>
+</ol>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/001.png" alt></p>
+<blockquote>
+<p>对上图这个二叉树进行查找，如查键值为5的记录，先找到根，其值时6，大于5，查找6的左子树，找到3，5大于3，再找其右子树，一共找了3次。同理，查找键值为8的记录，用了3次。所有键值平均查找次数为(1+2+2+3+3+3)/6=2.3次，假如对这些键值进行顺序查找，平均查找次数为(1+2+3+4+5+6)/6=3.3（查找顺序摆放的数，第一个数肯定是1次，而第2个数是2次，以此类推），显然二叉查找树的平均查找速度比顺序查找更快</p>
+<p>二叉查找树可以任意的构造，假如二叉查找树按照如下方式构造</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/002.png" alt></p>
+<blockquote>
+<p>平均查找速度为(1+2+3+4+5+5)/6=3.16次，和顺序查找差不多。为了提高二叉查找树的查询效率，需要二叉查找数是平衡的，这就引出了平衡二叉树。</p>
+<p>平衡二叉树除了满足上面3个属性，还要满足如下1个属性</p>
+<ol>
+<li>树的左右两边的层级数相差不会大于1</li>
+</ol>
+<p>平衡二叉树的查找效率确实很快，但维护一颗平衡二叉树的代价是非常大的，需要1次或多次左旋和右旋来得到插入或更新后树的平衡性。简单举个例子。</p>
+<p>初始平衡二叉树</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/003.png" alt></p>
+<blockquote>
+<p>插入3</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/004.png" alt></p>
+<blockquote>
+<p>右旋一次</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/005.png" alt></p>
+<blockquote>
+<p>再左旋一次</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/006.png" alt></p>
+<blockquote>
+<p>作为一个科普性的文章，这里不对左旋的右旋的细节进行分析，放几个图片能理解左旋和右旋即可</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/3b0f670f16c8413e8cfa0011fe85c98f.gif" alt></p>
+<blockquote>
+<p>对x进行左旋，意味着将x变为一个左结点</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/007.png" alt></p>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/008.gif" alt></p>
+<blockquote>
+<p>对y进行右旋，意味着将y变为一个右节点</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/009.png" alt></p>
+<blockquote>
+<p>回头看上面例子的左旋和右旋，是不是很清楚了？</p>
+</blockquote>
+<h3 id="B树和B-树"><a href="#B树和B-树" class="headerlink" title="B树和B+树"></a>B树和B+树</h3><blockquote>
+<p>B树和B-树是同一种树，假如用平衡二叉树实现索引，效率已经很高了，查找一个节点所做的IO次数是这个节点所处的树的高度，因为我们无法把整个索引都加载到内存，并且节点数据在磁盘中不是顺序排放的。所以最坏情况下，磁盘的IO次数为树的高度。</p>
+<p>虽然平衡二叉树查找效率确实很高，但是频繁的IO才是阻碍提高性能的瓶颈，怎样减少IO次数呢？前辈们很聪明的提出了局部性原理，分为时间局部性原理，即假如你查询id为1的用户数据，过一段时间你还会查询id为1的数据，所以会将这部分数据缓存下来。空间局部性原理，当你查询id为1的用户数据的时候，你有很大的概率会去查询id为2，3，4的用户的数据，所以会一次性的把id为1，2，3，4的数据都读到内存中去，这个最小的单位就是页。</p>
+<p>B树和B+树的概念比较复杂，有兴趣的小伙伴可以点原文链接看看知乎上写的一篇文章，这里只做一个宏观的介绍，前文已经提到树高决定着IO的次数，那么降低树高不就能减少IO的次数吗，怎么减少呢，每个节点的数据多放一点不就行了，并且这个数据是存放在一块的，对应的是数据库中的读取的最小单位页，一次IO就可以将这些数据读取出来，虽然比较的次数有可能会增加，但是在内存中的比较和磁盘IO相比差几个数量级，整体上效率还是提高了。</p>
+<p>所以你看到的B树是这样的</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/010.png" alt></p>
+<blockquote>
+<p>B+树是这样的</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/011.png" alt></p>
+<blockquote>
+<p>那么B树和B+树的区别在哪呢？</p>
+<ol>
+<li>B+跟B树不同B+树的非叶子节点不保存键值对应的数据，这样使得B+树每个节点所能保存的键值大大增加；</li>
+<li>B+树叶子节点保存了父节点的所有键值和键值对应的数据，每个叶子节点的键值从小到大链接；</li>
+<li>B+树的根节点键值数量和其子节点个数相等;</li>
+<li>B+的非叶子节点只进行数据索引，不会存实际的键值对应的数据，所有数据必须要到叶子节点才能获取到，所以每次数据查询的次数都一样；</li>
+</ol>
+<p>放个图理解的更清楚一点，B树</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/012.png" alt></p>
+<blockquote>
+<p>B+树</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/013.png" alt></p>
+<blockquote>
+<p>在B+树的基础上每个节点存储的关键字数更多，树的层级更少所以查询数据更快，所有关键字数据都存在叶子节点，所以每次查找的次数都相同，查询速度比B树更稳定。除此之外，B+树的叶子节点是跟后序节点相连接的，这对范围查找是非常有用的。</p>
+</blockquote>
+<h3 id="聚集索引和联合索引"><a href="#聚集索引和联合索引" class="headerlink" title="聚集索引和联合索引"></a>聚集索引和联合索引</h3><blockquote>
+<p>在InnoDB存储引擎中，是以主键为索引来组织数据的。在InnoDB存储引擎中，每张表都有个主键，如果在创建表时没有显示的定义主键，则InnoDB存储引擎会按如下方式选择或创建主键。</p>
+<ol>
+<li>首先判断表中是否有非空的唯一索引，如果有，则该列即为主键</li>
+<li>如果不符合上述条件，InnoDB存储引擎自动创建一个6字节大小的指针作为索引</li>
+<li>如果有多个非空唯一索引时，InnoDB存储引擎将选择建表时第一个定义的非空唯一索引作为主键</li>
+</ol>
+<p>假如说有如下数据，用户id为主键（1， tom），（2，mike），（3，sam），（4，lisa），（5，li）则数据是这样存储的，图1</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/014.png" alt></p>
+<blockquote>
+<p>假如说我们现在对用户名建索引，用户名索引是怎么存的呢？图2</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/015.png" alt></p>
+<blockquote>
+<p>用户名索引叶子节点数据存储的是主键，所以当我们运行如下sql语句时</p>
+</blockquote>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">table</span> <span class="token keyword">where</span> name <span class="token operator">=</span><span class="token string">"sam"</span>
+</code></pre>
+<blockquote>
+<p>过程是这样的，先在name索引上找到对应的主键，在根据对应的主键去建表时建立的B+树上找到对应的记录，即先在图1上找，再到图2上找。</p>
+<p>聚集索引：数据行的物理顺序与列值（一般是主键的那一列）的逻辑顺序相同，一个表中只能拥有一个聚集索引。图1用的就是聚集索引</p>
+<p>非聚集索引：定义：该索引中索引的逻辑顺序与磁盘上行的物理存储顺序不同，一个表中可以拥有多个非聚集索引。图2用的就是非聚集索引</p>
+<p>最后再说一个联合索引，联合索引是指对表上的多个列进行索引。创建方式如下：</p>
+</blockquote>
+<pre class=" language-sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span>t<span class="token punctuation">`</span> <span class="token punctuation">(</span>
+ <span class="token punctuation">`</span><span class="token number">a</span><span class="token punctuation">`</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+ <span class="token punctuation">`</span><span class="token number">b</span><span class="token punctuation">`</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+ <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span><span class="token punctuation">`</span><span class="token number">a</span><span class="token punctuation">`</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+ <span class="token keyword">KEY</span> <span class="token punctuation">`</span>idx_a_b<span class="token punctuation">`</span> <span class="token punctuation">(</span><span class="token punctuation">`</span><span class="token number">a</span><span class="token punctuation">`</span><span class="token punctuation">,</span><span class="token punctuation">`</span><span class="token number">b</span><span class="token punctuation">`</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span> <span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>联合索引也是一颗B+树，不同的是联合索引的键值的数量不是1，而是大于等于2，多个键值的B+树是如下存的</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/016.png" alt></p>
+<blockquote>
+<p>可以看到键值都是排序的，就上面的例子来说（1，1）（1，2）（2，1）（2，4）（3，1）（3，2），数据按照（a，b）的顺序进行了存放。</p>
+<p>因此对于查询select <em> from table where a = xxx and b = xxx，显然是可以使用（a，b）这个联合索引的。对于单个的a列查询select </em> from table where a = xxx，也可以使用（a，b）这个索引。但对于b列的查询select * from table where b = xxx，则不可以使用这颗B+树索引。可以发现叶子节点上的b值为1，2，1，4，1，2，显然不是排序的，因此对于b列的查询使用不到（a，b）的索引</p>
+</blockquote>
+<h3 id="自适应哈希索引"><a href="#自适应哈希索引" class="headerlink" title="自适应哈希索引"></a>自适应哈希索引</h3><blockquote>
+<p>InnoDB存储引擎会监控对表上各项索引页的查询。如果观察到建立哈希索引可以带来速度提升，则建立哈希索引，称之为自适应哈希索引，DBA不能对建立哈希索引的过程进行干预，只能启动或禁用自适应哈希索引</p>
+<p>数据库一般采用除法散列的方法，即取k除以m的余数，将关键词k映射到m个槽的某一个去，即哈希函数为h(k) = k mod m，当发生冲突时，即两个关键字可能映射到同一个槽上，采用链接法，即以链表的形式保存冲突的关键字，和HashMap类似</p>
+<p>当对热点数据建立了哈希索引以后，省去在B+树上进行查找，可以极大地提高服务的性能，自适应哈希索引对于字典类型的查找非常迅速，如select * from table where id = xxx，但是对于范围查找就无能无力了</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/017.png" alt></p>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/" class="b-link-green">MySQL索引为什么要用B+树实现</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/14/springboot-yi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="SpringBoot（一）">
+                        
+                        <span class="card-title">SpringBoot（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">SpringBoot2.0 整合 JWT 框架，解决Token跨域验证问题一、传统Session认证1、认证过程
+1、用户向服务器发送用户名和密码。
+2、服务器验证后在当前对话（session）保存相关数据。
+3、服务器向返回session</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-14
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
+                                    SpringBoot
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JWT/" target="_blank">
+                        <span class="chip bg-color">JWT</span>
+                    </a>
+                    
+                    <a href="/tags/Springboot2-0/" target="_blank">
+                        <span class="chip bg-color">Springboot2.0</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/11/mian-shi-ti-ji-jin/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="面试题集锦">
+                        
+                        <span class="card-title">面试题集锦</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">面试必刷真题（持续更新中）一、Java 基础
+1.JDK 和 JRE 有什么区别？
+JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥有的一切，还有编译器（javac）和工具（如javadoc</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/面试/" class="post-category" target="_blank">
+                                    面试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/容器，多线程，反射，对象拷贝/" target="_blank">
+                        <span class="chip bg-color">容器，多线程，反射，对象拷贝</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">114.5k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

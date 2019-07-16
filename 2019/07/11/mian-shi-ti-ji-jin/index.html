@@ -1,0 +1,1012 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="面试题集锦, 晓笙的BLOG">
+    <meta name="description" content="面试必刷真题（持续更新中）一、Java 基础
+1.JDK 和 JRE 有什么区别？
+JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥有的一切，还有编译器（javac）和工具（如javadoc">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>面试题集锦 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        面试题集锦
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/容器，多线程，反射，对象拷贝/" target="_blank">
+                                <span class="chip bg-color">容器，多线程，反射，对象拷贝</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/面试/" class="post-category" target="_blank">
+                                面试
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-11
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        5.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        19 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="面试必刷真题（持续更新中）"><a href="#面试必刷真题（持续更新中）" class="headerlink" title="面试必刷真题（持续更新中）"></a>面试必刷真题（持续更新中）</h1><h3 id="一、Java-基础"><a href="#一、Java-基础" class="headerlink" title="一、Java 基础"></a>一、Java 基础</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/001.png" alt></p>
+<h4 id="1-JDK-和-JRE-有什么区别？"><a href="#1-JDK-和-JRE-有什么区别？" class="headerlink" title="1.JDK 和 JRE 有什么区别？"></a>1.JDK 和 JRE 有什么区别？</h4><blockquote>
+<p>JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥有的一切，还有编译器（javac）和工具（如javadoc和jdb）。它能够创建和编译程序。</p>
+<p>JRE 是 Java运行时环境。它是运行已编译 Java 程序所需的所有内容的集合，包括 Java虚拟机（JVM），Java类库，java命令和其他的一些基础构件。但是，它不能用于创建新程序。</p>
+<p>如果你只是为了运行一下 Java 程序的话，那么你只需要安装 JRE 就可以了。如果你需要进行一些 Java 编程方面的工作，那么你就需要安装JDK了。但是，这不是绝对的。有时，即使您不打算在计算机上进行任何Java开发，仍然需要安装JDK。例如，如果要使用JSP部署Web应用程序，那么从技术上讲，您只是在应用程序服务器中运行Java程序。那你为什么需要JDK呢？因为应用程序服务器会将 JSP 转换为 Java servlet，并且需要使用 JDK 来编译 servlet。</p>
+</blockquote>
+<h4 id="2-和-equals-的区别是什么？"><a href="#2-和-equals-的区别是什么？" class="headerlink" title="2.== 和 equals 的区别是什么？"></a>2.== 和 equals 的区别是什么？</h4><blockquote>
+<p><strong>==</strong> : 它的作用是判断两个对象的地址是不是相等。即，判断两个对象是不是同一个对象。(基本数据类型==比较的是值，引用数据类型==比较的是内存地址)</p>
+<p><strong>equals()</strong> : 它的作用也是判断两个对象是否相等。但它一般有两种使用情况：</p>
+<ul>
+<li>情况1：类没有覆盖 equals() 方法。则通过 equals() 比较该类的两个对象时，等价于通过“==”比较这两个对象。</li>
+<li>情况2：类覆盖了 equals() 方法。一般，我们都覆盖 equals() 方法来两个对象的内容相等；若它们的内容相等，则返回 true (即，认为这两个对象相等)。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>举个例子：</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">test01</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// a 为一个引用</span>
+        String b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// b为另一个引用,对象的内容一样</span>
+        String aa <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 放在常量池中</span>
+        String bb <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 从常量池中查找</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>aa <span class="token operator">==</span> bb<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// true</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"aa==bb"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">==</span> b<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// false，非同一对象</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"a==b"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// true</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"aEQb"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">42</span> <span class="token operator">==</span> <span class="token number">42.0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment" spellcheck="true">// true</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"true"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p><strong>说明：</strong></p>
+<ul>
+<li>String 中的 equals 方法是被重写过的，因为 object 的 equals 方法是比较的对象的内存地址，而 String 的 equals 方法比较的是对象的值。</li>
+<li>当创建 String 类型的对象时，虚拟机会在常量池中查找有没有已经存在的值和要创建的值相同的对象，如果有就把它赋给当前引用。如果没有就在常量池中重新创建一个 String 对象。</li>
+</ul>
+</blockquote>
+<h4 id="3-hashCode-相同，则-equals-也一定为-true，对吗？"><a href="#3-hashCode-相同，则-equals-也一定为-true，对吗？" class="headerlink" title="3. hashCode()相同，则 equals()也一定为 true，对吗？"></a>3. hashCode()相同，则 equals()也一定为 true，对吗？</h4><blockquote>
+<ol>
+<li>如果两个对象相等，则hashcode一定也是相同的</li>
+<li>两个对象相等,对两个对象分别调用equals方法都返回true</li>
+<li>两个对象有相同的hashcode值，它们也不一定是相等的</li>
+<li><strong>因此，equals 方法被覆盖过，则 hashCode 方法也必须被覆盖</strong></li>
+<li>hashCode() 的默认行为是对堆上的对象产生独特值。如果没有重写 hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）</li>
+</ol>
+</blockquote>
+<h4 id="4-hashCode（）介绍"><a href="#4-hashCode（）介绍" class="headerlink" title="4.hashCode（）介绍"></a>4.hashCode（）介绍</h4><blockquote>
+<p>hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个int整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在JDK的Object.java中，这就意味着Java中的任何类都包含有hashCode() 函数。</p>
+<p>散列表存储的是键值对(key-value)，它的特点是：能根据“键”快速的检索出对应的“值”。这其中就利用到了散列码！（可以快速找到所需要的对象）</p>
+</blockquote>
+<h4 id="5-为什么要有-hashCode"><a href="#5-为什么要有-hashCode" class="headerlink" title="5.为什么要有 hashCode"></a>5.为什么要有 hashCode</h4><h5 id="我们以“HashSet-如何检查重复”为例子来说明为什么要有-hashCode："><a href="#我们以“HashSet-如何检查重复”为例子来说明为什么要有-hashCode：" class="headerlink" title="我们以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode："></a><strong>我们以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode：</strong></h5><blockquote>
+<p>当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 hashcode 值作比较，如果没有相符的hashcode，HashSet会假设对象没有重复出现。但是如果发现有相同 hashcode 值的对象，这时会调用 equals（）方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。（摘自我的Java启蒙书《Head first java》第二版）。这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。</p>
+</blockquote>
+<h4 id="6-final-在-java-中有什么作用？"><a href="#6-final-在-java-中有什么作用？" class="headerlink" title="6.final 在 java 中有什么作用？"></a>6.final 在 java 中有什么作用？</h4><blockquote>
+<p>final关键字主要用在三个地方：变量、方法、类。</p>
+<ol>
+<li>对于一个final变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。</li>
+<li>当用final修饰一个类时，表明这个类不能被继承。final类中的所有成员方法都会被隐式地指定为final方法。</li>
+<li>使用final方法的原因有两个。第一个原因是把方法锁定，以防任何继承类修改它的含义；第二个原因是效率。在早期的Java实现版本中，会将final方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java版本已经不需要使用final方法进行这些优化了）。类中所有的private方法都隐式地指定为final。</li>
+</ol>
+</blockquote>
+<h4 id="7-java-中的-Math-round-1-5-等于多少？"><a href="#7-java-中的-Math-round-1-5-等于多少？" class="headerlink" title="7.java 中的 Math.round(-1.5) 等于多少？"></a>7.java 中的 Math.round(-1.5) 等于多少？</h4><blockquote>
+<p>Math.round(1.5)的返回值是2，Math.round(-1.5)的返回值是-1。四舍五入的原理是在参数上加0.5然后做向下取整。</p>
+</blockquote>
+<h4 id="8-String-属于基础的数据类型吗？"><a href="#8-String-属于基础的数据类型吗？" class="headerlink" title="8.String 属于基础的数据类型吗？"></a>8.String 属于基础的数据类型吗？</h4><blockquote>
+<p>String不是基本的数据类型，是final修饰的java类，java中的基本类型一共有8个，它们分别为：</p>
+<p>1 字符类型：byte，char</p>
+<p>2 基本整型：short，int，long</p>
+<p>3 浮点型：float，double</p>
+<p>4 布尔类型：boolean</p>
+</blockquote>
+<h4 id="9-java-中操作字符串都有哪些类？它们之间有什么区别？"><a href="#9-java-中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="9.java 中操作字符串都有哪些类？它们之间有什么区别？"></a>9.java 中操作字符串都有哪些类？它们之间有什么区别？</h4><blockquote>
+<p>String、StringBuffer、StringBuilder</p>
+<p>String : final修饰，String类的方法都是返回new String。即对String对象的任何改变都不影响到原对象，对字符串的修改操作都会生成新的对象。<br>StringBuffer : 对字符串的操作的方法都加了synchronized，保证线程安全。</p>
+<p>StringBuilder : 不保证线程安全，在方法体内需要进行字符串的修改操作，可以new StringBuilder对象，调用StringBuilder对象的append、replace、delete等方法修改字符串。</p>
+</blockquote>
+<h4 id="10-Java中String直接赋字符串和new-String的区别-如String-str-new-String-“a”-和String-str-“a”有什么区别"><a href="#10-Java中String直接赋字符串和new-String的区别-如String-str-new-String-“a”-和String-str-“a”有什么区别" class="headerlink" title="10.Java中String直接赋字符串和new String的区别 如String str=new String(“a”)和String str = “a”有什么区别?"></a>10.Java中String直接赋字符串和new String的区别 如String str=new String(“a”)和String str = “a”有什么区别?</h4><blockquote>
+<p>String A=”ABC”;</p>
+<p>String B=new String(“ABC”);</p>
+<p>这两个值，A,B 是否相等，如果都往HashSet里面放，能放下吗？</p>
+<p>答：(a)A==B 的判断为false;</p>
+<p>​         (b)A.equals(B)为true ；因为值相等，所以都往HashSet里面放不下，只能放一个 </p>
+<h3 id="问题：-与equals-的区别："><a href="#问题：-与equals-的区别：" class="headerlink" title="问题：==与equals()的区别："></a>问题：==与equals()的区别：</h3><ol>
+<li>==:比较引用类型比较的是地址值是否相同</li>
+<li>equals:比较引用类型默认也是比较地址值是否相同，注意:<strong>String类重写了equals()方法</strong>，比较的是内容是否相同。</li>
+</ol>
+<p><strong>String A = “ABC”;内存会去查找永久代(常量池) ，如果没有的话，在永久代中中开辟一块儿内存空间，把地址赋给栈指针，如果已经有了”ABC”的内存，直接把地址赋给栈指针；</strong></p>
+<p><strong>因此</strong></p>
+<p><strong>String str1=”aa”;</strong></p>
+<p><strong>Srting str2=”aa”;</strong></p>
+<p><strong>String Str3=”aa”;</strong></p>
+<p><strong>….</strong></p>
+<p><strong>这样下去，str1==Str2==str3;会一直相等下去，(a) ==的判断， (b) equals()的判断；都相等，因为他们的地址都相等，因此只在常量池中有一份内存空间，地址全部相同；</strong> </p>
+<p> <strong>而String str = new String(“a”);是根据”a”这个String对象再次构造一个String对象;在堆中从新new一块儿内存，把指针赋给栈，</strong></p>
+<p><strong>将新构造出来的String对象的引用赋给str。 因此 只要是new String()，则，栈中的地址都是指向最新的new出来的堆中的地址，</strong></p>
+<p><strong>(a)“”==“” 是判断地址的，当然不相同；</strong></p>
+<p><strong>(b)至于equals,String类型重写了 equals()方法，判断值是否相等，明显相等，因此 equals 是相等的；</strong></p>
+<p>这是String 重写的equals:</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token operator">*</span> <span class="token annotation punctuation">@see</span>  #<span class="token function">compareTo</span><span class="token punctuation">(</span>String<span class="token punctuation">)</span>
+     <span class="token operator">*</span> <span class="token annotation punctuation">@see</span>  #<span class="token function">equalsIgnoreCase</span><span class="token punctuation">(</span>String<span class="token punctuation">)</span>
+     <span class="token operator">*</span><span class="token operator">/</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span>Object anObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>anObject <span class="token keyword">instanceof</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            String anotherString <span class="token operator">=</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> anObject<span class="token punctuation">;</span>
+            <span class="token keyword">int</span> n <span class="token operator">=</span> value<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> anotherString<span class="token punctuation">.</span>value<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">char</span> v1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+                <span class="token keyword">char</span> v2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> anotherString<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+                <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token operator">--</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>v1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> v2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                    i<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringDemo2</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String s2 <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// false</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">*</span><span class="token operator">*</span>运行结果：<span class="token operator">*</span><span class="token operator">*</span>
+
+<span class="token operator">></span> <span class="token boolean">false</span> 
+<span class="token operator">></span> <span class="token boolean">true</span>
+</code></pre>
+<p><strong>代码详解</strong></p>
+<blockquote>
+<ol>
+<li>首先，通过main（）方法进栈。</li>
+<li>然后再栈中定义一个对象s1,去堆中开辟一个内存空间，将内存空间的引用赋值给s1，“hello”是常量，然后去字符串常量池 查看是否有hello字符串对象，没有的话分配一个空间存放hello，并且将其空间地址存入堆中new出来的空间中。</li>
+<li>在栈中定义一个对象s2，然后去字符串常量池中查看是否有”hello”字符串对象，有，直接把”hello”的地址赋值给s2.</li>
+<li>即s1中存的是堆中分配的空间，堆中分配的空间中存的是字符串常量池中分配空间存放”hello”的空间的地址值。而s2中之间存的是字符串常量池中分配空间存放”hello”的空间的地址值。</li>
+<li>由于s1与s2中存放的地址不同，所以输出false。因为，类String重写了equals()方法，它比较的是引用类型的 的值是否相等，所以输出true。即结果为false、true。</li>
+</ol>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/020.png" alt></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringDemo1</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// false</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+
+        String s3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String s4 <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s4<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// false</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>s4<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+
+        String s5 <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+        String s6 <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s5 <span class="token operator">==</span> s6<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s5<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>s6<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>s1~s6用equals()的比较不解释，都是比较的值，均为true。以下讲解==</p>
+<ol>
+<li>s1、s2：二者均为new出来的，各自在堆中分配有空间，并各自将内存地址赋值给s1、s2。空间地址不同，==比较为false。但是各自在堆中空间中保存的值均为在字符串常量池中的同一个对象的地址。根据Demo处的图即解释不难理解。</li>
+<li>s3、s4同上Demo出解释。</li>
+<li>s5、s6都是在常量池中取值，二者都指向常量池中同一对象，其地址值相同，所以结果为true。</li>
+</ol>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringDemo4</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String s1 <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+        String s2 <span class="token operator">=</span> <span class="token string">"world"</span><span class="token punctuation">;</span>
+        String s3 <span class="token operator">=</span> <span class="token string">"helloworld"</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s1 <span class="token operator">+</span> s2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// false</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token punctuation">(</span>s1 <span class="token operator">+</span> s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> <span class="token string">"hello"</span> <span class="token operator">+</span> <span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//false</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"hello"</span> <span class="token operator">+</span> <span class="token string">"world"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h5 id="Demo2详解"><a href="#Demo2详解" class="headerlink" title="Demo2详解"></a>Demo2详解</h5><blockquote>
+<p>equals()比较方法不解释，比较值，均相等，均为true。</p>
+<ol>
+<li>s1与s2相加是先在字符串常量池中开一个空间，然后拼接，这个空间的地址就是s1与s2拼接后的地址。与s3的地址不同，所以输出为false。</li>
+<li>s3与”hello”+”world”作比较，”hello”+”world”先拼接成”helloworld”,然后再去字符串常量池中找是否有”helloworld”,有，所以和s3共用一个字符串对象，则为true。</li>
+</ol>
+</blockquote>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
+<li><blockquote>
+<ol>
+<li>String s = new String(“hello”)会创建2（1）个对象，String s = “hello”创建1（0）个对象。<br>注：当字符串常量池中有对象hello时括号内成立！</li>
+<li>字符串如果是变量相加，先开空间，在拼接。</li>
+<li>字符串如果是常量相加，是先加，然后在常量池找，如果有就直接返回，否则，就创建。</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li>如何将字符串反转？</li>
+<li>String 类的常用方法都有那些？</li>
+<li>抽象类必须要有抽象方法吗？</li>
+<li>普通类和抽象类有哪些区别？</li>
+<li>抽象类能使用 final 修饰吗？</li>
+<li>接口和抽象类有什么区别？</li>
+<li>java 中 IO 流分为几种？</li>
+<li>BIO、NIO、AIO 有什么区别？</li>
+<li>Files的常用方法都有哪些？</li>
+</ol>
+<h3 id="二、容器"><a href="#二、容器" class="headerlink" title="二、容器"></a>二、容器</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/002.png" alt></p>
+<ol>
+<li>java 容器都有哪些？</li>
+<li>Collection 和 Collections 有什么区别？</li>
+<li>List、Set、Map 之间的区别是什么？</li>
+<li>HashMap 和 Hashtable 有什么区别？</li>
+<li>如何决定使用 HashMap 还是 TreeMap？</li>
+<li>说一下 HashMap 的实现原理？</li>
+<li>说一下 HashSet 的实现原理？</li>
+<li>ArrayList 和 LinkedList 的区别是什么？</li>
+<li>如何实现数组和 List 之间的转换？</li>
+<li>ArrayList 和 Vector 的区别是什么？</li>
+<li>Array 和 ArrayList 有何区别？</li>
+<li>在 Queue 中 poll()和 remove()有什么区别？</li>
+<li>哪些集合类是线程安全的？</li>
+<li>迭代器 Iterator 是什么？</li>
+<li>Iterator 怎么使用？有什么特点？</li>
+<li>Iterator 和 ListIterator 有什么区别？</li>
+<li>怎么确保一个集合不能被修改？</li>
+</ol>
+<h3 id="三、多线程"><a href="#三、多线程" class="headerlink" title="三、多线程"></a>三、多线程</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/003.png" alt></p>
+<ol>
+<li>并行和并发有什么区别？</li>
+<li>线程和进程的区别？</li>
+<li>守护线程是什么？</li>
+<li>创建线程有哪几种方式？</li>
+<li>说一下 runnable 和 callable 有什么区别？</li>
+<li>线程有哪些状态？</li>
+<li>sleep() 和 wait() 有什么区别？</li>
+<li>notify()和 notifyAll()有什么区别？</li>
+<li>线程的 run()和 start()有什么区别？</li>
+<li>创建线程池有哪几种方式？</li>
+<li>线程池都有哪些状态？</li>
+<li>线程池中 submit()和 execute()方法有什么区别？</li>
+<li>在 java 程序中怎么保证多线程的运行安全？</li>
+<li>多线程锁的升级原理是什么？</li>
+<li>什么是死锁？</li>
+<li>怎么防止死锁？</li>
+<li>ThreadLocal 是什么？有哪些使用场景？</li>
+<li>说一下 synchronized 底层实现原理？</li>
+<li>synchronized 和 volatile 的区别是什么？</li>
+<li>synchronized 和 Lock 有什么区别？</li>
+<li>synchronized 和 ReentrantLock 区别是什么？</li>
+<li>说一下 atomic 的原理？</li>
+</ol>
+<h3 id="四、反射"><a href="#四、反射" class="headerlink" title="四、反射"></a>四、反射</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/004.png" alt></p>
+<ol>
+<li>什么是反射？</li>
+<li>什么是 java 序列化？什么情况下需要序列化？</li>
+<li>动态代理是什么？有哪些应用？</li>
+<li>怎么实现动态代理？</li>
+</ol>
+<h3 id="五、对象拷贝"><a href="#五、对象拷贝" class="headerlink" title="五、对象拷贝"></a>五、对象拷贝</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/005.png" alt></p>
+<ol>
+<li>为什么要使用克隆？</li>
+<li>如何实现对象克隆？</li>
+<li>深拷贝和浅拷贝区别是什么？</li>
+</ol>
+<h3 id="六、Java-Web"><a href="#六、Java-Web" class="headerlink" title="六、Java Web"></a>六、Java Web</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/006.png" alt></p>
+<ol>
+<li>jsp 和 servlet 有什么区别？</li>
+<li>jsp 有哪些内置对象？作用分别是什么？</li>
+<li>说一下 jsp 的 4 种作用域？</li>
+<li>session 和 cookie 有什么区别？</li>
+<li>说一下 session 的工作原理？</li>
+<li>如果客户端禁止 cookie 能实现 session 还能用吗？</li>
+<li>spring mvc 和 struts 的区别是什么？</li>
+<li>如何避免 sql 注入？</li>
+<li>什么是 XSS 攻击，如何避免？</li>
+<li>什么是 CSRF 攻击，如何避免？</li>
+</ol>
+<h3 id="七、异常"><a href="#七、异常" class="headerlink" title="七、异常"></a>七、异常</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/007.png" alt></p>
+<ol>
+<li>throw 和 throws 的区别？</li>
+<li>final、finally、finalize 有什么区别？</li>
+<li>try-catch-finally 中哪个部分可以省略？</li>
+<li>try-catch-finally 中，如果 catch 中 return 了，finally 还会执行吗？</li>
+<li>常见的异常类有哪些？</li>
+</ol>
+<h3 id="八、网络"><a href="#八、网络" class="headerlink" title="八、网络"></a>八、网络</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/008.png" alt></p>
+<ol>
+<li>http 响应码 301 和 302 代表的是什么？有什么区别？</li>
+<li>forward 和 redirect 的区别？</li>
+<li>简述 tcp 和 udp的区别？</li>
+<li>tcp 为什么要三次握手，两次不行吗？为什么？</li>
+<li>说一下 tcp 粘包是怎么产生的？</li>
+<li>OSI 的七层模型都有哪些？</li>
+<li>get 和 post 请求有哪些区别？</li>
+<li>如何实现跨域？</li>
+<li>说一下 JSONP 实现原理？</li>
+</ol>
+<h3 id="九、设计模式"><a href="#九、设计模式" class="headerlink" title="九、设计模式"></a>九、设计模式</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/009.png" alt></p>
+<ol>
+<li>说一下你熟悉的设计模式？</li>
+</ol>
+<ul>
+<li>简单工厂和抽象工厂有什么区别？</li>
+</ul>
+<h3 id="十、Spring-Spring-MVC"><a href="#十、Spring-Spring-MVC" class="headerlink" title="十、Spring/Spring MVC"></a>十、Spring/Spring MVC</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/010.png" alt></p>
+<ol>
+<li>为什么要使用 spring？</li>
+<li>解释一下什么是 aop？</li>
+<li>解释一下什么是 ioc？</li>
+<li>spring 有哪些主要模块？</li>
+<li>spring 常用的注入方式有哪些？</li>
+<li>spring 中的 bean 是线程安全的吗？</li>
+<li>spring 支持几种 bean 的作用域？</li>
+<li>spring 自动装配 bean 有哪些方式？</li>
+<li>spring 事务实现方式有哪些？</li>
+<li>说一下 spring 的事务隔离？</li>
+<li>说一下 spring mvc 运行流程？</li>
+<li>spring mvc 有哪些组件？</li>
+<li>@RequestMapping 的作用是什么？</li>
+<li>@Autowired 的作用是什么？</li>
+</ol>
+<h3 id="十一、Spring-Boot-Spring-Cloud"><a href="#十一、Spring-Boot-Spring-Cloud" class="headerlink" title="十一、Spring Boot/Spring Cloud"></a>十一、Spring Boot/Spring Cloud</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/011.png" alt></p>
+<ol>
+<li>什么是 spring boot？</li>
+<li>为什么要用 spring boot？</li>
+<li>spring boot 核心配置文件是什么？</li>
+<li>spring boot 配置文件有哪几种类型？它们有什么区别？</li>
+<li>spring boot 有哪些方式可以实现热部署？</li>
+<li>jpa 和 hibernate 有什么区别？</li>
+<li>什么是 spring cloud？</li>
+<li>spring cloud 断路器的作用是什么？</li>
+<li>spring cloud 的核心组件有哪些？</li>
+</ol>
+<h3 id="十二、Hibernate"><a href="#十二、Hibernate" class="headerlink" title="十二、Hibernate"></a>十二、Hibernate</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/012.png" alt></p>
+<ol>
+<li>为什么要使用 hibernate？</li>
+<li>什么是 ORM 框架？</li>
+<li>hibernate 中如何在控制台查看打印的 sql 语句？</li>
+<li>hibernate 有几种查询方式？</li>
+<li>hibernate 实体类可以被定义为 final 吗？</li>
+<li>在 hibernate 中使用 Integer 和 int 做映射有什么区别？</li>
+<li>hibernate 是如何工作的？</li>
+<li>get()和 load()的区别？</li>
+<li>说一下 hibernate 的缓存机制？</li>
+<li>hibernate 对象有哪些状态？</li>
+<li>在 hibernate 中 getCurrentSession 和 openSession 的区别是什么？</li>
+<li>hibernate 实体类必须要有无参构造函数吗？为什么？</li>
+</ol>
+<h3 id="十三、Mybatis"><a href="#十三、Mybatis" class="headerlink" title="十三、Mybatis"></a>十三、Mybatis</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/013.png" alt></p>
+<ol>
+<li>mybatis 中 #{}和 ${}的区别是什么？</li>
+<li>mybatis 有几种分页方式？</li>
+<li>RowBounds 是一次性查询全部结果吗？为什么？</li>
+<li>mybatis 逻辑分页和物理分页的区别是什么？</li>
+<li>mybatis 是否支持延迟加载？延迟加载的原理是什么？</li>
+<li>说一下 mybatis 的一级缓存和二级缓存？</li>
+<li>mybatis 和 hibernate 的区别有哪些？</li>
+<li>mybatis 有哪些执行器（Executor）？</li>
+<li>mybatis 分页插件的实现原理是什么？</li>
+<li>mybatis 如何编写一个自定义插件？</li>
+</ol>
+<h4 id="十四、RabbitMQ"><a href="#十四、RabbitMQ" class="headerlink" title="十四、RabbitMQ"></a>十四、RabbitMQ</h4><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/014.png" alt></p>
+<ol>
+<li>rabbitmq 的使用场景有哪些？</li>
+<li>rabbitmq 有哪些重要的角色？</li>
+<li>rabbitmq 有哪些重要的组件？</li>
+<li>rabbitmq 中 vhost 的作用是什么？</li>
+<li>rabbitmq 的消息是怎么发送的？</li>
+<li>rabbitmq 怎么保证消息的稳定性？</li>
+<li>rabbitmq 怎么避免消息丢失？</li>
+<li>要保证消息持久化成功的条件有哪些？</li>
+<li>rabbitmq 持久化有什么缺点？</li>
+<li>rabbitmq 有几种广播类型？</li>
+<li>rabbitmq 怎么实现延迟消息队列？</li>
+<li>rabbitmq 集群有什么用？</li>
+<li>rabbitmq 节点的类型有哪些？</li>
+<li>rabbitmq 集群搭建需要注意哪些问题？</li>
+<li>rabbitmq 每个节点是其他节点的完整拷贝吗？为什么？</li>
+<li>rabbitmq 集群中唯一一个磁盘节点崩溃了会发生什么情况？</li>
+<li>rabbitmq 对集群节点停止顺序有要求吗？</li>
+</ol>
+<h3 id="十五、Kafka"><a href="#十五、Kafka" class="headerlink" title="十五、Kafka"></a>十五、Kafka</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/015.png" alt></p>
+<ol>
+<li>kafka 可以脱离 zookeeper 单独使用吗？为什么？</li>
+<li>kafka 有几种数据保留的策略？</li>
+<li>kafka 同时设置了 7 天和 10G 清除数据，到第五天的时候消息达到了 10G，这个时候 kafka 将如何处理？</li>
+<li>什么情况会导致 kafka 运行变慢？</li>
+<li>使用 kafka 集群需要注意什么？</li>
+</ol>
+<h3 id="十六、Zookeeper"><a href="#十六、Zookeeper" class="headerlink" title="十六、Zookeeper"></a>十六、Zookeeper</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/016.png" alt></p>
+<ol>
+<li>zookeeper 是什么？</li>
+<li>zookeeper 都有哪些功能？</li>
+<li>zookeeper 有几种部署模式？</li>
+<li>zookeeper 怎么保证主从节点的状态同步？</li>
+<li>集群中为什么要有主节点？</li>
+<li>集群中有 3 台服务器，其中一个节点宕机，这个时候 zookeeper 还可以使用吗？</li>
+<li>说一下 zookeeper 的通知机制？</li>
+</ol>
+<h3 id="十七、MySql"><a href="#十七、MySql" class="headerlink" title="十七、MySql"></a>十七、MySql</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/017.png" alt></p>
+<ol>
+<li>数据库的三范式是什么？</li>
+<li>一张自增表里面总共有 7 条数据，删除了最后 2 条数据，重启 mysql 数据库，又插入了一条数据，此时 id 是几？</li>
+<li>如何获取当前数据库版本？</li>
+<li>说一下 ACID 是什么？</li>
+<li>char 和 varchar 的区别是什么？</li>
+<li>float 和 double 的区别是什么？</li>
+<li>mysql 的内连接、左连接、右连接有什么区别？</li>
+<li>mysql 索引是怎么实现的？</li>
+<li>怎么验证 mysql 的索引是否满足需求？</li>
+<li>说一下数据库的事务隔离？</li>
+<li>说一下 mysql 常用的引擎？</li>
+<li>说一下 mysql 的行锁和表锁？</li>
+<li>说一下乐观锁和悲观锁？</li>
+<li>mysql 问题排查都有哪些手段？</li>
+<li>如何做 mysql 的性能优化？</li>
+</ol>
+<h3 id="十八、Redis"><a href="#十八、Redis" class="headerlink" title="十八、Redis"></a>十八、Redis</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/018.png" alt></p>
+<ol>
+<li>redis 是什么？都有哪些使用场景？</li>
+<li>redis 有哪些功能？</li>
+<li>redis 和 memecache 有什么区别？</li>
+<li>redis 为什么是单线程的？</li>
+<li>什么是缓存穿透？怎么解决？</li>
+<li>redis 支持的数据类型有哪些？</li>
+<li>redis 支持的 java 客户端都有哪些？</li>
+<li>jedis 和 redisson 有哪些区别？</li>
+<li>怎么保证缓存和数据库数据的一致性？</li>
+<li>redis 持久化有几种方式？</li>
+<li>redis 怎么实现分布式锁？</li>
+<li>redis 分布式锁有什么缺陷？</li>
+<li>redis 如何做内存优化？</li>
+<li>redis 淘汰策略有哪些？</li>
+<li>redis 常见的性能问题有哪些？该如何解决？</li>
+</ol>
+<h3 id="十九、JVM"><a href="#十九、JVM" class="headerlink" title="十九、JVM"></a>十九、JVM</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/019.png" alt></p>
+<ol>
+<li>说一下 jvm 的主要组成部分？及其作用？</li>
+<li>说一下 jvm 运行时数据区？</li>
+<li>说一下堆栈的区别？</li>
+<li>队列和栈是什么？有什么区别？</li>
+<li>什么是双亲委派模型？</li>
+<li>说一下类加载的执行过程？</li>
+<li>怎么判断对象是否可以被回收？</li>
+<li>java 中都有哪些引用类型？</li>
+<li>说一下 jvm 有哪些垃圾回收算法？</li>
+<li>说一下 jvm 有哪些垃圾回收器？</li>
+<li>详细介绍一下 CMS 垃圾回收器？</li>
+<li>新生代垃圾回收器和老生代垃圾回收器都有哪些？有什么区别？</li>
+<li>简述分代垃圾回收器是怎么工作的？</li>
+<li>说一下 jvm 调优的工具？</li>
+<li>常用的 jvm 调优的参数都有哪些？</li>
+</ol>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/07/11/mian-shi-ti-ji-jin/" class="b-link-green">面试题集锦</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="MySQL索引为什么要用B+树实现">
+                        
+                        <span class="card-title">MySQL索引为什么要用B+树实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">MySQL索引为什么要用B+树实现一、前言
+在从一堆数据中查找指定的数据时，我们常用的数据结构是哈希表和二叉查找树，表本质上就是一堆数据的集合，所以MySQL数据库用了B+树和哈希表来实现索引
+B+树是通过二叉查找树，再由平衡二叉树，B树（</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-12
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数据库/" class="post-category" target="_blank">
+                                    数据库
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySql，B/" target="_blank">
+                        <span class="chip bg-color">MySql，B+</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/10/mac-xia-an-zhuang-dubbo-he-zookeeper/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Mac下安装Dubbo和Zookeeper">
+                        
+                        <span class="card-title">Mac下安装Dubbo和Zookeeper</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Mac下安装Dubbo和Zookeeper一、Zookeeper
+zookeeper支持brew安装,检查安装环境
+
+brew info zookeeper
+
+brew install zookeeper
+
+
+安装后zookeeper配置文</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/中间件/" class="post-category" target="_blank">
+                                    中间件
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/dobbo，zookeeper/" target="_blank">
+                        <span class="chip bg-color">dobbo，zookeeper</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">114.5k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

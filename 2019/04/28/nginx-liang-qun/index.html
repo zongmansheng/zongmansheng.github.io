@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="nginx惊群, 晓笙的BLOG">
     <meta name="description" content="nginx惊群一、什么是惊群
-​    多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应这一个事">
+​        多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -292,15 +292,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="nginx惊群"><a href="#nginx惊群" class="headerlink" title="nginx惊群"></a>nginx惊群</h1><h4 id="一、什么是惊群"><a href="#一、什么是惊群" class="headerlink" title="一、什么是惊群"></a>一、什么是惊群</h4><blockquote>
-<p>​    多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应这一个事件，当然只有一个进程能处理事件成功，其他的进程在处理该事件失败后重新休眠（也有其他选择）。这种性能浪费现象就是惊群。</p>
+<p>​        多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应这一个事件，当然只有一个进程能处理事件成功，其他的进程在处理该事件失败后重新休眠（也有其他选择）。这种性能浪费现象就是惊群。</p>
 </blockquote>
 <blockquote>
-<p>​    惊群通常发生在server 上，当父进程绑定一个端口监听socket，然后fork出多个子进程，子进程们开始循环处理（比如accept）这个socket。每当用户发起一个TCP连接时，多个子进程同时被唤醒，然后其中一个子进程accept新连接成功，余者皆失败，重新休眠。</p>
+<p>​        惊群通常发生在server 上，当父进程绑定一个端口监听socket，然后fork出多个子进程，子进程们开始循环处理（比如accept）这个socket。每当用户发起一个TCP连接时，多个子进程同时被唤醒，然后其中一个子进程accept新连接成功，余者皆失败，重新休眠。</p>
 </blockquote>
 <h4 id="二、如何解决惊群问题-post事件处理机制"><a href="#二、如何解决惊群问题-post事件处理机制" class="headerlink" title="二、如何解决惊群问题-post事件处理机制"></a>二、如何解决惊群问题-post事件处理机制</h4><blockquote>
-<p>​    很多操作系统的最新版本的内核已经在事件驱动机制中解决了惊群问题，但Nginx作为可移植性极高的web服务器，还是在自身的应用层面上较好的解决了这一问题。<br>Nginx规定了同一时刻只有唯一一个worker子进程监听web端口，这一就不会发生惊群了，此时新连接事件只能唤醒唯一的正在监听端口的worker子进程。</p>
-<p>​    如何限制在某一时刻是有一个子进程监听web端口呢？在打开accept_mutex锁的情况下，只有调用ngx_trylock_accept_mutex方法后，当前的worker进程才会去试着监听web端口。</p>
-<p>​    那么，什么时候释放ngx_accept_mutex锁呢？<br>​    显然不能等到这批事件全部执行完。因为这个worker进程上可能有许多活跃的连接，处理这些连接上的事件会占用很长时间，其他worker进程很难得到处理新连接的机会。</p>
+<p>​        很多操作系统的最新版本的内核已经在事件驱动机制中解决了惊群问题，但Nginx作为可移植性极高的web服务器，还是在自身的应用层面上较好的解决了这一问题。<br>Nginx规定了同一时刻只有唯一一个worker子进程监听web端口，这一就不会发生惊群了，此时新连接事件只能唤醒唯一的正在监听端口的worker子进程。</p>
+<p>​        如何限制在某一时刻是有一个子进程监听web端口呢？在打开accept_mutex锁的情况下，只有调用ngx_trylock_accept_mutex方法后，当前的worker进程才会去试着监听web端口。</p>
+<p>那么，什么时候释放ngx_accept_mutex锁呢？<br>       显然不能等到这批事件全部执行完。因为这个worker进程上可能有许多活跃的连接，处理这些连接上的事件会占用很长时间，其他worker进程很难得到处理新连接的机会。</p>
 <p>​    如何解决长时间占用ngx_accept_mutex的问题呢？</p>
 <p>​    这就要依靠post事件处理机制，Nginx设计了两个队列：ngx_posted_accept_events队列（存放新连接事件的队列）和ngx_posted_events队列（存放普通事件的队列）。这两个队列都是ngx_event_t类型的双链表。定义如下：</p>
 </blockquote>
@@ -414,7 +414,7 @@ ngx_thread_volatile ngx_event_t  <span class="token operator">*</span>ngx_posted
 <span class="token punctuation">}</span>
 </code></pre>
 <blockquote>
-<p>​    上面代码中要进行说明的是，flags被设置后作为函数ngx_process_events方法的一个参数，在epoll模块中这个接口的实现方法是ngx_epoll_process_events（其具体代码见<a href="http://blog.csdn.net/xiajun07061225/article/details/9250341）。当falgs标志位含有nGX_POST_EVENTS时是不会立即调用事件的handler回调方法的，代码如下所示：" target="_blank" rel="noopener">http://blog.csdn.net/xiajun07061225/article/details/9250341）。当falgs标志位含有nGX_POST_EVENTS时是不会立即调用事件的handler回调方法的，代码如下所示：</a></p>
+<p>​        上面代码中要进行说明的是，flags被设置后作为函数ngx_process_events方法的一个参数，在epoll模块中这个接口的实现方法是ngx_epoll_process_events（其具体代码见<a href="http://blog.csdn.net/xiajun07061225/article/details/9250341）。当falgs标志位含有nGX_POST_EVENTS时是不会立即调用事件的handler回调方法的，代码如下所示：" target="_blank" rel="noopener">http://blog.csdn.net/xiajun07061225/article/details/9250341）。当falgs标志位含有nGX_POST_EVENTS时是不会立即调用事件的handler回调方法的，代码如下所示：</a></p>
 </blockquote>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//事件需要延后处理</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span>flags <span class="token operator">&amp;</span> NGX_POST_EVENTS<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -651,7 +651,7 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">99.5k</span>
+                <span class="white-color">114.5k</span>
             
 
             
