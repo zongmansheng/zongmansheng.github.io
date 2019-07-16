@@ -1,0 +1,690 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="分布式锁, 晓笙的BLOG">
+    <meta name="description" content="分布式锁一、什么是锁？
+
+在单进程的系统中，当存在多个线程可以同时改变某个变量（可变共享变量）时，就需要对变量或代码块做同步，使其在修改这种变量时能够线性执行消除并发修改变量。
+而同步的本质是通过锁来实现的。为了实现多个线程在一个时刻同一个">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>分布式锁 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        分布式锁
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/redis/" target="_blank">
+                                <span class="chip bg-color">redis</span>
+                            </a>
+                        
+                            <a href="/tags/zookeeper/" target="_blank">
+                                <span class="chip bg-color">zookeeper</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/分布式/" class="post-category" target="_blank">
+                                分布式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-16
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.8k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        13 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><h3 id="一、什么是锁？"><a href="#一、什么是锁？" class="headerlink" title="一、什么是锁？"></a>一、什么是锁？</h3><blockquote>
+<ul>
+<li>在单进程的系统中，当存在多个线程可以同时改变某个变量（可变共享变量）时，就需要对变量或代码块做同步，使其在修改这种变量时能够线性执行消除并发修改变量。</li>
+<li>而同步的本质是通过锁来实现的。为了实现多个线程在一个时刻同一个代码块只能有一个线程可执行，那么需要在某个地方做个标记，这个标记必须每个线程都能看到，当标记不存在时可以设置该标记，其余后续线程发现已经有标记了则等待拥有标记的线程结束同步代码块取消标记后再去尝试设置标记。这个标记可以理解为锁。</li>
+<li>不同地方实现锁的方式也不一样，只要能满足所有线程都能看得到标记即可。如 Java 中 synchronize 是在对象头设置标记，Lock 接口的实现类基本上都只是某一个 volitile 修饰的 int 型变量其保证每个线程都能拥有对该 int 的可见性和原子修改，linux 内核中也是利用互斥量或信号量等内存数据做标记。</li>
+<li>除了利用内存数据做锁其实任何互斥的都能做锁（只考虑互斥情况），如流水表中流水号与时间结合做幂等校验可以看作是一个不会释放的锁，或者使用某个文件是否存在作为锁等。只需要满足在对标记进行修改能保证原子性和内存可见性即可。</li>
+</ul>
+</blockquote>
+<h3 id="二、什么是分布式？"><a href="#二、什么是分布式？" class="headerlink" title="二、什么是分布式？"></a>二、什么是分布式？</h3><blockquote>
+<p>分布式的 CAP 理论告诉我们:</p>
+</blockquote>
+<blockquote>
+<p>任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。</p>
+<p>目前很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。基于 CAP理论，很多系统在设计之初就要对这三者做出取舍。在互联网领域的绝大多数的场景中，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证最终一致性。</p>
+<p>分布式场景</p>
+<p><strong>此处主要指集群模式下，多个相同服务同时开启.</strong></p>
+</blockquote>
+<blockquote>
+<p>在许多的场景中，我们为了保证数据的最终一致性，需要很多的技术方案来支持，比如<code>分布式事务</code>、<code>分布式锁</code>等。很多时候我们需要保证一个方法在同一时间内只能被同一个线程执行。在单机环境中，通过 Java 提供的并发 API 我们可以解决，但是在分布式环境下，就没有那么简单啦。</p>
+<ul>
+<li>分布式与单机情况下最大的不同在于其不是多线程而是<code>多进程</code>。</li>
+<li>多线程由于可以共享堆内存，因此可以简单的采取内存作为标记存储位置。而进程之间甚至可能都不在同一台物理机上，因此需要将标记存储在一个所有进程都能看到的地方。</li>
+</ul>
+</blockquote>
+<h3 id="三、什么是分布式锁？"><a href="#三、什么是分布式锁？" class="headerlink" title="三、什么是分布式锁？"></a>三、什么是分布式锁？</h3><blockquote>
+<ul>
+<li>当在分布式模型下，数据只有一份（或有限制），此时需要利用锁的技术控制某一时刻修改数据的进程数。</li>
+<li>与单机模式下的锁不仅需要保证进程可见，还需要考虑进程与锁之间的网络问题。（我觉得分布式情况下之所以问题变得复杂，主要就是需要考虑到网络的延时和不可靠。。。一个大坑）</li>
+<li>分布式锁还是可以将标记存在内存，只是该内存不是某个进程分配的内存而是公共内存如 Redis、Memcache。至于利用数据库、文件等做锁与单机的实现是一样的，只要保证标记能互斥就行。</li>
+</ul>
+</blockquote>
+<h3 id="四、我们需要怎样的分布式锁？"><a href="#四、我们需要怎样的分布式锁？" class="headerlink" title="四、我们需要怎样的分布式锁？"></a>四、我们需要怎样的分布式锁？</h3><blockquote>
+<ul>
+<li>可以保证在分布式部署的应用集群中，同一个方法在同一时间只能被一台机器-上的一个线程执行。</li>
+<li>这把锁要是一把可重入锁（避免死锁）</li>
+<li>这把锁最好是一把阻塞锁（根据业务需求考虑要不要这条）</li>
+<li>这把锁最好是一把公平锁（根据业务需求考虑要不要这条）</li>
+<li>有高可用的获取锁和释放锁功能</li>
+<li>获取锁和释放锁的性能要好</li>
+</ul>
+</blockquote>
+<h3 id="五、基于数据库做分布式锁"><a href="#五、基于数据库做分布式锁" class="headerlink" title="五、基于数据库做分布式锁"></a>五、基于数据库做分布式锁</h3><h4 id="基于乐观锁"><a href="#基于乐观锁" class="headerlink" title="基于乐观锁"></a>基于乐观锁</h4><h6 id="基于表主键唯一做分布式锁"><a href="#基于表主键唯一做分布式锁" class="headerlink" title="基于表主键唯一做分布式锁"></a>基于表主键唯一做分布式锁</h6><blockquote>
+<p><strong>思路：</strong>利用主键唯一的特性，如果有多个请求同时提交到数据库的话，数据库会保证只有一个操作可以成功，那么我们就可以认为操作成功的那个线程获得了该方法的锁，当方法执行完毕之后，想要释放锁的话，删除这条数据库记录即可。</p>
+<p>上面这种简单的实现有以下几个问题：</p>
+<ul>
+<li>这把锁强依赖数据库的可用性，数据库是一个单点，一旦数据库挂掉，会导致业务系统不可用。</li>
+<li>这把锁没有失效时间，一旦解锁操作失败，就会导致锁记录一直在数据库中，其他线程无法再获得到锁。</li>
+<li>这把锁只能是非阻塞的，因为数据的 insert操作，一旦插入失败就会直接报错。没有获得锁的线程并不会进入排队队列，要想再次获得锁就要再次触发获得锁操作。</li>
+<li>这把锁是非重入的，同一个线程在没有释放锁之前无法再次获得该锁。因为数据中数据已经存在了。</li>
+<li>这把锁是非公平锁，所有等待锁的线程凭运气去争夺锁。</li>
+<li>在 MySQL 数据库中采用主键冲突防重，在大并发情况下有可能会造成锁表现象。</li>
+</ul>
+<h5 id="当然，我们也可以有其他方式解决上面的问题。"><a href="#当然，我们也可以有其他方式解决上面的问题。" class="headerlink" title="当然，我们也可以有其他方式解决上面的问题。"></a>当然，我们也可以有其他方式解决上面的问题。</h5><ul>
+<li>数据库是单点？搞两个数据库，数据之前双向同步，一旦挂掉快速切换到备库上。</li>
+<li>没有失效时间？只要做一个定时任务，每隔一定时间把数据库中的超时数据清理一遍。</li>
+<li>非阻塞的？搞一个 while 循环，直到 insert 成功再返回成功。</li>
+<li>非重入的？在数据库表中加个字段，记录当前获得锁的机器的主机信息和线程信息，那么下次再获取锁的时候先查询数据库，如果当前机器的主机信息和线程信息在数据库可以查到的话，直接把锁分配给他就可以了。</li>
+<li>非公平的？再建一张中间表，将等待锁的线程全记录下来，并根据创建时间排序，只有最先创建的允许获取锁。</li>
+<li>比较好的办法是在程序中生产主键进行防重。</li>
+</ul>
+</blockquote>
+<h4 id="基于表字段版本号做分布式锁"><a href="#基于表字段版本号做分布式锁" class="headerlink" title="基于表字段版本号做分布式锁"></a>基于表字段版本号做分布式锁</h4><blockquote>
+<p>这个策略源于 mysql 的 mvcc 机制，使用这个策略其实本身没有什么问题，唯一的问题就是对数据表侵入较大，我们要为每个表设计一个版本号字段，然后写一条判断 sql 每次进行判断，增加了数据库操作的次数，在高并发的要求下，对数据库连接的开销也是无法忍受的。</p>
+<p>基于悲观锁</p>
+</blockquote>
+<h4 id="基于数据库排他锁做分布式锁"><a href="#基于数据库排他锁做分布式锁" class="headerlink" title="基于数据库排他锁做分布式锁"></a>基于数据库排他锁做分布式锁</h4><blockquote>
+<p>在查询语句后面增加<code>for update</code>，数据库会在查询过程中给数据库表增加排他锁 (注意： InnoDB 引擎在加锁的时候，只有通过索引进行检索的时候才会使用行级锁，否则会使用表级锁。这里我们希望使用行级锁，就要给要执行的方法字段名添加索引，值得注意的是，这个索引一定要创建成唯一索引，否则会出现多个重载方法之间无法同时被访问的问题。重载方法的话建议把参数类型也加上。)。当某条记录被加上排他锁之后，其他线程无法再在该行记录上增加排他锁。</p>
+<p>我们可以认为获得排他锁的线程即可获得分布式锁，当获取到锁之后，可以执行方法的业务逻辑，执行完方法之后，通过<code>connection.commit()</code>操作来释放锁。</p>
+<p>这种方法可以有效的解决上面提到的无法释放锁和阻塞锁的问题。</p>
+<ul>
+<li>阻塞锁？ <code>for update</code>语句会在执行成功后立即返回，在执行失败时一直处于阻塞状态，直到成功。</li>
+<li>锁定之后服务宕机，无法释放？使用这种方式，服务宕机之后数据库会自己把锁释放掉。</li>
+</ul>
+<p>但是还是无法直接解决数据库单点和可重入问题。</p>
+<p>这里还可能存在另外一个问题，虽然我们对方法字段名使用了唯一索引，并且显示使用 for update 来使用行级锁。但是，MySQL 会对查询进行优化，即便在条件中使用了索引字段，但是否使用索引来检索数据是由 MySQL 通过判断不同执行计划的代价来决定的，如果 MySQL 认为全表扫效率更高，比如对一些很小的表，它就不会使用索引，这种情况下 InnoDB 将使用表锁，而不是行锁。如果发生这种情况就悲剧了。。。</p>
+<p>还有一个问题，就是我们要使用排他锁来进行分布式锁的 lock，那么一个排他锁长时间不提交，就会占用数据库连接。一旦类似的连接变得多了，就可能把数据库连接池撑爆。</p>
+</blockquote>
+<h4 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h4><blockquote>
+<p><strong>优点</strong>：简单，易于理解</p>
+<p><strong>缺点</strong>：会有各种各样的问题（操作数据库需要一定的开销，使用数据库的行级锁并不一定靠谱，性能不靠谱）</p>
+</blockquote>
+<h3 id="基于-Redis-做分布式锁"><a href="#基于-Redis-做分布式锁" class="headerlink" title="基于 Redis 做分布式锁"></a>基于 Redis 做分布式锁</h3><blockquote>
+<p>基于 REDIS 的 SETNX()、EXPIRE() 方法做分布式锁</p>
+</blockquote>
+<blockquote>
+<p>目前几乎很多大型网站及应用都是分布式部署的，分布式场景中的数据一致性问题一直是一个比较重要的话题。分布式的CAP理论告诉我们“任何一个分布式系统都无法同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance），最多只能同时满足两项。”所以，很多系统在设计之初就要对这三者做出取舍。在互联网领域的绝大多数的场景中，都需要牺牲强一致性来换取系统的高可用性，系统往往只需要保证“最终一致性”，只要这个最终时间是在用户可以接受的范围内即可。</p>
+<p>在很多场景中，我们为了保证数据的最终一致性，需要很多的技术方案来支持，比如分布式事务、分布式锁等。</p>
+</blockquote>
+<h4 id="1-选用Redis实现分布式锁原因"><a href="#1-选用Redis实现分布式锁原因" class="headerlink" title="1.选用Redis实现分布式锁原因"></a>1.选用Redis实现分布式锁原因</h4><blockquote>
+<p>Redis有很高的性能</p>
+<p>Redis命令对此支持较好，实现起来比较方便</p>
+</blockquote>
+<h4 id="2-Redis常用命令"><a href="#2-Redis常用命令" class="headerlink" title="2.Redis常用命令"></a>2.Redis常用命令</h4><blockquote>
+<p>SETNX key val</p>
+<p>setnx 的含义就是 SET if Not Exists，其主要有两个参数 setnx(key, value)。该方法是原子的，如果 key 不存在，则设置当前 key 成功，返回 1；如果当前 key 已经存在，则设置当前 key 失败，返回 0。</p>
+</blockquote>
+<blockquote>
+<p>expire()</p>
+<p>expire key timeout<br>为key设置一个超时时间，单位为second，超过这个时间锁会自动释放，避免死锁。</p>
+</blockquote>
+<blockquote>
+<p>delete<br>delete key<br>删除key</p>
+</blockquote>
+<h4 id="3-实现"><a href="#3-实现" class="headerlink" title="3.实现"></a>3.实现</h4><blockquote>
+<p>使用的是jedis来连接Redis。</p>
+</blockquote>
+<h4 id="4-实现思想"><a href="#4-实现思想" class="headerlink" title="4.实现思想"></a>4.实现思想</h4><blockquote>
+<p>获取锁的时候，使用setnx加锁，并使用expire命令为锁添加一个超时时间，超过该时间则自动释放锁，锁的value值为一个随机生成的UUID，通过此在释放锁的时候进行判断。</p>
+<p>获取锁的时候还设置一个获取的超时时间，若超过这个时间则放弃获取锁。</p>
+<p>释放锁的时候，通过UUID判断是不是该锁，若是该锁，则执行delete进行锁释放。</p>
+</blockquote>
+<h4 id="5-使用步骤"><a href="#5-使用步骤" class="headerlink" title="5.使用步骤"></a>5.使用步骤</h4><blockquote>
+<p>1、setnx(lockkey, 1) 如果返回 0，则说明占位失败；如果返回 1，则说明占位成功</p>
+<p>2、expire() 命令对 lockkey 设置超时时间，为的是避免死锁问题。</p>
+<p>3、执行完业务代码后，可以通过 delete 命令删除 key。</p>
+<p>这个方案其实是可以解决日常工作中的需求的，但从技术方案的探讨上来说，可能还有一些可以完善的地方。</p>
+<p>比如，如果在第一步 setnx 执行成功后，在 expire() 命令执行成功前，发生了宕机的现象，那么就依然会出现死锁的问题，所以如果要对其进行完善的话，可以使用 redis 的 setnx()、get() 和 getset() 方法来实现分布式锁。</p>
+</blockquote>
+<h3 id="基于-REDIS-的-SETNX-、GET-、GETSET-方法做分布式锁"><a href="#基于-REDIS-的-SETNX-、GET-、GETSET-方法做分布式锁" class="headerlink" title="基于 REDIS 的 SETNX()、GET()、GETSET()方法做分布式锁"></a>基于 REDIS 的 SETNX()、GET()、GETSET()方法做分布式锁</h3><blockquote>
+<p>这个方案的背景主要是在 setnx() 和 expire() 的方案上针对可能存在的死锁问题，做了一些优化。</p>
+</blockquote>
+<h5 id="getset"><a href="#getset" class="headerlink" title="getset()"></a>getset()</h5><blockquote>
+<p>这个命令主要有两个参数 getset(key，newValue)。该方法是原子的，对 key 设置 newValue 这个值，并且返回 key 原来的旧值。假设 key 原来是不存在的，那么多次执行这个命令，会出现下边的效果：</p>
+<ul>
+<li>getset(key, “value1”) 返回 null 此时 key 的值会被设置为 value1</li>
+<li>getset(key, “value2”) 返回 value1 此时 key 的值会被设置为 value2</li>
+<li>依次类推！</li>
+</ul>
+</blockquote>
+<h4 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤:"></a>使用步骤:</h4><blockquote>
+<ul>
+<li>setnx(lockkey, 当前时间+过期超时时间)，如果返回 1，则获取锁成功；如果返回 0 则没有获取到锁，转向 2。</li>
+<li>get(lockkey) 获取值 oldExpireTime ，并将这个 value 值与当前的系统时间进行比较，如果小于当前系统时间，则认为这个锁已经超时，可以允许别的请求重新获取，转向 3。</li>
+<li>计算 newExpireTime = 当前时间+过期超时时间，然后 getset(lockkey, newExpireTime) 会返回当前 lockkey 的值currentExpireTime。</li>
+<li>判断 currentExpireTime 与 oldExpireTime 是否相等，如果相等，说明当前 getset 设置成功，获取到了锁。如果不相等，说明这个锁又被别的请求获取走了，那么当前请求可以直接返回失败，或者继续重试。</li>
+<li>在获取到锁之后，当前线程可以开始自己的业务处理，当处理完毕后，比较自己的处理时间和对于锁设置的超时时间，如果小于锁设置的超时时间，则直接执行 delete 释放锁；如果大于锁设置的超时时间，则不需要再锁进行处理。</li>
+</ul>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/07/16/fen-bu-shi-suo/" class="b-link-green">分布式锁</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/07/16/fen-bu-shi-suo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="分布式锁">
+                        
+                        <span class="card-title">分布式锁</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">分布式锁一、什么是锁？
+
+在单进程的系统中，当存在多个线程可以同时改变某个变量（可变共享变量）时，就需要对变量或代码块做同步，使其在修改这种变量时能够线性执行消除并发修改变量。
+而同步的本质是通过锁来实现的。为了实现多个线程在一个时刻同一个</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/分布式/" class="post-category" target="_blank">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/redis/" target="_blank">
+                        <span class="chip bg-color">redis</span>
+                    </a>
+                    
+                    <a href="/tags/zookeeper/" target="_blank">
+                        <span class="chip bg-color">zookeeper</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/16/java-yuan-dai-ma-de-zhi-xing-yuan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="java源代码的执行原理">
+                        
+                        <span class="card-title">java源代码的执行原理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">解析java执行内幕
+一 编写java源程序public class Test02 {
+    public static void main(String[] args) {
+        System.out.println("Hel</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                    日常学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java底层/" target="_blank">
+                        <span class="chip bg-color">java底层</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">123.9k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -5,7 +5,8 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="乐观锁与悲观锁的区别, 晓笙的BLOG">
-    <meta name="description" content="悲观锁和乐观锁的区别一、悲观锁(Pessimistic Lock)    总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程使用，其它线">
+    <meta name="description" content="悲观锁和乐观锁的区别一、悲观锁(Pessimistic Lock)
+​        总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -290,37 +291,47 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="悲观锁和乐观锁的区别"><a href="#悲观锁和乐观锁的区别" class="headerlink" title="悲观锁和乐观锁的区别"></a>悲观锁和乐观锁的区别</h1><h4 id="一、悲观锁-Pessimistic-Lock"><a href="#一、悲观锁-Pessimistic-Lock" class="headerlink" title="一、悲观锁(Pessimistic Lock)"></a>一、悲观锁(Pessimistic Lock)</h4><pre><code>    总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程）。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中synchronized和ReentrantLock等独占锁就是悲观锁思想的实现。
-    它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。
-</code></pre><h4 id="二、乐观锁-Optimistic-Lock"><a href="#二、乐观锁-Optimistic-Lock" class="headerlink" title="二、乐观锁(Optimistic Lock)"></a>二、乐观锁(Optimistic Lock)</h4><pre><code>    总是假设最好的情况，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号机制和CAS算法实现。乐观锁适用于多读的应用类型，这样可以提高吞吐量，像数据库提供的类似于write_condition机制，其实都是提供的乐观锁。在Java中java.util.concurrent.atomic包下面的原子变量类就是使用了乐观锁的一种实现方式CAS实现的。
-</code></pre><h4 id="三、乐观锁常见的两种实现方式"><a href="#三、乐观锁常见的两种实现方式" class="headerlink" title="三、乐观锁常见的两种实现方式"></a>三、乐观锁常见的两种实现方式</h4><pre><code>乐观锁一般会使用版本号机制或CAS算法实现。
-</code></pre><h5 id="1-版本号机制"><a href="#1-版本号机制" class="headerlink" title="1.版本号机制"></a>1.版本号机制</h5><pre><code>    一般是在数据表中加上一个数据版本号version字段，表示数据被修改的次数，当数据被修改时，version值会加一。当线程A要更新数据值时，在读取数据的同时也会读取version值，在提交更新时，若刚才读取到的version值为当前数据库中的version值相等时才更新，否则重试更新操作，直到更新成功。
+                <h1 id="悲观锁和乐观锁的区别"><a href="#悲观锁和乐观锁的区别" class="headerlink" title="悲观锁和乐观锁的区别"></a>悲观锁和乐观锁的区别</h1><h4 id="一、悲观锁-Pessimistic-Lock"><a href="#一、悲观锁-Pessimistic-Lock" class="headerlink" title="一、悲观锁(Pessimistic Lock)"></a>一、悲观锁(Pessimistic Lock)</h4><blockquote>
+<p>​        总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程）。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中synchronized和ReentrantLock等独占锁就是悲观锁思想的实现。<br>​        它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。</p>
+</blockquote>
+<h4 id="二、乐观锁-Optimistic-Lock"><a href="#二、乐观锁-Optimistic-Lock" class="headerlink" title="二、乐观锁(Optimistic Lock)"></a>二、乐观锁(Optimistic Lock)</h4><blockquote>
+<p>​        总是假设最好的情况，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号机制和CAS算法实现。乐观锁适用于多读的应用类型，这样可以提高吞吐量，像数据库提供的类似于write_condition机制，其实都是提供的乐观锁。在Java中java.util.concurrent.atomic包下面的原子变量类就是使用了乐观锁的一种实现方式CAS实现的。</p>
+</blockquote>
+<h4 id="三、乐观锁常见的两种实现方式"><a href="#三、乐观锁常见的两种实现方式" class="headerlink" title="三、乐观锁常见的两种实现方式"></a>三、乐观锁常见的两种实现方式</h4><blockquote>
+<p>乐观锁一般会使用版本号机制或CAS算法实现。</p>
+</blockquote>
+<h5 id="1-版本号机制"><a href="#1-版本号机制" class="headerlink" title="1.版本号机制"></a>1.版本号机制</h5><blockquote>
+<p>​        一般是在数据表中加上一个数据版本号version字段，表示数据被修改的次数，当数据被修改时，version值会加一。当线程A要更新数据值时，在读取数据的同时也会读取version值，在提交更新时，若刚才读取到的version值为当前数据库中的version值相等时才更新，否则重试更新操作，直到更新成功。</p>
+<p>举一个简单的例子：<br>       假设数据库中帐户信息表中有一个 version 字段，当前值为 1 ；而当前帐户余额字段（ balance ）为 $100 。</p>
+<p>   操作员 A 此时将其读出（ version=1 ），并从其帐户余额中扣除 50（50（100-$50 ）。<br>​        在操作员 A 操作的过程中，操作员B 也读入此用户信息（ version=1 ），并从其帐户余额中扣除 20（20（100-$20 ）。<br>操作员 A 完成了修改工作，将数据版本号加 1（ version=2 ），连同帐户扣除后余额（ balance=$50 ），提交至数据库更新，此时由于提交数据版本大于数据库记录当前版本，数据被更新，数据库记录 version 更新为 2 。<br>​        操作员 B 完成了操作，也将版本号加一（ version=2 ）试图向数据库提交数据（ balance=$80 ），但此时比对数据库记录版本时发现，操作员 B 提交的数据版本号为 2 ，数据库记录当前版本也为 2 ，不满足 “ 提交版本必须大于记录当前版本才能执行更新 “ 的乐观锁策略，因此，操作员 B 的提交被驳回。<br>这样，就避免了操作员 B 用基于 version=1 的旧数据修改的结果覆盖操作员A 的操作结果的可能。</p>
+</blockquote>
+<h5 id="2-CAS算法"><a href="#2-CAS算法" class="headerlink" title="2.CAS算法"></a>2.CAS算法</h5><blockquote>
+<p>​        即compare and swap（比较与交换），是一种有名的无锁算法。无锁编程，即不使用锁的情况下实现多线程之间的变量同步，也就是在没有线程被阻塞的情况下实现变量的同步，所以也叫非阻塞同步（Non-blocking Synchronization）。CAS算法涉及到三个操作数</p>
+<p>   需要读写的内存值 V<br>   进行比较的值 A<br>   拟写入的新值 B<br>   当且仅当 V 的值等于 A时，CAS通过原子方式用新值B来更新V的值，否则不会执行任何操作（比较和替换是一个原子操作）。一般情况下是一个自旋操作，即不断的重试。</p>
+</blockquote>
+<h4 id="四、乐观锁的缺点"><a href="#四、乐观锁的缺点" class="headerlink" title="四、乐观锁的缺点"></a>四、乐观锁的缺点</h4><blockquote>
+<p>ABA 问题是乐观锁一个常见的问题</p>
+</blockquote>
+<h5 id="1-ABA-问题"><a href="#1-ABA-问题" class="headerlink" title="1 ABA 问题"></a>1 ABA 问题</h5><blockquote>
+<p>​        如果一个变量V初次读取的时候是A值，并且在准备赋值的时候检查到它仍然是A值，那我们就能说明它的值没有被其他线程修改过了吗？很明显是不能的，因为在这段时间它的值可能被改为其他值，然后又改回A，那CAS操作就会误认为它从来没有被修改过。这个问题被称为CAS操作的 “ABA”问题。</p>
+<p>   JDK 1.5 以后的 AtomicStampedReference 类就提供了此种能力，其中的 compareAndSet 方法就是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。</p>
+</blockquote>
+<h5 id="2-循环时间长开销大"><a href="#2-循环时间长开销大" class="headerlink" title="2 循环时间长开销大"></a>2 循环时间长开销大</h5><blockquote>
+<p>​        自旋CAS（也就是不成功就一直循环执行直到成功）如果长时间不成功，会给CPU带来非常大的执行开销。 如果JVM能支持处理器提供的pause指令那么效率会有一定的提升，pause指令有两个作用，第一它可以延迟流水线执行指令（de-pipeline）,使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。第二它可以避免在退出循环的时候因内存顺序冲突（memory order violation）而引起CPU流水线被清空（CPU pipeline flush），从而提高CPU的执行效率。</p>
+</blockquote>
+<h5 id="3-只能保证一个共享变量的原子操作"><a href="#3-只能保证一个共享变量的原子操作" class="headerlink" title="3 只能保证一个共享变量的原子操作"></a>3 只能保证一个共享变量的原子操作</h5><blockquote>
+<p>​        CAS 只对单个共享变量有效，当操作涉及跨多个共享变量时 CAS 无效。但是从 JDK 1.5开始，提供了AtomicReference类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行 CAS 操作.所以我们可以使用锁或者利用AtomicReference类把多个共享变量合并成一个共享变量来操作。</p>
+</blockquote>
+<h4 id="五、CAS与synchronized的使用情景"><a href="#五、CAS与synchronized的使用情景" class="headerlink" title="五、CAS与synchronized的使用情景"></a>五、CAS与synchronized的使用情景</h4><blockquote>
+<p>简单的来说CAS适用于写比较少的情况下（多读场景，冲突一般较少），synchronized适用于写比较多的情况下（多写场景，冲突一般较多）</p>
+</blockquote>
+<blockquote>
+<p>对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。<br>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</p>
+</blockquote>
+<blockquote>
+<p>补充： Java并发编程这个领域中synchronized关键字一直都是元老级的角色，很久之前很多人都会称它为 “重量级锁” 。但是，在JavaSE 1.6之后进行了主要包括为了减少获得锁和释放锁带来的性能消耗而引入的 偏向锁 和 轻量级锁 以及其它各种优化之后变得在某些情况下并不是那么重了。synchronized的底层实现主要依靠 Lock-Free 的队列，基本思路是 自旋后阻塞，竞争切换后继续竞争锁，稍微牺牲了公平性，但获得了高吞吐量。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。</p>
+</blockquote>
 
-举一个简单的例子： 
-    假设数据库中帐户信息表中有一个 version 字段，当前值为 1 ；而当前帐户余额字段（ balance ）为 $100 。
-
-    操作员 A 此时将其读出（ version=1 ），并从其帐户余额中扣除 50（50（100-$50 ）。
-在操作员 A 操作的过程中，操作员B 也读入此用户信息（ version=1 ），并从其帐户余额中扣除 20（20（100-$20 ）。
-操作员 A 完成了修改工作，将数据版本号加 1（ version=2 ），连同帐户扣除后余额（ balance=$50 ），提交至数据库更新，此时由于提交数据版本大于数据库记录当前版本，数据被更新，数据库记录 version 更新为 2 。
-    操作员 B 完成了操作，也将版本号加一（ version=2 ）试图向数据库提交数据（ balance=$80 ），但此时比对数据库记录版本时发现，操作员 B 提交的数据版本号为 2 ，数据库记录当前版本也为 2 ，不满足 “ 提交版本必须大于记录当前版本才能执行更新 “ 的乐观锁策略，因此，操作员 B 的提交被驳回。
-这样，就避免了操作员 B 用基于 version=1 的旧数据修改的结果覆盖操作员A 的操作结果的可能。
-</code></pre><h5 id="2-CAS算法"><a href="#2-CAS算法" class="headerlink" title="2.CAS算法"></a>2.CAS算法</h5><pre><code>    即compare and swap（比较与交换），是一种有名的无锁算法。无锁编程，即不使用锁的情况下实现多线程之间的变量同步，也就是在没有线程被阻塞的情况下实现变量的同步，所以也叫非阻塞同步（Non-blocking Synchronization）。CAS算法涉及到三个操作数
-
-    需要读写的内存值 V
-    进行比较的值 A
-    拟写入的新值 B
-    当且仅当 V 的值等于 A时，CAS通过原子方式用新值B来更新V的值，否则不会执行任何操作（比较和替换是一个原子操作）。一般情况下是一个自旋操作，即不断的重试。
-</code></pre><h4 id="四、乐观锁的缺点"><a href="#四、乐观锁的缺点" class="headerlink" title="四、乐观锁的缺点"></a>四、乐观锁的缺点</h4><pre><code>ABA 问题是乐观锁一个常见的问题
-</code></pre><h5 id="1-ABA-问题"><a href="#1-ABA-问题" class="headerlink" title="1 ABA 问题"></a>1 ABA 问题</h5><pre><code>    如果一个变量V初次读取的时候是A值，并且在准备赋值的时候检查到它仍然是A值，那我们就能说明它的值没有被其他线程修改过了吗？很明显是不能的，因为在这段时间它的值可能被改为其他值，然后又改回A，那CAS操作就会误认为它从来没有被修改过。这个问题被称为CAS操作的 “ABA”问题。
-
-    JDK 1.5 以后的 AtomicStampedReference 类就提供了此种能力，其中的 compareAndSet 方法就是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。
-</code></pre><h5 id="2-循环时间长开销大"><a href="#2-循环时间长开销大" class="headerlink" title="2 循环时间长开销大"></a>2 循环时间长开销大</h5><pre><code>    自旋CAS（也就是不成功就一直循环执行直到成功）如果长时间不成功，会给CPU带来非常大的执行开销。 如果JVM能支持处理器提供的pause指令那么效率会有一定的提升，pause指令有两个作用，第一它可以延迟流水线执行指令（de-pipeline）,使CPU不会消耗过多的执行资源，延迟的时间取决于具体实现的版本，在一些处理器上延迟时间是零。第二它可以避免在退出循环的时候因内存顺序冲突（memory order violation）而引起CPU流水线被清空（CPU pipeline flush），从而提高CPU的执行效率。
-</code></pre><h5 id="3-只能保证一个共享变量的原子操作"><a href="#3-只能保证一个共享变量的原子操作" class="headerlink" title="3 只能保证一个共享变量的原子操作"></a>3 只能保证一个共享变量的原子操作</h5><pre><code>    CAS 只对单个共享变量有效，当操作涉及跨多个共享变量时 CAS 无效。但是从 JDK 1.5开始，提供了AtomicReference类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行 CAS 操作.所以我们可以使用锁或者利用AtomicReference类把多个共享变量合并成一个共享变量来操作。
-</code></pre><h4 id="五、CAS与synchronized的使用情景"><a href="#五、CAS与synchronized的使用情景" class="headerlink" title="五、CAS与synchronized的使用情景"></a>五、CAS与synchronized的使用情景</h4><pre><code>    简单的来说CAS适用于写比较少的情况下（多读场景，冲突一般较少），synchronized适用于写比较多的情况下（多写场景，冲突一般较多）
-</code></pre><pre><code>    对于资源竞争较少（线程冲突较轻）的情况，使用synchronized同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。
-对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。
-</code></pre><pre><code>补充： Java并发编程这个领域中synchronized关键字一直都是元老级的角色，很久之前很多人都会称它为 “重量级锁” 。但是，在JavaSE 1.6之后进行了主要包括为了减少获得锁和释放锁带来的性能消耗而引入的 偏向锁 和 轻量级锁 以及其它各种优化之后变得在某些情况下并不是那么重了。synchronized的底层实现主要依靠 Lock-Free 的队列，基本思路是 自旋后阻塞，竞争切换后继续竞争锁，稍微牺牲了公平性，但获得了高吞吐量。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。
-</code></pre>
             </div>
             <hr>
 
@@ -378,7 +389,8 @@
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">ArrayList简介    ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这</div>
+                    <div class="summary">ArrayList简介
+ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用ensureCapacity操作来增加 ArrayList 实例的容量。这可以减</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-28
@@ -459,7 +471,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">114.5k</span>
+                <span class="white-color">123.9k</span>
             
 
             

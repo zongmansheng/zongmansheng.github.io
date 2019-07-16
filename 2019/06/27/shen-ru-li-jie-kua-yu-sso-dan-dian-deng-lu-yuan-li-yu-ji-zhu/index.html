@@ -1,0 +1,821 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="深入理解跨域SSO单点登录原理与技术, 晓笙的BLOG">
+    <meta name="description" content="深入理解跨域SSO单点登录原理与技术一：SSO体系结构SSO
+SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。它包括可以将这次主要的登录映射到其他应用中用于">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>深入理解跨域SSO单点登录原理与技术 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        深入理解跨域SSO单点登录原理与技术
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/SSO/" target="_blank">
+                                <span class="chip bg-color">SSO</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/单点登录/" class="post-category" target="_blank">
+                                单点登录
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-06-27
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        13 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="深入理解跨域SSO单点登录原理与技术"><a href="#深入理解跨域SSO单点登录原理与技术" class="headerlink" title="深入理解跨域SSO单点登录原理与技术"></a>深入理解跨域SSO单点登录原理与技术</h1><h3 id="一：SSO体系结构"><a href="#一：SSO体系结构" class="headerlink" title="一：SSO体系结构"></a>一：SSO体系结构</h3><h4 id="SSO"><a href="#SSO" class="headerlink" title="SSO"></a>SSO</h4><blockquote>
+<p>SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。它包括可以将这次主要的登录映射到其他应用中用于同一个用户的登录的机制。它是目前比较流行的企业业务整合的解决方案之一。</p>
+</blockquote>
+<h4 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h4><blockquote>
+<p>当用户第一次访问应用系统1的时候，因为还没有登录，会被引导到认证系统中进行登录；根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－token；用户再访问别的应用的时候就会将这个token带上，作为自己认证的凭据，应用系统接受到请求之后会把token送到认证系统进行校验，检查token的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了 。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/001.png" alt></p>
+<h4 id="Token（令牌）"><a href="#Token（令牌）" class="headerlink" title="Token（令牌）"></a>Token（令牌）</h4><blockquote>
+<p>token的意思是“令牌”，是服务端生成的一串字符串，作为客户端进行请求的一个标识。</p>
+<p>当用户第一次登录后，服务器生成一个token并将此token返回给客户端，客户端收到token后把它存储起来，可以放在cookie或者Local Storage（本地存储）里。 以后客户端只需带上这个token前来请求数据即可，无需再次带上用户名和密码。</p>
+<p>简单token的组成；uid(用户唯一的身份标识)、time(当前时间的时间戳)、sign（签名，token的前几位以哈希算法压缩成的一定长度的十六进制字符串。为防止token泄露）。</p>
+<p><strong>设计token的值可以有以下方式</strong></p>
+<ol>
+<li>用设备mac地址作为token</li>
+<li>用sessionid作为token</li>
+</ol>
+</blockquote>
+<h4 id="同域SSO原理分析"><a href="#同域SSO原理分析" class="headerlink" title="同域SSO原理分析"></a>同域SSO原理分析</h4><blockquote>
+<blockquote>
+<p>实际上，HTTP协议是无状态的，单个系统的会话由服务端Session进行维持，Session保持会话的原理是通过Cookie把sessionId写入浏览器，每次访问都会自动携带全部Cookie，在服务端读取其中的sessionId进行验证实现会话保持。同域下单点登录其实就是手写token代替sessionId进行会话认证。</p>
+</blockquote>
+<p><strong>token的生成</strong></p>
+<p>服务端生成token后，将token与user对象存储在Map结构中，token为Key，user对象为value，response.addCookie()生成新的Cookie，名为token，值为token的值。</p>
+<p><strong>token过期移除</strong></p>
+<p>将服务端的token从Map中移除，再删除浏览器端的名为token的Cookie。</p>
+</blockquote>
+<h5 id="认证流程"><a href="#认证流程" class="headerlink" title="认证流程"></a>认证流程</h5><p><img src="//zongmansheng.club/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/002.png" alt></p>
+<h4 id="跨域SSO原理分析"><a href="#跨域SSO原理分析" class="headerlink" title="跨域SSO原理分析"></a>跨域SSO原理分析</h4><blockquote>
+<p>当有多个系统时，认证机制的流程如下：</p>
+<ol>
+<li>提供用户登录界面，供用户进行身份认证</li>
+<li>用户验证通过后，生成新token</li>
+<li>将token<->user 对存入全局MAP中供校验</-></li>
+<li><strong>将token写入所有域的Cookie中</strong></li>
+<li>页面重定向回原始请求URL</li>
+</ol>
+<p><strong>分析</strong></p>
+<p>当系统有多个并且在不同域(domain)时，Cookie只会作用在当前域下。</p>
+<p>将token写入所有域的Cookie中才是解决跨域SSO的核心。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/003.png" alt></p>
+<h3 id="二：Cookie增删改查"><a href="#二：Cookie增删改查" class="headerlink" title="二：Cookie增删改查"></a>二：Cookie增删改查</h3><h4 id="如何读取Cookie？"><a href="#如何读取Cookie？" class="headerlink" title="如何读取Cookie？"></a>如何读取Cookie？</h4><blockquote>
+<p>通过Servlet中的request对象可以读取到Cookie数组，然后foreach遍历读取，一般只是获取到nam和value，其他信息写入到浏览器后，浏览器不主动再发回来，读取并无意义。</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">        Cookie<span class="token punctuation">[</span><span class="token punctuation">]</span> cookies <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cookies <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>Cookie cookie <span class="token operator">:</span> cookies<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>
+                        cookie<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+                        cookie<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+                        cookie<span class="token punctuation">.</span><span class="token function">getMaxAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+                        cookie<span class="token punctuation">.</span><span class="token function">getPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+                        cookie<span class="token punctuation">.</span><span class="token function">getDomain</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+                        cookie<span class="token punctuation">.</span><span class="token function">getSecure</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span>
+                        cookie<span class="token punctuation">.</span><span class="token function">isHttpOnly</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//客户端js是否可以获取</span>
+                <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<h4 id="如何写入Cookie带浏览器？"><a href="#如何写入Cookie带浏览器？" class="headerlink" title="如何写入Cookie带浏览器？"></a>如何写入Cookie带浏览器？</h4><blockquote>
+<p>新建Cookie对象设置一系列属性，然后添加到response中去。需要注意的是，当设置path为“/”时，表示所有路径都会被该Cookie作用到，如果设置为<code>/path1</code>那么由<code>/path2</code>发起请求就不会携带该Cookie。默认不设置只作用在当前路径下。</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">        Cookie cookie <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cookie</span><span class="token punctuation">(</span><span class="token string">"myCookieName"</span><span class="token punctuation">,</span><span class="token string">"myCookieValue"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cookie<span class="token punctuation">.</span><span class="token function">setHttpOnly</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//Javascript不能处理</span>
+        <span class="token comment" spellcheck="true">//一个正值表示cookie将在经过许多秒之后过期。注意，值是cookie过期的最大时间，而不是cookie当前的时间。</span>
+        <span class="token comment" spellcheck="true">//负值表示cookie没有持久存储，在Web浏览器退出时将被删除。零值会导致删除cookie。</span>
+        cookie<span class="token punctuation">.</span><span class="token function">setMaxAge</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cookie<span class="token punctuation">.</span><span class="token function">setSecure</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//如果为true，仅支持HTTPS协议</span>
+        <span class="token comment" spellcheck="true">//cookie对指定目录中的所有页面以及该目录子目录中的所有页面都可见。</span>
+        cookie<span class="token punctuation">.</span><span class="token function">setPath</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//cookie.setDomain("www.a.com");//默认情况下，cookie只返回给发送cookie的服务器。</span>
+        response<span class="token punctuation">.</span><span class="token function">addCookie</span><span class="token punctuation">(</span>cookie<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="修改Cookie"><a href="#修改Cookie" class="headerlink" title="修改Cookie"></a>修改Cookie</h4><blockquote>
+<p>修改更新Cookie时，除了要保证Cookie的name是相同的，也要保证Cookie的一系列属性是相同的，否则浏览器会生成新的Cookie。</p>
+</blockquote>
+<h4 id="删除Cookie"><a href="#删除Cookie" class="headerlink" title="删除Cookie"></a>删除Cookie</h4><blockquote>
+<p>只需要设置Cookie的MaxAge为负值，意味着是过去的Cookie，浏览器就会清除。</p>
+</blockquote>
+<h3 id="三：跨域读写Cookie"><a href="#三：跨域读写Cookie" class="headerlink" title="三：跨域读写Cookie"></a>三：跨域读写Cookie</h3><h4 id="1-利用HTML的script标签跨域写Cookie"><a href="#1-利用HTML的script标签跨域写Cookie" class="headerlink" title="1.利用HTML的script标签跨域写Cookie"></a>1.利用HTML的script标签跨域写Cookie</h4><blockquote>
+<p>比如当前域是<a href="http://www.a.com,下面的script标签是跨域写cookie的核心，通过此标签实现了向www.b.com域写入cookie：" target="_blank" rel="noopener">www.a.com,下面的script标签是跨域写cookie的核心，通过此标签实现了向www.b.com域写入cookie：</a></p>
+</blockquote>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.b.com/setCookie?cname<span class="token punctuation">=</span>token&amp;cval<span class="token punctuation">=</span>123456<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<h4 id="P3P协议"><a href="#P3P协议" class="headerlink" title="P3P协议"></a>P3P协议</h4><p>P3P是一种被称为个人隐私安全平台项目（the Platform for Privacy Preferences）的标准，能够保护在线隐私权，使Internet冲浪者可以选择在浏览网页时，是否被第三方收集并利用自己的个人信息。如果一个站点不遵守P3P标准的话，那么有关它的Cookies将被自动拒绝，并且P3P还能够自动识破多种Cookies的嵌入方式。p3p是由全球资讯联盟网所开发的。</p>
+<p><strong>举个例子：</strong></p>
+<p>我们在访问A网站时，理论上说，我们只能把Cookie信息保存到A站域名下，而不能写入到B网站下。如果想要跨域读写Cookie，只是通过script标签变相访问B网站在一些浏览器是行不通的，此时B网站的服务器应该告诉浏览器允许A网站写入Cookie，否则浏览器将会拒绝执行，这就是P3P协议。</p>
+<p><strong>服务端如何告诉浏览器？</strong></p>
+<p>P3P提供了一种简单的方式 ，来加载用户隐私策略，只要在http响应的头信息中增加 <code>response.setHeader(&quot;P3P&quot;,&quot;CP=NON DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAa IVDa CONa HISa TELa OTPa OUR UNRa IND UNI COM NAV INT DEM CNT PRE LOC);</code>而无需指定隐私策略文件也可以达到指定隐私策略的目的。 CP=后面的字符串分别代表不同的策略信息。</p>
+<p><strong>总结</strong></p>
+<p>因为P3P协议所以不能保证所有浏览器都能通过script标签方式跨域写Cookie，有的浏览器本身就是拒绝跨域的。</p>
+<p>显然这种方式是不能保证跨域写cookie的成功性。</p>
+</blockquote>
+<h4 id="2-通过URL参数实现跨域信息传递"><a href="#2-通过URL参数实现跨域信息传递" class="headerlink" title="2.通过URL参数实现跨域信息传递"></a>2.通过URL参数实现跨域信息传递</h4><blockquote>
+<p>我们要在A域实现写入token到B域，需要在A域设计一个servlet接收请求，代码：</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@WebServlet</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">"tg"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Servlet</span> <span class="token keyword">extends</span> <span class="token class-name">HttpServlet</span> <span class="token punctuation">{</span>
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doPost</span><span class="token punctuation">(</span>HttpServletRequest request<span class="token punctuation">,</span> HttpServletResponse response<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//获取请求的目标域</span>
+        String from <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"from"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//生成token，</span>
+        String token <span class="token operator">=</span> <span class="token string">"123456"</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//重定向到目标域</span>
+        response<span class="token punctuation">.</span><span class="token function">sendRedirect</span><span class="token punctuation">(</span>from <span class="token operator">+</span> <span class="token string">"?cname=token&amp;cval="</span> <span class="token operator">+</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+ <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>由a域发起请求，请求地址：<code>http://www.a.com/tg?from=http://www.b.com/set_cookie</code>, 请求后该Servlet会获取<code>from</code>参数的值并生成<code>token</code>最后让客户端重定向到<code>http://www.b.com/set_cookie?cname=token&amp;cval=123456</code>，然后B域的Servlet(“set_cookie”)获取Url参数写入Cookie到客户端，代码：</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//将要写入的cookie项，调用者通过参数传递</span>
+        String cookieName <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"cname"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        String cookieValue <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"cval"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//生成cookie</span>
+        Cookie cookie <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cookie</span><span class="token punctuation">(</span>cookieName<span class="token punctuation">,</span>cookieValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cookie<span class="token punctuation">.</span><span class="token function">setPath</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//一般可以将domain设置到顶级域</span>
+        <span class="token comment" spellcheck="true">//cookie.setDomain("www.b.com");</span>
+        response<span class="token punctuation">.</span><span class="token function">addCookie</span><span class="token punctuation">(</span>cookie<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>这时候再查看B域下的Cookie就可以发现(token=123456)已经被写入到浏览器。</p>
+</blockquote>
+<h4 id="3-读取其它域的Cookie"><a href="#3-读取其它域的Cookie" class="headerlink" title="3.读取其它域的Cookie"></a>3.读取其它域的Cookie</h4><blockquote>
+<p><strong>利用script标签</strong></p>
+<p>利用script标签执行另一个域实现的读取cookie方法，script标签返回结果将是变量定义形式的JS代码，每一个变量表示一个cookie项，这些代码加载后，此页面后续JS代码可以直接在script脚本中读取已定义的变量值，即各cookie值。</p>
+</blockquote>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.b.com/reaf_cookies<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<p>HTML页面读取</p>
+</blockquote>
+<pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+<span class="token function">alert</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<p><strong>B域的url为/read_cookies的Servlet是如何实现的？</strong></p>
+<p>如图，首先我们先在request中获取cookie数组，然后for循环遍历拼接为类似<code>var token=&#39;test123&#39;;</code>的字符串。最重要的是设置<code>ContentType</code>为<code>application/javascript</code>，代码如下：</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doGet</span><span class="token punctuation">(</span>HttpServletRequest request<span class="token punctuation">,</span> HttpServletResponse response<span class="token punctuation">)</span> <span class="token keyword">throws</span> ServletException<span class="token punctuation">,</span> IOException <span class="token punctuation">{</span>
+        Cookie<span class="token punctuation">[</span><span class="token punctuation">]</span> cookies <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getCookies</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        StringBuilder stringBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//一定要设置响应类型，否则可能导致IE不解析js直接进行下载操作</span>
+        response<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"application/javascript"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>cookies <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>Cookie cookie <span class="token operator">:</span> cookies<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//结果类似于这样 var token='123456';</span>
+                stringBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"var "</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>cookie<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>cookie<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">";"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            response<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>stringBuilder<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+</code></pre>
+<h3 id="四：跨域Ajax请求"><a href="#四：跨域Ajax请求" class="headerlink" title="四：跨域Ajax请求"></a>四：跨域Ajax请求</h3><h4 id="1-Jsonp的方式"><a href="#1-Jsonp的方式" class="headerlink" title="1.Jsonp的方式"></a>1.Jsonp的方式</h4><blockquote>
+<p>跨域Ajax请求在浏览器阶段就会被阻止，我们可以通过script标签返回想要的json数据。如图：</p>
+</blockquote>
+<pre class=" language-html"><code class="language-html"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>http://www.b.com/user_info_2<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<p>后台Servlet代码</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//要正确设置响应类型,避免IE出现下载</span>
+        response<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"application/javascript"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        String userInfo <span class="token operator">=</span> <span class="token string">"{\"id\":1,\"name\":\"zhangsan\"}"</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//返回拼接的javascript语句字符串，语句本身执行一个调用函数的操作</span>
+        String ret <span class="token operator">=</span> <span class="token string">"showResult("</span><span class="token operator">+</span>userInfo<span class="token operator">+</span><span class="token string">")"</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>在Servlet中设置返回类型为<code>javascript</code>，并正常获取json格式的数据，最关键的是在最后拼接为js语句字符串，语句本身就是执行一个调用函数的操作：</p>
+</blockquote>
+<pre><code>showResult({&quot;id&quot;:1,&quot;name&quot;:&quot;zhangsan&quot;})
+</code></pre><blockquote>
+<p>而<code>showResult(ret)</code>回调函数自然需要我们在之前就定义好：</p>
+</blockquote>
+<pre class=" language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+        <span class="token keyword">function</span> <span class="token function">showResult</span><span class="token punctuation">(</span>ret<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>ret<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<p><strong>优化</strong></p>
+<p>这种方式，前端的回调函数和后端耦合度较高。前端可以在调用后端方法时带上回调函数名（?callback=xxxxx），后端优化后的代码：</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">        <span class="token comment" spellcheck="true">//通过参数传递回调函数名，一定程度降低了前后端代码的耦合度</span>
+        String callback <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"callback"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//返回拼接的javascript语句字符串，语句本身执行一个调用函数的操作</span>
+        String ret <span class="token operator">=</span> callback<span class="token operator">+</span><span class="token string">"("</span><span class="token operator">+</span>userInfo<span class="token operator">+</span><span class="token string">")"</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p><strong>再优化</strong></p>
+<p>HTML页面加载到我们定义的script标签时就会执行我们的回调方法，更多时候我们想要控制回调方法的执行时机。这个问题可以通过前端动态生成节点来解决，当我们执行完之后再移除节点即可：</p>
+</blockquote>
+<pre class=" language-html"><code class="language-html">    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">></span></span><span class="token script language-javascript">
+        <span class="token keyword">var</span> script <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">"script"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        script<span class="token punctuation">.</span>src <span class="token operator">=</span> <span class="token string">"http://www.b.com/user_info_2?callback=showResult"</span><span class="token punctuation">;</span>
+        document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        script<span class="token punctuation">.</span>onload <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">removeChild</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+</code></pre>
+<blockquote>
+<p><strong>JQuery</strong></p>
+<p>我们可以把这些封装到一个方法里，随时调用。这里可以使用Jquery封装好的API。</p>
+</blockquote>
+<pre class=" language-js"><code class="language-js">                $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                    url<span class="token punctuation">:</span> <span class="token string">"http://localhost:9090/query"</span><span class="token punctuation">,</span>
+                    type<span class="token punctuation">:</span> <span class="token string">"GET"</span><span class="token punctuation">,</span>
+                    dataType<span class="token punctuation">:</span> <span class="token string">"jsonp"</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">//指定服务器返回的数据类型</span>
+                    jsonpCallback<span class="token punctuation">:</span> <span class="token string">"showData"</span><span class="token punctuation">,</span>  <span class="token comment" spellcheck="true">//指定回调函数名称</span>
+                    success<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"调用success"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">function</span> <span class="token function">showData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    <span class="token keyword">var</span> result <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+</code></pre>
+<h4 id="2-CORS简介"><a href="#2-CORS简介" class="headerlink" title="2.CORS简介"></a>2.CORS简介</h4><blockquote>
+<p>出于安全原因，浏览器限制从脚本内发起的跨源HTTP请求。 例如，XMLHttpRequest和Fetch API遵循同源策略。 这意味着使用这些API的Web应用程序只能从加载应用程序的同一个域请求HTTP资源，除非使用CORS头文件。</p>
+<p>跨域资源共享（ <a href="https://developer.mozilla.org/en-US/docs/Glossary/CORS" target="_blank" rel="noopener">CORS</a> ）机制允许 Web 应用服务器进行跨域访问控制，从而使跨域数据传输得以安全进行。浏览器支持在 API 容器中（例如 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest" target="_blank" rel="noopener"><code>XMLHttpRequest</code></a> 或 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener">Fetch</a> ）使用 CORS，以降低跨域 HTTP 请求所带来的风险。</p>
+<p><strong>GET跨域请求原理</strong></p>
+<p>当客户端浏览器发起一个跨域的HTTP请求，浏览器经过请求响应，如果没有看到<code>Access-Control-Allow-Origin</code>的header头部，会认为你的请求是不合法的。换句话说，我们只要在被请求的服务器上设置这个头部，浏览器就会允许我们进行请求。</p>
+<p><strong>解决方法</strong></p>
+<p>对于简单的请求，我们直接在服务端 设置就可以了。如图，只要请求的地址是<code>www.a.com</code>就会被浏览器允许跨域。如果想要允许对于多个来源可以用<code>,</code>号进行隔开；如果想要允许所有来源，设置为<code>*</code>就可以，不过建议不要使用，这样会造成安全隐患。</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doGet</span><span class="token punctuation">(</span>HttpServletRequest request<span class="token punctuation">,</span> HttpServletResponse response<span class="token punctuation">)</span> <span class="token keyword">throws</span> ServletException<span class="token punctuation">,</span> IOException <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//简单请求，直接设置Access-Control-Allow-Origin就可以了</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Origin"</span><span class="token punctuation">,</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//要正确设置响应类型,避免IE出现下载</span>
+        response<span class="token punctuation">.</span><span class="token function">setContentType</span><span class="token punctuation">(</span><span class="token string">"application/json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        response<span class="token punctuation">.</span><span class="token function">getWriter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"{\"id\":1,\"name\":\"zhangsan\"}"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>对于复杂的请求，比如POST，或者加入了自定义header头部，上面的方法就不适用了。下面继续看。</p>
+</blockquote>
+<h4 id="CORS流程"><a href="#CORS流程" class="headerlink" title="CORS流程"></a>CORS流程</h4><blockquote>
+<p>请求发起时,浏览器先判断当前是否是跨域的AJAX;</p>
+<p>如果是,判断是否是普通类型请求(GET类型,无自定义头数据);</p>
+<p>普通请求,直接发起GET到服务端,在响应头中寻找 Access-Contro-Alow- Origin,如果有且允许,处理响应结果;</p>
+<p>不是普通请求(非GET类型,或有自定义头), 先 PreFlight(即发起一个 method= OPTIONS)的请求,</p>
+<p>要求返回 Access-Control-Allow- Methods和 Access-Control-Allow- Headers, 内容体为空</p>
+<p>PreFlight正确执行后, 再发起GET请求, 获得响应结果, 并处理结果.</p>
+<p><strong>实现</strong></p>
+<p>归根到我们的代码中的实现，只需要在servlet中定义options请求的处理方法即可。如图</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">doOptions</span><span class="token punctuation">(</span>HttpServletRequest req<span class="token punctuation">,</span> HttpServletResponse response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Origin"</span><span class="token punctuation">,</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Methods"</span><span class="token punctuation">,</span><span class="token string">"GET,POST,OPTIONS,DELETE"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        response<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Headers"</span><span class="token punctuation">,</span><span class="token string">"reqid,xxx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>注意：<code>Access-Control-Allow-Origin</code>是必需的。</p>
+</blockquote>
+<h4 id="3-两种跨域AJax请求对比"><a href="#3-两种跨域AJax请求对比" class="headerlink" title="3.两种跨域AJax请求对比"></a>3.两种跨域AJax请求对比</h4><blockquote>
+<p><strong>兼容性</strong></p>
+<p>Jsonp对所有浏览器兼容，CORS对现代浏览器兼容（IE8之后）。</p>
+<p><strong>请求方式</strong></p>
+<p>Jsonp只支持GET方式，CORS支持GET，POST等。</p>
+<p><strong>调用方式</strong></p>
+<p>Jsonp需要服务端封装返回信息，CORS更像原生AJax一样使用。</p>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/" class="b-link-green">深入理解跨域SSO单点登录原理与技术</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="平衡二叉树、B树、B+树，B*树的区别">
+                        
+                        <span class="card-title">平衡二叉树、B树、B+树，B*树的区别</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">平衡二叉树、B树、B+树，B*树的区别平衡二叉树
+定义：基于二分法的策略提高数据的查找速度**的一种二叉树数据结构；
+特点：平衡二叉树是采用二分法思想把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/日常学习/" class="post-category" target="_blank">
+                                    日常学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/平衡二叉树-B树-B-树/" target="_blank">
+                        <span class="chip bg-color">平衡二叉树 B树 B+树</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/06/26/cas-dan-dian-deng-lu-yuan-li-jie-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="CAS单点登录原理解析">
+                        
+                        <span class="card-title">CAS单点登录原理解析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">CAS单点登录原理解析1、基于Cookie的单点登录的回顾
+
+基于Cookie的单点登录核心原理：
+​      将用户名密码加密之后存于Cookie中，之后访问网站时在过滤器（filter）中校验用户权限，如果没有权限则从Cookie中取</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/单点登录/" class="post-category" target="_blank">
+                                    单点登录
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CAS/" target="_blank">
+                        <span class="chip bg-color">CAS</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">123.9k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
