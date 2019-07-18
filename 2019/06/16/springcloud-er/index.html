@@ -262,7 +262,7 @@ Spring Cloud 封装了 Netflix 公司开发">
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-15
+                    2019-06-16
                 </div>
 
                 
@@ -298,7 +298,7 @@ Spring Cloud 封装了 Netflix 公司开发">
 <p>Eureka由两个组件组成：Eureka server和Eureka client。Eureka server用作服务注册服务器。Eureka client是一个java客户端，用来简化与服务器的交互、作为轮询负载均衡器，并提供服务的故障切换支持。Netflix在其生产环境中使用的是另外的客户端，它提供基于流量、资源利用率以及出错状态的加权负载均衡。</p>
 <p>最简单的微服务架构图：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/15/springcloud-er/001.png" alt></p>
+<p><img src="//zongmansheng.club/2019/06/16/springcloud-er/001.png" alt></p>
 <blockquote>
 <p>Eureka Server(注册中心):提供服务注册和发现</p>
 <p>Service Provider(服务提供方):将自身服务注册到Eureka中心，从而使服务消费方能够找到</p>
@@ -307,7 +307,7 @@ Spring Cloud 封装了 Netflix 公司开发">
 <blockquote>
 <p>为了给大家演示完整的SpringCloud，我们把我们当前的工程构建为SpringBoot聚合工程，我这里的聚合工程取名为SpringCloud</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/15/springcloud-er/002.png" alt></p>
+<p><img src="//zongmansheng.club/2019/06/16/springcloud-er/002.png" alt></p>
 <pre><code>EurekaApplication.java
 </code></pre><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>springcloud<span class="token punctuation">.</span>eureka<span class="token punctuation">;</span>
 
@@ -332,7 +332,7 @@ Spring Cloud 封装了 Netflix 公司开发">
 <p>启动SpringBoot Application</p>
 <p>访问 localhost:8090</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/15/springcloud-er/003.png" alt></p>
+<p><img src="//zongmansheng.club/2019/06/16/springcloud-er/003.png" alt></p>
 <h4 id="eureka集群使用"><a href="#eureka集群使用" class="headerlink" title="eureka集群使用"></a>eureka集群使用</h4><blockquote>
 <p>在一个分布式系统中，服务注册中心是最重要的基础部分，理应随时处于可以提供服务的状态。如果是单点部署，如果注册中心出现故障，将会出现毁灭性的灾难。为了维持其可用性，使用集群是很好的解决方案。Eureka通过互相注册的方式来实现高可用的部署，所以我们只需要将Eureke Server配置其他可用的serviceUrl就能实现高可用部署。</p>
 <p>新建集群配置profiles：application-peer1.yml/application-peer2.yml/application-peer3.yml</p>
@@ -388,7 +388,7 @@ eureka:
 <p>　　1、fetch-registry：表示是否从eureka server获取注册信息，如果是单一节点，不需要同步其他eureka server节点，则可以设置为false，但此处为集群，应该设置为true，默认为true，可不设置。</p>
 <p>　　2、register-with-eureka：表示是否将自己注册到eureka server，因为要构建集群环境，需要将自己注册到及群众，所以应该开启。默认为true，可不显式设置。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/15/springcloud-er/006.png" alt></p>
+<p><img src="//zongmansheng.club/2019/06/16/springcloud-er/006.png" alt></p>
 <blockquote>
 <p>运行：</p>
 </blockquote>
@@ -401,7 +401,7 @@ java <span class="token operator">-</span>jar eureka <span class="token number">
 <blockquote>
 <p>访问localhost:8090</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/15/springcloud-er/005.png" alt></p>
+<p><img src="//zongmansheng.club/2019/06/16/springcloud-er/005.png" alt></p>
 
             </div>
             <hr>
@@ -425,7 +425,7 @@ java <span class="token operator">-</span>jar eureka <span class="token number">
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/15/springcloud-er/" class="b-link-green">SpringCloud（二）</a>
+                    <a href="/2019/06/16/springcloud-er/" class="b-link-green">SpringCloud（二）</a>
                 </p>
             </div>
         </div>
@@ -450,7 +450,7 @@ java <span class="token operator">-</span>jar eureka <span class="token number">
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/07/15/springcloud-san/">
+                <a href="/2019/06/17/springcloud-san/">
                     <div class="card-image">
                         
                         
@@ -460,18 +460,38 @@ java <span class="token operator">-</span>jar eureka <span class="token number">
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary"></div>
+                    <div class="summary">Eureka Producer（服务提供者）新建moudel(service-producer)Pom.xml
+修改pom依赖
+
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;project x</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-15
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-17
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            ZongMan
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/springcloud/" class="post-category" target="_blank">
+                                    springcloud
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Eureka/" target="_blank">
+                        <span class="chip bg-color">Eureka</span>
+                    </a>
+                    
+                    <a href="/tags/Producer/" target="_blank">
+                        <span class="chip bg-color">Producer</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -483,34 +503,30 @@ java <span class="token operator">-</span>jar eureka <span class="token number">
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/15/jsonweb-ling-pai/">
+                <a href="/2019/06/15/springcloud-yi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="JSONWeb令牌">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="springcloud（一）">
                         
-                        <span class="card-title">JSONWeb令牌</span>
+                        <span class="card-title">springcloud（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">JSON Web令牌（JWT）
+                    <div class="summary">SpringCloud（一）
 
-JSON Web Token（JWT）是目前最流行的跨域身份验证解决方案。
-
-1.跨域身份验证
-Internet服务无法与用户身份验证分开。一般过程如下。
-1.用户向服务器发送用户名和密码。
-2.验证服务器</div>
+开发web程序的最早期时间，最被广泛使用的企业程序架构是将程序的服务器端组件打包为单个单元。例如很多企业将Java应用程序打包为单个WAR完整运行。单体架构在很多小型的Web服务中很常见，因为其优点很明显：
+</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-15
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/日常学习/" class="post-category" target="_blank">
-                                    日常学习
+                            <a href="/categories/springcloud/" class="post-category" target="_blank">
+                                    springcloud
                                 </a>
                             
                             
@@ -520,12 +536,8 @@ Internet服务无法与用户身份验证分开。一般过程如下。
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JSON-WEB/" target="_blank">
-                        <span class="chip bg-color">JSON WEB</span>
-                    </a>
-                    
-                    <a href="/tags/JWT/" target="_blank">
-                        <span class="chip bg-color">JWT</span>
+                    <a href="/tags/springcloud/" target="_blank">
+                        <span class="chip bg-color">springcloud</span>
                     </a>
                     
                 </div>
@@ -552,7 +564,7 @@ Internet服务无法与用户身份验证分开。一般过程如下。
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">123.9k</span>
+                <span class="white-color">127.6k</span>
             
 
             

@@ -261,7 +261,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-06-27
+                    2019-06-24
                 </div>
 
                 
@@ -297,7 +297,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
 <h4 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h4><blockquote>
 <p>当用户第一次访问应用系统1的时候，因为还没有登录，会被引导到认证系统中进行登录；根据用户提供的登录信息，认证系统进行身份校验，如果通过校验，应该返回给用户一个认证的凭据－－token；用户再访问别的应用的时候就会将这个token带上，作为自己认证的凭据，应用系统接受到请求之后会把token送到认证系统进行校验，检查token的合法性。如果通过校验，用户就可以在不用再次登录的情况下访问应用系统2和应用系统3了 。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/001.png" alt></p>
+<p><img src="//zongmansheng.club/2019/06/24/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/001.png" alt></p>
 <h4 id="Token（令牌）"><a href="#Token（令牌）" class="headerlink" title="Token（令牌）"></a>Token（令牌）</h4><blockquote>
 <p>token的意思是“令牌”，是服务端生成的一串字符串，作为客户端进行请求的一个标识。</p>
 <p>当用户第一次登录后，服务器生成一个token并将此token返回给客户端，客户端收到token后把它存储起来，可以放在cookie或者Local Storage（本地存储）里。 以后客户端只需带上这个token前来请求数据即可，无需再次带上用户名和密码。</p>
@@ -317,7 +317,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
 <p><strong>token过期移除</strong></p>
 <p>将服务端的token从Map中移除，再删除浏览器端的名为token的Cookie。</p>
 </blockquote>
-<h5 id="认证流程"><a href="#认证流程" class="headerlink" title="认证流程"></a>认证流程</h5><p><img src="//zongmansheng.club/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/002.png" alt></p>
+<h5 id="认证流程"><a href="#认证流程" class="headerlink" title="认证流程"></a>认证流程</h5><p><img src="//zongmansheng.club/2019/06/24/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/002.png" alt></p>
 <h4 id="跨域SSO原理分析"><a href="#跨域SSO原理分析" class="headerlink" title="跨域SSO原理分析"></a>跨域SSO原理分析</h4><blockquote>
 <p>当有多个系统时，认证机制的流程如下：</p>
 <ol>
@@ -331,7 +331,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
 <p>当系统有多个并且在不同域(domain)时，Cookie只会作用在当前域下。</p>
 <p>将token写入所有域的Cookie中才是解决跨域SSO的核心。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/003.png" alt></p>
+<p><img src="//zongmansheng.club/2019/06/24/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/003.png" alt></p>
 <h3 id="二：Cookie增删改查"><a href="#二：Cookie增删改查" class="headerlink" title="二：Cookie增删改查"></a>二：Cookie增删改查</h3><h4 id="如何读取Cookie？"><a href="#如何读取Cookie？" class="headerlink" title="如何读取Cookie？"></a>如何读取Cookie？</h4><blockquote>
 <p>通过Servlet中的request对象可以读取到Cookie数组，然后foreach遍历读取，一般只是获取到nam和value，其他信息写入到浏览器后，浏览器不主动再发回来，读取并无意义。</p>
 </blockquote>
@@ -596,7 +596,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/06/27/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/" class="b-link-green">深入理解跨域SSO单点登录原理与技术</a>
+                    <a href="/2019/06/24/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/" class="b-link-green">深入理解跨域SSO单点登录原理与技术</a>
                 </p>
             </div>
         </div>
@@ -621,23 +621,79 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/">
+                <a href="/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="平衡二叉树、B树、B+树，B*树的区别">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Mac下安装Dubbo和Zookeeper">
                         
-                        <span class="card-title">平衡二叉树、B树、B+树，B*树的区别</span>
+                        <span class="card-title">Mac下安装Dubbo和Zookeeper</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">平衡二叉树、B树、B+树，B*树的区别平衡二叉树
-定义：基于二分法的策略提高数据的查找速度**的一种二叉树数据结构；
-特点：平衡二叉树是采用二分法思想把数据按规则组装成一个树形结构的数据，用这个树形结构的数据减少无关数据的检索，大大的提升了</div>
+                    <div class="summary">Mac下安装Dubbo和Zookeeper一、Zookeeper
+zookeeper支持brew安装,检查安装环境
+
+brew info zookeeper
+
+brew install zookeeper
+
+
+安装后zookeeper配置文</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-27
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-24
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/中间件/" class="post-category" target="_blank">
+                                    中间件
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/dobbo，zookeeper/" target="_blank">
+                        <span class="chip bg-color">dobbo，zookeeper</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/06/20/jvm-de-la-ji-hui-shou-ji-zhi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="JVM的垃圾回收机制">
+                        
+                        <span class="card-title">JVM的垃圾回收机制</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">JVM的垃圾回收机制一、 技术背景
+说起垃圾回收（GC），大部分人都把这项技术当做Java语言的伴生产物。
+事实上，GC的历史比Java久远，早在1960年Lisp这门语言中就使用了内存动态分配和垃圾回收技术。
+
+二、 哪些内存需要回收？
+</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -653,56 +709,12 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/平衡二叉树-B树-B-树/" target="_blank">
-                        <span class="chip bg-color">平衡二叉树 B树 B+树</span>
+                    <a href="/tags/JVM/" target="_blank">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2019/06/26/cas-dan-dian-deng-lu-yuan-li-jie-xi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="CAS单点登录原理解析">
-                        
-                        <span class="card-title">CAS单点登录原理解析</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary">CAS单点登录原理解析1、基于Cookie的单点登录的回顾
-
-基于Cookie的单点登录核心原理：
-​      将用户名密码加密之后存于Cookie中，之后访问网站时在过滤器（filter）中校验用户权限，如果没有权限则从Cookie中取</div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-26
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/单点登录/" class="post-category" target="_blank">
-                                    单点登录
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/CAS/" target="_blank">
-                        <span class="chip bg-color">CAS</span>
+                    <a href="/tags/回收机制/" target="_blank">
+                        <span class="chip bg-color">回收机制</span>
                     </a>
                     
                 </div>
@@ -729,7 +741,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">123.9k</span>
+                <span class="white-color">127.6k</span>
             
 
             
