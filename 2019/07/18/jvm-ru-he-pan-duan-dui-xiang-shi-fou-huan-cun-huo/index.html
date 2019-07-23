@@ -1,0 +1,641 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="JVM如何判断对象是否还存活, 晓笙的BLOG">
+    <meta name="description" content="JVM如何判断对象是否还存活
+在java堆中存活着几乎所有的对象实例，垃圾收集器在回收之前需要判断哪些对象还存活着，哪些对象已经死去。
+
+一、引用计数法
+引用计算法的算法大致如下：给对象添加一个引用计数器，每当有地方引用它时，计数器就加1；">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>JVM如何判断对象是否还存活 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        JVM如何判断对象是否还存活
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/JVM/" target="_blank">
+                                <span class="chip bg-color">JVM</span>
+                            </a>
+                        
+                            <a href="/tags/回收机制/" target="_blank">
+                                <span class="chip bg-color">回收机制</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/虚拟机/" class="post-category" target="_blank">
+                                虚拟机
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-18
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        7 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="JVM如何判断对象是否还存活"><a href="#JVM如何判断对象是否还存活" class="headerlink" title="JVM如何判断对象是否还存活"></a>JVM如何判断对象是否还存活</h1><blockquote>
+<p>在java堆中存活着几乎所有的对象实例，垃圾收集器在回收之前需要判断哪些对象还存活着，哪些对象已经死去。</p>
+</blockquote>
+<h3 id="一、引用计数法"><a href="#一、引用计数法" class="headerlink" title="一、引用计数法"></a>一、引用计数法</h3><blockquote>
+<p>引用计算法的算法大致如下：给对象添加一个引用计数器，每当有地方引用它时，计数器就加1；当引用失效时，计数器就减1；当计数器为0时就表示该对象已经死去。</p>
+<p>客观的说，引用计数法的实现简单，判定效率也很高，在大多数情况下是一种不错的算法，也有很多经典的应用案例，比如微软公司的COM（Component Object Model）技术、使用ActionScript 3的FlashPlayer、Python语言和在游戏脚本领域广泛应用的Squirrel中都使用了引用计数算法进行了内存管理。<strong>但在主流的java虚拟机中没有选用引用计数法来管理内存，主要是因为它很难解决对象之间相互循环引用的问题</strong>。</p>
+<p>现在我们就通过对象循环引用的例子来测试java虚拟机是否会回收？</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>jvm<span class="token punctuation">.</span>demo<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/**
+ * @Author: ZongMan
+ * @Date: 2019-07-18
+ * @Time: 21:42
+ * @Vsersion: 1.0
+ * 测试java虚拟机会否用引用计数法进行垃圾回收
+ **/</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ReferenceCountTest</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> Object instance <span class="token operator">=</span> null<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> oneMB<span class="token operator">=</span><span class="token number">1024</span><span class="token operator">*</span><span class="token number">1024</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bigSize <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token operator">*</span>oneMB<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 该成员属性用来占点内存，方便gc日志中观察内存回收过程
+     * @param args
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        ReferenceCountTest a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReferenceCountTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ReferenceCountTest b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ReferenceCountTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        a<span class="token punctuation">.</span>instance <span class="token operator">=</span> b<span class="token punctuation">;</span>
+
+        b<span class="token punctuation">.</span>instance <span class="token operator">=</span> a<span class="token punctuation">;</span>
+
+        a <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        b <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//当发生gc时，对象a和对象b能否被回收？</span>
+        System<span class="token punctuation">.</span><span class="token function">gc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="二、可达性分析算法"><a href="#二、可达性分析算法" class="headerlink" title="二、可达性分析算法"></a>二、可达性分析算法</h3><blockquote>
+<p>在主流的商用语言中（例如Java、C#）的主流实现中，都是通过可达性分析（Reachability Analysis）来判定对象是否存活的。这个算法的思路就是：</p>
+<p>通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时（也就是从GC Roots到这个对象不可达时 ），则说明此对象是不可用的。如下图所示，虽然Object5、Object6、Object7之间是相互关联的，但它们与GC Roots是断开的，所以它们被判定为可回收的对象。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/18/jvm-ru-he-pan-duan-dui-xiang-shi-fou-huan-cun-huo/001.png" alt></p>
+<blockquote>
+<p>在java中，可作为GC Roots的对象有以下几种：</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
+<li>方法区中类静态属性引用的对象。</li>
+<li>方法区中常量引用的对象。</li>
+<li>本地方法栈中JNI（即一般说的Native方法）引用的对象。</li>
+</ul>
+</blockquote>
+<h3 id="三、四种引用类型"><a href="#三、四种引用类型" class="headerlink" title="三、四种引用类型"></a>三、四种引用类型</h3><blockquote>
+<p>在JDK1.2之后，Java对引用的概念进行了扩充，将引用分为强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Reference）、虚引用（Phantom Reference）四种，这四种引用强度依次逐渐减弱。以下是它们的定义：</p>
+<ul>
+<li><strong>强引用</strong>就是指在程序代码中普遍存在的，类型“Object object = new Object()”这类的引用，垃圾回收器永远不会回收这类被引用的对象。</li>
+<li><strong>软引用</strong>用来描述一些还有用但并非必须的对象。对于软引用关联的对象，在系统将要发生内存溢出之前，将会将这些对象列进回收范围进行第二次回收。若这次回收后还没有足够的内存，才会抛出内存溢出异常，在JDK1.2后，提供了SoftReference类来实现软引用。</li>
+<li><strong>弱引用</strong>也用来描述非必须对象，但它的强度比软引用更弱些，被弱引用关联的对象只能生存到下一次垃圾回收之前。无论当前内存是否足够，垃圾回收都会回收掉被弱引用的对象。JDK1.2后，专门用WeakReference类来实现弱引用。</li>
+<li><strong>虚引用</strong>也称为幽灵引用或者幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设立虚引用的目的就是在这个对象被垃圾回收前收到一条系统通知。JDK1.2后，提供了PhantomRerence类来实现虚引用。</li>
+</ul>
+</blockquote>
+<h3 id="四、对象生存或死亡"><a href="#四、对象生存或死亡" class="headerlink" title="四、对象生存或死亡"></a>四、对象生存或死亡</h3><blockquote>
+<p>在可达性分析算法中不可达的对象，并非一定会垃圾回收的，这时候它们暂时处于“缓刑“阶段，要真正宣告一个对象的死亡，至少要经历两次标记过程：</p>
+<ol>
+<li><strong>如果对象在进行可达性分析时发现没有与GC Roots相连接的引用链，那它将会被第一次标记并且进行一次筛选</strong>，筛选的条件是此对象是否有必要执行finalize()方法。当对象没有覆盖finalize()方法，或者finalize()方法已经被虚拟机调用过，虚拟机将这两种情况都视为“没有必要执行”。</li>
+<li><strong>如果这个对象被判定为有必要执行finalize()方法，那么这个对象将被放置在一个叫做F-Queue的队列之中，并在稍后由虚拟机自动建立的、低优先级的Finalizer线程去执行它</strong>。这里所谓的执行是指虚拟机会触发这个方法，但它不会承诺会等待它运行结束。这样做的原因是，如果对象在finalize()方法中运行缓慢，或者发生了死循环或更糟糕的情况，这将可能导致F-Queue队列中其他对象永久处于等待，甚至整个内存回收系统崩溃。finalize方法是对象逃脱被回收的最后一次机会，稍后GC将对F-Queue队列中的对象进行第二次小规模的标记，如果对象要在finalize中成功拯救自己——只要重新与GC Roots重新建立关联即可，这样在第二次标记时它将被移出“即将回收”集合，否则将会被回收。</li>
+</ol>
+</blockquote>
+<h3 id="五、回收方法区"><a href="#五、回收方法区" class="headerlink" title="五、回收方法区"></a>五、回收方法区</h3><blockquote>
+<p>在堆中，尤其在新生代中，常规进行一次垃圾回收一般可以回收70%~95%的空间，而方法区（或者HotSpot虚拟机中的永久代）的垃圾回收效率远低于此。</p>
+<p>方法区的垃圾回收主要回收两部分内容：<strong>废弃常量和无用的类</strong>。</p>
+<p>判断一个常量是否为废弃常量的条件比较简单，以常量池中字面量的回收为例，假如一个字符串“a”已经进入了常量池中，但当前系统没有任何一个String对象是叫做“a”的，也就是说没有任何String对象引用长常量池中的“a”变量，也没有其他地方引用了这个字面量，那么垃圾回收时，这个“a”常量就会被系统清理出常量池。常量池中的其他类（接口）、方法、字段的符号引用也与此类似。</p>
+<p>判断一个类是否是无用的类条件就苛刻些，需要满足以下三个条件才可以被回收，而不是像对象一样不使用了，必然被回收，是否被类进行回收，Hotspot虚拟机提供了相关参数进行控制：</p>
+<ul>
+<li>该类的所有实例都已经被回收。</li>
+<li>加载该类的ClassLoader已经被回收</li>
+<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ul>
+<p>在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGI这类频繁自定义ClassLoader的场景都需要虚拟机具备类卸载的功能，以保证方法区（永久代）不溢出。</p>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/07/18/jvm-ru-he-pan-duan-dui-xiang-shi-fou-huan-cun-huo/" class="b-link-green">JVM如何判断对象是否还存活</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/22/springboot-er/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="SpringBoot（二）">
+                        
+                        <span class="card-title">SpringBoot（二）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Springboot整合JPA一、JPA是什么
+JPA(java persistence api)，它并不是一个框架，而是一组规范。我觉得对于任何一个开发人员来说，理解“规范”这个词应该不在话下。其中，Hibernate就实现了这个规范，而</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
+                                    SpringBoot
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Springboot2-0/" target="_blank">
+                        <span class="chip bg-color">Springboot2.0</span>
+                    </a>
+                    
+                    <a href="/tags/JPA/" target="_blank">
+                        <span class="chip bg-color">JPA</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/18/fu-zai-jun-heng/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="负载均衡">
+                        
+                        <span class="card-title">负载均衡</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">负载神器 LVS、Nginx及HAProxy工作原理
+​        当前大多数的互联网系统都使用了服务器集群技术，集群是将相同服务部署在多台服务器上构成一个集群整体对外提供服务，这些集群可以是 Web 应用服务器集群，也可以是数据库服务</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/集群/" class="post-category" target="_blank">
+                                    集群
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/LVS/" target="_blank">
+                        <span class="chip bg-color">LVS</span>
+                    </a>
+                    
+                    <a href="/tags/Nginx/" target="_blank">
+                        <span class="chip bg-color">Nginx</span>
+                    </a>
+                    
+                    <a href="/tags/HAProxy/" target="_blank">
+                        <span class="chip bg-color">HAProxy</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">133.4k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

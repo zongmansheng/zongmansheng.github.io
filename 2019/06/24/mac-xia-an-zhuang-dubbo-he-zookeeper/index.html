@@ -275,14 +275,14 @@ brew install zookeeper
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        483
+                        770
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -309,7 +309,7 @@ brew install zookeeper
 <p>安装后zookeeper配置文件位置：</p>
 </blockquote>
 <pre><code>/usr/local/etc/zookeeper
-</code></pre><h4 id="2-、配置文件zookeeper详解"><a href="#2-、配置文件zookeeper详解" class="headerlink" title="2 、配置文件zookeeper详解"></a>2 、配置文件zookeeper详解</h4><h5 id="3、参数详解："><a href="#3、参数详解：" class="headerlink" title="3、参数详解："></a>3、参数详解：</h5><blockquote>
+</code></pre><h4 id="二-、配置文件zookeeper详解"><a href="#二-、配置文件zookeeper详解" class="headerlink" title="二 、配置文件zookeeper详解"></a>二 、配置文件zookeeper详解</h4><h5 id="1、参数详解："><a href="#1、参数详解：" class="headerlink" title="1、参数详解："></a>1、参数详解：</h5><blockquote>
 <p>tickTime：ZK中的一个时间单元。ZK中所有时间都是以这个时间单元为基础，进行整数倍配置的。例如，session的最小超时时间是2*tickTime。</p>
 <p>initLimit：Follower在启动过程中，会从Leader同步所有最新数据，然后确定自己能够对外服务的起始状态。Leader允许F在initLimit时间内完成这个工作。通常情况下，我们不用太在意这个参数的设置。如果ZK集群的数据量确实很大了，F在启动的时候，从Leader上同步数据的时间也会相应变长，因此在这种情况下，有必要适当调大这个参数了。(No Java system property)</p>
 <p>syncLimit：在运行过程中，Leader负责与ZK集群中所有机器进行通信，例如通过一些心跳检测机制，来检测机器的存活状态。如果L发出心跳包在syncLimit之后，还没有从F那里收到响应，那么就认为这个F已经不在线了。注意：不要把这个参数设置得过大，否则可能会掩盖一些问题。(No Java system property)</p>
@@ -319,6 +319,62 @@ brew install zookeeper
 <blockquote>
 <p>server.x=[hostname]:nnnnn[:nnnnn]：这里的x是一个数字，与myid文件中的id是一致的。右边可以配置两个端口，第一个端口用于F和L之间的数据同步和其它通信，第二个端口用于Leader选举过程中投票通信。</p>
 </blockquote>
+<h5 id="2-配置启动"><a href="#2-配置启动" class="headerlink" title="2.配置启动"></a>2.配置启动</h5><blockquote>
+<p>安装后，在<code>/usr/local/etc/zookeeper/</code>目录下，已经有了缺省的<code>配置文件</code>。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/003.png" alt></p>
+<blockquote>
+<p>打开配置文件</p>
+</blockquote>
+<pre class=" language-cfg"><code class="language-cfg"># The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/usr/local/var/run/zookeeper/data
+# the port at which the clients will connect
+clientPort=2181
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+</code></pre>
+<blockquote>
+<p>主要配置</p>
+</blockquote>
+<pre><code>tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/usr/local/var/run/zookeeper/data
+clientPort=2181
+</code></pre><blockquote>
+<p>启动zk</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/004.png" alt></p>
+<h5 id="连接ZooKeeper服务器"><a href="#连接ZooKeeper服务器" class="headerlink" title="连接ZooKeeper服务器"></a>连接ZooKeeper服务器</h5><blockquote>
+<p>ZooKeeper命令行界面（CLI）用于与ZooKeeper集合进行交互以进行开发。它有助于调试和解决不同的选项。使用如下命令：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/005.png" alt></p>
+<blockquote>
+<p>一旦客户端启动，就可以使用命令与zookeeper服务器进行交互了。<br>最后使用 <code>Ctrl + c</code> 即可退出zkCli。</p>
+</blockquote>
+<h5 id="停止zookeeper服务器"><a href="#停止zookeeper服务器" class="headerlink" title="停止zookeeper服务器"></a>停止zookeeper服务器</h5><p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/006.png" alt></p>
 
             </div>
             <hr>
@@ -474,7 +530,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">127.6k</span>
+                <span class="white-color">133.4k</span>
             
 
             
