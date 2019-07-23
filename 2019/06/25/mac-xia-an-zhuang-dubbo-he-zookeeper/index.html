@@ -4,10 +4,16 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="在Mac上使用Markdown, 晓笙的BLOG">
-    <meta name="description" content="在Mac上使用Markdown导语
-MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通过简单的标记语法，它可以使普通文本具有一定的格式
-​        最近入手一台macbook  pro，已经把这个博客从wi">
+    <meta name="keywords" content="Mac下安装Dubbo和Zookeeper, 晓笙的BLOG">
+    <meta name="description" content="Mac下安装Dubbo和Zookeeper一、Zookeeper
+zookeeper支持brew安装,检查安装环境
+
+brew info zookeeper
+
+brew install zookeeper
+
+
+安装后zookeeper配置文">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +21,7 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>在Mac上使用Markdown | 晓笙的BLOG</title>
+    <title>Mac下安装Dubbo和Zookeeper | 晓笙的BLOG</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -210,13 +216,13 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        在Mac上使用Markdown
+                        Mac下安装Dubbo和Zookeeper
                     </div>
                 </div>
             </div>
@@ -238,8 +244,8 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Mac-Markdown/" target="_blank">
-                                <span class="chip bg-color">Mac Markdown</span>
+                            <a href="/tags/dobbo，zookeeper/" target="_blank">
+                                <span class="chip bg-color">dobbo，zookeeper</span>
                             </a>
                         
                     </div>
@@ -250,8 +256,8 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/皮一下/" class="post-category" target="_blank">
-                                皮一下
+                            <a href="/categories/中间件/" class="post-category" target="_blank">
+                                中间件
                             </a>
                         
                     </div>
@@ -262,21 +268,21 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-05-05
+                    2019-06-25
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        367
+                        770
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        3 分
                     </div>
                     
                 
@@ -292,78 +298,84 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="在Mac上使用Markdown"><a href="#在Mac上使用Markdown" class="headerlink" title="在Mac上使用Markdown"></a>在Mac上使用Markdown</h1><h4 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h4><blockquote>
-<p>MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通过简单的标记语法，它可以使普通文本具有一定的格式</p>
-<p>​        最近入手一台macbook  pro，已经把这个博客从windows迁移到mac上来了！！！</p>
+                <h1 id="Mac下安装Dubbo和Zookeeper"><a href="#Mac下安装Dubbo和Zookeeper" class="headerlink" title="Mac下安装Dubbo和Zookeeper"></a>Mac下安装Dubbo和Zookeeper</h1><h2 id="一、Zookeeper"><a href="#一、Zookeeper" class="headerlink" title="一、Zookeeper"></a>一、Zookeeper</h2><blockquote>
+<p>zookeeper支持brew安装,检查安装环境</p>
 </blockquote>
-<h4 id="一、常用语法及快捷键"><a href="#一、常用语法及快捷键" class="headerlink" title="一、常用语法及快捷键"></a>一、常用语法及快捷键</h4><h5 id="1-1标题"><a href="#1-1标题" class="headerlink" title="1.1标题"></a>1.1标题</h5><blockquote>
-<p>##一级标题</p>
-<p>####二级标题</p>
-<p>######三级标题</p>
-<p>########四级标题</p>
-<p>##########五级标题</p>
-<p>############六级标题</p>
-<p>快捷键为cmd+X（X为几级标题就写数字几，如二级标题为：cmd+2）</p>
+<pre><code>brew info zookeeper
+</code></pre><p><img src="//zongmansheng.club/2019/06/25/mac-xia-an-zhuang-dubbo-he-zookeeper/001.png" alt></p>
+<pre><code>brew install zookeeper
+</code></pre><p><img src="//zongmansheng.club/2019/06/25/mac-xia-an-zhuang-dubbo-he-zookeeper/002.png" alt></p>
+<blockquote>
+<p>安装后zookeeper配置文件位置：</p>
 </blockquote>
-<h5 id="1-2引用"><a href="#1-2引用" class="headerlink" title="1.2引用"></a>1.2引用</h5><blockquote>
-<p>当你需要引用别人的话时，可以在引用的文字前面添加引用标记 <strong>&gt;</strong>，<br>即表示此后的内容为引用，这时候，文字的背景色也会改变。</p>
-<p>如：&gt;这是一段引用</p>
+<pre><code>/usr/local/etc/zookeeper
+</code></pre><h4 id="二-、配置文件zookeeper详解"><a href="#二-、配置文件zookeeper详解" class="headerlink" title="二 、配置文件zookeeper详解"></a>二 、配置文件zookeeper详解</h4><h5 id="1、参数详解："><a href="#1、参数详解：" class="headerlink" title="1、参数详解："></a>1、参数详解：</h5><blockquote>
+<p>tickTime：ZK中的一个时间单元。ZK中所有时间都是以这个时间单元为基础，进行整数倍配置的。例如，session的最小超时时间是2*tickTime。</p>
+<p>initLimit：Follower在启动过程中，会从Leader同步所有最新数据，然后确定自己能够对外服务的起始状态。Leader允许F在initLimit时间内完成这个工作。通常情况下，我们不用太在意这个参数的设置。如果ZK集群的数据量确实很大了，F在启动的时候，从Leader上同步数据的时间也会相应变长，因此在这种情况下，有必要适当调大这个参数了。(No Java system property)</p>
+<p>syncLimit：在运行过程中，Leader负责与ZK集群中所有机器进行通信，例如通过一些心跳检测机制，来检测机器的存活状态。如果L发出心跳包在syncLimit之后，还没有从F那里收到响应，那么就认为这个F已经不在线了。注意：不要把这个参数设置得过大，否则可能会掩盖一些问题。(No Java system property)</p>
+<p>dataDir：存储快照文件snapshot的目录。默认情况下，事务日志也会存储在这里。建议同时配置参数dataLogDir, 事务日志的写性能直接影响zk性能。</p>
+<p>-clientPort： 客户端连接server的端口，即对外服务端口，一般设置为2181吧。</p>
 </blockquote>
-<h5 id="1-3链接"><a href="#1-3链接" class="headerlink" title="1.3链接"></a>1.3链接</h5><blockquote>
-<p>链接分为图片链接和网址链接。</p>
-<p><strong>图片链接</strong></p>
-<pre><code>![图片描述] (图片地址)
-</code></pre><p>快捷键为：shift + cmd + I</p>
-<p><strong>网页链接</strong></p>
-<pre><code>[网页描述](网页地址)
-</code></pre><p>快捷键为 sihft + cmd + k</p>
+<blockquote>
+<p>server.x=[hostname]:nnnnn[:nnnnn]：这里的x是一个数字，与myid文件中的id是一致的。右边可以配置两个端口，第一个端口用于F和L之间的数据同步和其它通信，第二个端口用于Leader选举过程中投票通信。</p>
 </blockquote>
-<h5 id="1-4代码"><a href="#1-4代码" class="headerlink" title="1.4代码"></a>1.4代码</h5><blockquote>
-<p>使用两个 <strong>`</strong>符号把单行代码包裹起来。</p>
-<p>多行代码两个用<strong><code>`</code></strong>包起来。</p>
+<h5 id="2-配置启动"><a href="#2-配置启动" class="headerlink" title="2.配置启动"></a>2.配置启动</h5><blockquote>
+<p>安装后，在<code>/usr/local/etc/zookeeper/</code>目录下，已经有了缺省的<code>配置文件</code>。</p>
 </blockquote>
-<h5 id="1-5表格"><a href="#1-5表格" class="headerlink" title="1.5表格"></a>1.5表格</h5><blockquote>
-<p>| 1 | 2 | 3 |</p>
-<p>| —- |:—-:| —:|</p>
-<p>| a | d | g |</p>
-<p>| b | e | h |</p>
-<p>| c | f | I |</p>
-<p><strong>| —- |:—-:| —:|</strong>表示对其方式。:—表示左对齐；—:表示右对齐；:—-:表示中间对齐。</p>
+<p><img src="//zongmansheng.club/2019/06/25/mac-xia-an-zhuang-dubbo-he-zookeeper/003.png" alt></p>
+<blockquote>
+<p>打开配置文件</p>
 </blockquote>
-<p>效果为：</p>
-<table>
-<thead>
-<tr>
-<th>1</th>
-<th style="text-align:center">2</th>
-<th style="text-align:right">3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a</td>
-<td style="text-align:center">d</td>
-<td style="text-align:right">g</td>
-</tr>
-<tr>
-<td>b</td>
-<td style="text-align:center">e</td>
-<td style="text-align:right">h</td>
-</tr>
-<tr>
-<td>c</td>
-<td style="text-align:center">f</td>
-<td style="text-align:right">I</td>
-</tr>
-</tbody>
-</table>
-<h5 id="1-6其他"><a href="#1-6其他" class="headerlink" title="1.6其他"></a>1.6其他</h5><pre><code>加粗 :**Bold**
-斜体字 :*Italics*
-高亮 :==text==
-段落 : 段落之间空一行
-画水平线 (HR) :--------
-方框：- [ ] -
+<pre class=" language-cfg"><code class="language-cfg"># The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/usr/local/var/run/zookeeper/data
+# the port at which the clients will connect
+clientPort=2181
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
 </code></pre>
+<blockquote>
+<p>主要配置</p>
+</blockquote>
+<pre><code>tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/usr/local/var/run/zookeeper/data
+clientPort=2181
+</code></pre><blockquote>
+<p>启动zk</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/25/mac-xia-an-zhuang-dubbo-he-zookeeper/004.png" alt></p>
+<h5 id="连接ZooKeeper服务器"><a href="#连接ZooKeeper服务器" class="headerlink" title="连接ZooKeeper服务器"></a>连接ZooKeeper服务器</h5><blockquote>
+<p>ZooKeeper命令行界面（CLI）用于与ZooKeeper集合进行交互以进行开发。它有助于调试和解决不同的选项。使用如下命令：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/06/25/mac-xia-an-zhuang-dubbo-he-zookeeper/005.png" alt></p>
+<blockquote>
+<p>一旦客户端启动，就可以使用命令与zookeeper服务器进行交互了。<br>最后使用 <code>Ctrl + c</code> 即可退出zkCli。</p>
+</blockquote>
+<h5 id="停止zookeeper服务器"><a href="#停止zookeeper服务器" class="headerlink" title="停止zookeeper服务器"></a>停止zookeeper服务器</h5><p><img src="//zongmansheng.club/2019/06/25/mac-xia-an-zhuang-dubbo-he-zookeeper/006.png" alt></p>
+
             </div>
             <hr>
 
@@ -386,7 +398,7 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/05/05/zai-mac-shang-shi-yong-markdown/" class="b-link-green">在Mac上使用Markdown</a>
+                    <a href="/2019/06/25/mac-xia-an-zhuang-dubbo-he-zookeeper/" class="b-link-green">Mac下安装Dubbo和Zookeeper</a>
                 </p>
             </div>
         </div>
@@ -411,29 +423,30 @@ MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通�
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/">
+                <a href="/2019/06/26/cas-dan-dian-deng-lu-yuan-li-jie-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="消息队列的高可用">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="CAS单点登录原理解析">
                         
-                        <span class="card-title">消息队列的高可用</span>
+                        <span class="card-title">CAS单点登录原理解析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">消息队列的高可用一、RabbitMQ 的高可用性
-​    RabbitMQ 是比较有代表性的，因为是基于主从（非分布式）做高可用性的，我们就以 RabbitMQ 为例子讲解第一种 MQ 的高可用性怎么实现。
-RabbitMQ 有三种模式：</div>
+                    <div class="summary">CAS单点登录原理解析1、基于Cookie的单点登录的回顾
+
+基于Cookie的单点登录核心原理：
+​      将用户名密码加密之后存于Cookie中，之后访问网站时在过滤器（filter）中校验用户权限，如果没有权限则从Cookie中取</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-05
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-26
                         </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java高级/" class="post-category" target="_blank">
-                                    java高级
+                            <a href="/categories/单点登录/" class="post-category" target="_blank">
+                                    单点登录
                                 </a>
                             
                             
@@ -443,8 +456,8 @@ RabbitMQ 有三种模式：</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/分布式，MQ/" target="_blank">
-                        <span class="chip bg-color">分布式，MQ</span>
+                    <a href="/tags/CAS/" target="_blank">
+                        <span class="chip bg-color">CAS</span>
                     </a>
                     
                 </div>
@@ -458,28 +471,28 @@ RabbitMQ 有三种模式：</div>
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/04/28/nginx-liang-qun/">
+                <a href="/2019/06/24/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="nginx惊群">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="深入理解跨域SSO单点登录原理与技术">
                         
-                        <span class="card-title">nginx惊群</span>
+                        <span class="card-title">深入理解跨域SSO单点登录原理与技术</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">nginx惊群一、什么是惊群
-​        多线程/多进程（linux下线程进程也没多大区别）等待同一个socket事件，当这个事件发生时，这些线程/进程被同时唤醒，就是惊群。可以想见，效率很低下，许多进程被内核重新调度唤醒，同时去响应</div>
+                    <div class="summary">深入理解跨域SSO单点登录原理与技术一：SSO体系结构SSO
+SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。它包括可以将这次主要的登录映射到其他应用中用于</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-28
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-24
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/进阶/" class="post-category" target="_blank">
-                                    进阶
+                            <a href="/categories/单点登录/" class="post-category" target="_blank">
+                                    单点登录
                                 </a>
                             
                             
@@ -489,8 +502,8 @@ RabbitMQ 有三种模式：</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/SSO/" target="_blank">
+                        <span class="chip bg-color">SSO</span>
                     </a>
                     
                 </div>
@@ -517,7 +530,7 @@ RabbitMQ 有三种模式：</div>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">133.4k</span>
+                <span class="white-color">135.4k</span>
             
 
             

@@ -275,7 +275,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-22
+                    2019-07-21
                 </div>
 
                 
@@ -308,7 +308,7 @@
                 <h1 id="Mac下安装Kafka"><a href="#Mac下安装Kafka" class="headerlink" title="Mac下安装Kafka"></a>Mac下安装Kafka</h1><blockquote>
 <p>使用brew安装</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/22/mac-xia-an-zhuang-kafka/001.png" alt></p>
+<p><img src="//zongmansheng.club/2019/07/21/mac-xia-an-zhuang-kafka/001.png" alt></p>
 <p>安装完之后，安装目录为：</p>
 <pre><code># kafka安装目录
 /usr/local/Cellar/kafka/2.2.1
@@ -369,7 +369,7 @@ kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partit
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/22/mac-xia-an-zhuang-kafka/" class="b-link-green">Mac下安装Kafka</a>
+                    <a href="/2019/07/21/mac-xia-an-zhuang-kafka/" class="b-link-green">Mac下安装Kafka</a>
                 </p>
             </div>
         </div>
@@ -392,45 +392,57 @@ kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partit
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/07/23/springboot-san/">
+                <a href="/2019/07/21/mac-xia-an-zhuang-kafka/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="SpringBoot（三）">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Mac下安装Kafka">
                         
-                        <span class="card-title">SpringBoot（三）</span>
+                        <span class="card-title">Mac下安装Kafka</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Springboot整合Kafka一、什么是Kafka
-Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala和Java编写。Kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者在网站中的所有动作流数据。 </div>
+                    <div class="summary">Mac下安装Kafka
+使用brew安装
+
+
+安装完之后，安装目录为：
+# kafka安装目录
+/usr/local/Cellar/kafka/2.2.1
+
+# 配置文件目录
+/usr/local/etc/kafka/
+
+如果需要修改配置，</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
-                                    SpringBoot
+                            <a href="/categories/中间件/" class="post-category" target="_blank">
+                                    中间件
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kafka/" target="_blank">
-                        <span class="chip bg-color">kafka</span>
+                    <a href="/tags/MQ/" target="_blank">
+                        <span class="chip bg-color">MQ</span>
                     </a>
                     
-                    <a href="/tags/springboot2-0/" target="_blank">
-                        <span class="chip bg-color">springboot2.0</span>
+                    <a href="/tags/kafka/" target="_blank">
+                        <span class="chip bg-color">kafka</span>
                     </a>
                     
                 </div>
@@ -444,28 +456,31 @@ Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala�
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/22/springboot-er/">
+                <a href="/2019/07/18/jvm-ru-he-pan-duan-dui-xiang-shi-fou-huan-cun-huo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="SpringBoot（二）">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="JVM如何判断对象是否还存活">
                         
-                        <span class="card-title">SpringBoot（二）</span>
+                        <span class="card-title">JVM如何判断对象是否还存活</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Springboot整合JPA一、JPA是什么
-JPA(java persistence api)，它并不是一个框架，而是一组规范。我觉得对于任何一个开发人员来说，理解“规范”这个词应该不在话下。其中，Hibernate就实现了这个规范，而</div>
+                    <div class="summary">JVM如何判断对象是否还存活
+在java堆中存活着几乎所有的对象实例，垃圾收集器在回收之前需要判断哪些对象还存活着，哪些对象已经死去。
+
+一、引用计数法
+引用计算法的算法大致如下：给对象添加一个引用计数器，每当有地方引用它时，计数器就加1；</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
-                                    SpringBoot
+                            <a href="/categories/虚拟机/" class="post-category" target="_blank">
+                                    虚拟机
                                 </a>
                             
                             
@@ -475,12 +490,12 @@ JPA(java persistence api)，它并不是一个框架，而是一组规范。我�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Springboot2-0/" target="_blank">
-                        <span class="chip bg-color">Springboot2.0</span>
+                    <a href="/tags/JVM/" target="_blank">
+                        <span class="chip bg-color">JVM</span>
                     </a>
                     
-                    <a href="/tags/JPA/" target="_blank">
-                        <span class="chip bg-color">JPA</span>
+                    <a href="/tags/回收机制/" target="_blank">
+                        <span class="chip bg-color">回收机制</span>
                     </a>
                     
                 </div>
@@ -507,7 +522,7 @@ JPA(java persistence api)，它并不是一个框架，而是一组规范。我�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">133.4k</span>
+                <span class="white-color">135.4k</span>
             
 
             

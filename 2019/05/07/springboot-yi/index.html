@@ -4,16 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Mac下安装Dubbo和Zookeeper, 晓笙的BLOG">
-    <meta name="description" content="Mac下安装Dubbo和Zookeeper一、Zookeeper
-zookeeper支持brew安装,检查安装环境
-
-brew info zookeeper
-
-brew install zookeeper
-
-
-安装后zookeeper配置文">
+    <meta name="keywords" content="SpringBoot（一）, 晓笙的BLOG">
+    <meta name="description" content="SpringBoot2.0 整合 JWT 框架，解决Token跨域验证问题一、传统Session认证1、认证过程
+1、用户向服务器发送用户名和密码。
+2、服务器验证后在当前对话（session）保存相关数据。
+3、服务器向返回session">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +16,7 @@ brew install zookeeper
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Mac下安装Dubbo和Zookeeper | 晓笙的BLOG</title>
+    <title>SpringBoot（一） | 晓笙的BLOG</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -216,13 +211,13 @@ brew install zookeeper
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Mac下安装Dubbo和Zookeeper
+                        SpringBoot（一）
                     </div>
                 </div>
             </div>
@@ -244,8 +239,12 @@ brew install zookeeper
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/dobbo，zookeeper/" target="_blank">
-                                <span class="chip bg-color">dobbo，zookeeper</span>
+                            <a href="/tags/JWT/" target="_blank">
+                                <span class="chip bg-color">JWT</span>
+                            </a>
+                        
+                            <a href="/tags/Springboot2-0/" target="_blank">
+                                <span class="chip bg-color">Springboot2.0</span>
                             </a>
                         
                     </div>
@@ -256,8 +255,8 @@ brew install zookeeper
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/中间件/" class="post-category" target="_blank">
-                                中间件
+                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
+                                SpringBoot
                             </a>
                         
                     </div>
@@ -268,21 +267,21 @@ brew install zookeeper
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-06-24
+                    2019-05-07
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        770
+                        468
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        1 分
                     </div>
                     
                 
@@ -298,84 +297,60 @@ brew install zookeeper
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Mac下安装Dubbo和Zookeeper"><a href="#Mac下安装Dubbo和Zookeeper" class="headerlink" title="Mac下安装Dubbo和Zookeeper"></a>Mac下安装Dubbo和Zookeeper</h1><h2 id="一、Zookeeper"><a href="#一、Zookeeper" class="headerlink" title="一、Zookeeper"></a>一、Zookeeper</h2><blockquote>
-<p>zookeeper支持brew安装,检查安装环境</p>
+                <h1 id="SpringBoot2-0-整合-JWT-框架，解决Token跨域验证问题"><a href="#SpringBoot2-0-整合-JWT-框架，解决Token跨域验证问题" class="headerlink" title="SpringBoot2.0 整合 JWT 框架，解决Token跨域验证问题"></a>SpringBoot2.0 整合 JWT 框架，解决Token跨域验证问题</h1><h3 id="一、传统Session认证"><a href="#一、传统Session认证" class="headerlink" title="一、传统Session认证"></a>一、传统Session认证</h3><h4 id="1、认证过程"><a href="#1、认证过程" class="headerlink" title="1、认证过程"></a>1、认证过程</h4><blockquote>
+<p>1、用户向服务器发送用户名和密码。</p>
+<p>2、服务器验证后在当前对话（session）保存相关数据。</p>
+<p>3、服务器向返回sessionId，写入客户端 Cookie。</p>
+<p>4、客户端每次请求，需要通过 Cookie，将 sessionId 回传服务器。</p>
+<p>5、服务器收到 sessionId，验证客户端。</p>
 </blockquote>
-<pre><code>brew info zookeeper
-</code></pre><p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/001.png" alt></p>
-<pre><code>brew install zookeeper
-</code></pre><p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/002.png" alt></p>
-<blockquote>
-<p>安装后zookeeper配置文件位置：</p>
+<h4 id="2、存在问题"><a href="#2、存在问题" class="headerlink" title="2、存在问题"></a>2、存在问题</h4><blockquote>
+<p>1、session保存在服务端，客户端访问高并发时，服务端压力大。</p>
+<p>2、扩展性差，服务器集群，就需要 session 数据共享。</p>
 </blockquote>
-<pre><code>/usr/local/etc/zookeeper
-</code></pre><h4 id="二-、配置文件zookeeper详解"><a href="#二-、配置文件zookeeper详解" class="headerlink" title="二 、配置文件zookeeper详解"></a>二 、配置文件zookeeper详解</h4><h5 id="1、参数详解："><a href="#1、参数详解：" class="headerlink" title="1、参数详解："></a>1、参数详解：</h5><blockquote>
-<p>tickTime：ZK中的一个时间单元。ZK中所有时间都是以这个时间单元为基础，进行整数倍配置的。例如，session的最小超时时间是2*tickTime。</p>
-<p>initLimit：Follower在启动过程中，会从Leader同步所有最新数据，然后确定自己能够对外服务的起始状态。Leader允许F在initLimit时间内完成这个工作。通常情况下，我们不用太在意这个参数的设置。如果ZK集群的数据量确实很大了，F在启动的时候，从Leader上同步数据的时间也会相应变长，因此在这种情况下，有必要适当调大这个参数了。(No Java system property)</p>
-<p>syncLimit：在运行过程中，Leader负责与ZK集群中所有机器进行通信，例如通过一些心跳检测机制，来检测机器的存活状态。如果L发出心跳包在syncLimit之后，还没有从F那里收到响应，那么就认为这个F已经不在线了。注意：不要把这个参数设置得过大，否则可能会掩盖一些问题。(No Java system property)</p>
-<p>dataDir：存储快照文件snapshot的目录。默认情况下，事务日志也会存储在这里。建议同时配置参数dataLogDir, 事务日志的写性能直接影响zk性能。</p>
-<p>-clientPort： 客户端连接server的端口，即对外服务端口，一般设置为2181吧。</p>
+<h3 id="二、JWT简介"><a href="#二、JWT简介" class="headerlink" title="二、JWT简介"></a>二、JWT简介</h3><blockquote>
+<p>JWT(全称：JSON Web Token)，在基于HTTP通信过程中，进行身份认证。</p>
 </blockquote>
-<blockquote>
-<p>server.x=[hostname]:nnnnn[:nnnnn]：这里的x是一个数字，与myid文件中的id是一致的。右边可以配置两个端口，第一个端口用于F和L之间的数据同步和其它通信，第二个端口用于Leader选举过程中投票通信。</p>
+<h4 id="1、认证流程"><a href="#1、认证流程" class="headerlink" title="1、认证流程"></a>1、认证流程</h4><blockquote>
+<p>1、客户端通过用户名和密码登录服务器;</p>
+<p>2、服务端对客户端身份进行验证；</p>
+<p>3、服务器认证以后，生成一个 JSON 对象，发回客户端；</p>
+<p>4、客户端与服务端通信的时候，都要发回这个 JSON 对象；</p>
+<p>5、服务端解析该JSON对象，获取用户身份；</p>
+<p>6、服务端可以不必存储该JSON（Token）对象，身份信息都可以解析出来。</p>
 </blockquote>
-<h5 id="2-配置启动"><a href="#2-配置启动" class="headerlink" title="2.配置启动"></a>2.配置启动</h5><blockquote>
-<p>安装后，在<code>/usr/local/etc/zookeeper/</code>目录下，已经有了缺省的<code>配置文件</code>。</p>
-</blockquote>
-<p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/003.png" alt></p>
-<blockquote>
-<p>打开配置文件</p>
-</blockquote>
-<pre class=" language-cfg"><code class="language-cfg"># The number of milliseconds of each tick
-tickTime=2000
-# The number of ticks that the initial
-# synchronization phase can take
-initLimit=10
-# The number of ticks that can pass between
-# sending a request and getting an acknowledgement
-syncLimit=5
-# the directory where the snapshot is stored.
-# do not use /tmp for storage, /tmp here is just
-# example sakes.
-dataDir=/usr/local/var/run/zookeeper/data
-# the port at which the clients will connect
-clientPort=2181
-# the maximum number of client connections.
-# increase this if you need to handle more clients
-#maxClientCnxns=60
-#
-# Be sure to read the maintenance section of the
-# administrator guide before turning on autopurge.
-#
-# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
-#
-# The number of snapshots to retain in dataDir
-#autopurge.snapRetainCount=3
-# Purge task interval in hours
-# Set to "0" to disable auto purge feature
-#autopurge.purgeInterval=1
+<h4 id="2、JWT结构说明"><a href="#2、JWT结构说明" class="headerlink" title="2、JWT结构说明"></a>2、JWT结构说明</h4><pre class=" language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">"验证成功"</span><span class="token punctuation">,</span>
+    <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token property">"token"</span><span class="token operator">:</span> <span class="token string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.
+ eyJzdWIiOiJhZG1pbiCI6iZEIj3fQ.
+ uEJSJagJf1j7A55Wwr1bGsB5YQoAyz5rbFtF"</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <blockquote>
-<p>主要配置</p>
+<p>上面的Token被手动格式化了，实际上是用”.”分隔的一个完整的长字符串。</p>
 </blockquote>
-<pre><code>tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/usr/local/var/run/zookeeper/data
-clientPort=2181
-</code></pre><blockquote>
-<p>启动zk</p>
+<h5 id="JWT结构"><a href="#JWT结构" class="headerlink" title="JWT结构"></a>JWT结构</h5><blockquote>
+<p>1、头部（header) 声明类型以及加密算法；</p>
+<p>2、负载（payload) 携带一些用户身份信息；</p>
+<p>3、签名（signature) 签名信息。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/004.png" alt></p>
-<h5 id="连接ZooKeeper服务器"><a href="#连接ZooKeeper服务器" class="headerlink" title="连接ZooKeeper服务器"></a>连接ZooKeeper服务器</h5><blockquote>
-<p>ZooKeeper命令行界面（CLI）用于与ZooKeeper集合进行交互以进行开发。它有助于调试和解决不同的选项。使用如下命令：</p>
+<h4 id="3、JWT使用方式"><a href="#3、JWT使用方式" class="headerlink" title="3、JWT使用方式"></a>3、JWT使用方式</h4><blockquote>
+<p>通常推荐的做法是客户端在 HTTP 请求的头信息Authorization字段里面。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/005.png" alt></p>
+<pre class=" language-xml"><code class="language-xml">Authorization: Bearer <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>token</span><span class="token punctuation">></span></span>
+</code></pre>
 <blockquote>
-<p>一旦客户端启动，就可以使用命令与zookeeper服务器进行交互了。<br>最后使用 <code>Ctrl + c</code> 即可退出zkCli。</p>
+<p>服务端获取JWT方式</p>
 </blockquote>
-<h5 id="停止zookeeper服务器"><a href="#停止zookeeper服务器" class="headerlink" title="停止zookeeper服务器"></a>停止zookeeper服务器</h5><p><img src="//zongmansheng.club/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/006.png" alt></p>
-
+<pre><code>String token = request.getHeader(&quot;token&quot;);
+</code></pre><h3 id="三、与SpringBoot2整合"><a href="#三、与SpringBoot2整合" class="headerlink" title="三、与SpringBoot2整合"></a>三、与SpringBoot2整合</h3><h4 id="1、核心依赖文件"><a href="#1、核心依赖文件" class="headerlink" title="1、核心依赖文件"></a>1、核心依赖文件</h4><pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.jsonwebtoken<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>jjwt<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>0.9.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+</code></pre>
+<h4 id="2、配置文件"><a href="#2、配置文件" class="headerlink" title="2、配置文件"></a>2、配置文件</h4>
             </div>
             <hr>
 
@@ -398,7 +373,7 @@ clientPort=2181
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/06/24/mac-xia-an-zhuang-dubbo-he-zookeeper/" class="b-link-green">Mac下安装Dubbo和Zookeeper</a>
+                    <a href="/2019/05/07/springboot-yi/" class="b-link-green">SpringBoot（一）</a>
                 </p>
             </div>
         </div>
@@ -423,30 +398,28 @@ clientPort=2181
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/06/26/cas-dan-dian-deng-lu-yuan-li-jie-xi/">
+                <a href="/2019/05/08/springboot-er/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="CAS单点登录原理解析">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="SpringBoot（二）">
                         
-                        <span class="card-title">CAS单点登录原理解析</span>
+                        <span class="card-title">SpringBoot（二）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">CAS单点登录原理解析1、基于Cookie的单点登录的回顾
-
-基于Cookie的单点登录核心原理：
-​      将用户名密码加密之后存于Cookie中，之后访问网站时在过滤器（filter）中校验用户权限，如果没有权限则从Cookie中取</div>
+                    <div class="summary">Springboot整合JPA一、JPA是什么
+JPA(java persistence api)，它并不是一个框架，而是一组规范。我觉得对于任何一个开发人员来说，理解“规范”这个词应该不在话下。其中，Hibernate就实现了这个规范，而</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-26
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-08
                         </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/单点登录/" class="post-category" target="_blank">
-                                    单点登录
+                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
+                                    SpringBoot
                                 </a>
                             
                             
@@ -456,8 +429,12 @@ clientPort=2181
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CAS/" target="_blank">
-                        <span class="chip bg-color">CAS</span>
+                    <a href="/tags/Springboot2-0/" target="_blank">
+                        <span class="chip bg-color">Springboot2.0</span>
+                    </a>
+                    
+                    <a href="/tags/JPA/" target="_blank">
+                        <span class="chip bg-color">JPA</span>
                     </a>
                     
                 </div>
@@ -471,28 +448,29 @@ clientPort=2181
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/06/24/shen-ru-li-jie-kua-yu-sso-dan-dian-deng-lu-yuan-li-yu-ji-zhu/">
+                <a href="/2019/05/06/zai-mac-shang-shi-yong-markdown/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="深入理解跨域SSO单点登录原理与技术">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="在Mac上使用Markdown">
                         
-                        <span class="card-title">深入理解跨域SSO单点登录原理与技术</span>
+                        <span class="card-title">在Mac上使用Markdown</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">深入理解跨域SSO单点登录原理与技术一：SSO体系结构SSO
-SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，用户只需要登录一次就可以访问所有相互信任的应用系统。它包括可以将这次主要的登录映射到其他应用中用于</div>
+                    <div class="summary">在Mac上使用Markdown导语
+MarkDown是一种轻量级的标记语言，他的开发者为John Gruber。通过简单的标记语法，它可以使普通文本具有一定的格式
+​        最近入手一台macbook  pro，已经把这个博客从wi</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-24
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-06
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/单点登录/" class="post-category" target="_blank">
-                                    单点登录
+                            <a href="/categories/皮一下/" class="post-category" target="_blank">
+                                    皮一下
                                 </a>
                             
                             
@@ -502,8 +480,8 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SSO/" target="_blank">
-                        <span class="chip bg-color">SSO</span>
+                    <a href="/tags/Mac-Markdown/" target="_blank">
+                        <span class="chip bg-color">Mac Markdown</span>
                     </a>
                     
                 </div>
@@ -530,7 +508,7 @@ SSO英文全称Single Sign On，单点登录。SSO是在多个应用系统中，
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">133.4k</span>
+                <span class="white-color">135.4k</span>
             
 
             

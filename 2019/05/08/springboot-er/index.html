@@ -265,7 +265,7 @@ JPA(java persistence api)，它并不是一个框架，而是一组规范。我�
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-22
+                    2019-05-08
                 </div>
 
                 
@@ -534,15 +534,15 @@ public interface UserDAO extends JpaRepository<user,long> {
 <h3 id="三、启动项目"><a href="#三、启动项目" class="headerlink" title="三、启动项目"></a>三、启动项目</h3><blockquote>
 <p>控制输出</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/22/springboot-er/001.png" alt></p>
+<p><img src="//zongmansheng.club/2019/05/08/springboot-er/001.png" alt></p>
 <blockquote>
 <p>数据表会自动创建，此时我们查看数据库</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/22/springboot-er/002.png" alt></p>
+<p><img src="//zongmansheng.club/2019/05/08/springboot-er/002.png" alt></p>
 <blockquote>
 <p>添加两条数据，访问 <a href="http://localhost:8080/list" target="_blank" rel="noopener">http://localhost:8080/list</a></p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/22/springboot-er/003.png" alt></p>
+<p><img src="//zongmansheng.club/2019/05/08/springboot-er/003.png" alt></p>
 <h3 id="四、源码地址"><a href="#四、源码地址" class="headerlink" title="四、源码地址"></a>四、源码地址</h3><p><a href="https://gitee.com/zongmansheng/springboot-zms.git" target="_blank" rel="noopener">https://gitee.com/zongmansheng/springboot-zms.git</a></p>
 
             </div>
@@ -567,7 +567,7 @@ public interface UserDAO extends JpaRepository<user,long> {
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/22/springboot-er/" class="b-link-green">SpringBoot（二）</a>
+                    <a href="/2019/05/08/springboot-er/" class="b-link-green">SpringBoot（二）</a>
                 </p>
             </div>
         </div>
@@ -592,38 +592,35 @@ public interface UserDAO extends JpaRepository<user,long> {
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/07/22/mac-xia-an-zhuang-kafka/">
+                <a href="/2019/05/09/xian-cheng-chi-di-ceng/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Mac下安装Kafka">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="线程池底层">
                         
-                        <span class="card-title">Mac下安装Kafka</span>
+                        <span class="card-title">线程池底层</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Mac下安装Kafka
-使用brew安装
+                    <div class="summary">线程池底层一、ThreadPoolExecutor
+在深入源码之前先来看看J.U.C包中的线程池类图：
 
 
-安装完之后，安装目录为：
-# kafka安装目录
-/usr/local/Cellar/kafka/2.2.1
 
-# 配置文件目录
-/usr/local/etc/kafka/
+它们的最顶层是一个Executor接口，它只有一个方法：
 
-如果需要修改配置，</div>
+public interface Executor {
+     vo</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-22
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-09
                         </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/中间件/" class="post-category" target="_blank">
-                                    中间件
+                            <a href="/categories/java高级/" class="post-category" target="_blank">
+                                    java高级
                                 </a>
                             
                             
@@ -633,12 +630,8 @@ public interface UserDAO extends JpaRepository<user,long> {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MQ/" target="_blank">
-                        <span class="chip bg-color">MQ</span>
-                    </a>
-                    
-                    <a href="/tags/kafka/" target="_blank">
-                        <span class="chip bg-color">kafka</span>
+                    <a href="/tags/ThreadPool/" target="_blank">
+                        <span class="chip bg-color">ThreadPool</span>
                     </a>
                     
                 </div>
@@ -652,31 +645,30 @@ public interface UserDAO extends JpaRepository<user,long> {
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/18/jvm-ru-he-pan-duan-dui-xiang-shi-fou-huan-cun-huo/">
+                <a href="/2019/05/07/springboot-yi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="JVM如何判断对象是否还存活">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="SpringBoot（一）">
                         
-                        <span class="card-title">JVM如何判断对象是否还存活</span>
+                        <span class="card-title">SpringBoot（一）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">JVM如何判断对象是否还存活
-在java堆中存活着几乎所有的对象实例，垃圾收集器在回收之前需要判断哪些对象还存活着，哪些对象已经死去。
-
-一、引用计数法
-引用计算法的算法大致如下：给对象添加一个引用计数器，每当有地方引用它时，计数器就加1；</div>
+                    <div class="summary">SpringBoot2.0 整合 JWT 框架，解决Token跨域验证问题一、传统Session认证1、认证过程
+1、用户向服务器发送用户名和密码。
+2、服务器验证后在当前对话（session）保存相关数据。
+3、服务器向返回session</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-18
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/虚拟机/" class="post-category" target="_blank">
-                                    虚拟机
+                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
+                                    SpringBoot
                                 </a>
                             
                             
@@ -686,12 +678,12 @@ public interface UserDAO extends JpaRepository<user,long> {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/JVM/" target="_blank">
-                        <span class="chip bg-color">JVM</span>
+                    <a href="/tags/JWT/" target="_blank">
+                        <span class="chip bg-color">JWT</span>
                     </a>
                     
-                    <a href="/tags/回收机制/" target="_blank">
-                        <span class="chip bg-color">回收机制</span>
+                    <a href="/tags/Springboot2-0/" target="_blank">
+                        <span class="chip bg-color">Springboot2.0</span>
                     </a>
                     
                 </div>
@@ -718,7 +710,7 @@ public interface UserDAO extends JpaRepository<user,long> {
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">133.4k</span>
+                <span class="white-color">135.4k</span>
             
 
             

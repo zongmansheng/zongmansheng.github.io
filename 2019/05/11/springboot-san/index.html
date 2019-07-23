@@ -5,7 +5,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="SpringBoot（三）, 晓笙的BLOG">
-    <meta name="description" content="Springboot整合Kafka一、什么是Kafka
+    <meta name="description" content="Springboot整合Kafka一、Kafka是什么
 Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala和Java编写。Kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者在网站中的所有动作流数据。 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -265,7 +265,7 @@ Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala�
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-23
+                    2019-05-11
                 </div>
 
                 
@@ -295,7 +295,7 @@ Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala�
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Springboot整合Kafka"><a href="#Springboot整合Kafka" class="headerlink" title="Springboot整合Kafka"></a>Springboot整合Kafka</h1><h4 id="一、什么是Kafka"><a href="#一、什么是Kafka" class="headerlink" title="一、什么是Kafka"></a>一、什么是Kafka</h4><blockquote>
+                <h1 id="Springboot整合Kafka"><a href="#Springboot整合Kafka" class="headerlink" title="Springboot整合Kafka"></a>Springboot整合Kafka</h1><h4 id="一、Kafka是什么"><a href="#一、Kafka是什么" class="headerlink" title="一、Kafka是什么"></a>一、Kafka是什么</h4><blockquote>
 <p><strong>Kafka</strong>是由<a href="https://baike.baidu.com/item/Apache软件基金会" target="_blank" rel="noopener">Apache软件基金会</a>开发的一个开源流处理平台，由<a href="https://baike.baidu.com/item/Scala" target="_blank" rel="noopener">Scala</a>和<a href="https://baike.baidu.com/item/Java/85979" target="_blank" rel="noopener">Java</a>编写。Kafka是一种高吞吐量的<a href="https://baike.baidu.com/item/分布式/19276232" target="_blank" rel="noopener">分布式</a>发布订阅消息系统，它可以处理消费者在网站中的所有动作流数据。 这种动作（网页浏览，搜索和其他用户的行动）是在现代网络上的许多社会功能的一个关键因素。 这些数据通常是由于吞吐量的要求而通过处理日志和日志聚合来解决。 对于像<a href="https://baike.baidu.com/item/Hadoop" target="_blank" rel="noopener">Hadoop</a>一样的<a href="https://baike.baidu.com/item/日志/2769135" target="_blank" rel="noopener">日志</a>数据和离线分析系统，但又要求实时处理的限制，这是一个可行的解决方案。Kafka的目的是通过<a href="https://baike.baidu.com/item/Hadoop" target="_blank" rel="noopener">Hadoop</a>的并行加载机制来统一线上和离线的消息处理，也是为了通过<a href="https://baike.baidu.com/item/集群/5486962" target="_blank" rel="noopener">集群</a>来提供实时的消息。</p>
 </blockquote>
 <h3 id="二、创建Springboot工程"><a href="#二、创建Springboot工程" class="headerlink" title="二、创建Springboot工程"></a>二、创建Springboot工程</h3><h4 id="2-1、pom依赖"><a href="#2-1、pom依赖" class="headerlink" title="2.1、pom依赖"></a>2.1、pom依赖</h4><pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
@@ -509,8 +509,8 @@ spring:
 
 <span class="token punctuation">}</span>
 </code></pre>
-<h4 id="2-7、控制台输出"><a href="#2-7、控制台输出" class="headerlink" title="2.7、控制台输出"></a>2.7、控制台输出</h4><p><img src="//zongmansheng.club/2019/07/23/springboot-san/001.png" alt></p>
-<p><img src="//zongmansheng.club/2019/07/23/springboot-san/002.png" alt></p>
+<h4 id="2-7、控制台输出"><a href="#2-7、控制台输出" class="headerlink" title="2.7、控制台输出"></a>2.7、控制台输出</h4><p><img src="//zongmansheng.club/2019/05/11/springboot-san/001.png" alt></p>
+<p><img src="//zongmansheng.club/2019/05/11/springboot-san/002.png" alt></p>
 
             </div>
             <hr>
@@ -534,7 +534,7 @@ spring:
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/23/springboot-san/" class="b-link-green">SpringBoot（三）</a>
+                    <a href="/2019/05/11/springboot-san/" class="b-link-green">SpringBoot（三）</a>
                 </p>
             </div>
         </div>
@@ -557,25 +557,24 @@ spring:
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/07/23/springboot-san/">
+                <a href="/2019/05/12/springboot-si/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="SpringBoot（三）">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="SpringBoot（四）">
                         
-                        <span class="card-title">SpringBoot（三）</span>
+                        <span class="card-title">SpringBoot（四）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Springboot整合Kafka一、什么是Kafka
-Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala和Java编写。Kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者在网站中的所有动作流数据。 </div>
+                    <div class="summary">Springboot整合Redis做缓存一、Redis是什么
+Redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-23
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-12
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -588,16 +587,15 @@ Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala�
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kafka/" target="_blank">
-                        <span class="chip bg-color">kafka</span>
-                    </a>
-                    
                     <a href="/tags/springboot2-0/" target="_blank">
                         <span class="chip bg-color">springboot2.0</span>
+                    </a>
+                    
+                    <a href="/tags/redis/" target="_blank">
+                        <span class="chip bg-color">redis</span>
                     </a>
                     
                 </div>
@@ -611,38 +609,29 @@ Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala�
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/22/mac-xia-an-zhuang-kafka/">
+                <a href="/2019/05/10/jian-zao-zhe-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Mac下安装Kafka">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="建造者模式">
                         
-                        <span class="card-title">Mac下安装Kafka</span>
+                        <span class="card-title">建造者模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Mac下安装Kafka
-使用brew安装
-
-
-安装完之后，安装目录为：
-# kafka安装目录
-/usr/local/Cellar/kafka/2.2.1
-
-# 配置文件目录
-/usr/local/etc/kafka/
-
-如果需要修改配置，</div>
+                    <div class="summary">建造者模式一、介绍
+意图：将一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示。
+主要解决：主要解决在软件系统中，有时候面临着”一个复杂对象”的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/中间件/" class="post-category" target="_blank">
-                                    中间件
+                            <a href="/categories/设计模式/" class="post-category" target="_blank">
+                                    设计模式
                                 </a>
                             
                             
@@ -652,12 +641,8 @@ Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MQ/" target="_blank">
-                        <span class="chip bg-color">MQ</span>
-                    </a>
-                    
-                    <a href="/tags/kafka/" target="_blank">
-                        <span class="chip bg-color">kafka</span>
+                    <a href="/tags/Builder-Pattern/" target="_blank">
+                        <span class="chip bg-color">Builder Pattern</span>
                     </a>
                     
                 </div>
@@ -684,7 +669,7 @@ Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">133.4k</span>
+                <span class="white-color">135.4k</span>
             
 
             
