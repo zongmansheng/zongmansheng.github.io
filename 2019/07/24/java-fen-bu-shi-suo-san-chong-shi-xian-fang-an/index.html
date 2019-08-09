@@ -1,0 +1,802 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Java分布式锁三种实现方案, 晓笙的BLOG">
+    <meta name="description" content="Java分布式锁三种实现方案方案一：数据库乐观锁
+​        乐观锁通常实现基于数据版本(version)的记录机制实现的，比如有一张红包表（t_bonus），有一个字段(left_count)记录礼物的剩余个数，用户每领取一个奖品，">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Java分布式锁三种实现方案 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Java分布式锁三种实现方案
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/乐观锁/" target="_blank">
+                                <span class="chip bg-color">乐观锁</span>
+                            </a>
+                        
+                            <a href="/tags/redis/" target="_blank">
+                                <span class="chip bg-color">redis</span>
+                            </a>
+                        
+                            <a href="/tags/zookeeper/" target="_blank">
+                                <span class="chip bg-color">zookeeper</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/分布式/" class="post-category" target="_blank">
+                                分布式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-24
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Java分布式锁三种实现方案"><a href="#Java分布式锁三种实现方案" class="headerlink" title="Java分布式锁三种实现方案"></a>Java分布式锁三种实现方案</h1><h3 id="方案一：数据库乐观锁"><a href="#方案一：数据库乐观锁" class="headerlink" title="方案一：数据库乐观锁"></a>方案一：数据库乐观锁</h3><blockquote>
+<p>​        乐观锁通常实现基于数据版本(version)的记录机制实现的，比如有一张红包表（t_bonus），有一个字段(left_count)记录礼物的剩余个数，用户每领取一个奖品，对应的left_count减1，在并发的情况下如何要保证left_count不为负数，乐观锁的实现方式为在红包表上添加一个版本号字段（version），默认为0。</p>
+</blockquote>
+<h4 id="异常实现流程"><a href="#异常实现流程" class="headerlink" title="异常实现流程"></a>异常实现流程</h4><pre><code>-- 可能会发生的异常情况
+-- 线程1查询，当前left_count为1，则有记录
+select * from t_bonus where id = 10001 and left_count &gt; 0
+
+-- 线程2查询，当前left_count为1，也有记录
+select * from t_bonus where id = 10001 and left_count &gt; 0
+
+-- 线程1完成领取记录，修改left_count为0,
+update t_bonus set left_count = left_count - 1 where id = 10001
+
+-- 线程2完成领取记录，修改left_count为-1，产生脏数据
+update t_bonus set left_count = left_count - 1 where id = 10001
+</code></pre><h4 id="通过乐观锁实现"><a href="#通过乐观锁实现" class="headerlink" title="通过乐观锁实现"></a>通过乐观锁实现</h4><pre><code>-- 添加版本号控制字段
+ALTER TABLE table ADD COLUMN version INT DEFAULT &#39;0&#39; NOT NULL AFTER t_bonus;
+
+-- 线程1查询，当前left_count为1，则有记录，当前版本号为1234
+select left_count, version from t_bonus where id = 10001 and left_count &gt; 0
+
+-- 线程2查询，当前left_count为1，有记录，当前版本号为1234
+select left_count, version from t_bonus where id = 10001 and left_count &gt; 0
+
+-- 线程1,更新完成后当前的version为1235，update状态为1，更新成功
+update t_bonus set version = 1235, left_count = left_count-1 where id = 10001 and version = 1234
+
+-- 线程2,更新由于当前的version为1235，udpate状态为0，更新失败，再针对相关业务做异常处理
+update t_bonus set version = 1235, left_count = left_count-1 where id = 10001 and version = 1234
+</code></pre><h3 id="方案二：基于Redis的分布式锁"><a href="#方案二：基于Redis的分布式锁" class="headerlink" title="方案二：基于Redis的分布式锁"></a>方案二：基于Redis的分布式锁</h3><pre><code>SETNX命令（SET if Not eXists）
+语法：SETNX key value
+功能：原子性操作，当且仅当 key 不存在，将 key 的值设为 value ，并返回1；若给定的 key 已经存在，则 SETNX 不做任何动作，并返回0。
+Expire命令
+语法：expire(key, expireTime)
+功能：key设置过期时间
+GETSET命令
+语法：GETSET key value
+功能：将给定 key 的值设为 value ，并返回 key 的旧值 (old value)，当 key 存在但不是字符串类型时，返回一个错误，当key不存在时，返回nil。
+GET命令
+语法：GET key
+功能：返回 key 所关联的字符串值，如果 key 不存在那么返回特殊值 nil 。
+DEL命令
+语法：DEL key [KEY …]
+功能：删除给定的一个或多个 key ,不存在的 key 会被忽略。
+</code></pre><h5 id="第一种：使用redis的setnx-、expire-方法，用于分布式锁"><a href="#第一种：使用redis的setnx-、expire-方法，用于分布式锁" class="headerlink" title="第一种：使用redis的setnx()、expire()方法，用于分布式锁"></a>第一种：使用redis的setnx()、expire()方法，用于分布式锁</h5><blockquote>
+<ol>
+<li>setnx(lockkey, 1) 如果返回0，则说明占位失败；如果返回1，则说明占位成功</li>
+<li>expire()命令对lockkey设置超时时间，为的是避免死锁问题。</li>
+<li>执行完业务代码后，可以通过delete命令删除key。</li>
+</ol>
+</blockquote>
+<pre><code>        这个方案其实是可以解决日常工作中的需求的，但从技术方案的探讨上来说，可能还有一些可以完善的地方。比如，如果在第一步setnx执行成功后，在expire()命令执行成功前，发生了宕机的现象，那么就依然会出现死锁的问题
+</code></pre><h5 id="第二种：使用redis的setnx-、get-、getset-方法，用于分布式锁，解决死锁问题"><a href="#第二种：使用redis的setnx-、get-、getset-方法，用于分布式锁，解决死锁问题" class="headerlink" title="第二种：使用redis的setnx()、get()、getset()方法，用于分布式锁，解决死锁问题"></a>第二种：使用redis的setnx()、get()、getset()方法，用于分布式锁，解决死锁问题</h5><blockquote>
+<ol>
+<li>setnx(lockkey, 当前时间+过期超时时间) ，如果返回1，则获取锁成功；如果返回0则没有获取到锁，转向2。</li>
+<li>get(lockkey)获取值oldExpireTime ，并将这个value值与当前的系统时间进行比较，如果小于当前系统时间，则认为这个锁已经超时，可以允许别的请求重新获取，转向3。</li>
+<li>计算newExpireTime=当前时间+过期超时时间，然后getset(lockkey, newExpireTime) 会返回当前lockkey的值currentExpireTime。</li>
+<li>判断currentExpireTime与oldExpireTime 是否相等，如果相等，说明当前getset设置成功，获取到了锁。如果不相等，说明这个锁又被别的请求获取走了，那么当前请求可以直接返回失败，或者继续重试。</li>
+<li>在获取到锁之后，当前线程可以开始自己的业务处理，当处理完毕后，比较自己的处理时间和对于锁设置的超时时间，如果小于锁设置的超时时间，则直接执行delete释放锁；如果大于锁设置的超时时间，则不需要再锁进行处理。</li>
+</ol>
+</blockquote>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><blockquote>
+<p>使用的是jedis来连接Redis。</p>
+</blockquote>
+<h4 id="实现思想"><a href="#实现思想" class="headerlink" title="实现思想"></a>实现思想</h4><blockquote>
+<ul>
+<li>获取锁的时候，使用setnx加锁，并使用expire命令为锁添加一个超时时间，超过该时间则自动释放锁，锁的value值为一个随机生成的UUID，通过此在释放锁的时候进行判断。</li>
+<li>获取锁的时候还设置一个获取的超时时间，若超过这个时间则放弃获取锁。</li>
+<li>释放锁的时候，通过UUID判断是不是该锁，若是该锁，则执行delete进行锁释放。</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>springboot<span class="token punctuation">.</span>lock<span class="token punctuation">.</span>redislock<span class="token punctuation">;</span>
+<span class="token keyword">import</span> redis<span class="token punctuation">.</span>clients<span class="token punctuation">.</span>jedis<span class="token punctuation">.</span>Jedis<span class="token punctuation">;</span>
+<span class="token keyword">import</span> redis<span class="token punctuation">.</span>clients<span class="token punctuation">.</span>jedis<span class="token punctuation">.</span>JedisPool<span class="token punctuation">;</span>
+<span class="token keyword">import</span> redis<span class="token punctuation">.</span>clients<span class="token punctuation">.</span>jedis<span class="token punctuation">.</span>Transaction<span class="token punctuation">;</span>
+<span class="token keyword">import</span> redis<span class="token punctuation">.</span>clients<span class="token punctuation">.</span>jedis<span class="token punctuation">.</span>exceptions<span class="token punctuation">.</span>JedisException<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>UUID<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/**
+ * @Author: ZongMan
+ * @Date: 2019-07-25
+ * @Time: 07:38
+ * @Vsersion: 1.0
+ **/</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DistributedLock</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> JedisPool jedisPool<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">DistributedLock</span><span class="token punctuation">(</span>JedisPool jedisPool<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>jedisPool <span class="token operator">=</span> jedisPool<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">/**
+     * 加锁
+     * @param localName  锁的key
+     * @param acquireTimeout  获取超时时间
+     * @param timeout   锁的超时时间
+     * @return 锁标识
+     */</span>
+    <span class="token keyword">public</span> String <span class="token function">lockWithTimeout</span><span class="token punctuation">(</span>String localName<span class="token punctuation">,</span> Long acquireTimeout<span class="token punctuation">,</span> Long timeout<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Jedis conn <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        String retIdentifier <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 获取连接</span>
+            conn <span class="token operator">=</span> jedisPool<span class="token punctuation">.</span><span class="token function">getResource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 随机生成一个value</span>
+            String identifier <span class="token operator">=</span> UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 锁名，即key值</span>
+            String lockKey <span class="token operator">=</span> <span class="token string">"lock:"</span> <span class="token operator">+</span> localName<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 超时时间，上锁后超过此时间则自动释放锁</span>
+            <span class="token keyword">int</span> lockExpire <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>timeout <span class="token operator">/</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">// 获取锁的超时时间，超过这个时间则放弃获取锁</span>
+            <span class="token keyword">long</span> end <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> acquireTimeout<span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> end<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>conn<span class="token punctuation">.</span><span class="token function">setnx</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">,</span> identifier<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    conn<span class="token punctuation">.</span><span class="token function">expire</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">,</span> lockExpire<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token comment" spellcheck="true">// 返回value值，用于释放锁时间确认</span>
+                    retIdentifier <span class="token operator">=</span> identifier<span class="token punctuation">;</span>
+                    <span class="token keyword">return</span> retIdentifier<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token comment" spellcheck="true">// 返回-1代表key没有设置超时时间，为key设置一个超时时间</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>conn<span class="token punctuation">.</span><span class="token function">ttl</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    conn<span class="token punctuation">.</span><span class="token function">expire</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">,</span> lockExpire<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">interrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">JedisException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>conn <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                conn<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> retIdentifier<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 释放锁
+     * @param lockName 锁的key
+     * @param identifier    释放锁的标识
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">releaseLock</span><span class="token punctuation">(</span>String lockName<span class="token punctuation">,</span> String identifier<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Jedis conn <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        String lockKey <span class="token operator">=</span> <span class="token string">"lock:"</span> <span class="token operator">+</span> lockName<span class="token punctuation">;</span>
+        <span class="token keyword">boolean</span> retFlag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            conn <span class="token operator">=</span> jedisPool<span class="token punctuation">.</span><span class="token function">getResource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// 监视lock，准备开始事务</span>
+                conn<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">// 通过前面返回的value值判断是不是该锁，若是该锁，则删除，释放锁</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>identifier<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>conn<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    Transaction transaction <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">multi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    transaction<span class="token punctuation">.</span><span class="token function">del</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    List<span class="token operator">&lt;</span>Object<span class="token operator">></span> results <span class="token operator">=</span> transaction<span class="token punctuation">.</span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>results <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    retFlag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                conn<span class="token punctuation">.</span><span class="token function">unwatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">JedisException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>conn <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                conn<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> retFlag<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>测试分布式锁；<br>例子中使用50个线程模拟秒杀一个商品，使用–运算符来实现商品减少，从结果有序性就可以看出是否为加锁状态。</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>springboot<span class="token punctuation">.</span>lock<span class="token punctuation">.</span>redislock<span class="token punctuation">;</span>
+<span class="token keyword">import</span> redis<span class="token punctuation">.</span>clients<span class="token punctuation">.</span>jedis<span class="token punctuation">.</span>JedisPool<span class="token punctuation">;</span>
+<span class="token keyword">import</span> redis<span class="token punctuation">.</span>clients<span class="token punctuation">.</span>jedis<span class="token punctuation">.</span>JedisPoolConfig<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/**
+ * @Author: ZongMan
+ * @Date: 2019-07-24
+ * @Time: 21:54
+ * @Vsersion: 1.0
+ **/</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedisService</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> JedisPool pool <span class="token operator">=</span> null<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        JedisPoolConfig config <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JedisPoolConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 设置最大连接数</span>
+        config<span class="token punctuation">.</span><span class="token function">setMaxTotal</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 设置最大空闲数</span>
+        config<span class="token punctuation">.</span><span class="token function">setMaxIdle</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 设置最大等待时间</span>
+        config<span class="token punctuation">.</span><span class="token function">setMaxWaitMillis</span><span class="token punctuation">(</span><span class="token number">1000</span> <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 在borrow一个jedis实例时，是否需要验证，若为true，则所有jedis实例均是可用的</span>
+        config<span class="token punctuation">.</span><span class="token function">setTestOnBorrow</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pool <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JedisPool</span><span class="token punctuation">(</span>config<span class="token punctuation">,</span> <span class="token string">"127.0.0.1"</span><span class="token punctuation">,</span> <span class="token number">6379</span><span class="token punctuation">,</span> <span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    DistributedLock lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DistributedLock</span><span class="token punctuation">(</span>pool<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n <span class="token operator">=</span> <span class="token number">500</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">seckill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 返回锁的value值，供释放锁时候进行判断</span>
+        String indentifier <span class="token operator">=</span> lock<span class="token punctuation">.</span><span class="token function">lockWithTimeout</span><span class="token punctuation">(</span><span class="token string">"resource"</span><span class="token punctuation">,</span> 5000L<span class="token punctuation">,</span> 1000L<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"获得了锁"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token operator">--</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        lock<span class="token punctuation">.</span><span class="token function">releaseLock</span><span class="token punctuation">(</span><span class="token string">"resource"</span><span class="token punctuation">,</span> indentifier<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="基于ZooKeeper实现分布式锁"><a href="#基于ZooKeeper实现分布式锁" class="headerlink" title="基于ZooKeeper实现分布式锁"></a>基于ZooKeeper实现分布式锁</h3><blockquote>
+<p>ZooKeeper是一个分布式的，开放源码的<strong>分布式应用程序协调服务</strong>，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是<strong>一个为分布式应用提供一致性服务的软件</strong>，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</p>
+<p>ZooKeeper的架构通过<strong>冗余服务</strong>实现高可用性。因此，如果第一次无应答，客户端就可以询问另一台ZooKeeper主机。ZooKeeper节点将它们的数据存储于一个<strong>分层的命名空间</strong>，非常类似于一个文件系统或一个前缀树结构。客户端可以在节点读写，从而以这种方式拥有一个共享的配置服务。更新是全序的。</p>
+</blockquote>
+<h4 id="基于ZooKeeper分布式锁的流程"><a href="#基于ZooKeeper分布式锁的流程" class="headerlink" title="基于ZooKeeper分布式锁的流程"></a>基于ZooKeeper分布式锁的流程</h4><blockquote>
+<ul>
+<li>在zookeeper指定节点（locks）下创建临时顺序节点node_n</li>
+<li>获取locks下所有子节点children</li>
+<li>对子节点按节点自增序号从小到大排序</li>
+<li>判断本节点是不是第一个子节点，若是，则获取锁；若不是，则监听比该节点小的那个节点的删除事件</li>
+<li>若监听事件生效，则回到第二步重新进行判断，直到获取到锁</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>这里推荐一个Apache的开源库Curator，它是一个ZooKeeper客户端，Curator提供的InterProcessMutex是分布式锁的实现，acquire方法用于获取锁，release方法用于释放锁。</p>
+<p>优点：具备高可用、可重入、阻塞锁特性，可解决失效死锁问题。<br>缺点：因为需要频繁的创建和删除节点，性能上不如Redis方式。</p>
+<p>使用zookeeper的<strong>可靠性和稳定性</strong>是要大于使用redis实现的分布式锁的，但是相比而言，redis的<strong>性能</strong>更好。</p>
+</blockquote>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><blockquote>
+<p>下面就具体使用java和zookeeper实现分布式锁，操作zookeeper使用的是apache提供的zookeeper的包。</p>
+<ul>
+<li>通过实现Watch接口，实现process(WatchedEvent event)方法来实施监控，使CountDownLatch来完成监控，在等待锁的时候使用CountDownLatch来计数，等到后进行countDown，停止等待，继续运行。</li>
+<li>以下整体流程基本与上述描述流程一致，只是在监听的时候使用的是CountDownLatch来监听前一个节点。</li>
+</ul>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/07/24/java-fen-bu-shi-suo-san-chong-shi-xian-fang-an/" class="b-link-green">Java分布式锁三种实现方案</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/26/shu-ju-jie-gou-dan-lian-biao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="数据结构——单链表">
+                        
+                        <span class="card-title">数据结构——单链表</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">数据结构—单链表一、什么是链表？
+​        链表是一种最常见的数据结构，其内部数据呈线性排列，属于线性表结构，什么是线性表？表中的数据按顺序依次排列，就像用一条线把数据串联起来一样。
+
+
+
+​        链表就是这种排布方式，特</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/数据结构/" class="post-category" target="_blank">
+                                    数据结构
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/单链表/" target="_blank">
+                        <span class="chip bg-color">单链表</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/21/mac-xia-an-zhuang-kafka/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="Mac下安装Kafka">
+                        
+                        <span class="card-title">Mac下安装Kafka</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Mac下安装Kafka
+使用brew安装
+
+
+安装完之后，安装目录为：
+# kafka安装目录
+/usr/local/Cellar/kafka/2.2.1
+
+# 配置文件目录
+/usr/local/etc/kafka/
+
+如果需要修改配置，</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/中间件/" class="post-category" target="_blank">
+                                    中间件
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MQ/" target="_blank">
+                        <span class="chip bg-color">MQ</span>
+                    </a>
+                    
+                    <a href="/tags/kafka/" target="_blank">
+                        <span class="chip bg-color">kafka</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">159.6k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

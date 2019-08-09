@@ -1,0 +1,594 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="数据结构——单链表, 晓笙的BLOG">
+    <meta name="description" content="数据结构—单链表一、什么是链表？
+​        链表是一种最常见的数据结构，其内部数据呈线性排列，属于线性表结构，什么是线性表？表中的数据按顺序依次排列，就像用一条线把数据串联起来一样。
+
+
+
+​        链表就是这种排布方式，特">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>数据结构——单链表 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        数据结构——单链表
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/单链表/" target="_blank">
+                                <span class="chip bg-color">单链表</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/数据结构/" class="post-category" target="_blank">
+                                数据结构
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-07-26
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.3k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        4 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="数据结构—单链表"><a href="#数据结构—单链表" class="headerlink" title="数据结构—单链表"></a>数据结构—单链表</h1><h3 id="一、什么是链表？"><a href="#一、什么是链表？" class="headerlink" title="一、什么是链表？"></a>一、什么是链表？</h3><blockquote>
+<p>​        链表是一种最常见的数据结构，其内部数据呈线性排列，属于线性表结构，什么是线性表？表中的数据按顺序依次排列，就像用一条线把数据串联起来一样。</p>
+</blockquote>
+<p><img src="/Volumes/work/hexo/source/_posts/数据结构——单链表/001.png" alt></p>
+<blockquote>
+<p>​        链表就是这种排布方式，特点是添加数据和删除数据速度快，但是查询数据会比较耗时，这是因为链表在内存中的存储结构造成的。</p>
+<p>​        这里我们可以将数组与链表进行对比，数组大家应该都很熟悉，学过 Java 的都会用，但是你真的了解它在内存中的存储结构吗？数组的特点是查询数据很快，添加数据和删除数据效率低，这一特征与链表恰好相反，数组的缺陷正是链表的优势，数组的优势则是链表的缺陷，所以二者对比着来记，效果会更好。</p>
+<p>​        来说说为什么数组和链表的特点恰好相反，首先来看看二者在内存中的存储结构。</p>
+<p>​        数组和链表都是线性表结构，数组在内存中是一串连续的内存空间，比如定义一个 int 类型数组，int[] array = new int[6]，计算机会为 array 分配一块连续的空间，如下图所示。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/002.png" alt></p>
+<blockquote>
+<p>​        1000-1003 这段空间用来存储数组中的第一个元素 array[0]，1004-1007 的空间用来存储 array[1]，以此类推数组中的每个元素都对应一块大小为 4 byte 的空间，这种结构就决定了数组查询数据速度很快，只需要知道首地址（在栈内存中记录的就是数组的首地址，可以直接获取），再结合寻址公式就可以很快找到对应元素的地址，从而取出数据。</p>
+<p>数组的寻址公式：i_address = first_address + data_size*i</p>
+<p>​        带入上述案例中，比如要找到数组中第 3 个元素，也就是下标为 2 ，该元素的首地址即 2_address = 1000 + 2*4 = 1008，计算机只需要执行一个简单的数学运算就可以找到元素的首地址，进而取出对应的值，对于计算机来讲，简单数学运算的耗时几乎可以忽略不计，所以数组查询数据速度非常快。</p>
+<p>​        也正是因为这种结构导致数组添加和删除数据效率很低，因为这两种操作不仅仅是在数组中添加或者移除一个元素那么简单，同时还需要移动其他已存在的元素。</p>
+<p>​        数组中各个元素的内存地址都是连续，不间断的，删除某个元素之后需要保证数组仍然是连续的，所以就需要移动数据，比如要删除 array[2]，删除之后需要依次将 array[3]、array[4]、array[5] 向前移动一位，如下图所示。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/003.png" alt></p>
+<blockquote>
+<p>同理，如果此时将 0 添加到数组中的第 2 位，即 array[1] 的位置，同样需要先将 array[1] 及其之后的各个元素依次向后移动 1 位，给新数据腾出位置才能添加，如下图所示。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/004.png" alt></p>
+<blockquote>
+<p>因为要移动元素，所以无论是添加数据还是删除数据，效率都不高。</p>
+<p>搞清楚数组的存储结构之后，我们再来看看链表的存储结构，在内存中，链表中的数据是分散的，无须存储在一块连续的内存空间中，如下图所示。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/005.png" alt></p>
+<blockquote>
+<p>链表中存储了 3 个元素分别是 1、2、3，每个元素都有一个指针，指向下一个元素的内存地址，1 的指针就指向 2 的内存地址 1008，2 的指针就指向 3 的内存地址 1020，依次类推。</p>
+<p>不同元素之间的物理空间间隔也是不确定的，所以这样的结构就无法通过一个固定的公式来求出某个元素的内存地址，只能从首元素开始依次向后查找，直到找到目标元素。如果目标元素位于链表的最后一位，则需要遍历整个链表才能找到它，效率很低。</p>
+<p>同样，正是因为这样的结构，使得链表添加和删除元素效率很高，无须移动其他已存在的元素，只需要修改元素指针即可。比如，删除 2，则只需要将 1 的指针指向 3 即可，如下图所示。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/006.png" alt></p>
+<blockquote>
+<p>添加元素也是一样，要在 2 和 3 之间添加元素 0 ，只需要随机分配一块空间存储 0，然后将 2 的指针指向 0，0 的指针指向 3 即可，如下图所示。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/007.png" alt></p>
+<blockquote>
+<p>所以在链表中，无论是添加还是删除元素，都只需要修改相关节点的指针即可，效率很高。</p>
+<p>搞清楚链表的结构之后，我们使用 Java 语言来实现一个单链表的结构。</p>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/07/26/shu-ju-jie-gou-dan-lian-biao/" class="b-link-green">数据结构——单链表</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/07/29/springboot-wu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="SpringBoot（五）">
+                        
+                        <span class="card-title">SpringBoot（五）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Springboot整合sharding-jdbc中间件，实现数据分库分表一、什么sharding-jdbc
+当当开源的，属于 client 层方案，目前已经更名为 [ShardingSphere]。确实之前用的还比较多一些，因为 SQL </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
+                                    SpringBoot
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/springboot2-0/" target="_blank">
+                        <span class="chip bg-color">springboot2.0</span>
+                    </a>
+                    
+                    <a href="/tags/sharding-jdbc/" target="_blank">
+                        <span class="chip bg-color">sharding-jdbc</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/07/24/java-fen-bu-shi-suo-san-chong-shi-xian-fang-an/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java分布式锁三种实现方案">
+                        
+                        <span class="card-title">Java分布式锁三种实现方案</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Java分布式锁三种实现方案方案一：数据库乐观锁
+​        乐观锁通常实现基于数据版本(version)的记录机制实现的，比如有一张红包表（t_bonus），有一个字段(left_count)记录礼物的剩余个数，用户每领取一个奖品，</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/分布式/" class="post-category" target="_blank">
+                                    分布式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/乐观锁/" target="_blank">
+                        <span class="chip bg-color">乐观锁</span>
+                    </a>
+                    
+                    <a href="/tags/redis/" target="_blank">
+                        <span class="chip bg-color">redis</span>
+                    </a>
+                    
+                    <a href="/tags/zookeeper/" target="_blank">
+                        <span class="chip bg-color">zookeeper</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">159.6k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

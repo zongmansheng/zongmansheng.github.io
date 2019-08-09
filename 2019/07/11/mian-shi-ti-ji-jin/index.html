@@ -269,14 +269,14 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        5.2k
+                        7.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        19 分
+                        28 分
                     </div>
                     
                 
@@ -501,17 +501,43 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 </blockquote>
 </li>
 </ol>
-<ol>
-<li>如何将字符串反转？</li>
-<li>String 类的常用方法都有那些？</li>
-<li>抽象类必须要有抽象方法吗？</li>
-<li>普通类和抽象类有哪些区别？</li>
-<li>抽象类能使用 final 修饰吗？</li>
-<li>接口和抽象类有什么区别？</li>
-<li>java 中 IO 流分为几种？</li>
-<li>BIO、NIO、AIO 有什么区别？</li>
-<li>Files的常用方法都有哪些？</li>
+<h4 id="11、如何将字符串反转？"><a href="#11、如何将字符串反转？" class="headerlink" title="11、如何将字符串反转？"></a>11、如何将字符串反转？</h4><h4 id="12、String-类的常用方法都有那些？"><a href="#12、String-类的常用方法都有那些？" class="headerlink" title="12、String 类的常用方法都有那些？"></a>12、String 类的常用方法都有那些？</h4><h4 id="13、抽象类必须要有抽象方法吗？"><a href="#13、抽象类必须要有抽象方法吗？" class="headerlink" title="13、抽象类必须要有抽象方法吗？"></a>13、抽象类必须要有抽象方法吗？</h4><h4 id="14、普通类和抽象类有哪些区别？"><a href="#14、普通类和抽象类有哪些区别？" class="headerlink" title="14、普通类和抽象类有哪些区别？"></a>14、普通类和抽象类有哪些区别？</h4><h4 id="15、抽象类能使用-final-修饰吗？"><a href="#15、抽象类能使用-final-修饰吗？" class="headerlink" title="15、抽象类能使用 final 修饰吗？"></a>15、抽象类能使用 final 修饰吗？</h4><h4 id="16、接口和抽象类有什么区别？"><a href="#16、接口和抽象类有什么区别？" class="headerlink" title="16、接口和抽象类有什么区别？"></a>16、接口和抽象类有什么区别？</h4><h4 id="17、java-中-IO-流分为几种？"><a href="#17、java-中-IO-流分为几种？" class="headerlink" title="17、java 中 IO 流分为几种？"></a>17、java 中 IO 流分为几种？</h4><h4 id="18、BIO、NIO、AIO-有什么区别？"><a href="#18、BIO、NIO、AIO-有什么区别？" class="headerlink" title="18、BIO、NIO、AIO 有什么区别？"></a>18、BIO、NIO、AIO 有什么区别？</h4><h4 id="19、Files的常用方法都有哪些？"><a href="#19、Files的常用方法都有哪些？" class="headerlink" title="19、Files的常用方法都有哪些？"></a>19、Files的常用方法都有哪些？</h4><h4 id="20、Arraylist-与-LinkedList-异同"><a href="#20、Arraylist-与-LinkedList-异同" class="headerlink" title="20、Arraylist 与 LinkedList 异同"></a>20、Arraylist 与 LinkedList 异同</h4><blockquote>
+<ul>
+<li><ol>
+<li>是否保证线程安全：** ArrayList 和 LinkedList 都是不同步的，也就是不保证线程安全；</li>
 </ol>
+</li>
+<li><strong>2. 底层数据结构：</strong> Arraylist 底层使用的是Object数组；LinkedList 底层使用的是双向链表数据结构（JDK1.6之前为循环链表，JDK1.7取消了循环。注意双向链表和双向循环链表的区别：）； 详细可阅读<a href="https://www.cnblogs.com/xingele0917/p/3696593.html" target="_blank" rel="noopener">JDK1.7-LinkedList循环链表优化</a></li>
+<li><strong>3. 插入和删除是否受元素位置的影响：</strong> ① <strong>ArrayList 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。</strong> 比如：执行<code>add(E e)</code>方法的时候， ArrayList 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 ② <strong>LinkedList 采用链表存储，所以插入，删除元素时间复杂度不受元素位置的影响，都是近似 O（1）而数组为近似 O（n）。</strong></li>
+<li><strong>4. 是否支持快速随机访问：</strong> LinkedList 不支持高效的随机元素访问，而 ArrayList 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</li>
+<li><strong>5. 内存空间占用：</strong> ArrayList的空 间浪费主要体现在在list列表的结尾会预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗比ArrayList更多的空间（因为要存放直接后继和直接前驱以及数据）。 </li>
+<li>补充内容:RandomAccess接口**</li>
+</ul>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">RandomAccess</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>查看源码我们发现实际上 RandomAccess 接口中什么都没有定义。所以，在我看来 RandomAccess 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
+<p>在binarySearch（）方法中，它要判断传入的list 是否RamdomAccess的实例，如果是，调用indexedBinarySearch（）方法，如果不是，那么调用iteratorBinarySearch（）方法</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span>
+    <span class="token keyword">int</span> <span class="token function">binarySearch</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Comparable</span><span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">>></span> list<span class="token punctuation">,</span> T key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>list <span class="token keyword">instanceof</span> <span class="token class-name">RandomAccess</span> <span class="token operator">||</span> list<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&lt;</span>BINARYSEARCH_THRESHOLD<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> Collections<span class="token punctuation">.</span><span class="token function">indexedBinarySearch</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            <span class="token keyword">return</span> Collections<span class="token punctuation">.</span><span class="token function">iteratorBinarySearch</span><span class="token punctuation">(</span>list<span class="token punctuation">,</span> key<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>ArraysList 实现了 RandomAccess 接口， 而 LinkedList 没有实现。为什么呢？我觉得还是和底层数据结构有关！ArraysList 底层是数组，而 LinkedList 底层是链表。数组天然支持随机访问，时间复杂度为 O（1），所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O（n），所以不支持快速随机访问。，ArraysList 实现了 RandomAccess 接口，就表明了他具有快速随机访问功能。 RandomAccess 接口只是标识，并不是说 ArraysList 实现 RandomAccess 接口才具有快速随机访问功能的！</p>
+<p><strong>下面再总结一下 list 的遍历方式选择：</strong></p>
+<ul>
+<li>实现了RandomAccess接口的list，优先选择普通for循环 ，其次foreach,</li>
+<li>未实现RandomAccess接口的ist， 优先选择iterator遍历（foreach遍历底层也是通过iterator实现的），大size的数据，千万不要使用普通for循环</li>
+</ul>
+<h3 id="补充：数据结构基础之双向链表"><a href="#补充：数据结构基础之双向链表" class="headerlink" title="补充：数据结构基础之双向链表"></a>补充：数据结构基础之双向链表</h3><p>双向链表也叫双链表，是链表的一种，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表，如下图所示，同时下图也是LinkedList 底层使用的是双向循环链表数据结构。</p>
+</blockquote>
 <h3 id="二、容器"><a href="#二、容器" class="headerlink" title="二、容器"></a>二、容器</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/002.png" alt></p>
 <ol>
 <li>java 容器都有哪些？</li>
@@ -725,21 +751,66 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 </ol>
 <h3 id="十八、Redis"><a href="#十八、Redis" class="headerlink" title="十八、Redis"></a>十八、Redis</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/018.png" alt></p>
 <ol>
-<li>redis 是什么？都有哪些使用场景？</li>
-<li>redis 有哪些功能？</li>
-<li>redis 和 memecache 有什么区别？</li>
-<li>redis 为什么是单线程的？</li>
-<li>什么是缓存穿透？怎么解决？</li>
-<li>redis 支持的数据类型有哪些？</li>
-<li>redis 支持的 java 客户端都有哪些？</li>
-<li>jedis 和 redisson 有哪些区别？</li>
-<li>怎么保证缓存和数据库数据的一致性？</li>
-<li>redis 持久化有几种方式？</li>
-<li>redis 怎么实现分布式锁？</li>
-<li>redis 分布式锁有什么缺陷？</li>
-<li>redis 如何做内存优化？</li>
-<li>redis 淘汰策略有哪些？</li>
-<li>redis 常见的性能问题有哪些？该如何解决？</li>
+<li><h4 id="redis-是什么？都有哪些使用场景？"><a href="#redis-是什么？都有哪些使用场景？" class="headerlink" title="redis 是什么？都有哪些使用场景？"></a>redis 是什么？都有哪些使用场景？</h4><blockquote>
+<p>Redis 的全称是：Remote Dictionary.Server，本质上是一个 Key-Value 类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据 flush 到硬盘上进行保存。因为是纯内存操作，Redis 的性能非常出色，每秒可以处理超过 10 万次读写操作，是已知性能最快的Key-Value DB。</p>
+<p>Redis 的出色之处不仅仅是性能，Redis 最大的魅力是支持保存多种数据结构，此外单个 value 的最大限制是 1GB，不像 memcached 只能保存 1MB 的数据，因此 Redis 可以用来实现很多有用的功能。</p>
+<p>比方说用他的 List 来做 FIFO 双向链表，实现一个轻量级的高性 能消息队列服务，用他的 Set 可以做高性能的 tag 系统等等。</p>
+<p>另外 Redis 也可以对存入的 Key-Value 设置 expire 时间，因此也可以被当作一 个功能加强版的memcached 来用。 Redis 的主要缺点是数据库容量受到物理内存的限制，不能用作海量数据的高性能读写，因此 Redis 适合的场景主要局限在较小数据量的高性能操作和运算上。</p>
+</blockquote>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><h5 id="（1）会话缓存（Session-Cache）"><a href="#（1）会话缓存（Session-Cache）" class="headerlink" title="（1）会话缓存（Session Cache）"></a>（1）会话缓存（Session Cache）</h5><blockquote>
+<p>最常用的一种使用 Redis 的情景是会话缓存（sessioncache），用 Redis 缓存会话比其他存储（如Memcached）的优势在于：Redis 提供持久化。当维护一个不是严格要求一致性的缓存时，如果用户的购物车信息全部丢失，大部分人都会不高兴的，现在，他们还会这样吗？</p>
+<p>幸运的是，随着 Redis 这些年的改进，很容易找到怎么恰当的使用 Redis 来缓存会话的文档。甚至广为人知的商业平台 Magento 也提供 Redis 的插件。</p>
+</blockquote>
+<h5 id="2）全页缓存（FPC）"><a href="#2）全页缓存（FPC）" class="headerlink" title="(2）全页缓存（FPC）"></a>(2）全页缓存（FPC）</h5><blockquote>
+<p>除基本的会话 token 之外，Redis 还提供很简便的 FPC 平台。回到一致性问题，即使重启了 Redis 实例，因为有磁盘的持久化，用户也不会看到页面加载速度的下降，这是一个极大改进，类似 PHP 本地FPC。</p>
+<p>再次以 Magento 为例，Magento 提供一个插件来使用 Redis 作为全页缓存后端。</p>
+<p>此外，对 WordPress 的用户来说，Pantheon 有一个非常好的插件 wp-redis，这个插件能帮助你以最快速度加载你曾浏览过的页面。</p>
+</blockquote>
+<h5 id="（3）队列"><a href="#（3）队列" class="headerlink" title="（3）队列"></a>（3）队列</h5><blockquote>
+<p>Reids 在内存存储引擎领域的一大优点是提供 list 和 set 操作，这使得 Redis 能作为一个很好的消息队列平台来使用。Redis 作为队列使用的操作，就类似于本地程序语言（如 Python）对 list 的 push/pop操作。</p>
+<p>如果你快速的在 Google 中搜索“Redis queues”，你马上就能找到大量的开源项目，这些项目的目的就是利用 Redis 创建非常好的后端工具，以满足各种队列需求。例如，Celery 有一个后台就是使用Redis 作为 broker，你可以从这里去查看。</p>
+</blockquote>
+<h5 id="4）排行榜-计数器"><a href="#4）排行榜-计数器" class="headerlink" title="(4）排行榜/计数器"></a>(4）排行榜/计数器</h5><blockquote>
+<p>Redis 在内存中对数字进行递增或递减的操作实现的非常好。集合（Set）和有序集合（SortedSet）也使得我们在执行这些操作的时候变的非常简单，Redis 只是正好提供了这两种数据结构。</p>
+<p>所以，我们要从排序集合中获取到排名最靠前的 10 个用户–我们称之为“user_scores”，我们只需要像下面一样执行即可：</p>
+<p>当然，这是假定你是根据你用户的分数做递增的排序。如果你想返回用户及用户的分数，你需要这样执行：</p>
+<p>ZRANGE user_scores 0 10 WITHSCORESAgora Games 就是一个很好的例子，用 Ruby 实现的，它的排行榜就是使用 Redis 来存储数据的，你可以在这里看到。</p>
+</blockquote>
+<h5 id="（5）发布-订阅"><a href="#（5）发布-订阅" class="headerlink" title="（5）发布/订阅"></a>（5）发布/订阅</h5><blockquote>
+<p>Redis 的发布/订阅功能。发布/订阅的使用场景确实非常多。我已看见人们在社交网络连接中使用，还可作为基于发布/订阅的脚本触发器，甚至用 Redis 的发布/订阅功能来建立聊天系统！</p>
+</blockquote>
+</li>
+<li><h4 id="redis-有哪些功能？"><a href="#redis-有哪些功能？" class="headerlink" title="redis 有哪些功能？"></a>redis 有哪些功能？</h4></li>
+<li><h4 id="redis-和-memecache-有什么区别？"><a href="#redis-和-memecache-有什么区别？" class="headerlink" title="redis 和 memecache 有什么区别？"></a>redis 和 memecache 有什么区别？</h4><blockquote>
+<ul>
+<li>memcached 所有的值均是简单的字符串，redis 作为其替代者，支持更为丰富的数据类型</li>
+<li>redis 的速度比 memcached 快很多 redis 的速度比 memcached 快很多</li>
+<li>redis 可以持久化其数据 redis 可以持久化其数据</li>
+</ul>
+</blockquote>
+</li>
+<li><h4 id="redis-为什么是单线程的？"><a href="#redis-为什么是单线程的？" class="headerlink" title="redis 为什么是单线程的？"></a>redis 为什么是单线程的？</h4></li>
+<li><h4 id="什么是缓存穿透？怎么解决？"><a href="#什么是缓存穿透？怎么解决？" class="headerlink" title="什么是缓存穿透？怎么解决？"></a>什么是缓存穿透？怎么解决？</h4></li>
+<li><h4 id="redis-支持的数据类型有哪些？"><a href="#redis-支持的数据类型有哪些？" class="headerlink" title="redis 支持的数据类型有哪些？"></a>redis 支持的数据类型有哪些？</h4><blockquote>
+<p>String、List、Set、Sorted Set、hashes</p>
+</blockquote>
+</li>
+<li><h4 id="redis-支持的-java-客户端都有哪些？"><a href="#redis-支持的-java-客户端都有哪些？" class="headerlink" title="redis 支持的 java 客户端都有哪些？"></a>redis 支持的 java 客户端都有哪些？</h4><blockquote>
+<p>Redisson、Jedis、lettuce 等等，官方推荐使用 Redisson。</p>
+</blockquote>
+</li>
+<li><h4 id="jedis-和-redisson-有哪些区别？"><a href="#jedis-和-redisson-有哪些区别？" class="headerlink" title="jedis 和 redisson 有哪些区别？"></a>jedis 和 redisson 有哪些区别？</h4><blockquote>
+<p>Jedis 是 Redis 的 Java 实现的客户端，其 API 提供了比较全面的 Redis 命令的支持；</p>
+<p>Redisson 实现了分布式和可扩展的 Java 数据结构，和 Jedis 相比，功能较为简单，不支持字符串操作，不支持排序、事务、管道、分区等 Redis 特性。Redisson 的宗旨是促进使用者对 Redis 的关注分离，从而让使用者能够将精力更集中地放在处理业务逻辑上。</p>
+</blockquote>
+</li>
+<li><h4 id="怎么保证缓存和数据库数据的一致性？"><a href="#怎么保证缓存和数据库数据的一致性？" class="headerlink" title="怎么保证缓存和数据库数据的一致性？"></a>怎么保证缓存和数据库数据的一致性？</h4></li>
+<li><h4 id="redis-持久化有几种方式？"><a href="#redis-持久化有几种方式？" class="headerlink" title="redis 持久化有几种方式？"></a>redis 持久化有几种方式？</h4></li>
+<li><h4 id="redis-怎么实现分布式锁？"><a href="#redis-怎么实现分布式锁？" class="headerlink" title="redis 怎么实现分布式锁？"></a>redis 怎么实现分布式锁？</h4></li>
+<li><h4 id="redis-分布式锁有什么缺陷？"><a href="#redis-分布式锁有什么缺陷？" class="headerlink" title="redis 分布式锁有什么缺陷？"></a>redis 分布式锁有什么缺陷？</h4></li>
+<li><h4 id="redis-如何做内存优化？"><a href="#redis-如何做内存优化？" class="headerlink" title="redis 如何做内存优化？"></a>redis 如何做内存优化？</h4></li>
+<li><h4 id="redis-淘汰策略有哪些？"><a href="#redis-淘汰策略有哪些？" class="headerlink" title="redis 淘汰策略有哪些？"></a>redis 淘汰策略有哪些？</h4></li>
+<li><h4 id="redis-常见的性能问题有哪些？该如何解决？"><a href="#redis-常见的性能问题有哪些？该如何解决？" class="headerlink" title="redis 常见的性能问题有哪些？该如何解决？"></a>redis 常见的性能问题有哪些？该如何解决？</h4></li>
 </ol>
 <h3 id="十九、JVM"><a href="#十九、JVM" class="headerlink" title="十九、JVM"></a>十九、JVM</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/019.png" alt></p>
 <ol>
@@ -918,7 +989,7 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（</div>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">135.4k</span>
+                <span class="white-color">159.6k</span>
             
 
             
