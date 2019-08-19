@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zongmansheng.club/"/>
-  <updated>2019-08-19T02:57:16.197Z</updated>
+  <updated>2019-08-19T14:46:47.032Z</updated>
   <id>http://zongmansheng.club/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SpringBoot（七）</title>
+    <link href="http://zongmansheng.club/2019/08/19/springboot-qi/"/>
+    <id>http://zongmansheng.club/2019/08/19/springboot-qi/</id>
+    <published>2019-08-19T14:46:47.000Z</published>
+    <updated>2019-08-19T14:46:47.032Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>SpringCloud（七）</title>
@@ -491,31 +505,6 @@
     
     
       <category term="Nginx，负载均衡" scheme="http://zongmansheng.club/tags/Nginx%EF%BC%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mac下安装Redis</title>
-    <link href="http://zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/"/>
-    <id>http://zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/</id>
-    <published>2019-07-09T03:41:35.000Z</published>
-    <updated>2019-07-16T13:37:43.023Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Mac下安装Redis"><a href="#Mac下安装Redis" class="headerlink" title="Mac下安装Redis"></a>Mac下安装Redis</h1><h4 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h4><blockquote><p>打开官网：<a href="https://redis.io/" target="_blank" rel="noopener">https://redis.io/</a></p><p>这里下载的是最新版本</p></blockquote><p><img src="//zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/001.png" alt></p><h4 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h4><blockquote><p>下载完成后，打开命令行工具，执行解压命令</p></blockquote><pre><code>tar zxvf redis-5.0.5.tar.gz</code></pre><blockquote><p>将解压后文件夹放到/usr/local</p></blockquote><pre><code>mv redis-5.0.5 /usr/local/</code></pre><blockquote><p>切换到相应目录</p></blockquote><pre><code>cd /usr/local/redis-5.0.5/</code></pre><blockquote><p>编译测试</p></blockquote><pre><code>sudo make test</code></pre><p><img src="//zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/002.png" alt></p><blockquote><p>编译安装</p></blockquote><pre><code>sudo make install</code></pre><p><img src="//zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/003.png" alt></p><blockquote><p>启动Redis</p></blockquote><pre><code>redis-server</code></pre><p><img src="//zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/004.png" alt></p><h4 id="3-配置"><a href="#3-配置" class="headerlink" title="3.配置"></a>3.配置</h4><blockquote><p>在redis目录下建立bin，etc，db三个目录</p></blockquote><p><img src="//zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/005.png" alt></p><blockquote><p>拷贝 redis.conf 到 /usr/local/redis/etc下</p></blockquote><pre><code>cp /usr/local/redis/redis.conf /usr/local/redis/etc/</code></pre><blockquote><p>把/usr/local/redis/src目录下的mkreleasehdr.sh，redis-benchmark， redis-check-rdb， redis-cli， redis-server拷贝到bin目录</p></blockquote><pre><code>cp redis-benchmark /usr/local/redis/bin/cp redis-check-rdb /usr/local/redis/bin/cp redis-cli /usr/local/redis/bin/cp redis-server /usr/local/redis/bin/</code></pre><blockquote><p>修改redis.conf</p></blockquote><pre class=" language-xml"><code class="language-xml">#修改为守护模式daemonize yes#设置进程锁文件pidfile /usr/local/redis/redis.pid#端口port 6379#客户端超时时间timeout 300#日志级别loglevel debug#日志文件位置logfile /usr/local/redis/log-redis.log#设置数据库的数量，默认数据库为0，可以使用SELECT <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dbid</span><span class="token punctuation">></span></span>命令在连接上指定数据库iddatabases 16##指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合#save <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>seconds</span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>changes</span><span class="token punctuation">></span></span>#Redis默认配置文件中提供了三个条件：save 900 1save 300 10save 60 10000#指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，如果为了节省CPU时间，#可以关闭该#选项，但会导致数据库文件变的巨大rdbcompression yes#指定本地数据库文件名dbfilename dump.rdb#指定本地数据库路径dir /usr/local/redis/db/#指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能#会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有#的数据会在一段时间内只存在于内存中appendonly no#指定更新日志条件，共有3个可选值：#no：表示等操作系统进行数据缓存同步到磁盘（快）#always：表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全）#everysec：表示每秒同步一次（折衷，默认值）appendfsync everysec</code></pre><blockquote><p>启动服务</p></blockquote><pre><code>./bin/redis-server etc/redis.conf</code></pre><p><img src="//zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/007.png" alt></p><blockquote><p>查看日志</p></blockquote><pre><code>tail -f log-redis.log</code></pre><blockquote><p>打开redis客户端</p></blockquote><pre><code>./bin/redis-cli</code></pre><p><img src="//zongmansheng.club/2019/07/09/mac-xia-an-zhuang-redis/008.png" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Mac下安装Redis&quot;&gt;&lt;a href=&quot;#Mac下安装Redis&quot; class=&quot;headerlink&quot; title=&quot;Mac下安装Redis&quot;&gt;&lt;/a&gt;Mac下安装Redis&lt;/h1&gt;&lt;h4 id=&quot;1-下载&quot;&gt;&lt;a href=&quot;#1-下载&quot; class=&quot;
-      
-    
-    </summary>
-    
-      <category term="中间件" scheme="http://zongmansheng.club/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-    
-      <category term="Redis" scheme="http://zongmansheng.club/tags/Redis/"/>
     
   </entry>
   
