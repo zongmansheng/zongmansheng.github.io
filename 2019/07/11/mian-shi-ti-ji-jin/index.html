@@ -269,14 +269,14 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        7.5k
+                        9.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        28 分
+                        33 分
                     </div>
                     
                 
@@ -538,6 +538,29 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 </ul>
 <h3 id="补充：数据结构基础之双向链表"><a href="#补充：数据结构基础之双向链表" class="headerlink" title="补充：数据结构基础之双向链表"></a>补充：数据结构基础之双向链表</h3><p>双向链表也叫双链表，是链表的一种，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表，如下图所示，同时下图也是LinkedList 底层使用的是双向循环链表数据结构。</p>
 </blockquote>
+<h4 id="21、Object类中方法总结：基于Java8"><a href="#21、Object类中方法总结：基于Java8" class="headerlink" title="21、Object类中方法总结：基于Java8"></a>21、Object类中方法总结：基于Java8</h4><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/024.png" alt></p>
+<blockquote>
+<h5 id="hashcode"><a href="#hashcode" class="headerlink" title="hashcode()"></a>hashcode()</h5><p>hashCode()方法返回的就是一个数值，从方法的名称上就可以看出，其目的是生成一个hash码。hash码的主要用途就是在对对象进行散列的时候作为key输入，据此很容易推断出，我们需要每个对象的hash码尽可能不同，这样才能保证散列的存取性能。哈希算法也称为散列算法，是将数据依特定算法直接指定到一个地址上。</p>
+<pre><code>初学者可以这样理解，hashCode方法实际上返回的就是对象存储的物理地址（实际可能并不是）。
+</code></pre><hr>
+<h5 id="hashcode-和-equals-的区别"><a href="#hashcode-和-equals-的区别" class="headerlink" title="hashcode() 和 equals() 的区别"></a><strong>hashcode() 和 equals() 的区别</strong></h5><p>1、如果两个对象equals，Java运行时环境会认为他们的hashcode一定相等。<br>2、如果两个对象不equals，他们的hashcode有可能相等。<br>3、如果两个对象hashcode相等，他们不一定equals。</p>
+<p>4、如果两个对象hashcode不相等，他们一定不equals。 </p>
+<hr>
+<h4 id="wait-wait-long-wait-long-int-notify-notifyAll"><a href="#wait-wait-long-wait-long-int-notify-notifyAll" class="headerlink" title="wait(),wait(long),wait(long,int),notify(),notifyAll()"></a>wait(),wait(long),wait(long,int),notify(),notifyAll()</h4><p>这几个函数体现的是Java的多线程机制<br>在使用的时候要求在synchronize语句中使用<br>wait()用于让当前线程失去操作权限，当前线程进入等待序列<br>notify()用于随机通知一个持有对象的锁的线程获取操作权限<br>notifyAll()用于通知所有持有对象的锁的线程获取操作权限</p>
+<p>wait(long) 和wait(long,int)用于设定下一次获取锁的距离当前释放锁的时间间隔</p>
+<h4 id="toString-和getClass"><a href="#toString-和getClass" class="headerlink" title="toString()和getClass()"></a>toString()和getClass()</h4><p>toString()返回一个String对象，用来标识自己</p>
+<p>如Object类默认的:</p>
+<pre class=" language-JAVA"><code class="language-JAVA">public String toString() {
+       return getClass().getName() + "@" + Integer.toHexString(hashCode());
+   }
+</code></pre>
+<p>getClass()返回一个Class对象。</p>
+<h4 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h4><p>其实是使用了原型模式，</p>
+<p>使用clone方法的几个条件：<br>1）在派生类中实现Cloneable借口。</p>
+<p>　2）为了获取对象的一份拷贝，我们可以利用Object类的clone方法。<br>　3）在派生类中覆盖积累的clone方法，声明为public。</p>
+<p>　4）在派生类的clone方法中，调用super.clone()。</p>
+<h4 id="finalize-用于在垃圾回收"><a href="#finalize-用于在垃圾回收" class="headerlink" title="finalize()用于在垃圾回收"></a>finalize()用于在垃圾回收</h4><h4 id="registerNatives-本地注册"><a href="#registerNatives-本地注册" class="headerlink" title="registerNatives() 本地注册"></a>registerNatives() 本地注册</h4><p>native修饰的方法表示本地方法（跟系统有关，也可以理解为这个方法不是在java中实现的），据说这个方法在一个名为java.dll的动态库文件中。Object类中第40行（我的是jdk1.8）开始的 static{ registerNatives(); } 表示的是在类被加载时，调用 registerNatives()方法进行一些跟系统有关的方法调用，而这个方法的实现就在java.dll中（里面会根据不同系统来执行不同的底层操作）。</p>
+</blockquote>
 <h3 id="二、容器"><a href="#二、容器" class="headerlink" title="二、容器"></a>二、容器</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/002.png" alt></p>
 <ol>
 <li>java 容器都有哪些？</li>
@@ -638,20 +661,43 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 </ul>
 <h3 id="十、Spring-Spring-MVC"><a href="#十、Spring-Spring-MVC" class="headerlink" title="十、Spring/Spring MVC"></a>十、Spring/Spring MVC</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/010.png" alt></p>
 <ol>
-<li>为什么要使用 spring？</li>
-<li>解释一下什么是 aop？</li>
-<li>解释一下什么是 ioc？</li>
-<li>spring 有哪些主要模块？</li>
-<li>spring 常用的注入方式有哪些？</li>
-<li>spring 中的 bean 是线程安全的吗？</li>
-<li>spring 支持几种 bean 的作用域？</li>
-<li>spring 自动装配 bean 有哪些方式？</li>
-<li>spring 事务实现方式有哪些？</li>
-<li>说一下 spring 的事务隔离？</li>
-<li>说一下 spring mvc 运行流程？</li>
-<li>spring mvc 有哪些组件？</li>
-<li>@RequestMapping 的作用是什么？</li>
-<li>@Autowired 的作用是什么？</li>
+<li><h4 id="为什么要使用-spring？"><a href="#为什么要使用-spring？" class="headerlink" title="为什么要使用 spring？"></a>为什么要使用 spring？</h4></li>
+<li><h4 id="解释一下什么是-aop？"><a href="#解释一下什么是-aop？" class="headerlink" title="解释一下什么是 aop？"></a>解释一下什么是 aop？</h4></li>
+<li><h4 id="解释一下什么是-ioc？"><a href="#解释一下什么是-ioc？" class="headerlink" title="解释一下什么是 ioc？"></a>解释一下什么是 ioc？</h4></li>
+<li><h4 id="spring-有哪些主要模块？"><a href="#spring-有哪些主要模块？" class="headerlink" title="spring 有哪些主要模块？"></a>spring 有哪些主要模块？</h4></li>
+<li><h4 id="spring-常用的注入方式有哪些？"><a href="#spring-常用的注入方式有哪些？" class="headerlink" title="spring 常用的注入方式有哪些？"></a>spring 常用的注入方式有哪些？</h4></li>
+<li><h4 id="spring-中的-bean-是线程安全的吗？"><a href="#spring-中的-bean-是线程安全的吗？" class="headerlink" title="spring 中的 bean 是线程安全的吗？"></a>spring 中的 bean 是线程安全的吗？</h4></li>
+<li><h4 id="spring-支持几种-bean-的作用域？"><a href="#spring-支持几种-bean-的作用域？" class="headerlink" title="spring 支持几种 bean 的作用域？"></a>spring 支持几种 bean 的作用域？</h4></li>
+<li><h4 id="spring-自动装配-bean-有哪些方式？"><a href="#spring-自动装配-bean-有哪些方式？" class="headerlink" title="spring 自动装配 bean 有哪些方式？"></a>spring 自动装配 bean 有哪些方式？</h4></li>
+<li><h4 id="spring-事务实现方式有哪些？"><a href="#spring-事务实现方式有哪些？" class="headerlink" title="spring 事务实现方式有哪些？"></a>spring 事务实现方式有哪些？</h4></li>
+<li><h4 id="说一下-spring-的事务隔离？"><a href="#说一下-spring-的事务隔离？" class="headerlink" title="说一下 spring 的事务隔离？"></a>说一下 spring 的事务隔离？</h4></li>
+<li><h4 id="说一下-spring-mvc-运行流程？"><a href="#说一下-spring-mvc-运行流程？" class="headerlink" title="说一下 spring mvc 运行流程？"></a>说一下 spring mvc 运行流程？</h4><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/023.jpeg" alt></p>
+</li>
+<li><h4 id="spring-mvc-有哪些组件？"><a href="#spring-mvc-有哪些组件？" class="headerlink" title="spring mvc 有哪些组件？"></a>spring mvc 有哪些组件？</h4></li>
+<li><h4 id="RequestMapping-的作用是什么？"><a href="#RequestMapping-的作用是什么？" class="headerlink" title="@RequestMapping 的作用是什么？"></a>@RequestMapping 的作用是什么？</h4></li>
+<li><h4 id="Autowired-的作用是什么？"><a href="#Autowired-的作用是什么？" class="headerlink" title="@Autowired 的作用是什么？"></a>@Autowired 的作用是什么？</h4></li>
+<li><h4 id="Spring-bean的生命周期？"><a href="#Spring-bean的生命周期？" class="headerlink" title="Spring bean的生命周期？"></a>Spring bean的生命周期？</h4><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/022.png" alt></p>
+<blockquote>
+<p>（1）<strong>BeanFactoryPostProcessor</strong>的postProcessorBeanFactory()方法：若某个IoC容器内添加了实现了BeanFactoryPostProcessor接口的实现类Bean，那么在该容器中实例化任何其他Bean之前可以回调该Bean中的postPrcessorBeanFactory()方法来对Bean的配置元数据进行更改，比如从XML配置文件中获取到的配置信息。</p>
+<p>（2）Bean的实例化：Bean的实例化是使用反射实现的。</p>
+<p>（3）Bean属性注入：Bean实例化完成后，利用反射技术实现属性及依赖Bean的注入。</p>
+<p>（4）<strong>BeanNameAware</strong>的setBeanName()方法：如果某个Bean实现了BeanNameAware接口，那么Spring将会将Bean实例的ID传递给setBeanName()方法，在Bean类中新增一个beanName字段，并实现setBeanName()方法。</p>
+<p>（5）<strong>BeanFactoryAware</strong>的setBeanFactory()方法：如果某个Bean实现了BeanFactoryAware接口，那么Spring将会将创建Bean的BeanFactory传递给setBeanFactory()方法，在Bean类中新增了一个beanFactory字段用来保存BeanFactory的值，并实现setBeanFactory()方法。</p>
+<p>（6）<strong>ApplicationContextAware</strong>的setApplicationContext()方法：如果某个Bean实现了ApplicationContextAware接口，那么Spring将会将该Bean所在的上下文环境ApplicationContext传递给setApplicationContext()方法，在Bean类中新增一个ApplicationContext字段用来保存ApplicationContext的值，并实现setApplicationContext()方法。</p>
+<p>（7）<strong>BeanPostProcessor</strong>预初始化方法：如果某个IoC容器中增加的实现BeanPostProcessor接口的实现类Bean，那么在该容器中实例化Bean之后，执行初始化之前会调用BeanPostProcessor中的postProcessBeforeInitialization()方法执行预初始化处理。</p>
+<p>（8）<strong>InitializingBean</strong>的afterPropertiesSet()方法：如果Bean实现了InitializingBean接口，那么Bean在实例化完成后将会执行接口中的afterPropertiesSet()方法来进行初始化。</p>
+<p>（9）自定义的inti-method指定的方法：如果配置文件中使用init-method属性指定了初始化方法，那么Bean在实例化完成后将会调用该属性指定的初始化方法进行Bean的初始化。</p>
+<p>（10）<strong>BeanPostProcessor</strong>初始化后方法：如果某个IoC容器中增加的实现BeanPostProcessor接口的实现类Bean，那么在该容器中实例化Bean之后并且完成初始化调用后执行该接口中的postProcessorAfterInitialization()方法进行初始化后处理。</p>
+<p>（11）使用Bean：此时有关Bean的所有准备工作均已完成，Bean可以被程序使用了，它们将会一直驻留在应用上下文中，直到该上下文环境被销毁。</p>
+<p>（12）<strong>DisposableBean</strong>的destory()方法：如果Bean实现了DisposableBean接口，Spring将会在Bean实例销毁之前调用该接口的destory()方法，来完成一些销毁之前的处理工作。</p>
+<p>（13）自定义的destory-method指定的方法：如果在配置文件中使用destory-method指定了销毁方法，那么在Bean实例销毁之前会调用该指定的方法完成一些销毁之前的处理工作。</p>
+<p><em>注意：</em></p>
+<p><em>1、BeanFactoryPostProcessor接口与BeanPostProcessor接口的作用范围是整个上下文环境中，使用方法是单独新增一个类来实现这些接口，那么在处理其他Bean的某些时刻就会回调响应的接口中的方法。</em></p>
+<p><em>2、BeanNameAware、BeanFactoryAware、ApplicationContextAware的作用范围的Bean范围，即仅仅对实现了该接口的指定Bean有效，所有其使用方法是在要使用该功能的Bean自己来实现该接口。</em></p>
+<p><em>3、第8点与第9点所述的两个初始化方法作用是一样的，我们完全可以使用其中的一种即可，一般情况我们使用第9点所述的方式，尽量少的去来Bean中实现某些接口，保持其独立性，低耦合性，尽量不要与Spring代码耦合在一起。第12和第13也是如此。</em></p>
+</blockquote>
+</li>
+<li></li>
 </ol>
 <h3 id="十一、Spring-Boot-Spring-Cloud"><a href="#十一、Spring-Boot-Spring-Cloud" class="headerlink" title="十一、Spring Boot/Spring Cloud"></a>十一、Spring Boot/Spring Cloud</h3><p><img src="//zongmansheng.club/2019/07/11/mian-shi-ti-ji-jin/011.png" alt></p>
 <ol>
@@ -989,7 +1035,7 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（</div>
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">159.6k</span>
+                <span class="white-color">161.2k</span>
             
 
             
