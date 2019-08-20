@@ -433,7 +433,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"面试题","value":3},{"name":"单点登录","value":2},{"name":"基础底层","value":1},{"name":"进阶","value":3},{"name":"虚拟机","value":3},{"name":"日常学习","value":16},{"name":"分布式","value":3},{"name":"每日算法","value":1},{"name":"数据库","value":7},{"name":"docker","value":1},{"name":"中间件","value":5},{"name":"Spring","value":2},{"name":"SpringBoot","value":7},{"name":"springcloud","value":4},{"name":"计算机网络","value":2},{"name":"springboot","value":1},{"name":"java基础","value":1},{"name":"web基础","value":1},{"name":"后端","value":1},{"name":"设计模式","value":4},{"name":"皮一下","value":1},{"name":"基础","value":1},{"name":"数据结构","value":1},{"name":"java高级","value":3},{"name":"Java基础","value":1},{"name":"集群","value":1},{"name":"面试","value":2}],
+                data: [{"name":"面试题","value":3},{"name":"基础底层","value":1},{"name":"进阶","value":3},{"name":"单点登录","value":2},{"name":"日常学习","value":16},{"name":"虚拟机","value":3},{"name":"分布式","value":3},{"name":"每日算法","value":1},{"name":"中间件","value":5},{"name":"docker","value":1},{"name":"数据库","value":7},{"name":"Spring","value":2},{"name":"SpringBoot","value":7},{"name":"springcloud","value":4},{"name":"计算机网络","value":2},{"name":"springboot","value":1},{"name":"java基础","value":1},{"name":"web基础","value":1},{"name":"后端","value":1},{"name":"设计模式","value":4},{"name":"皮一下","value":1},{"name":"基础","value":1},{"name":"数据结构","value":1},{"name":"java高级","value":3},{"name":"Java基础","value":1},{"name":"集群","value":1},{"name":"面试","value":2}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -457,7 +457,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
         xAxis: [
             {
                 type: 'category',
-                data: ["JVM","springboot2.0","redis","Springboot2.0","HashMap","回收机制","JWT","zookeeper","算法","mysql"]
+                data: ["JVM","springboot2.0","redis","Springboot2.0","HashMap","JWT","回收机制","zookeeper","算法","ElasticSearch"]
             }
         ],
         yAxis: [
@@ -593,12 +593,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/CAS/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">CAS</span>
-            </a>
-            
-            
-            
             <a href="/tags/ConcurrentHashMap/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">ConcurrentHashMap</span>
             </a>
@@ -613,6 +607,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <a href="/tags/DNS，劫持，投毒，解析/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">DNS，劫持，投毒，解析</span>
+            </a>
+            
+            
+            
+            <a href="/tags/CAS/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">CAS</span>
             </a>
             
             
@@ -635,18 +635,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/JVM/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">JVM</span>
-            </a>
-            
-            
-            
-            <a href="/tags/回收机制/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">回收机制</span>
-            </a>
-            
-            
-            
             <a href="/tags/JSON-WEB/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">JSON WEB</span>
             </a>
@@ -655,6 +643,18 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <a href="/tags/JWT/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">JWT</span>
+            </a>
+            
+            
+            
+            <a href="/tags/JVM/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">JVM</span>
+            </a>
+            
+            
+            
+            <a href="/tags/回收机制/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">回收机制</span>
             </a>
             
             
@@ -701,8 +701,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/mysql/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">mysql</span>
+            <a href="/tags/dobbo，zookeeper/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">dobbo，zookeeper</span>
             </a>
             
             
@@ -719,12 +719,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/dobbo，zookeeper/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">dobbo，zookeeper</span>
-            </a>
-            
-            
-            
             <a href="/tags/MQ/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">MQ</span>
             </a>
@@ -737,8 +731,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/Nginx，负载均衡/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Nginx，负载均衡</span>
+            <a href="/tags/mysql/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">mysql</span>
             </a>
             
             
@@ -755,6 +749,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
+            <a href="/tags/Nginx，负载均衡/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Nginx，负载均衡</span>
+            </a>
+            
+            
+            
             <a href="/tags/MySql/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">MySql</span>
             </a>
@@ -767,20 +767,40 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/MySql，B/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">MySql，B+</span>
-            </a>
-            
-            
-            
             <a href="/tags/乐观锁，悲观锁，共享锁，排它锁，行锁，表锁/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">乐观锁，悲观锁，共享锁，排它锁，行锁，表锁</span>
             </a>
             
             
             
+            <a href="/tags/MySql，B/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">MySql，B+</span>
+            </a>
+            
+            
+            
             <a href="/tags/MyCat/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">MyCat</span>
+            </a>
+            
+            
+            
+            
+            
+            <a href="/tags/XSS/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">XSS</span>
+            </a>
+            
+            
+            
+            <a href="/tags/CSRF/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">CSRF</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Netty/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Netty</span>
             </a>
             
             
@@ -797,12 +817,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/Netty/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Netty</span>
-            </a>
-            
-            
-            
             <a href="/tags/nginx/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">nginx</span>
             </a>
@@ -811,20 +825,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <a href="/tags/负载均衡/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">负载均衡</span>
-            </a>
-            
-            
-            
-            
-            
-            <a href="/tags/XSS/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">XSS</span>
-            </a>
-            
-            
-            
-            <a href="/tags/CSRF/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">CSRF</span>
             </a>
             
             
@@ -901,18 +901,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/AOP/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">AOP</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Spring/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Spring</span>
-            </a>
-            
-            
-            
             <a href="/tags/Swagger/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">Swagger</span>
             </a>
@@ -925,6 +913,18 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
+            <a href="/tags/AOP/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">AOP</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Spring/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Spring</span>
+            </a>
+            
+            
+            
             <a href="/tags/JUC/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">JUC</span>
             </a>
@@ -933,12 +933,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <a href="/tags/ThreadLocal/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">ThreadLocal</span>
-            </a>
-            
-            
-            
-            <a href="/tags/java8/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">java8</span>
             </a>
             
             
@@ -961,6 +955,18 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
+            <a href="/tags/Mybatis-plus-3-0/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Mybatis-plus 3.0</span>
+            </a>
+            
+            
+            
+            <a href="/tags/java8/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">java8</span>
+            </a>
+            
+            
+            
             <a href="/tags/jdbc/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">jdbc</span>
             </a>
@@ -973,20 +979,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/Mybatis-plus-3-0/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Mybatis-plus 3.0</span>
-            </a>
-            
-            
-            
             <a href="/tags/sort/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">sort</span>
-            </a>
-            
-            
-            
-            <a href="/tags/springcloud/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">springcloud</span>
             </a>
             
             
@@ -1009,8 +1003,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/数据库，乐观锁，悲观锁/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">数据库，乐观锁，悲观锁</span>
+            <a href="/tags/springcloud/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">springcloud</span>
             </a>
             
             
@@ -1033,6 +1027,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
+            <a href="/tags/数据库，乐观锁，悲观锁/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">数据库，乐观锁，悲观锁</span>
+            </a>
+            
+            
+            
             <a href="/tags/Mac-Markdown/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">Mac Markdown</span>
             </a>
@@ -1051,26 +1051,26 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             
             
-            <a href="/tags/并发/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">并发</span>
-            </a>
-            
-            
-            
             <a href="/tags/Builder-Pattern/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">Builder Pattern</span>
             </a>
             
             
             
-            <a href="/tags/mysql，索引/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">mysql，索引</span>
+            <a href="/tags/并发/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">并发</span>
             </a>
             
             
             
             <a href="/tags/单链表/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">单链表</span>
+            </a>
+            
+            
+            
+            <a href="/tags/mysql，索引/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">mysql，索引</span>
             </a>
             
             
@@ -1083,6 +1083,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <a href="/tags/SSO/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">SSO</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Wrapper，装饰者/" target="_blank">
+                <span class="chip center-align waves-effect waves-light chip-default">Wrapper，装饰者</span>
             </a>
             
             
@@ -1131,12 +1137,6 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <a href="/tags/HAProxy/" target="_blank">
                 <span class="chip center-align waves-effect waves-light chip-default">HAProxy</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Wrapper，装饰者/" target="_blank">
-                <span class="chip center-align waves-effect waves-light chip-default">Wrapper，装饰者</span>
             </a>
             
             
