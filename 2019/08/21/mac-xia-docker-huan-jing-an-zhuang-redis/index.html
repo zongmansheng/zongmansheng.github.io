@@ -4,9 +4,13 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Nginx全面解析, 晓笙的BLOG">
-    <meta name="description" content="Nginx全面解析一、什么是ngnix
-Nginx是一个http服务器。是一个使用c语言开发的高性能的http 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器。nginx能够支撑5万并发链接，并且cpu、内存等资源消耗却非">
+    <meta name="keywords" content="Mac下docker环境安装Redis, 晓笙的BLOG">
+    <meta name="description" content="Mac下docker环境安装Redis
+说明下，以下内容中：本地是指，主机，即安装docker的机器环境，一般是物理机容器是指，运行docker容器后的内部环境
+
+一、下载镜像docker pull redis
+
+不指定版本默认下载就是最新">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +18,7 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Nginx全面解析 | 晓笙的BLOG</title>
+    <title>Mac下docker环境安装Redis | 晓笙的BLOG</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -209,13 +213,13 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Nginx全面解析
+                        Mac下docker环境安装Redis
                     </div>
                 </div>
             </div>
@@ -237,12 +241,12 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/" target="_blank">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/redis/" target="_blank">
+                                <span class="chip bg-color">redis</span>
                             </a>
                         
-                            <a href="/tags/负载均衡/" target="_blank">
-                                <span class="chip bg-color">负载均衡</span>
+                            <a href="/tags/docker/" target="_blank">
+                                <span class="chip bg-color">docker</span>
                             </a>
                         
                     </div>
@@ -253,8 +257,8 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/进阶/" class="post-category" target="_blank">
-                                进阶
+                            <a href="/categories/docker/" class="post-category" target="_blank">
+                                docker
                             </a>
                         
                     </div>
@@ -265,14 +269,14 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-06-18
+                    2019-08-21
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        831
+                        486
                     </div>
                     
 
@@ -295,30 +299,44 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Nginx全面解析"><a href="#Nginx全面解析" class="headerlink" title="Nginx全面解析"></a>Nginx全面解析</h1><h4 id="一、什么是ngnix"><a href="#一、什么是ngnix" class="headerlink" title="一、什么是ngnix"></a>一、什么是ngnix</h4><blockquote>
-<p>Nginx是一个http服务器。是一个使用c语言开发的高性能的http 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器。nginx能够支撑5万并发链接，并且cpu、内存等资源消耗却非常低，运行非常稳定，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+                <h1 id="Mac下docker环境安装Redis"><a href="#Mac下docker环境安装Redis" class="headerlink" title="Mac下docker环境安装Redis"></a>Mac下docker环境安装Redis</h1><blockquote>
+<p>说明下，以下内容中：<br><code>本地</code>是指，主机，即安装<code>docker</code>的机器环境，一般是物理机<br><code>容器</code>是指，运行<code>docker</code>容器后的内部环境</p>
 </blockquote>
-<h4 id="二、NGINX可以用来做什么"><a href="#二、NGINX可以用来做什么" class="headerlink" title="二、NGINX可以用来做什么"></a>二、NGINX可以用来做什么</h4><blockquote>
-<p>1、反向代理：反向代理（ReverseProxy）方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端,简单来说就是真实的服务器不能直接被外部网络访问,想要访问必须通过代理。</p>
+<h4 id="一、下载镜像"><a href="#一、下载镜像" class="headerlink" title="一、下载镜像"></a>一、下载镜像</h4><pre><code>docker pull redis
+</code></pre><blockquote>
+<p>不指定版本默认下载就是最新版本</p>
 </blockquote>
-<blockquote>
-<p>2、动静分离：运用Nginx的反向代理功能分发请求：所有动态资源的请求交给应用服务器，而静态资源的请求（例如图片、视频、CSS、JavaScript文件等）则直接由Nginx返回到浏览器，这样能大大减轻应用服务器的压力</p>
+<h4 id="二、在本地某个位置创建以下内容"><a href="#二、在本地某个位置创建以下内容" class="headerlink" title="二、在本地某个位置创建以下内容"></a>二、在本地某个位置创建以下内容</h4><blockquote>
+<p>建议将以下内容放在一起，方便以后管理和查看</p>
+<p>mac切换用户权限    sudo su</p>
 </blockquote>
-<blockquote>
-<p>3、负载均衡：负载均衡也是 Nginx常用的一个功能，当一台服务器的单位时间内的访问量越大时，服务器压力就越大，大到超过自身承受能力时，服务器就会崩溃。为了避免服务器崩溃，让用户有更好的体验，我们通过负载均衡的方式来分担服务器压力。我们可以建立很多很多服务器，组成一个服务器集群，当用户访问网站时，先访问一个中间服务器，在让这个中间服务器在服务器集群中选择一个压力较小的服务器，然后将该访问请求引入该服务器。如此以来，用户的每次访问，都会保证服务器集群中的每个服务器压力趋于平衡，分担了服务器压力，避免了服务器崩溃的情况。负载均衡配置一般都需要同时配置反向代理，通过反向代理跳转到负载均衡。</p>
-</blockquote>
-<h4 id="三、常见问题"><a href="#三、常见问题" class="headerlink" title="三、常见问题"></a>三、常见问题</h4><h5 id="1-nginx负载均衡是如何实现的"><a href="#1-nginx负载均衡是如何实现的" class="headerlink" title="1.nginx负载均衡是如何实现的"></a>1.nginx负载均衡是如何实现的</h5><blockquote>
-<p>nginx负载均衡要两台或以上的应用服务器 ， 并且在nginx.conf中写入相关配置，主要是对proxy_pass,upstream的使用</p>
-</blockquote>
-<h5 id="2-nginx的upstream常见的几种方式的分发策略"><a href="#2-nginx的upstream常见的几种方式的分发策略" class="headerlink" title="2.nginx的upstream常见的几种方式的分发策略"></a>2.nginx的upstream常见的几种方式的分发策略</h5><blockquote>
-<p>1.轮询（默认）——每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。</p>
-<p>2.weight ——指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。</p>
-<p>3.ip_hash ——每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器。</p>
-<p>4.backup——其它所有的非backup机器down或者忙的时候，请求backup机器。所以这台机器压力会最轻。</p>
-<p>5.down——表示单前的server暂时不参与负载</p>
-<p>6.fair（第三方）按后端服务器的响应时间来分配请求，响应时间短的优先分配。与weight分配策略类似。</p>
-</blockquote>
-
+<pre><code># 以/docker/redis为例
+mkdir /docker/redis
+mkdir /docker/redis/data
+touch /docker/redis/redis.conf
+touch /docker/redis/redis.bash
+</code></pre><h4 id="三、编辑配置文件"><a href="#三、编辑配置文件" class="headerlink" title="三、编辑配置文件"></a>三、编辑配置文件</h4><pre><code>vim /docker/redis/reoedis.conf
+</code></pre><p><img src="//zongmansheng.club/2019/08/21/mac-xia-docker-huan-jing-an-zhuang-redis/001.png" alt></p>
+<h4 id="四、编辑启动脚本"><a href="#四、编辑启动脚本" class="headerlink" title="四、编辑启动脚本"></a>四、编辑启动脚本</h4><pre><code>vi /docker/redis/redis.bash
+</code></pre><pre><code>docker run -p 6379:6379 --name redis -v /docker/redis/redis.conf:/etc/redis/redis.conf -v /docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf 
+</code></pre><pre><code>docker run redis # 从redis镜像运行容器
+-p 6379:6379 # 映射本地6379端口到容器6379端口，前为本地端口
+--name redis # 设置容器名称为redis，方便以后使用docker ps进行管理
+-v /docker/redis/redis.conf:/etc/redis/redis.conf # 关联本地/docker/redis/redis.conf文件到容器中/etc/redis/redis.conf，同样，前为本地
+-v /docker/redis/data:/data # 关联本地/docker/redis/data到容器内/data目录，此为存放redis数据的目录，为方便以后升级redis，而数据可以留存
+-d # 后台启动，使用此方式启动，则redis.conf中daemonize必须设置为no，否则会无法启动
+redis-server /etc/redis/redis.conf # 在容器内启动redis-server的命令，主要是为了加载配置
+</code></pre><h4 id="五、给与执行权限"><a href="#五、给与执行权限" class="headerlink" title="五、给与执行权限"></a>五、给与执行权限</h4><pre><code>sudo chmod 777 /docker/redis/redis.bash
+</code></pre><h4 id="六、启动"><a href="#六、启动" class="headerlink" title="六、启动"></a>六、启动</h4><pre><code>/docker/redis/redis.bash
+# 查看是否已启动
+docker ps
+# 如果无法启动或者docker ps中无对应内容，将bash中命令复制出来，删除-d参数启动，查看报错信息
+# 使用redis-cli或者rdm访问 localhost:6379
+# 如需访问容器，可使用
+docker exec -it redis bash
+# 或直接使用redis-cli访问容器内redis
+docker exec -it redis redis-cli
+</code></pre>
             </div>
             <hr>
 
@@ -341,7 +359,7 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
                     </span>
                     <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/06/18/nginx-quan-mian-jie-xi/" class="b-link-green">Nginx全面解析</a>
+                    <a href="/2019/08/21/mac-xia-docker-huan-jing-an-zhuang-redis/" class="b-link-green">Mac下docker环境安装Redis</a>
                 </p>
             </div>
         </div>
@@ -364,45 +382,51 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/06/19/springcloud-si/">
+                <a href="/2019/08/21/mac-xia-docker-huan-jing-an-zhuang-redis/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="SpringCloud（四）">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Mac下docker环境安装Redis">
                         
-                        <span class="card-title">SpringCloud（四）</span>
+                        <span class="card-title">Mac下docker环境安装Redis</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Eureka Ribbon（负载均衡服务调用者）一、Spring Cloud Ribbon
-在微服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯都是HTTP RESTful的。Spring cloud有两种服务调用方式，一种是r</div>
+                    <div class="summary">Mac下docker环境安装Redis
+说明下，以下内容中：本地是指，主机，即安装docker的机器环境，一般是物理机容器是指，运行docker容器后的内部环境
+
+一、下载镜像docker pull redis
+
+不指定版本默认下载就是最新</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springcloud/" class="post-category" target="_blank">
-                                    springcloud
+                            <a href="/categories/docker/" class="post-category" target="_blank">
+                                    docker
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/eureka/" target="_blank">
-                        <span class="chip bg-color">eureka</span>
+                    <a href="/tags/redis/" target="_blank">
+                        <span class="chip bg-color">redis</span>
                     </a>
                     
-                    <a href="/tags/ribbon/" target="_blank">
-                        <span class="chip bg-color">ribbon</span>
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>
@@ -416,31 +440,29 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/06/17/springcloud-san/">
+                <a href="/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="SpringCloud（三）">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Mac下docker环境安装ElasticSearch">
                         
-                        <span class="card-title">SpringCloud（三）</span>
+                        <span class="card-title">Mac下docker环境安装ElasticSearch</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Eureka Producer（服务提供者）新建moudel(service-producer)Pom.xml
-修改pom依赖
+                    <div class="summary">Mac下docker环境安装ElasticSearch一、Mac上需要装有docker环境1、下载镜像docker pull elasticsearch:6.5.3
 
-&lt;?xml version="1.0" encoding="UTF-8"?>
-&lt;project x</div>
+2、运行容器docker run -d -p 9200:9200 -p </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-06-17
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-20
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/springcloud/" class="post-category" target="_blank">
-                                    springcloud
+                            <a href="/categories/docker/" class="post-category" target="_blank">
+                                    docker
                                 </a>
                             
                             
@@ -450,12 +472,12 @@ Nginx是一个http服务器。是一个使用c语言开发的高性能的http �
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Eureka/" target="_blank">
-                        <span class="chip bg-color">Eureka</span>
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
-                    <a href="/tags/Producer/" target="_blank">
-                        <span class="chip bg-color">Producer</span>
+                    <a href="/tags/ElasticSearch/" target="_blank">
+                        <span class="chip bg-color">ElasticSearch</span>
                     </a>
                     
                 </div>
