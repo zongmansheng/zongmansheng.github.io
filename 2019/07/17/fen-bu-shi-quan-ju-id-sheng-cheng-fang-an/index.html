@@ -5,7 +5,12 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="分布式全局ID生成方案, 晓笙的BLOG">
-    <meta name="description" content="分布式全局ID生成方案">
+    <meta name="description" content="分布式全局ID生成方案一、分布式ID的特性
+
+唯一性：确保生成的ID是全网唯一的。
+有序递增性：确保生成的ID是对于某个用户或者业务是按一定的数字有序递增的。
+高可用性：确保任何时候都能正确的生成ID。
+带时间：ID里面包含时间，一眼扫过去">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -267,14 +272,14 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        10
+                        1.9k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        7 分
                     </div>
                     
                 
@@ -290,7 +295,184 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="分布式全局ID生成方案"><a href="#分布式全局ID生成方案" class="headerlink" title="分布式全局ID生成方案"></a>分布式全局ID生成方案</h1>
+                <h1 id="分布式全局ID生成方案"><a href="#分布式全局ID生成方案" class="headerlink" title="分布式全局ID生成方案"></a>分布式全局ID生成方案</h1><h3 id="一、分布式ID的特性"><a href="#一、分布式ID的特性" class="headerlink" title="一、分布式ID的特性"></a>一、分布式ID的特性</h3><blockquote>
+<ul>
+<li>唯一性：确保生成的ID是全网唯一的。</li>
+<li>有序递增性：确保生成的ID是对于某个用户或者业务是按一定的数字有序递增的。</li>
+<li>高可用性：确保任何时候都能正确的生成ID。</li>
+<li>带时间：ID里面包含时间，一眼扫过去就知道哪天的交易。</li>
+</ul>
+</blockquote>
+<h3 id="二、分布式ID的生成方案"><a href="#二、分布式ID的生成方案" class="headerlink" title="二、分布式ID的生成方案"></a>二、分布式ID的生成方案</h3><h4 id="1、数据库自增长序列或字段"><a href="#1、数据库自增长序列或字段" class="headerlink" title="1、数据库自增长序列或字段"></a>1、数据库自增长序列或字段</h4><blockquote>
+<p>最常见的方式。利用数据库，全数据库唯一。</p>
+</blockquote>
+<h5 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h5><blockquote>
+<p>1）简单，代码方便，性能可以接受。<br>2）数字ID天然排序，对分页或者需要排序的结果很有帮助。</p>
+</blockquote>
+<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><blockquote>
+<p>1）不同数据库语法和实现不同，数据库迁移的时候或多数据库版本支持的时候需要处理。<br>2）在单个数据库或读写分离或一主多从的情况下，只有一个主库可以生成。有单点故障的风险。<br>3）在性能达不到要求的情况下，比较难于扩展。<br>4）如果遇见多个系统需要合并或者涉及到数据迁移会相当痛苦。<br>5）分表分库的时候会有麻烦。</p>
+</blockquote>
+<h5 id="优化方案："><a href="#优化方案：" class="headerlink" title="优化方案："></a>优化方案：</h5><blockquote>
+<p>针对主库单点，如果有多个Master库，则每个Master库设置的起始数字不一样，步长一样，可以是Master的个数。比如：Master1 生成的是 1，4，7，10，Master2生成的是2,5,8,11 Master3生成的是 3,6,9,12。这样就可以有效生成集群中的唯一ID，也可以大大降低ID生成数据库操作的负载。</p>
+</blockquote>
+<h4 id="2、UUID"><a href="#2、UUID" class="headerlink" title="2、UUID"></a>2、UUID</h4><blockquote>
+<p>常见的方式。可以利用数据库也可以利用程序生成，一般来说全球唯一。</p>
+</blockquote>
+<h5 id="优点：-1"><a href="#优点：-1" class="headerlink" title="优点："></a>优点：</h5><blockquote>
+<p>1）简单，代码方便。<br>2）生成ID性能非常好，基本不会有性能问题。<br>3）全球唯一，在遇见数据迁移，系统数据合并，或者数据库变更等情况下，可以从容应对。</p>
+</blockquote>
+<h5 id="缺点：-1"><a href="#缺点：-1" class="headerlink" title="缺点："></a>缺点：</h5><blockquote>
+<p>1）没有排序，无法保证趋势递增。<br>2）UUID往往是使用字符串存储，查询的效率比较低。<br>3）存储空间比较大，如果是海量数据库，就需要考虑存储量的问题。<br>4）传输数据量大<br>5）不可读。</p>
+</blockquote>
+<h4 id="3、批量生成ID"><a href="#3、批量生成ID" class="headerlink" title="3、批量生成ID"></a>3、批量生成ID</h4><blockquote>
+<p>一次按需批量生成多个ID，每次生成都需要访问数据库，将数据库修改为最大的ID值，并在内存中记录当前值及最大值。</p>
+</blockquote>
+<h5 id="优点：-2"><a href="#优点：-2" class="headerlink" title="优点："></a>优点：</h5><blockquote>
+<p>避免了每次生成ID都要访问数据库并带来压力，提高性能</p>
+</blockquote>
+<h5 id="缺点：-2"><a href="#缺点：-2" class="headerlink" title="缺点："></a>缺点：</h5><blockquote>
+<p>属于本地生成策略，存在单点故障，服务重启造成ID不连续</p>
+</blockquote>
+<h4 id="4、Redis生成ID"><a href="#4、Redis生成ID" class="headerlink" title="4、Redis生成ID"></a>4、Redis生成ID</h4><blockquote>
+<p>当使用数据库来生成ID性能不够要求的时候，可以尝试使用Redis来生成ID。这主要依赖于Redis是单线程的，所以也可以用生成全局唯一的ID。可以用Redis的原子操作 INCR和INCRBY来实现。</p>
+<p>可以使用Redis集群来获取更高的吞吐量。假如一个集群中有5台Redis。可以初始化每台Redis的值分别是1,2,3,4,5，然后步长都是5。各个Redis生成的ID为：</p>
+</blockquote>
+<pre><code>A：1,6,11,16,21
+B：2,7,12,17,22
+C：3,8,13,18,23
+D：4,9,14,19,24
+E：5,10,15,20,25
+</code></pre><blockquote>
+<p>这个，随便负载到哪个机确定好，未来很难做修改。但是3-5台服务器基本能够满足器上，都可以获得不同的ID。但是步长和初始值一定需要事先需要了。使用Redis集群也可以方式单点故障的问题。</p>
+<p>另外，比较适合使用Redis来生成每天从0开始的流水号。比如订单号=日期+当日自增长号。可以每天在Redis中生成一个Key，使用INCR进行累加。</p>
+</blockquote>
+<h5 id="优点：-3"><a href="#优点：-3" class="headerlink" title="优点："></a>优点：</h5><blockquote>
+<p>1）不依赖于数据库，灵活方便，且性能优于数据库。<br>2）数字ID天然排序，对分页或者需要排序的结果很有帮助。</p>
+</blockquote>
+<h5 id="缺点：-3"><a href="#缺点：-3" class="headerlink" title="缺点："></a>缺点：</h5><blockquote>
+<p>1）如果系统中没有Redis，还需要引入新的组件，增加系统复杂度。<br>2）需要编码和配置的工作量比较大。</p>
+</blockquote>
+<h4 id="5、Twitter的snowflake算法"><a href="#5、Twitter的snowflake算法" class="headerlink" title="5、Twitter的snowflake算法"></a>5、Twitter的snowflake算法</h4><blockquote>
+<p>snowflake是Twitter开源的分布式ID生成算法，结果是一个long型的ID。雪花算法将生成不高于19位的有序Long型整数，多用于分布式环境的数据主键。</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/07/17/fen-bu-shi-quan-ju-id-sheng-cheng-fang-an/001.png" alt></p>
+<blockquote>
+<p>雪花算法解析 结构 snowflake的结构如下(每部分用-分开):<br>0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 - 000000000000<br>第一位为未使用，接下来的41位为毫秒级时间(41位的长度可以使用69年)，</p>
+<p>然后是5位datacenterId和5位workerId(10位的长度最多支持部署1024个节点） ，</p>
+<p>最后12位是毫秒内的计数（12位的计数顺序号支持每个节点每毫秒产生4096个ID序号）</p>
+<p>一共加起来刚好64位，为一个Long型。(转换成字符串长度为18)。</p>
+<p>Snowflake算法核心把时间戳，工作机器id，序列号组合在一起。</p>
+<p>整体上按照时间自增排序，并且整个分布式系统内不会产生ID碰撞（由datacenter和机器ID作区分），</p>
+<p>并且效率较高，经测试，snowflake每秒能够产生26万ID左右，完全满足需要。</p>
+<p>其核心思想是：使用41bit作为毫秒数，10bit作为机器的ID（5个bit是数据中心，5个bit的机器ID），12bit作为毫秒内的流水号（意味着每个节点在每毫秒可以产生 4096 个 ID），最后还有一个符号位，永远是0。</p>
+</blockquote>
+<h5 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h5><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>springboot<span class="token punctuation">.</span>snowflake<span class="token punctuation">.</span>globalid<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/**
+ * @Author: ZongMan
+ * @Date: 2019-09-05
+ * @Time: 22:34
+ * @Vsersion: 1.0
+ * 描述: Twitter的分布式自增ID雪花算法snowflake (Java版)
+ **/</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SnowFlake</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/**
+     * 起始的时间戳
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> START_STMP <span class="token operator">=</span> 1480166465631L<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 每一部分占用的位数
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> SEQUENCE_BIT <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//序列号占用的位数</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> MACHINE_BIT <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//机器标识占用的位数</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> DATACENTER_BIT <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//数据中心占用的位数</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 每一部分的最大值
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> MAX_DATACENTER_NUM <span class="token operator">=</span> <span class="token operator">-</span>1L <span class="token operator">^</span> <span class="token punctuation">(</span><span class="token operator">-</span>1L <span class="token operator">&lt;&lt;</span> DATACENTER_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> MAX_MACHINE_NUM <span class="token operator">=</span> <span class="token operator">-</span>1L <span class="token operator">^</span> <span class="token punctuation">(</span><span class="token operator">-</span>1L <span class="token operator">&lt;&lt;</span> MACHINE_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> MAX_SEQUENCE <span class="token operator">=</span> <span class="token operator">-</span>1L <span class="token operator">^</span> <span class="token punctuation">(</span><span class="token operator">-</span>1L <span class="token operator">&lt;&lt;</span> SEQUENCE_BIT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 每一部分向左的位移
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> MACHINE_LEFT <span class="token operator">=</span> SEQUENCE_BIT<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> DATACENTER_LEFT <span class="token operator">=</span> SEQUENCE_BIT <span class="token operator">+</span> MACHINE_BIT<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">long</span> TIMESTMP_LEFT <span class="token operator">=</span> DATACENTER_LEFT <span class="token operator">+</span> DATACENTER_BIT<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">long</span> datacenterId<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//数据中心</span>
+    <span class="token keyword">private</span> <span class="token keyword">long</span> machineId<span class="token punctuation">;</span>     <span class="token comment" spellcheck="true">//机器标识</span>
+    <span class="token keyword">private</span> <span class="token keyword">long</span> sequence <span class="token operator">=</span> 0L<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//序列号</span>
+    <span class="token keyword">private</span> <span class="token keyword">long</span> lastStmp <span class="token operator">=</span> <span class="token operator">-</span>1L<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//上一次时间戳</span>
+
+    <span class="token keyword">public</span> <span class="token function">SnowFlake</span><span class="token punctuation">(</span><span class="token keyword">long</span> datacenterId<span class="token punctuation">,</span> <span class="token keyword">long</span> machineId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>datacenterId <span class="token operator">></span> MAX_DATACENTER_NUM <span class="token operator">||</span> datacenterId <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">"datacenterId can't be greater than MAX_DATACENTER_NUM or less than 0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>machineId <span class="token operator">></span> MAX_MACHINE_NUM <span class="token operator">||</span> machineId <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">"machineId can't be greater than MAX_MACHINE_NUM or less than 0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>datacenterId <span class="token operator">=</span> datacenterId<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>machineId <span class="token operator">=</span> machineId<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 产生下一个ID
+     * @return
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">long</span> <span class="token function">nextId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">long</span> currStmp <span class="token operator">=</span> <span class="token function">getNewstmp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>currStmp <span class="token operator">&lt;</span> lastStmp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">"Clock moved backwards.  Refusing to generate id"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>currStmp <span class="token operator">==</span> lastStmp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//相同毫秒内，序列号自增</span>
+            sequence <span class="token operator">=</span> <span class="token punctuation">(</span>sequence <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> MAX_SEQUENCE<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//同一毫秒的序列数已经达到最大</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>sequence <span class="token operator">==</span> 0L<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                currStmp <span class="token operator">=</span> <span class="token function">getNextMill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//不同毫秒内，序列号置为0</span>
+            sequence <span class="token operator">=</span> 0L<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        lastStmp <span class="token operator">=</span> currStmp<span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>currStmp <span class="token operator">-</span> START_STMP<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> TIMESTMP_LEFT <span class="token comment" spellcheck="true">//时间戳部分</span>
+                <span class="token operator">|</span> datacenterId <span class="token operator">&lt;&lt;</span> DATACENTER_LEFT       <span class="token comment" spellcheck="true">//数据中心部分</span>
+                <span class="token operator">|</span> machineId <span class="token operator">&lt;&lt;</span> MACHINE_LEFT             <span class="token comment" spellcheck="true">//机器标识部分</span>
+                <span class="token operator">|</span> sequence<span class="token punctuation">;</span>                             <span class="token comment" spellcheck="true">//序列号部分</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">long</span> <span class="token function">getNextMill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">long</span> mill <span class="token operator">=</span> <span class="token function">getNewstmp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>mill <span class="token operator">&lt;=</span> lastStmp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            mill <span class="token operator">=</span> <span class="token function">getNewstmp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> mill<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">long</span> <span class="token function">getNewstmp</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        SnowFlake snowFlake <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SnowFlake</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">long</span> start <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">1000000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>snowFlake<span class="token punctuation">.</span><span class="token function">nextId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
             </div>
             <hr>
 
@@ -456,7 +638,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">165.6k</span>
+                <span class="white-color">167.4k</span>
             
 
             
