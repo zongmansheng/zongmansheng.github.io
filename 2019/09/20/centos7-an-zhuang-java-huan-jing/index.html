@@ -1,0 +1,719 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="CentOS7安装软件, 晓笙的BLOG">
+    <meta name="description" content="CentOS7安装软件一、工具
+云服务器：安装CentOS 7
+远程连接工具：FinalShell
+
+二、安装java环境下载jdk1.8
+wget –no-cookies –no-check-certificate –header “Co">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>CentOS7安装软件 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！! !
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        CentOS7安装软件
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/操作系统/" target="_blank">
+                                <span class="chip bg-color">操作系统</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Linux/" class="post-category" target="_blank">
+                                Linux
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-20
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        5 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="CentOS7安装软件"><a href="#CentOS7安装软件" class="headerlink" title="CentOS7安装软件"></a>CentOS7安装软件</h1><h3 id="一、工具"><a href="#一、工具" class="headerlink" title="一、工具"></a>一、工具</h3><blockquote>
+<p>云服务器：安装CentOS 7</p>
+<p>远程连接工具：FinalShell</p>
+</blockquote>
+<h3 id="二、安装java环境"><a href="#二、安装java环境" class="headerlink" title="二、安装java环境"></a>二、安装java环境</h3><h4 id="下载jdk1-8"><a href="#下载jdk1-8" class="headerlink" title="下载jdk1.8"></a>下载jdk1.8</h4><blockquote>
+<p>wget –no-cookies –no-check-certificate –header “Cookie: gpw_e24=http%3A%2F%2F<a href="http://www.oracle.com%2F" target="_blank" rel="noopener">www.oracle.com%2F</a>; oraclelicense=accept-securebackup-cookie” “<a href="http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz&quot;" target="_blank" rel="noopener">http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz&quot;</a></p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/001.png" alt></p>
+<h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><pre><code>tar -zxvf jdk-8u131-linux-x64.tar.gz
+</code></pre><p>重命名</p>
+<pre><code>mv jdk-8u131-linux-x64.tar.gz /jdk8
+</code></pre><h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><pre><code>vi /etc/profile
+</code></pre><pre><code>export JAVA_HOME=/usr/local/java8/jdk8
+export JRE_HOME=$JAVA_HOME/jre
+export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
+</code></pre><p>环境生效</p>
+<pre><code>source /etc/profile
+</code></pre><h3 id="安装FastDFS"><a href="#安装FastDFS" class="headerlink" title="安装FastDFS"></a>安装FastDFS</h3><h4 id="安装gcc（编译时需要）"><a href="#安装gcc（编译时需要）" class="headerlink" title="安装gcc（编译时需要）"></a>安装gcc（编译时需要）</h4><blockquote>
+<p>FastDFS是C语言开发，安装FastDFS需要先将官网下载的源码进行编译，编译依赖gcc环境，如果没有gcc环境，需要安装gcc</p>
+</blockquote>
+<pre><code>yum install -y gcc gcc-c++
+</code></pre><h4 id="安装libevent（运行时需求）"><a href="#安装libevent（运行时需求）" class="headerlink" title="安装libevent（运行时需求）"></a>安装libevent（运行时需求）</h4><blockquote>
+<p>若安装了桌面图形界面，就不需要安装；FastDFS依赖libevent库；</p>
+</blockquote>
+<pre><code>yum -y install libevent
+</code></pre><h4 id="安装libfastcommon"><a href="#安装libfastcommon" class="headerlink" title="安装libfastcommon"></a>安装libfastcommon</h4><pre><code>wget https://github.com/happyfish100/libfastcommon/archive/V1.0.7.tar.gz
+</code></pre><h4 id="修改名字"><a href="#修改名字" class="headerlink" title="修改名字"></a>修改名字</h4><pre><code> mv V1.0.7.tar.gz libfastcommon-1.0.7.tar.gz
+</code></pre><h4 id="解压并进入"><a href="#解压并进入" class="headerlink" title="解压并进入"></a>解压并进入</h4><pre><code>tar -zxvf libfastcommon-1.0.7.tar.gz
+
+cd libfastcommon-1.0.7/
+</code></pre><h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><pre><code>./make.sh
+</code></pre><p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/002.png" alt></p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><pre><code>./make.sh install
+</code></pre><h4 id="设置几个软连接"><a href="#设置几个软连接" class="headerlink" title="设置几个软连接"></a>设置几个软连接</h4><pre><code>ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so
+ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so
+ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclient.so
+ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
+</code></pre><h4 id="安装-tracker-（跟踪器）服务-FastDFS-v5-05-tar-gz"><a href="#安装-tracker-（跟踪器）服务-FastDFS-v5-05-tar-gz" class="headerlink" title="安装 tracker （跟踪器）服务 FastDFS_v5.05.tar.gz"></a>安装 tracker （跟踪器）服务 FastDFS_v5.05.tar.gz</h4><pre><code>wget https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz
+</code></pre><h4 id="修改名字-1"><a href="#修改名字-1" class="headerlink" title="修改名字"></a>修改名字</h4><pre><code>mv V5.05.tar.gz FastDFS_v5.05.tar.gz
+</code></pre><p>解压进入编译安装</p>
+<pre><code>tar -zxvf FastDFS_v5.05.tar.gz
+cd fastdfs-5.05/
+./make.sh 
+./make.sh install
+</code></pre><p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/003.png" alt></p>
+<h4 id="配置和启动tracker"><a href="#配置和启动tracker" class="headerlink" title="配置和启动tracker"></a>配置和启动tracker</h4><blockquote>
+<p>切换目录到： /etc/fdfs/ 目录下；</p>
+<p>拷贝一份新的tracker配置文件</p>
+</blockquote>
+<pre><code>cp tracker.conf.sample tracker.conf
+</code></pre><blockquote>
+<p>修改tracker.conf ; </p>
+</blockquote>
+<pre><code>vim tracker.conf
+
+base_path=/home/yuqing/fastdfs  改为:  base_path=/home/fastdfs
+http.server_port  改为： 80
+</code></pre><h4 id="创建-home-fastdfs-目录"><a href="#创建-home-fastdfs-目录" class="headerlink" title="创建 /home/fastdfs 目录"></a>创建 /home/fastdfs 目录</h4><pre><code>mkdir /home/fastdfs
+</code></pre><h4 id="启动tracker，运行如下命令："><a href="#启动tracker，运行如下命令：" class="headerlink" title="启动tracker，运行如下命令："></a>启动tracker，运行如下命令：</h4><pre><code>/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart
+</code></pre><blockquote>
+<p>注意：在/home/fastdfs/ 目录下生成两个目录， 一个是数据，一个是日志</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/004.png" alt></p>
+<h4 id="配置和启动storage"><a href="#配置和启动storage" class="headerlink" title="配置和启动storage"></a>配置和启动storage</h4><blockquote>
+<p>由于上面已经安装过FastDFS，这里只需要配置storage就好了；</p>
+<p>（1）切换目录到： /etc/fdfs/ 目录下；</p>
+<p>（2）拷贝一份新的storage配置文件</p>
+</blockquote>
+<blockquote>
+<pre><code>cp storage.conf.sample storage.conf
+</code></pre></blockquote>
+<blockquote>
+<p>修改storage.conf ; </p>
+</blockquote>
+<pre><code>vim storage.conf
+</code></pre><blockquote>
+<pre><code>group_name=group1 #配置组名
+base_path=/home/yuqing/fastdfs    改为:  base_path=/home/fastdfs
+
+#store存放文件的位置(store_path)
+store_path0=/home/yuqing/fastdfs  改为： store_path0=/home/fdfs_storage 
+#如果有多个挂载磁盘则定义多个store_path，如下
+#store_path1=.....
+#store_path2=......
+
+#配置tracker服务器:IP
+tracker_server=192.168.172.20:22122
+#如果有多个则配置多个tracker
+#tracker_server=192.168.101.4:22122
+
+#配置http端口
+http.server_port=88
+</code></pre></blockquote>
+<h4 id="创建-home-fdfs-storage-目录"><a href="#创建-home-fdfs-storage-目录" class="headerlink" title="创建 /home/fdfs_storage 目录"></a>创建 /home/fdfs_storage 目录</h4><pre><code>mkdir /home/fdfs_storage
+</code></pre><h4 id="启动storage，-运行命令如下："><a href="#启动storage，-运行命令如下：" class="headerlink" title="启动storage， 运行命令如下："></a>启动storage， 运行命令如下：</h4><pre><code>/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart
+</code></pre><blockquote>
+<p>启动完成后进入 /home/fdfs_storage/data 目录下，显示目录如下：</p>
+</blockquote>
+<p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/005.png" alt></p>
+<h4 id="使用FastDFS自带工具测试"><a href="#使用FastDFS自带工具测试" class="headerlink" title="使用FastDFS自带工具测试"></a>使用FastDFS自带工具测试</h4><blockquote>
+<p>（1）切换目录到 /etc/fdfs/ 目录下；</p>
+<p>（2）拷贝一份新的client配置文件</p>
+</blockquote>
+<pre><code>cp client.conf.sample client.conf
+</code></pre><blockquote>
+<p>（3）修改client.conf ;   <strong>vim client.conf，</strong>修改基本路径和tracker_server如下：</p>
+</blockquote>
+<pre><code>base_path = /home/fastdfs
+
+tracker_server = 118.24.39.10:22122
+</code></pre><p>上传一张图片到新建的pic目录下</p>
+<blockquote>
+<p>进行测试，运行如下：（运行测试程序，读取/etc/fdfs/client.conf 文件，上传/pic目录下的timg.jpg文件）</p>
+</blockquote>
+<pre><code>/usr/bin/fdfs_test /etc/fdfs/client.conf upload /pic/timg.jpg
+</code></pre><p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/006.png" alt></p>
+<h3 id="FastDFS-和nginx整合"><a href="#FastDFS-和nginx整合" class="headerlink" title="FastDFS 和nginx整合"></a>FastDFS 和nginx整合</h3><h4 id="下载nginx插件"><a href="#下载nginx插件" class="headerlink" title="下载nginx插件"></a>下载nginx插件</h4><pre><code>wget http://jaist.dl.sourceforge.NET/project/fastdfs/FastDFS%20Nginx%20Module%20Source%20Code/fastdfs-nginx-module_v1.16.tar.gz
+</code></pre><p>编辑Nginx模块的配置文件：</p>
+<blockquote>
+<p>找到下面一行包含有 local 字眼去掉，因为这三个路径根本不是在 local 目录下的</p>
+<pre>
+
+CORE_INCS="$CORE_INCS /usr/local/include/fastdfs /usr/local/include/fastcommon/"
+
+</pre>
+改为如下：
+
+<pre>
+
+CORE_INCS="$CORE_INCS /usr/include/fastdfs /usr/include/fastcommon/"
+
+</pre>
+
+<p>复制文件：cp /usr/local/fastDFS/fastdfs-5.05/conf/http.conf /etc/fdfs<br>复制文件：cp /usr/local/fastDFS/fastdfs-5.05/conf/mime.types /etc/fdfs</p>
+</blockquote>
+<h4 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h4><pre><code>tar -zxvf nginx-1.11.8.tar.gz 
+cd nginx-1.11.8
+./configure --add-module=/usr/local/fastDFS/fastdfs-nginx-module/src
+make
+make install
+</code></pre><blockquote>
+<p>复制 Nginx 模块的配置文件：cp /opt/setups/FastDFS/fastdfs-nginx-module/src/mod_fastdfs.conf /etc/fdfs</p>
+</blockquote>
+<pre><code>cp /usr/local/fastDFS/fastdfs-nginx-module/src/mod_fastdfs.conf /etc/fdfs/
+</code></pre><blockquote>
+<p>编辑 Nginx 模块的配置文件：vim /etc/fdfs/mod_fastdfs.conf，编辑内容看下面中文注释<br>如果在已经启动 Nginx 的情况下修改下面内容记得要重启 Nginx。</p>
+</blockquote>
+<pre><code>vi mod_fastdfs.conf
+</code></pre><pre><code>base_path=/home/fastdfs
+tracker_server=118.24.39.10:22122 
+#tracker_server=118.24.39.10:22122 #(多个tracker配置多行)
+url_have_group_name=true        #url中包含group名称
+store_path0=/home/fdfs_storage  #指定文件存储路径（上面配置的store路径）
+</code></pre><h4 id="将libfdfsclient-so拷贝至-usr-lib下"><a href="#将libfdfsclient-so拷贝至-usr-lib下" class="headerlink" title="将libfdfsclient.so拷贝至/usr/lib下"></a>将libfdfsclient.so拷贝至/usr/lib下</h4><pre><code>cp /usr/lib64/libfdfsclient.so /usr/lib/
+</code></pre><h4 id="创建nginx-client目录"><a href="#创建nginx-client目录" class="headerlink" title="创建nginx/client目录"></a>创建nginx/client目录</h4><pre><code>mkdir -p /var/temp/nginx/client
+</code></pre><h4 id="修改nginx配置文件"><a href="#修改nginx配置文件" class="headerlink" title="修改nginx配置文件"></a>修改nginx配置文件</h4><pre><code>vi nginx.conf
+</code></pre><p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/007.png" alt></p>
+<p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/008.png" alt></p>
+<blockquote>
+<p><strong>说明</strong>：</p>
+<p>　　(a.) server_name指定本机ip；</p>
+<p>　　(b.) location /group1/M00/：group1为nginx 服务FastDFS的分组名称，M00是FastDFS自动生成编号，对应store_path0=/home/fdfs_storage，如果FastDFS定义store_path1，这里就是M01</p>
+</blockquote>
+<h4 id="Nginx启动"><a href="#Nginx启动" class="headerlink" title="Nginx启动"></a>Nginx启动</h4><pre><code>cd /usr/local/nginx/sbin/
+./nginx 
+</code></pre><p><img src="//zongmansheng.club/2019/09/20/centos7-an-zhuang-java-huan-jing/009.png" alt></p>
+<h3 id="在浏览器中访问上传到fastDFS的图片"><a href="#在浏览器中访问上传到fastDFS的图片" class="headerlink" title="在浏览器中访问上传到fastDFS的图片"></a>在浏览器中访问上传到fastDFS的图片</h3><p><a href="http://118.24.39.10/group1/M00/00/00/rBAAB12E7iyABm0TAACu49zL7nc697_big.jpg" target="_blank" rel="noopener">http://118.24.39.10/group1/M00/00/00/rBAAB12E7iyABm0TAACu49zL7nc697_big.jpg</a></p>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/09/20/centos7-an-zhuang-java-huan-jing/" class="b-link-green">CentOS7安装软件</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/09/20/centos7-an-zhuang-java-huan-jing/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="CentOS7安装软件">
+                        
+                        <span class="card-title">CentOS7安装软件</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">CentOS7安装软件一、工具
+云服务器：安装CentOS 7
+远程连接工具：FinalShell
+
+二、安装java环境下载jdk1.8
+wget –no-cookies –no-check-certificate –header “Co</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category" target="_blank">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/操作系统/" target="_blank">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/20/mysql-you-hua-zhuan-ti/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="mysql优化专题">
+                        
+                        <span class="card-title">mysql优化专题</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">Mysql优化专题
+一、索引的概述1）什么是索引？
+​        索引是一种特殊的文件(InnoDB数据表上的索引是表空间的一个组成部分)，它们包含着对数据表里所有记录的引用指针。更通俗的说，索引就相当于目录。当你在用新华字典时，帮你把</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/mysql/" class="post-category" target="_blank">
+                                    mysql
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/mysql/" target="_blank">
+                        <span class="chip bg-color">mysql</span>
+                    </a>
+                    
+                    <a href="/tags/索引/" target="_blank">
+                        <span class="chip bg-color">索引</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">173.7k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
