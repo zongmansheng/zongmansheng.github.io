@@ -305,7 +305,7 @@
 <p>​        来说说为什么数组和链表的特点恰好相反，首先来看看二者在内存中的存储结构。</p>
 <p>​        数组和链表都是线性表结构，数组在内存中是一串连续的内存空间，比如定义一个 int 类型数组，int[] array = new int[6]，计算机会为 array 分配一块连续的空间，如下图所示。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/002.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/26/shu-ju-jie-gou-dan-lian-biao/002.png" alt></p>
 <blockquote>
 <p>​        1000-1003 这段空间用来存储数组中的第一个元素 array[0]，1004-1007 的空间用来存储 array[1]，以此类推数组中的每个元素都对应一块大小为 4 byte 的空间，这种结构就决定了数组查询数据速度很快，只需要知道首地址（在栈内存中记录的就是数组的首地址，可以直接获取），再结合寻址公式就可以很快找到对应元素的地址，从而取出数据。</p>
 <p>数组的寻址公式：i_address = first_address + data_size*i</p>
@@ -313,26 +313,26 @@
 <p>​        也正是因为这种结构导致数组添加和删除数据效率很低，因为这两种操作不仅仅是在数组中添加或者移除一个元素那么简单，同时还需要移动其他已存在的元素。</p>
 <p>​        数组中各个元素的内存地址都是连续，不间断的，删除某个元素之后需要保证数组仍然是连续的，所以就需要移动数据，比如要删除 array[2]，删除之后需要依次将 array[3]、array[4]、array[5] 向前移动一位，如下图所示。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/003.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/26/shu-ju-jie-gou-dan-lian-biao/003.png" alt></p>
 <blockquote>
 <p>同理，如果此时将 0 添加到数组中的第 2 位，即 array[1] 的位置，同样需要先将 array[1] 及其之后的各个元素依次向后移动 1 位，给新数据腾出位置才能添加，如下图所示。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/004.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/26/shu-ju-jie-gou-dan-lian-biao/004.png" alt></p>
 <blockquote>
 <p>因为要移动元素，所以无论是添加数据还是删除数据，效率都不高。</p>
 <p>搞清楚数组的存储结构之后，我们再来看看链表的存储结构，在内存中，链表中的数据是分散的，无须存储在一块连续的内存空间中，如下图所示。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/005.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/26/shu-ju-jie-gou-dan-lian-biao/005.png" alt></p>
 <blockquote>
 <p>链表中存储了 3 个元素分别是 1、2、3，每个元素都有一个指针，指向下一个元素的内存地址，1 的指针就指向 2 的内存地址 1008，2 的指针就指向 3 的内存地址 1020，依次类推。</p>
 <p>不同元素之间的物理空间间隔也是不确定的，所以这样的结构就无法通过一个固定的公式来求出某个元素的内存地址，只能从首元素开始依次向后查找，直到找到目标元素。如果目标元素位于链表的最后一位，则需要遍历整个链表才能找到它，效率很低。</p>
 <p>同样，正是因为这样的结构，使得链表添加和删除元素效率很高，无须移动其他已存在的元素，只需要修改元素指针即可。比如，删除 2，则只需要将 1 的指针指向 3 即可，如下图所示。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/006.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/26/shu-ju-jie-gou-dan-lian-biao/006.png" alt></p>
 <blockquote>
 <p>添加元素也是一样，要在 2 和 3 之间添加元素 0 ，只需要随机分配一块空间存储 0，然后将 2 的指针指向 0，0 的指针指向 3 即可，如下图所示。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/26/shu-ju-jie-gou-dan-lian-biao/007.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/26/shu-ju-jie-gou-dan-lian-biao/007.png" alt></p>
 <blockquote>
 <p>所以在链表中，无论是添加还是删除元素，都只需要修改相关节点的指针即可，效率很高。</p>
 <p>搞清楚链表的结构之后，我们使用 Java 语言来实现一个单链表的结构。</p>
@@ -358,7 +358,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/26/shu-ju-jie-gou-dan-lian-biao/" class="b-link-green">数据结构——单链表</a>
                 </p>

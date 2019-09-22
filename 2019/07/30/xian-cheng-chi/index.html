@@ -1131,7 +1131,7 @@ ThreadPoolExecutor<span class="token punctuation">.</span>CallerRunsPolicy：由
 <blockquote>
 <p>执行结果：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/30/xian-cheng-chi/001.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/30/xian-cheng-chi/001.png" alt></p>
 <blockquote>
 <p>从执行结果可以看出，当线程池中线程的数目大于5时，便将任务放入任务缓存队列里面，当任务缓存队列满了之后，便创建新的线程。如果上面程序中，将for循环中改成执行20个任务，就会抛出任务拒绝异常了。</p>
 <p>　　不过在java doc中，并不提倡我们直接使用ThreadPoolExecutor，而是使用Executors类中提供的几个静态方法来创建线程池：</p>
@@ -1189,7 +1189,7 @@ Executors<span class="token punctuation">.</span><span class="token function">ne
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/30/xian-cheng-chi/" class="b-link-green">线程池</a>
                 </p>

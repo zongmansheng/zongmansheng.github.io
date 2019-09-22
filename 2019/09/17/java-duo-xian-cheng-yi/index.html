@@ -296,7 +296,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Java多线程（一）"><a href="#Java多线程（一）" class="headerlink" title="Java多线程（一）"></a>Java多线程（一）</h1><p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/001.png" alt></p>
+                <h1 id="Java多线程（一）"><a href="#Java多线程（一）" class="headerlink" title="Java多线程（一）"></a>Java多线程（一）</h1><p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/001.png" alt></p>
 <h3 id="一-进程和多线程简介"><a href="#一-进程和多线程简介" class="headerlink" title="一 进程和多线程简介"></a>一 进程和多线程简介</h3><h4 id="1-1-相关概念"><a href="#1-1-相关概念" class="headerlink" title="1.1 相关概念"></a>1.1 相关概念</h4><h5 id="何为线程？"><a href="#何为线程？" class="headerlink" title="何为线程？"></a><strong>何为线程？</strong></h5><blockquote>
 <p>​        线程与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享同一块内存空间和一组系统资源，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
 </blockquote>
@@ -335,7 +335,7 @@
 <span class="token punctuation">}</span>
 </code></pre>
 <p>运行结果：</p>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/002.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/002.png" alt></p>
 <blockquote>
 <p>从上面的运行结果可以看出：线程是一个子任务，CPU以不确定的方式，或者说是以随机的时间来调用线程中的run方法。</p>
 </blockquote>
@@ -358,7 +358,7 @@
 <span class="token punctuation">}</span>
 </code></pre>
 <p>运行结果：</p>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/003.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/003.png" alt></p>
 <h3 id="三-实例变量和线程安全"><a href="#三-实例变量和线程安全" class="headerlink" title="三 实例变量和线程安全"></a>三 实例变量和线程安全</h3><blockquote>
 <p>定义线程类中的实例变量针对其他线程可以有共享和不共享之分</p>
 </blockquote>
@@ -396,7 +396,7 @@
 <span class="token punctuation">}</span>
 </code></pre>
 <p>运行结果：</p>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/004.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/004.png" alt></p>
 <blockquote>
 <p>可以看出每个线程都有一个属于自己的实例变量count，它们之间互不影响。我们再来看看另一种情况</p>
 </blockquote>
@@ -434,7 +434,7 @@
 <span class="token punctuation">}</span>
 </code></pre>
 <p>运行结果：</p>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/005.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/005.png" alt></p>
 <blockquote>
 <p>可以看出这里已经出现了错误，我们想要的是依次递减的结果。为什么呢？？</p>
 <p>因为在大多数jvm中，count–的操作分为如下下三步：</p>
@@ -449,7 +449,7 @@
 <p>在run方法前加上synchronized关键字即可得到正确答案。</p>
 </blockquote>
 <p>加上关键字后的运行结果：</p>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/006.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/006.png" alt></p>
 <h3 id="四-一些常用方法"><a href="#四-一些常用方法" class="headerlink" title="四 一些常用方法"></a>四 一些常用方法</h3><h4 id="4-1-currentThread"><a href="#4-1-currentThread" class="headerlink" title="4.1 currentThread()"></a>4.1 currentThread()</h4><blockquote>
 <p>返回对当前正在执行的线程对象的引用。</p>
 </blockquote>
@@ -571,7 +571,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/007.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/007.png" alt></p>
 <blockquote>
 <p>for循环虽然停止执行了，但是for循环下面的语句还是会执行，说明线程并未被停止。</p>
 </blockquote>
@@ -638,7 +638,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/008.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/008.png" alt></p>
 <h3 id="七-Java多线程分类"><a href="#七-Java多线程分类" class="headerlink" title="七 Java多线程分类"></a>七 Java多线程分类</h3><h4 id="7-1-多线程分类"><a href="#7-1-多线程分类" class="headerlink" title="7.1 多线程分类"></a>7.1 多线程分类</h4><blockquote>
 <p>用户线程：运行在前台，执行具体的任务，如程序的主线程、连接网络的子线程等都是用户线程</p>
 <p>守护线程：运行在后台，为其他前台线程服务.也可以说守护线程是JVM中非守护线程的 <strong>“佣人”</strong>。</p>
@@ -687,7 +687,7 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="//zongmansheng.club/2019/09/17/java-duo-xian-cheng-yi/009.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/17/java-duo-xian-cheng-yi/009.png" alt></p>
 
             </div>
             <hr>
@@ -709,7 +709,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/09/17/java-duo-xian-cheng-yi/" class="b-link-green">Java多线程（一）</a>
                 </p>

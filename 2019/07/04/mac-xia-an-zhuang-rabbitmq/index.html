@@ -301,17 +301,17 @@ ruby -e “$(curl -fsSL https://raw">
 <p>ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;" target="_blank" rel="noopener">https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</a></p>
 <p>安装完查看版本</p>
 <pre><code>brew --version
-</code></pre><p><img src="//zongmansheng.club/2019/07/04/mac-xia-an-zhuang-rabbitmq/001.png" alt></p>
+</code></pre><p><img src="//zongmansheng.gitee.io/2019/07/04/mac-xia-an-zhuang-rabbitmq/001.png" alt></p>
 <p>安装</p>
 <pre><code>brew install rabbitmq
-</code></pre><p><img src="//zongmansheng.club/2019/07/04/mac-xia-an-zhuang-rabbitmq/002.png" alt></p>
+</code></pre><p><img src="//zongmansheng.gitee.io/2019/07/04/mac-xia-an-zhuang-rabbitmq/002.png" alt></p>
 <blockquote>
 <p>首次安装，下载一些相关的包</p>
 </blockquote>
 <blockquote>
 <p>真正安装rabbitmq</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/04/mac-xia-an-zhuang-rabbitmq/003.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/04/mac-xia-an-zhuang-rabbitmq/003.png" alt></p>
 <pre><code>## 进入安装目录
 cd /usr/local/Cellar/rabbitmq/3.7.5
 
@@ -322,16 +322,16 @@ rabbitmq-server
 </code></pre><p>启动控制台之前需要先开启插件</p>
 <pre><code>./rabbitmq-plugins enable rabbitmq_management
 </code></pre><p>启动成功</p>
-<p><img src="//zongmansheng.club/2019/07/04/mac-xia-an-zhuang-rabbitmq/005.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/04/mac-xia-an-zhuang-rabbitmq/005.png" alt></p>
 <blockquote>
 <p>浏览器访问：<a href="http://localhost:15761" target="_blank" rel="noopener">http://localhost:15761</a></p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/04/mac-xia-an-zhuang-rabbitmq/006.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/04/mac-xia-an-zhuang-rabbitmq/006.png" alt></p>
 <blockquote>
 <p>用户名：guest</p>
 <p>密    码：guest</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/04/mac-xia-an-zhuang-rabbitmq/007.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/04/mac-xia-an-zhuang-rabbitmq/007.png" alt></p>
 <h3 id="II-配置与测试"><a href="#II-配置与测试" class="headerlink" title="II. 配置与测试"></a>II. 配置与测试</h3><h4 id="1-添加账号"><a href="#1-添加账号" class="headerlink" title="1. 添加账号"></a>1. 添加账号</h4><blockquote>
 <p>首先是得启动mq</p>
 </blockquote>
@@ -389,7 +389,7 @@ rabbitmq-server
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p><img src="//zongmansheng.club/2019/07/04/mac-xia-an-zhuang-rabbitmq/008.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/04/mac-xia-an-zhuang-rabbitmq/008.png" alt></p>
 <blockquote>
 <p>消费者</p>
 </blockquote>
@@ -499,7 +499,7 @@ channel.basicConsume(QUEUE_NAME, false, consumer);
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/04/mac-xia-an-zhuang-rabbitmq/" class="b-link-green">Mac下安装RabbitMq</a>
                 </p>

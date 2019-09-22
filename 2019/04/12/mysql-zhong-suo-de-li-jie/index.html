@@ -292,13 +292,13 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="//zongmansheng.club/2019/04/12/mysql-zhong-suo-de-li-jie/001.png" alt="001"></p>
+                <p><img src="//zongmansheng.gitee.io/2019/04/12/mysql-zhong-suo-de-li-jie/001.png" alt="001"></p>
 <h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><pre><code>注：MySQL是一个支持插件式存储引擎的数据库系统。本文下面的所有介绍，都是基于InnoDB存储引擎，其他引擎的表现，会有较大的区别。
 </code></pre><h4 id="存储引擎查看"><a href="#存储引擎查看" class="headerlink" title="存储引擎查看"></a>存储引擎查看</h4><pre><code>MySQL给开发者提供了查询存储引擎的功能，我这里使用的是MySQL5.6.4，可以使用：
 
 SHOW ENGINES
-</code></pre><p><img src="//zongmansheng.club/2019/04/12/mysql-zhong-suo-de-li-jie/002.png" alt="002"></p>
-<p><img src="//zongmansheng.club/2019/04/12/mysql-zhong-suo-de-li-jie/003.png" alt="003"></p>
+</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/12/mysql-zhong-suo-de-li-jie/002.png" alt="002"></p>
+<p><img src="//zongmansheng.gitee.io/2019/04/12/mysql-zhong-suo-de-li-jie/003.png" alt="003"></p>
 <h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><pre><code>    用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加1。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。
 </code></pre><h5 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h5><h6 id="1、数据库表设计"><a href="#1、数据库表设计" class="headerlink" title="1、数据库表设计"></a>1、数据库表设计</h6><pre><code>三个字段，分别是id,value、version
 </code></pre><pre class=" language-sql"><code class="language-sql"><span class="token keyword">select</span> id<span class="token punctuation">,</span><span class="token keyword">value</span><span class="token punctuation">,</span>version <span class="token keyword">from</span> <span class="token keyword">TABLE</span> <span class="token keyword">where</span> id<span class="token operator">=</span><span class="token comment" spellcheck="true">#{id}</span>
@@ -401,7 +401,7 @@ innodb 的行锁是在有索引的情况下,没有索引的表是锁定全表的
 <p>2.查询进程（如果您有SUPER权限，您可以看到所有线程。否则，您只能看到您自己的线程）</p>
 <pre class=" language-sql"><code class="language-sql"><span class="token keyword">show</span> processlist
 </code></pre>
-<p><img src="//zongmansheng.club/2019/04/12/mysql-zhong-suo-de-li-jie/004.png" alt="004"></p>
+<p><img src="//zongmansheng.gitee.io/2019/04/12/mysql-zhong-suo-de-li-jie/004.png" alt="004"></p>
 <p>3.杀死进程id（就是上面命令的id列）</p>
 <pre><code>kill id
 </code></pre><p><strong>第二种</strong>：</p>
@@ -463,7 +463,7 @@ innodb 的行锁是在有索引的情况下,没有索引的表是锁定全表的
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/04/12/mysql-zhong-suo-de-li-jie/" class="b-link-green">MySql中锁的理解</a>
                 </p>

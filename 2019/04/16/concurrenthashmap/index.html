@@ -299,7 +299,7 @@ ConcurrentHashMap 被Segment 分成">
                 <h1 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h1><pre><code>JDK8 对ConcurrentHashMap 进行了脱胎换骨式的改造，使用了大量的lock-free 技术来减轻因锁的竞争而对性能造成的影响。
 
 ConcurrentHashMap 被Segment 分成了很多小区，Segment 就相当于小区保安，HashEntry 列表相当于小区业主，小区保安通过加锁的方式，保证每个Segment 内都不发生冲突。
-</code></pre><p><img src="//zongmansheng.club/2019/04/16/concurrenthashmap/001.png" alt="001"></p>
+</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/16/concurrenthashmap/001.png" alt="001"></p>
 <pre><code>通过分析Hashtable就知道，synchronized是针对整张Hash表的，即每次锁住整张表让线程独占，ConcurrentHashMap允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对hash表的不同部分进行的修改。ConcurrentHashMap内部使用段(Segment)来表示这些不同的部分，每个段其实就是一个小的hash table，它们有自己的锁。只要多个修改操作发生在不同的段上，它们就可以并发进行。
 
 有些方法需要跨段，比如size()和containsValue()，它们可能需要锁定整个表而而不仅仅是某个段，这需要按顺序锁定所有段，操作完毕后，又按顺序释放所有段的锁。这里“按顺序”是很重要的，否则极有可能出现死锁，在ConcurrentHashMap内部，段数组是final的，并且其成员变量实际上也是final的，但是，仅仅是将数组声明为final的并不保证数组成员也是final的，这需要实现上的保证。这可以确保不会出现死锁，因为获得锁的顺序是固定的。
@@ -333,7 +333,7 @@ ConcurrentHashMap 被Segment 分成了很多小区，Segment 就相当于小区�
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/04/16/concurrenthashmap/" class="b-link-green">ConcurrentHashMap</a>
                 </p>

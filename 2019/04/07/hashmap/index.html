@@ -323,9 +323,9 @@ JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理�
 <pre><code>相比于 JDK1.8 的 hash 方法 ，JDK 1.7 的 hash 方法的性能会稍差一点点，因为毕竟扰动了 4 次。
 
 所谓 “拉链法” 就是：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。
-</code></pre><p><img src="//zongmansheng.club/2019/04/07/hashmap/001.png" alt="001"></p>
+</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/07/hashmap/001.png" alt="001"></p>
 <h4 id="JDK1-8之后"><a href="#JDK1-8之后" class="headerlink" title="JDK1.8之后"></a>JDK1.8之后</h4><pre><code>    相比于之前的版本，jdk1.8在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。
-</code></pre><p><img src="//zongmansheng.club/2019/04/07/hashmap/002.png" alt="002"></p>
+</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/07/hashmap/002.png" alt="002"></p>
 <p>类的属性：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">AbstractMap</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Map</span><span class="token operator">&lt;</span>K<span class="token punctuation">,</span>V<span class="token operator">></span><span class="token punctuation">,</span> Cloneable<span class="token punctuation">,</span> Serializable <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 序列号</span>
@@ -421,7 +421,7 @@ JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理�
                 r <span class="token operator">=</span> p<span class="token punctuation">;</span>
        <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h2><h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><p><img src="//zongmansheng.club/2019/04/07/hashmap/003.png" alt="003"></p>
+<h2 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h2><h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><p><img src="//zongmansheng.gitee.io/2019/04/07/hashmap/003.png" alt="003"></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 默认构造函数。</span>
     <span class="token keyword">public</span> More <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token function">HashMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>loadFactor <span class="token operator">=</span> DEFAULT_LOAD_FACTOR<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// all   other fields defaulted</span>
@@ -482,7 +482,7 @@ JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理�
 
     - ①如果定位到的数组位置没有元素 就直接插入。
     - ②如果定位到的数组位置有元素就和要插入的key比较，如果key相同就直接覆盖，如果key不相同，就判断p是否是一个树节点，如果是就调用e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value)将元素添加进入。如果不是就遍历链表插入。
-</code></pre><p><img src="//zongmansheng.club/2019/04/07/hashmap/004.png" alt="004"></p>
+</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/07/hashmap/004.png" alt="004"></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> V <span class="token function">put</span><span class="token punctuation">(</span>K key<span class="token punctuation">,</span> V value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token function">putVal</span><span class="token punctuation">(</span><span class="token function">hash</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">,</span> key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -787,7 +787,7 @@ JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理�
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/04/07/hashmap/" class="b-link-green">HashMap</a>
                 </p>

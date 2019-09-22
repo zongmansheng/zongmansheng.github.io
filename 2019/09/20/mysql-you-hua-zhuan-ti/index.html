@@ -296,18 +296,18 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Mysql优化专题"><a href="#Mysql优化专题" class="headerlink" title="Mysql优化专题"></a>Mysql优化专题</h1><p><img src="//zongmansheng.club/2019/09/20/mysql-you-hua-zhuan-ti/001.png" alt></p>
+                <h1 id="Mysql优化专题"><a href="#Mysql优化专题" class="headerlink" title="Mysql优化专题"></a>Mysql优化专题</h1><p><img src="//zongmansheng.gitee.io/2019/09/20/mysql-you-hua-zhuan-ti/001.png" alt></p>
 <h3 id="一、索引的概述"><a href="#一、索引的概述" class="headerlink" title="一、索引的概述"></a>一、索引的概述</h3><h4 id="1）什么是索引？"><a href="#1）什么是索引？" class="headerlink" title="1）什么是索引？"></a>1）什么是索引？</h4><blockquote>
 <p>​        索引是一种特殊的文件(InnoDB数据表上的索引是表空间的一个组成部分)，它们包含着对数据表里所有记录的引用指针。更通俗的说，索引就相当于目录。当你在用新华字典时，帮你把目录撕掉了，你查询某个字开头的成语只能从第一页翻到第一千页。累！把目录还给你，则能快速定位！</p>
 </blockquote>
 <h4 id="2）索引的优缺点："><a href="#2）索引的优缺点：" class="headerlink" title="2）索引的优缺点："></a>2）索引的优缺点：</h4><blockquote>
 <p>​        可以大大加快数据的检索速度，这也是创建索引的最主要的原因。，且通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。但是，索引也是有缺点的：索引需要额外的维护成本；因为索引文件是单独存在的文件,对数据的增加,修改,删除,都会产生额外的对索引文件的操作,这些操作需要消耗额外的IO,会降低增/改/删的执行效率。</p>
 </blockquote>
-<h3 id="二、索引的基本使用"><a href="#二、索引的基本使用" class="headerlink" title="二、索引的基本使用"></a>二、索引的基本使用</h3><h4 id="1）创建索引：（三种方式）"><a href="#1）创建索引：（三种方式）" class="headerlink" title="1）创建索引：（三种方式）"></a>1）创建索引：（三种方式）</h4><h5 id="第一种方式："><a href="#第一种方式：" class="headerlink" title="第一种方式："></a>第一种方式：</h5><p><img src="//zongmansheng.club/2019/09/20/mysql-you-hua-zhuan-ti/002.png" alt></p>
+<h3 id="二、索引的基本使用"><a href="#二、索引的基本使用" class="headerlink" title="二、索引的基本使用"></a>二、索引的基本使用</h3><h4 id="1）创建索引：（三种方式）"><a href="#1）创建索引：（三种方式）" class="headerlink" title="1）创建索引：（三种方式）"></a>1）创建索引：（三种方式）</h4><h5 id="第一种方式："><a href="#第一种方式：" class="headerlink" title="第一种方式："></a>第一种方式：</h5><p><img src="//zongmansheng.gitee.io/2019/09/20/mysql-you-hua-zhuan-ti/002.png" alt></p>
 <h5 id="第二种方式：使用ALTER-TABLE命令去增加索引："><a href="#第二种方式：使用ALTER-TABLE命令去增加索引：" class="headerlink" title="第二种方式：使用ALTER TABLE命令去增加索引："></a>第二种方式：使用ALTER TABLE命令去增加索引：</h5><blockquote>
 <p>ALTER TABLE用来创建普通索引、UNIQUE索引或PRIMARY KEY索引。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/09/20/mysql-you-hua-zhuan-ti/003.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/20/mysql-you-hua-zhuan-ti/003.png" alt></p>
 <blockquote>
 <p>其中table_name是要增加索引的表名，column_list指出对哪些列进行索引，多列时各列之间用逗号分隔。</p>
 <p>索引名index_name可自己命名，缺省时，MySQL将根据第一个索引列赋一个名称。另外，ALTER TABLE允许在单个语句中更改多个表，因此可以在同时创建多个索引。</p>
@@ -315,7 +315,7 @@
 <h5 id="第三种方式：使用CREATE-INDEX命令创建"><a href="#第三种方式：使用CREATE-INDEX命令创建" class="headerlink" title="第三种方式：使用CREATE INDEX命令创建"></a>第三种方式：使用CREATE INDEX命令创建</h5><blockquote>
 <p>CREATE INDEX可对表增加普通索引或UNIQUE索引。（但是，不能创建PRIMARY KEY索引）</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/09/20/mysql-you-hua-zhuan-ti/004.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/20/mysql-you-hua-zhuan-ti/004.png" alt></p>
 <h3 id="三、索引的基本原理"><a href="#三、索引的基本原理" class="headerlink" title="三、索引的基本原理"></a>三、索引的基本原理</h3><blockquote>
 <p>​        索引用来快速地寻找那些具有特定值的记录。如果没有索引，一般来说执行查询时遍历整张表。</p>
 <p>索引的原理很简单，就是把无序的数据变成有序的查询</p>
@@ -327,7 +327,7 @@
 <h3 id="四、索引的数据结构（b树，hash）"><a href="#四、索引的数据结构（b树，hash）" class="headerlink" title="四、索引的数据结构（b树，hash）"></a>四、索引的数据结构（b树，hash）</h3><h4 id="1）B树索引"><a href="#1）B树索引" class="headerlink" title="1）B树索引"></a>1）B树索引</h4><blockquote>
 <p>​        mysql通过存储引擎取数据，基本上90%的人用的就是InnoDB了，按照实现方式分，InnoDB的索引类型目前只有两种：BTREE（B树）索引和HASH索引。B树索引是Mysql数据库中使用最频繁的索引类型，基本所有存储引擎都支持BTree索引。通常我们说的索引不出意外指的就是（B树）索引（实际是用B+树实现的，因为在查看表索引时，mysql一律打印BTREE，所以简称为B树索引）</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/09/20/mysql-you-hua-zhuan-ti/005.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/20/mysql-you-hua-zhuan-ti/005.png" alt></p>
 <blockquote>
 <p>查询方式：</p>
 <p>主键索引区:PI(关联保存的时数据的地址)按主键查询,</p>
@@ -342,7 +342,7 @@
 <h4 id="2）哈希索引"><a href="#2）哈希索引" class="headerlink" title="2）哈希索引"></a>2）哈希索引</h4><blockquote>
 <p>​        简要说下，类似于数据结构中简单实现的HASH表（散列表）一样，当我们在mysql中用哈希索引时，主要就是通过Hash算法（常见的Hash算法有直接定址法、平方取中法、折叠法、除数取余法、随机数法），将数据库字段数据转换成定长的Hash值，与这条数据的行指针一并存入Hash表的对应位置；如果发生Hash碰撞（两个不同关键字的Hash值相同），则在对应Hash键下以链表形式存储。当然这只是简略模拟图。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/09/20/mysql-you-hua-zhuan-ti/006.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/09/20/mysql-you-hua-zhuan-ti/006.png" alt></p>
 <h3 id="五、创建索引的原则（重中之重）"><a href="#五、创建索引的原则（重中之重）" class="headerlink" title="五、创建索引的原则（重中之重）"></a>五、创建索引的原则（重中之重）</h3><blockquote>
 <p>索引虽好，但也不是无限制的使用，最好符合一下几个原则</p>
 <p>1） 最左前缀匹配原则，组合索引非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&gt;、&lt;、between、like)就停止匹配，比如a = 1 and b = 2 and c &gt; 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a,b,d,c)的索引则都可以用到，a,b,d的顺序可以任意调整。</p>
@@ -382,7 +382,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/09/20/mysql-you-hua-zhuan-ti/" class="b-link-green">mysql优化专题</a>
                 </p>

@@ -322,7 +322,7 @@
 <blockquote>
 <p>hash算法示例图演示：</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/001.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/001.png" alt></p>
 <blockquote>
 <p>类似于HaspMap的实现就是使用散列，比如把1000个元素放到长度为10的hashmap里面去，放入之前会把这1000个数经过hash算法映射到10个数组里面去，这时候就会存在相同的映射值在一个数组的相同位置，就会产生hash碰撞，此时hashmap就会在产生碰撞的数组的后面使用Entry链表来存储相同映射的值，然后使用equals方法来判断同一个链表存储的值是否一样来获取值，链表就是hashmap用来解决碰撞的方法，所以我们一般在写一个类的时候要写自己的hashcode方法和equals方法，如果键的hashcode相同，再使用键的equals方法判断键内容是不是一样的，一样的就获取值</p>
 <p>Md5，Sha，取余都是散列算法，ConcurrentHashMap中是wang/jenkins算法</p>
@@ -333,14 +333,14 @@
 <blockquote>
 <p>分段锁的思想示例图</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/002.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/002.png" alt></p>
 <blockquote>
 <p>说明：</p>
 <p>a)传统的hashtable是很小空间的数组整段锁住，这样性能比较低</p>
 <p>b)ConcurrentHashMap是在很小空间数组的前面再加一个数组，映射的时候先映射到前面的数组，然后再映射到后面的很小空间的数组；读取的时候只需要把前面的数组锁住就可以了。这就是分段锁的思想</p>
 <p>ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segment实际是一种可重入锁（ReentrantLock），也就是用于分段的锁。HashEntry则用于存储键值对数据。一个ConcurrentHashMap里包含一个Segment数组。Segment的结构和HashMap类似，是一种数组和链表结构。一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素，每个Segment守护着一个HashEntry数组里的元素，当对HashEntry数组的数据进行修改时，必须首先获得与它对应的Segment锁。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/003.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/003.png" alt></p>
 <blockquote>
 <p>说明：上图存在两次散列的过程：比如插入一个1000的数，首先是把1000的位数(最多是高16位)做一次散列找到在segments数组中的位置，然后再把1000本身做一次散列找到在table中的位置</p>
 <p>获取值时一样</p>
@@ -374,7 +374,7 @@
 <blockquote>
 <p>传统意义的单链表是一个线性结构，向有序的链表中插入一个节点需要O(n)的时间，查找操作需要O(n)的时间。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/004.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/004.png" alt></p>
 <blockquote>
 <p>如果我们使用上图所示的跳跃表，就可以减少查找所需时间为O(n/2)，因为我们可以先通过每个节点的最上面的指针先进行查找，这样子就能跳过一半的节点。</p>
 <p>比如我们想查找19，首先和6比较，大于6之后，在和9进行比较，然后在和12进行比较……最后比较到21的时候，发现21大于19，说明查找的点在17和21之间，从这个过程中，我们可以看出，查找的时候跳过了3、7、12等点，因此查找的复杂度为O(n/2)。</p>
@@ -396,7 +396,7 @@
 <h4 id="5-什么是阻塞队列"><a href="#5-什么是阻塞队列" class="headerlink" title="5.什么是阻塞队列"></a>5.什么是阻塞队列</h4><blockquote>
 <p>取数据和存数据不满足要求时，会对线程进行阻塞。例如取数据时发现队列里面没有数据就在那里阻塞等着有数据了再取；存数据时发现队列已经满了就在那里阻塞等着有数据被取走时再存</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/005.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/005.png" alt></p>
 <h4 id="常用阻塞队列"><a href="#常用阻塞队列" class="headerlink" title="常用阻塞队列"></a><strong>常用阻塞队列</strong></h4><blockquote>
 <p>ArrayBlockingQueue： 数组结构组成有界阻塞队列。</p>
 <p>先进先出原则，初始化必须传大小，take和put时候用的同一把锁</p>
@@ -860,7 +860,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/03/bing-fa-gong-ju-lei-he-bing-fa-rong-qi/" class="b-link-green">并发工具类和并发容器</a>
                 </p>

@@ -305,12 +305,12 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
 <li>没有值相等重复的节点;</li>
 </ol>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/001.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/001.png" alt></p>
 <blockquote>
 <p>对上图这个二叉树进行查找，如查键值为5的记录，先找到根，其值时6，大于5，查找6的左子树，找到3，5大于3，再找其右子树，一共找了3次。同理，查找键值为8的记录，用了3次。所有键值平均查找次数为(1+2+2+3+3+3)/6=2.3次，假如对这些键值进行顺序查找，平均查找次数为(1+2+3+4+5+6)/6=3.3（查找顺序摆放的数，第一个数肯定是1次，而第2个数是2次，以此类推），显然二叉查找树的平均查找速度比顺序查找更快</p>
 <p>二叉查找树可以任意的构造，假如二叉查找树按照如下方式构造</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/002.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/002.png" alt></p>
 <blockquote>
 <p>平均查找速度为(1+2+3+4+5+5)/6=3.16次，和顺序查找差不多。为了提高二叉查找树的查询效率，需要二叉查找数是平衡的，这就引出了平衡二叉树。</p>
 <p>平衡二叉树除了满足上面3个属性，还要满足如下1个属性</p>
@@ -320,32 +320,32 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
 <p>平衡二叉树的查找效率确实很快，但维护一颗平衡二叉树的代价是非常大的，需要1次或多次左旋和右旋来得到插入或更新后树的平衡性。简单举个例子。</p>
 <p>初始平衡二叉树</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/003.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/003.png" alt></p>
 <blockquote>
 <p>插入3</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/004.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/004.png" alt></p>
 <blockquote>
 <p>右旋一次</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/005.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/005.png" alt></p>
 <blockquote>
 <p>再左旋一次</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/006.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/006.png" alt></p>
 <blockquote>
 <p>作为一个科普性的文章，这里不对左旋的右旋的细节进行分析，放几个图片能理解左旋和右旋即可</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/3b0f670f16c8413e8cfa0011fe85c98f.gif" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/3b0f670f16c8413e8cfa0011fe85c98f.gif" alt></p>
 <blockquote>
 <p>对x进行左旋，意味着将x变为一个左结点</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/007.png" alt></p>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/008.gif" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/007.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/008.gif" alt></p>
 <blockquote>
 <p>对y进行右旋，意味着将y变为一个右节点</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/009.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/009.png" alt></p>
 <blockquote>
 <p>回头看上面例子的左旋和右旋，是不是很清楚了？</p>
 </blockquote>
@@ -355,11 +355,11 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
 <p>B树和B+树的概念比较复杂，有兴趣的小伙伴可以点原文链接看看知乎上写的一篇文章，这里只做一个宏观的介绍，前文已经提到树高决定着IO的次数，那么降低树高不就能减少IO的次数吗，怎么减少呢，每个节点的数据多放一点不就行了，并且这个数据是存放在一块的，对应的是数据库中的读取的最小单位页，一次IO就可以将这些数据读取出来，虽然比较的次数有可能会增加，但是在内存中的比较和磁盘IO相比差几个数量级，整体上效率还是提高了。</p>
 <p>所以你看到的B树是这样的</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/010.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/010.png" alt></p>
 <blockquote>
 <p>B+树是这样的</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/011.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/011.png" alt></p>
 <blockquote>
 <p>那么B树和B+树的区别在哪呢？</p>
 <ol>
@@ -370,11 +370,11 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
 </ol>
 <p>放个图理解的更清楚一点，B树</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/012.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/012.png" alt></p>
 <blockquote>
 <p>B+树</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/013.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/013.png" alt></p>
 <blockquote>
 <p>在B+树的基础上每个节点存储的关键字数更多，树的层级更少所以查询数据更快，所有关键字数据都存在叶子节点，所以每次查找的次数都相同，查询速度比B树更稳定。除此之外，B+树的叶子节点是跟后序节点相连接的，这对范围查找是非常有用的。</p>
 </blockquote>
@@ -387,11 +387,11 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
 </ol>
 <p>假如说有如下数据，用户id为主键（1， tom），（2，mike），（3，sam），（4，lisa），（5，li）则数据是这样存储的，图1</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/014.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/014.png" alt></p>
 <blockquote>
 <p>假如说我们现在对用户名建索引，用户名索引是怎么存的呢？图2</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/015.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/015.png" alt></p>
 <blockquote>
 <p>用户名索引叶子节点数据存储的是主键，所以当我们运行如下sql语句时</p>
 </blockquote>
@@ -413,7 +413,7 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
 <blockquote>
 <p>联合索引也是一颗B+树，不同的是联合索引的键值的数量不是1，而是大于等于2，多个键值的B+树是如下存的</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/016.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/016.png" alt></p>
 <blockquote>
 <p>可以看到键值都是排序的，就上面的例子来说（1，1）（1，2）（2，1）（2，4）（3，1）（3，2），数据按照（a，b）的顺序进行了存放。</p>
 <p>因此对于查询select <em> from table where a = xxx and b = xxx，显然是可以使用（a，b）这个联合索引的。对于单个的a列查询select </em> from table where a = xxx，也可以使用（a，b）这个索引。但对于b列的查询select * from table where b = xxx，则不可以使用这颗B+树索引。可以发现叶子节点上的b值为1，2，1，4，1，2，显然不是排序的，因此对于b列的查询使用不到（a，b）的索引</p>
@@ -423,7 +423,7 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
 <p>数据库一般采用除法散列的方法，即取k除以m的余数，将关键词k映射到m个槽的某一个去，即哈希函数为h(k) = k mod m，当发生冲突时，即两个关键字可能映射到同一个槽上，采用链接法，即以链表的形式保存冲突的关键字，和HashMap类似</p>
 <p>当对热点数据建立了哈希索引以后，省去在B+树上进行查找，可以极大地提高服务的性能，自适应哈希索引对于字典类型的查找非常迅速，如select * from table where id = xxx，但是对于范围查找就无能无力了</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/017.png" alt></p>
+<p><img src="//zongmansheng.gitee.io/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/017.png" alt></p>
 
             </div>
             <hr>
@@ -445,7 +445,7 @@ B+树是通过二叉查找树，再由平衡二叉树，B树（">
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/12/mysql-suo-yin-wei-shi-me-yao-yong-b-shu-shi-xian/" class="b-link-green">MySQL索引为什么要用B+树实现</a>
                 </p>

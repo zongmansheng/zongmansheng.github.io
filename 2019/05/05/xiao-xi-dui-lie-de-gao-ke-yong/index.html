@@ -301,7 +301,7 @@ RabbitMQ 有三种模式：">
 <p>普通集群模式（无高可用性）</p>
 <p>普通集群模式，意思就是在多台机器上启动多个 RabbitMQ 实例，每个机器启动一个。你创建的 queue，只会放在一个 RabbitMQ 实例上，但是每个实例都同步 queue 的元数据（元数据可以认为是 queue 的一些配置信息，通过元数据，可以找到 queue 所在实例）。你消费的时候，实际上如果连接到了另外一个实例，那么那个实例会从 queue 所在实例上拉取数据过来。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/001.jpg" alt="001"></p>
+<p><img src="//zongmansheng.gitee.io/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/001.jpg" alt="001"></p>
 <h4 id="二、Kafka-的高可用性"><a href="#二、Kafka-的高可用性" class="headerlink" title="二、Kafka 的高可用性"></a>二、Kafka 的高可用性</h4><blockquote>
 <p>​    Kafka 一个最基本的架构认识：由多个 broker 组成，每个 broker 是一个节点；你创建一个 topic，这个 topic 可以划分为多个 partition，每个 partition 可以存在于不同的 broker 上，每个 partition 就放一部分数据。</p>
 <p>​    这就是天然的分布式消息队列，就是说一个 topic 的数据，是分散放在多个机器上的，每个机器就放一部分数据。</p>
@@ -309,7 +309,7 @@ RabbitMQ 有三种模式：">
 <p>​    Kafka 0.8 以前，是没有 HA 机制的，就是任何一个 broker 宕机了，那个 broker 上的 partition 就废了，没法写也没法读，没有什么高可用性可言。</p>
 <p>​    比如说，我们假设创建了一个 topic，指定其 partition 数量是 3 个，分别在三台机器上。但是，如果第二台机器宕机了，会导致这个 topic 的 1/3 的数据就丢了，因此这个是做不到高可用的。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/002.jpg" alt="002"></p>
+<p><img src="//zongmansheng.gitee.io/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/002.jpg" alt="002"></p>
 <blockquote>
 <p>​    这么搞，就有所谓的高可用性了，因为如果某个 broker 宕机了，没事儿，那个 broker上面的 partition 在其他机器上都有副本的，如果这上面有某个 partition 的 leader，那么此时会从 follower 中重新选举一个新的 leader 出来，大家继续读写那个新的 leader 即可。这就有所谓的高可用性了。</p>
 <p>​    写数据的时候，生产者就写 leader，然后 leader 将数据落地写本地磁盘，接着其他 follower 自己主动从 leader 来 pull 数据。一旦所有 follower 同步好数据了，就会发送 ack 给 leader，leader 收到所有 follower 的 ack 之后，就会返回写成功的消息给生产者。（当然，这只是其中一种模式，还可以适当调整这个行为）</p>
@@ -321,7 +321,7 @@ RabbitMQ 有三种模式：">
 <p>镜像集群模式（高可用性）</p>
 <p>​    这种模式，才是所谓的 RabbitMQ 的高可用模式。跟普通集群模式不一样的是，在镜像集群模式下，你创建的 queue，无论元数据还是 queue 里的消息都会存在于多个实例上，就是说，每个 RabbitMQ 节点都有这个 queue 的一个完整镜像，包含 queue 的全部数据的意思。然后每次你写消息到 queue 的时候，都会自动把消息同步到多个实例的 queue 上。</p>
 </blockquote>
-<p><img src="//zongmansheng.club/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/003.jpg" alt="003"></p>
+<p><img src="//zongmansheng.gitee.io/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/003.jpg" alt="003"></p>
 <blockquote>
 <p>​    那么如何开启这个镜像集群模式呢？其实很简单，RabbitMQ 有很好的管理控制台，就是在后台新增一个策略，这个策略是镜像集群模式的策略，指定的时候是可以要求数据同步到所有节点的，也可以要求同步到指定数量的节点，再次创建 queue 的时候，应用这个策略，就会自动将数据同步到其他的节点上去了。</p>
 <p>这样的话，好处在于，你任何一个机器宕机了，没事儿，其它机器（节点）还包含了这个 queue 的完整数据，别的 consumer 都可以到其它节点上去消费数据。坏处在于，第一，这个性能开销也太大了吧，消息需要同步到所有机器上，导致网络带宽压力和消耗很重！第二，这么玩儿，不是分布式的，就没有扩展性可言了，如果某个 queue 负载很重，你加机器，新增的机器也包含了这个 queue 的所有数据，并没有办法线性扩展你的 queue。</p>
@@ -347,7 +347,7 @@ RabbitMQ 有三种模式：">
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.club" class="b-link-green">晓笙的BLOG</a>
+                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/05/05/xiao-xi-dui-lie-de-gao-ke-yong/" class="b-link-green">消息队列的高可用</a>
                 </p>
