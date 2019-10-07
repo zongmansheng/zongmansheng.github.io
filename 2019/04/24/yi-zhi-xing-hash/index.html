@@ -343,32 +343,32 @@
 <blockquote>
 <p>f(图片名称) = Hash(图片名称) % 2^32</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/04/24/yi-zhi-xing-hash/004.jpg" alt="004"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/24/yi-zhi-xing-hash/004.jpg" alt="004"></p>
 <h5 id="3、把数据放到服务器上"><a href="#3、把数据放到服务器上" class="headerlink" title="3、把数据放到服务器上"></a><strong>3、把数据放到服务器上</strong></h5><blockquote>
 <p>对于每个数据，从映射的位置开始，顺时针行走，放置到碰到的第一个服务器上。例如3、230将会放到0号图片服务器，232将会放到1号图片服务器，4175556547将会放到2号图片服务器：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/04/24/yi-zhi-xing-hash/005.jpg" alt="005"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/24/yi-zhi-xing-hash/005.jpg" alt="005"></p>
 <blockquote>
 <p>这样一致性Hash就完成了。查找数据也是先映射、再顺时针行走找到第一台服务器。</p>
 </blockquote>
 <h4 id="二、一致性Hash如何缓解数据失效问题"><a href="#二、一致性Hash如何缓解数据失效问题" class="headerlink" title="二、一致性Hash如何缓解数据失效问题"></a>二、一致性Hash如何缓解数据失效问题</h4><blockquote>
 <p>假设现在1号服务器崩溃，图片232找不到1号服务器，顺时针行走的第一台服务器是2号服务器，于是232的缓存位置发生了改变，变为了2号：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/04/24/yi-zhi-xing-hash/006.jpg" alt="006"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/24/yi-zhi-xing-hash/006.jpg" alt="006"></p>
 <blockquote>
 <p>而对于其他图片来说，缓存位置并没有发生变化，影响的数据量从（N-1）/ N 降为了 M，其中M是0号图片服务器到1号图片服务器之间的图片数量。需要重新获取的缓存数据量降低了，雪崩问题自然也就能够得到缓解。</p>
 </blockquote>
 <h4 id="三、Hash环偏斜和虚拟节点"><a href="#三、Hash环偏斜和虚拟节点" class="headerlink" title="三、Hash环偏斜和虚拟节点"></a>三、Hash环偏斜和虚拟节点</h4><blockquote>
 <p>前面讨论得太理想了，实际的服务器分布和数据分布很可能是这样的：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/04/24/yi-zhi-xing-hash/007.jpg" alt="007"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/24/yi-zhi-xing-hash/007.jpg" alt="007"></p>
 <blockquote>
 <p>0、1、2三台服务器并没有均匀分布在环上，大量的图片数据都被放到了0号服务器上，而很少数据放到1、2号等其他图片服务器上，这种情况称之为Hash环偏斜。如果存放的是缓存则0号服务器崩溃就会引起缓存雪崩，如果存放的是数据则0号服务器就可能单点故障。</p>
 </blockquote>
 <blockquote>
 <p>很自然可以想到，增加多台服务器就好了嘛。我们在Hash环上生成0、1、2三台服务器的虚拟节点：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/04/24/yi-zhi-xing-hash/008.jpg" alt="008"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/24/yi-zhi-xing-hash/008.jpg" alt="008"></p>
 <blockquote>
 <p>具体的做法是，在服务器IP后面增加编号，每一台服务器产生多个Hash值，就能放置在0~2^32-1的多个位置上了。这样一来，顺时针行走能找到不同的服务器概率将会大大提高，避免了偏斜问题。虚拟的服务器节点数越多，偏斜出现的概率就越低。通常都需要设置32或以上的虚拟节点数目，我见过甚至有设置500的。</p>
 </blockquote>
@@ -393,7 +393,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/04/24/yi-zhi-xing-hash/" class="b-link-green">一致性Hash</a>
                 </p>

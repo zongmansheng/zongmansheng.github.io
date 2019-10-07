@@ -292,7 +292,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="面试必刷真题（持续更新中）"><a href="#面试必刷真题（持续更新中）" class="headerlink" title="面试必刷真题（持续更新中）"></a>面试必刷真题（持续更新中）</h1><h3 id="一、Java-基础"><a href="#一、Java-基础" class="headerlink" title="一、Java 基础"></a>一、Java 基础</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/001.png" alt></p>
+                <h1 id="面试必刷真题（持续更新中）"><a href="#面试必刷真题（持续更新中）" class="headerlink" title="面试必刷真题（持续更新中）"></a>面试必刷真题（持续更新中）</h1><h3 id="一、Java-基础"><a href="#一、Java-基础" class="headerlink" title="一、Java 基础"></a>一、Java 基础</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/001.png" alt></p>
 <h4 id="1-JDK-和-JRE-有什么区别？"><a href="#1-JDK-和-JRE-有什么区别？" class="headerlink" title="1.JDK 和 JRE 有什么区别？"></a>1.JDK 和 JRE 有什么区别？</h4><blockquote>
 <p>JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥有的一切，还有编译器（javac）和工具（如javadoc和jdb）。它能够创建和编译程序。</p>
 <p>JRE 是 Java运行时环境。它是运行已编译 Java 程序所需的所有内容的集合，包括 Java虚拟机（JVM），Java类库，java命令和其他的一些基础构件。但是，它不能用于创建新程序。</p>
@@ -444,7 +444,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>由于s1与s2中存放的地址不同，所以输出false。因为，类String重写了equals()方法，它比较的是引用类型的 的值是否相等，所以输出true。即结果为false、true。</li>
 </ol>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/020.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/020.png" alt></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringDemo1</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         String s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -538,7 +538,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 </ul>
 <h3 id="补充：数据结构基础之双向链表"><a href="#补充：数据结构基础之双向链表" class="headerlink" title="补充：数据结构基础之双向链表"></a>补充：数据结构基础之双向链表</h3><p>双向链表也叫双链表，是链表的一种，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表，如下图所示，同时下图也是LinkedList 底层使用的是双向循环链表数据结构。</p>
 </blockquote>
-<h4 id="21、Object类中方法总结：基于Java8"><a href="#21、Object类中方法总结：基于Java8" class="headerlink" title="21、Object类中方法总结：基于Java8"></a>21、Object类中方法总结：基于Java8</h4><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/024.png" alt></p>
+<h4 id="21、Object类中方法总结：基于Java8"><a href="#21、Object类中方法总结：基于Java8" class="headerlink" title="21、Object类中方法总结：基于Java8"></a>21、Object类中方法总结：基于Java8</h4><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/024.png" alt></p>
 <blockquote>
 <h5 id="hashcode"><a href="#hashcode" class="headerlink" title="hashcode()"></a>hashcode()</h5><p>hashCode()方法返回的就是一个数值，从方法的名称上就可以看出，其目的是生成一个hash码。hash码的主要用途就是在对对象进行散列的时候作为key输入，据此很容易推断出，我们需要每个对象的hash码尽可能不同，这样才能保证散列的存取性能。哈希算法也称为散列算法，是将数据依特定算法直接指定到一个地址上。</p>
 <pre><code>初学者可以这样理解，hashCode方法实际上返回的就是对象存储的物理地址（实际可能并不是）。
@@ -561,7 +561,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <p>　4）在派生类的clone方法中，调用super.clone()。</p>
 <h4 id="finalize-用于在垃圾回收"><a href="#finalize-用于在垃圾回收" class="headerlink" title="finalize()用于在垃圾回收"></a>finalize()用于在垃圾回收</h4><h4 id="registerNatives-本地注册"><a href="#registerNatives-本地注册" class="headerlink" title="registerNatives() 本地注册"></a>registerNatives() 本地注册</h4><p>native修饰的方法表示本地方法（跟系统有关，也可以理解为这个方法不是在java中实现的），据说这个方法在一个名为java.dll的动态库文件中。Object类中第40行（我的是jdk1.8）开始的 static{ registerNatives(); } 表示的是在类被加载时，调用 registerNatives()方法进行一些跟系统有关的方法调用，而这个方法的实现就在java.dll中（里面会根据不同系统来执行不同的底层操作）。</p>
 </blockquote>
-<h3 id="二、容器"><a href="#二、容器" class="headerlink" title="二、容器"></a>二、容器</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/002.png" alt></p>
+<h3 id="二、容器"><a href="#二、容器" class="headerlink" title="二、容器"></a>二、容器</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/002.png" alt></p>
 <ol>
 <li>java 容器都有哪些？</li>
 <li>Collection 和 Collections 有什么区别？</li>
@@ -581,7 +581,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>Iterator 和 ListIterator 有什么区别？</li>
 <li>怎么确保一个集合不能被修改？</li>
 </ol>
-<h3 id="三、多线程"><a href="#三、多线程" class="headerlink" title="三、多线程"></a>三、多线程</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/003.png" alt></p>
+<h3 id="三、多线程"><a href="#三、多线程" class="headerlink" title="三、多线程"></a>三、多线程</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/003.png" alt></p>
 <ol>
 <li>并行和并发有什么区别？</li>
 <li>线程和进程的区别？</li>
@@ -606,20 +606,20 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>synchronized 和 ReentrantLock 区别是什么？</li>
 <li>说一下 atomic 的原理？</li>
 </ol>
-<h3 id="四、反射"><a href="#四、反射" class="headerlink" title="四、反射"></a>四、反射</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/004.png" alt></p>
+<h3 id="四、反射"><a href="#四、反射" class="headerlink" title="四、反射"></a>四、反射</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/004.png" alt></p>
 <ol>
 <li>什么是反射？</li>
 <li>什么是 java 序列化？什么情况下需要序列化？</li>
 <li>动态代理是什么？有哪些应用？</li>
 <li>怎么实现动态代理？</li>
 </ol>
-<h3 id="五、对象拷贝"><a href="#五、对象拷贝" class="headerlink" title="五、对象拷贝"></a>五、对象拷贝</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/005.png" alt></p>
+<h3 id="五、对象拷贝"><a href="#五、对象拷贝" class="headerlink" title="五、对象拷贝"></a>五、对象拷贝</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/005.png" alt></p>
 <ol>
 <li>为什么要使用克隆？</li>
 <li>如何实现对象克隆？</li>
 <li>深拷贝和浅拷贝区别是什么？</li>
 </ol>
-<h3 id="六、Java-Web"><a href="#六、Java-Web" class="headerlink" title="六、Java Web"></a>六、Java Web</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/006.png" alt></p>
+<h3 id="六、Java-Web"><a href="#六、Java-Web" class="headerlink" title="六、Java Web"></a>六、Java Web</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/006.png" alt></p>
 <ol>
 <li>jsp 和 servlet 有什么区别？</li>
 <li>jsp 有哪些内置对象？作用分别是什么？</li>
@@ -632,7 +632,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>什么是 XSS 攻击，如何避免？</li>
 <li>什么是 CSRF 攻击，如何避免？</li>
 </ol>
-<h3 id="七、异常"><a href="#七、异常" class="headerlink" title="七、异常"></a>七、异常</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/007.png" alt></p>
+<h3 id="七、异常"><a href="#七、异常" class="headerlink" title="七、异常"></a>七、异常</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/007.png" alt></p>
 <ol>
 <li>throw 和 throws 的区别？</li>
 <li>final、finally、finalize 有什么区别？</li>
@@ -640,7 +640,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>try-catch-finally 中，如果 catch 中 return 了，finally 还会执行吗？</li>
 <li>常见的异常类有哪些？</li>
 </ol>
-<h3 id="八、网络"><a href="#八、网络" class="headerlink" title="八、网络"></a>八、网络</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/008.png" alt></p>
+<h3 id="八、网络"><a href="#八、网络" class="headerlink" title="八、网络"></a>八、网络</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/008.png" alt></p>
 <ol>
 <li>http 响应码 301 和 302 代表的是什么？有什么区别？</li>
 <li>forward 和 redirect 的区别？</li>
@@ -652,14 +652,14 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>如何实现跨域？</li>
 <li>说一下 JSONP 实现原理？</li>
 </ol>
-<h3 id="九、设计模式"><a href="#九、设计模式" class="headerlink" title="九、设计模式"></a>九、设计模式</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/009.png" alt></p>
+<h3 id="九、设计模式"><a href="#九、设计模式" class="headerlink" title="九、设计模式"></a>九、设计模式</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/009.png" alt></p>
 <ol>
 <li>说一下你熟悉的设计模式？</li>
 </ol>
 <ul>
 <li>简单工厂和抽象工厂有什么区别？</li>
 </ul>
-<h3 id="十、Spring-Spring-MVC"><a href="#十、Spring-Spring-MVC" class="headerlink" title="十、Spring/Spring MVC"></a>十、Spring/Spring MVC</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/010.png" alt></p>
+<h3 id="十、Spring-Spring-MVC"><a href="#十、Spring-Spring-MVC" class="headerlink" title="十、Spring/Spring MVC"></a>十、Spring/Spring MVC</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/010.png" alt></p>
 <ol>
 <li><h4 id="为什么要使用-spring？"><a href="#为什么要使用-spring？" class="headerlink" title="为什么要使用 spring？"></a>为什么要使用 spring？</h4></li>
 <li><h4 id="解释一下什么是-aop？"><a href="#解释一下什么是-aop？" class="headerlink" title="解释一下什么是 aop？"></a>解释一下什么是 aop？</h4></li>
@@ -671,12 +671,12 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li><h4 id="spring-自动装配-bean-有哪些方式？"><a href="#spring-自动装配-bean-有哪些方式？" class="headerlink" title="spring 自动装配 bean 有哪些方式？"></a>spring 自动装配 bean 有哪些方式？</h4></li>
 <li><h4 id="spring-事务实现方式有哪些？"><a href="#spring-事务实现方式有哪些？" class="headerlink" title="spring 事务实现方式有哪些？"></a>spring 事务实现方式有哪些？</h4></li>
 <li><h4 id="说一下-spring-的事务隔离？"><a href="#说一下-spring-的事务隔离？" class="headerlink" title="说一下 spring 的事务隔离？"></a>说一下 spring 的事务隔离？</h4></li>
-<li><h4 id="说一下-spring-mvc-运行流程？"><a href="#说一下-spring-mvc-运行流程？" class="headerlink" title="说一下 spring mvc 运行流程？"></a>说一下 spring mvc 运行流程？</h4><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/023.jpeg" alt></p>
+<li><h4 id="说一下-spring-mvc-运行流程？"><a href="#说一下-spring-mvc-运行流程？" class="headerlink" title="说一下 spring mvc 运行流程？"></a>说一下 spring mvc 运行流程？</h4><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/023.jpeg" alt></p>
 </li>
 <li><h4 id="spring-mvc-有哪些组件？"><a href="#spring-mvc-有哪些组件？" class="headerlink" title="spring mvc 有哪些组件？"></a>spring mvc 有哪些组件？</h4></li>
 <li><h4 id="RequestMapping-的作用是什么？"><a href="#RequestMapping-的作用是什么？" class="headerlink" title="@RequestMapping 的作用是什么？"></a>@RequestMapping 的作用是什么？</h4></li>
 <li><h4 id="Autowired-的作用是什么？"><a href="#Autowired-的作用是什么？" class="headerlink" title="@Autowired 的作用是什么？"></a>@Autowired 的作用是什么？</h4></li>
-<li><h4 id="Spring-bean的生命周期？"><a href="#Spring-bean的生命周期？" class="headerlink" title="Spring bean的生命周期？"></a>Spring bean的生命周期？</h4><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/022.png" alt></p>
+<li><h4 id="Spring-bean的生命周期？"><a href="#Spring-bean的生命周期？" class="headerlink" title="Spring bean的生命周期？"></a>Spring bean的生命周期？</h4><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/022.png" alt></p>
 <blockquote>
 <p>（1）<strong>BeanFactoryPostProcessor</strong>的postProcessorBeanFactory()方法：若某个IoC容器内添加了实现了BeanFactoryPostProcessor接口的实现类Bean，那么在该容器中实例化任何其他Bean之前可以回调该Bean中的postPrcessorBeanFactory()方法来对Bean的配置元数据进行更改，比如从XML配置文件中获取到的配置信息。</p>
 <p>（2）Bean的实例化：Bean的实例化是使用反射实现的。</p>
@@ -699,7 +699,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 </li>
 <li></li>
 </ol>
-<h3 id="十一、Spring-Boot-Spring-Cloud"><a href="#十一、Spring-Boot-Spring-Cloud" class="headerlink" title="十一、Spring Boot/Spring Cloud"></a>十一、Spring Boot/Spring Cloud</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/011.png" alt></p>
+<h3 id="十一、Spring-Boot-Spring-Cloud"><a href="#十一、Spring-Boot-Spring-Cloud" class="headerlink" title="十一、Spring Boot/Spring Cloud"></a>十一、Spring Boot/Spring Cloud</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/011.png" alt></p>
 <ol>
 <li>什么是 spring boot？</li>
 <li>为什么要用 spring boot？</li>
@@ -711,7 +711,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>spring cloud 断路器的作用是什么？</li>
 <li>spring cloud 的核心组件有哪些？</li>
 </ol>
-<h3 id="十二、Hibernate"><a href="#十二、Hibernate" class="headerlink" title="十二、Hibernate"></a>十二、Hibernate</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/012.png" alt></p>
+<h3 id="十二、Hibernate"><a href="#十二、Hibernate" class="headerlink" title="十二、Hibernate"></a>十二、Hibernate</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/012.png" alt></p>
 <ol>
 <li>为什么要使用 hibernate？</li>
 <li>什么是 ORM 框架？</li>
@@ -726,7 +726,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>在 hibernate 中 getCurrentSession 和 openSession 的区别是什么？</li>
 <li>hibernate 实体类必须要有无参构造函数吗？为什么？</li>
 </ol>
-<h3 id="十三、Mybatis"><a href="#十三、Mybatis" class="headerlink" title="十三、Mybatis"></a>十三、Mybatis</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/013.png" alt></p>
+<h3 id="十三、Mybatis"><a href="#十三、Mybatis" class="headerlink" title="十三、Mybatis"></a>十三、Mybatis</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/013.png" alt></p>
 <ol>
 <li>mybatis 中 #{}和 ${}的区别是什么？</li>
 <li>mybatis 有几种分页方式？</li>
@@ -739,7 +739,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>mybatis 分页插件的实现原理是什么？</li>
 <li>mybatis 如何编写一个自定义插件？</li>
 </ol>
-<h4 id="十四、RabbitMQ"><a href="#十四、RabbitMQ" class="headerlink" title="十四、RabbitMQ"></a>十四、RabbitMQ</h4><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/014.png" alt></p>
+<h4 id="十四、RabbitMQ"><a href="#十四、RabbitMQ" class="headerlink" title="十四、RabbitMQ"></a>十四、RabbitMQ</h4><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/014.png" alt></p>
 <ol>
 <li>rabbitmq 的使用场景有哪些？</li>
 <li>rabbitmq 有哪些重要的角色？</li>
@@ -759,7 +759,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>rabbitmq 集群中唯一一个磁盘节点崩溃了会发生什么情况？</li>
 <li>rabbitmq 对集群节点停止顺序有要求吗？</li>
 </ol>
-<h3 id="十五、Kafka"><a href="#十五、Kafka" class="headerlink" title="十五、Kafka"></a>十五、Kafka</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/015.png" alt></p>
+<h3 id="十五、Kafka"><a href="#十五、Kafka" class="headerlink" title="十五、Kafka"></a>十五、Kafka</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/015.png" alt></p>
 <ol>
 <li>kafka 可以脱离 zookeeper 单独使用吗？为什么？</li>
 <li>kafka 有几种数据保留的策略？</li>
@@ -767,7 +767,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>什么情况会导致 kafka 运行变慢？</li>
 <li>使用 kafka 集群需要注意什么？</li>
 </ol>
-<h3 id="十六、Zookeeper"><a href="#十六、Zookeeper" class="headerlink" title="十六、Zookeeper"></a>十六、Zookeeper</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/016.png" alt></p>
+<h3 id="十六、Zookeeper"><a href="#十六、Zookeeper" class="headerlink" title="十六、Zookeeper"></a>十六、Zookeeper</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/016.png" alt></p>
 <ol>
 <li>zookeeper 是什么？</li>
 <li>zookeeper 都有哪些功能？</li>
@@ -777,7 +777,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>集群中有 3 台服务器，其中一个节点宕机，这个时候 zookeeper 还可以使用吗？</li>
 <li>说一下 zookeeper 的通知机制？</li>
 </ol>
-<h3 id="十七、MySql"><a href="#十七、MySql" class="headerlink" title="十七、MySql"></a>十七、MySql</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/017.png" alt></p>
+<h3 id="十七、MySql"><a href="#十七、MySql" class="headerlink" title="十七、MySql"></a>十七、MySql</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/017.png" alt></p>
 <ol>
 <li>数据库的三范式是什么？</li>
 <li>一张自增表里面总共有 7 条数据，删除了最后 2 条数据，重启 mysql 数据库，又插入了一条数据，此时 id 是几？</li>
@@ -795,7 +795,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li>mysql 问题排查都有哪些手段？</li>
 <li>如何做 mysql 的性能优化？</li>
 </ol>
-<h3 id="十八、Redis"><a href="#十八、Redis" class="headerlink" title="十八、Redis"></a>十八、Redis</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/018.png" alt></p>
+<h3 id="十八、Redis"><a href="#十八、Redis" class="headerlink" title="十八、Redis"></a>十八、Redis</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/018.png" alt></p>
 <ol>
 <li><h4 id="redis-是什么？都有哪些使用场景？"><a href="#redis-是什么？都有哪些使用场景？" class="headerlink" title="redis 是什么？都有哪些使用场景？"></a>redis 是什么？都有哪些使用场景？</h4><blockquote>
 <p>Redis 的全称是：Remote Dictionary.Server，本质上是一个 Key-Value 类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据 flush 到硬盘上进行保存。因为是纯内存操作，Redis 的性能非常出色，每秒可以处理超过 10 万次读写操作，是已知性能最快的Key-Value DB。</p>
@@ -858,7 +858,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
 <li><h4 id="redis-淘汰策略有哪些？"><a href="#redis-淘汰策略有哪些？" class="headerlink" title="redis 淘汰策略有哪些？"></a>redis 淘汰策略有哪些？</h4></li>
 <li><h4 id="redis-常见的性能问题有哪些？该如何解决？"><a href="#redis-常见的性能问题有哪些？该如何解决？" class="headerlink" title="redis 常见的性能问题有哪些？该如何解决？"></a>redis 常见的性能问题有哪些？该如何解决？</h4></li>
 </ol>
-<h3 id="十九、JVM"><a href="#十九、JVM" class="headerlink" title="十九、JVM"></a>十九、JVM</h3><p><img src="//zongmansheng.gitee.io/2019/07/11/mian-shi-ti-ji-jin/019.png" alt></p>
+<h3 id="十九、JVM"><a href="#十九、JVM" class="headerlink" title="十九、JVM"></a>十九、JVM</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/11/mian-shi-ti-ji-jin/019.png" alt></p>
 <ol>
 <li>说一下 jvm 的主要组成部分？及其作用？</li>
 <li>说一下 jvm 运行时数据区？</li>
@@ -897,7 +897,7 @@ JDK是Java Development Kit，它是功能齐全的Java SDK。它拥有JRE所拥�
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/11/mian-shi-ti-ji-jin/" class="b-link-green">面试题集锦</a>
                 </p>

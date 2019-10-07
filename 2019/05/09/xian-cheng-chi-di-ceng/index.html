@@ -301,7 +301,7 @@ public interface Executor {
                 <h1 id="线程池底层"><a href="#线程池底层" class="headerlink" title="线程池底层"></a>线程池底层</h1><h4 id="一、ThreadPoolExecutor"><a href="#一、ThreadPoolExecutor" class="headerlink" title="一、ThreadPoolExecutor"></a>一、ThreadPoolExecutor</h4><blockquote>
 <p>在深入源码之前先来看看J.U.C包中的线程池类图：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/05/09/xian-cheng-chi-di-ceng/001.jpg" alt="001"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/05/09/xian-cheng-chi-di-ceng/001.jpg" alt="001"></p>
 <blockquote>
 <p>它们的最顶层是一个Executor接口，它只有一个方法：</p>
 </blockquote>
@@ -411,7 +411,7 @@ public interface Executor {
  <span class="token function">reject</span><span class="token punctuation">(</span>command<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h4 id="四、execute执行任务的流程图"><a href="#四、execute执行任务的流程图" class="headerlink" title="四、execute执行任务的流程图"></a>四、execute执行任务的流程图</h4><p><img src="//zongmansheng.gitee.io/2019/05/09/xian-cheng-chi-di-ceng/002.jpg" alt="002"></p>
+<h4 id="四、execute执行任务的流程图"><a href="#四、execute执行任务的流程图" class="headerlink" title="四、execute执行任务的流程图"></a>四、execute执行任务的流程图</h4><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/05/09/xian-cheng-chi-di-ceng/002.jpg" alt="002"></p>
 <blockquote>
 <p>​    继续往下看，addWorker添加任务，方法源码有点长，我按照逻辑拆分成两部分讲解：</p>
 <p>java.util.concurrent.ThreadPoolExecutor#addWorker：</p>
@@ -689,7 +689,7 @@ Worker w <span class="token operator">=</span> null<span class="token punctuatio
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/05/09/xian-cheng-chi-di-ceng/" class="b-link-green">线程池底层</a>
                 </p>

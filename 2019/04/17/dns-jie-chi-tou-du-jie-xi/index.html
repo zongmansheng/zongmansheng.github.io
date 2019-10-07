@@ -320,7 +320,7 @@
 </code></pre><h4 id="二、关于DNS劫持的记忆"><a href="#二、关于DNS劫持的记忆" class="headerlink" title="二、关于DNS劫持的记忆"></a>二、关于DNS劫持的记忆</h4><h5 id="DNS是什么？"><a href="#DNS是什么？" class="headerlink" title="DNS是什么？"></a>DNS是什么？</h5><pre><code>全称Domain Name System，是一个将域名和IP相互映射的分布式数据库。
 
     全球有很多家DNS服务中心，假如你关心过你的计算机，你会发现，在你的网卡上，有着一项“DNS服务器”的配置项，它设定了我将要抵达的目的地。
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/17/dns-jie-chi-tou-du-jie-xi/001.png" alt="001"></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/17/dns-jie-chi-tou-du-jie-xi/001.png" alt="001"></p>
 <pre><code>一转眼的工夫，我来到了114.114.114.114DNS中心。
 
     这个地方我来过很多次，表面上风平浪静，实则暗流涌动。我小心翼翼地来到办事大厅，不禁想起了我第一次被DNS劫持的经历。
@@ -336,7 +336,7 @@
     “你好，根据本ISP（电信运营商）颁布的条例，世界上不存在你所说的站点，现怀疑你是一个不合规的网络请求，将把你转发至baidu.com的IP地址。你有权保持沉默！”警卫冷漠地望着我。
 
 我知道，现在无论如何解释、挣扎都没有用了，只怪自己太年轻。无奈，我只好乖乖就范。
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/17/dns-jie-chi-tou-du-jie-xi/002.png" alt="002"></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/17/dns-jie-chi-tou-du-jie-xi/002.png" alt="002"></p>
 <pre><code>    还好当时正在使用计算机的用户有一些网络知识，当他发现自己输入的是google，返回的是baidu的页面时，并没有怪罪于我，大概是他心中已经猜到了原因。于是他将网卡的DNS配置为：8.8.8.8，这是一个国际上“不存在”的公司提供的DNS服务中心。
 
 仅仅这样就能畅通无阻地访问互联网了吗？经历了被DNS劫持，我依然不敢放松。
@@ -355,7 +355,7 @@
 可当我第二个“谢”字还没说出口，立即感到一阵头晕目眩。
 
     “不好！遇上了黑客，这是DNS投毒！”我的视线渐渐模糊，小伙的微笑也渐渐似乎变成了狞笑。我尽力搜索着脑海中和这一切有关的知识，想要知道寻求的办法。
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/17/dns-jie-chi-tou-du-jie-xi/003.png" alt="003"></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/17/dns-jie-chi-tou-du-jie-xi/003.png" alt="003"></p>
 <pre><code> DNS投毒，英文叫DNS cache poisoning，也叫做DNS污染。从客户端向DNS服务器发出查询IP的请求，到响应返回到客户端的这段时间里，如果有黑客或者其他一些不可说的设施伪造返回了一个错误的DNS应答，那么用户将不能访问到真正的资源。
 
 想到这里，我已经明显感觉难以控制自己的身体了，眼前一黑，就什么都不知道了。
@@ -368,9 +368,9 @@
 “我想查询域名mail.google.com的IP地址。”我试探性地问，依然不敢松懈。
 
 “好的呢亲，这边通过树状检索，在顶级域名com下，查询到google目录，在google目录下查询到mail,IP地址是xx.xxx.xx.xx呢。”
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/17/dns-jie-chi-tou-du-jie-xi/004.png" alt="004"></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/17/dns-jie-chi-tou-du-jie-xi/004.png" alt="004"></p>
 <pre><code>    我松了口气，谢天谢地，终于拿到了结果。可我知道作为一次完整的网络请求，这刚刚开始，这才是万里长征第一步，我得赶紧将这个解析结果带回去，等会还得马不停蹄往返三次建立连接。
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/17/dns-jie-chi-tou-du-jie-xi/005.png" alt="005"></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/17/dns-jie-chi-tou-du-jie-xi/005.png" alt="005"></p>
 
             </div>
             <hr>
@@ -392,7 +392,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/04/17/dns-jie-chi-tou-du-jie-xi/" class="b-link-green">DNS劫持投毒解析</a>
                 </p>

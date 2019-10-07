@@ -313,7 +313,7 @@ Java内存模型（Java Memory Model ,JMM）就是一种符合内存模型规范
 <p>Java内存模型规定了所有的变量都存储在主内存中，每条线程还有自己的工作内存，线程的工作内存中保存了该线程中是用到的变量的主内存副本拷贝，线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存。不同的线程之间也无法直接访问对方工作内存中的变量，线程间变量的传递均需要自己的工作内存和主存之间进行数据同步进行。</p>
 <p>而JMM就作用于工作内存和主存之间数据同步过程。他规定了如何做数据同步以及什么时候做数据同步。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/02/java-nei-cun-mo-xing/001.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/02/java-nei-cun-mo-xing/001.png" alt></p>
 <h4 id="Java内存模型的实现"><a href="#Java内存模型的实现" class="headerlink" title="Java内存模型的实现"></a>Java内存模型的实现</h4><blockquote>
 <p>了解Java多线程的朋友都知道，在Java中提供了一系列和并发处理相关的关键字，比如volatile、synchronized、final、concurren包等。其实这些就是Java内存模型封装了底层的实现后提供给程序员使用的一些关键字。</p>
 <p>在开发多线程的代码的时候，我们可以直接使用synchronized等关键字来控制并发，从来就不需要关心底层的编译器优化、缓存一致性等问题。所以，Java内存模型，除了定义了一套规范，还提供了一系列原语，封装了底层实现后，供开发者直接使用。</p>
@@ -354,7 +354,7 @@ Java内存模型（Java Memory Model ,JMM）就是一种符合内存模型规范
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/02/java-nei-cun-mo-xing/" class="b-link-green">Java内存模型</a>
                 </p>

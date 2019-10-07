@@ -298,7 +298,7 @@ Spring Cloud 封装了 Netflix 公司开发">
 <p>Eureka由两个组件组成：Eureka server和Eureka client。Eureka server用作服务注册服务器。Eureka client是一个java客户端，用来简化与服务器的交互、作为轮询负载均衡器，并提供服务的故障切换支持。Netflix在其生产环境中使用的是另外的客户端，它提供基于流量、资源利用率以及出错状态的加权负载均衡。</p>
 <p>最简单的微服务架构图：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/16/springcloud-er/001.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/16/springcloud-er/001.png" alt></p>
 <blockquote>
 <p>Eureka Server(注册中心):提供服务注册和发现</p>
 <p>Service Provider(服务提供方):将自身服务注册到Eureka中心，从而使服务消费方能够找到</p>
@@ -307,7 +307,7 @@ Spring Cloud 封装了 Netflix 公司开发">
 <blockquote>
 <p>为了给大家演示完整的SpringCloud，我们把我们当前的工程构建为SpringBoot聚合工程，我这里的聚合工程取名为SpringCloud</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/16/springcloud-er/002.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/16/springcloud-er/002.png" alt></p>
 <pre><code>EurekaApplication.java
 </code></pre><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>springcloud<span class="token punctuation">.</span>eureka<span class="token punctuation">;</span>
 
@@ -332,7 +332,7 @@ Spring Cloud 封装了 Netflix 公司开发">
 <p>启动SpringBoot Application</p>
 <p>访问 localhost:8090</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/16/springcloud-er/003.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/16/springcloud-er/003.png" alt></p>
 <h4 id="eureka集群使用"><a href="#eureka集群使用" class="headerlink" title="eureka集群使用"></a>eureka集群使用</h4><blockquote>
 <p>在一个分布式系统中，服务注册中心是最重要的基础部分，理应随时处于可以提供服务的状态。如果是单点部署，如果注册中心出现故障，将会出现毁灭性的灾难。为了维持其可用性，使用集群是很好的解决方案。Eureka通过互相注册的方式来实现高可用的部署，所以我们只需要将Eureke Server配置其他可用的serviceUrl就能实现高可用部署。</p>
 <p>新建集群配置profiles：application-peer1.yml/application-peer2.yml/application-peer3.yml</p>
@@ -388,7 +388,7 @@ eureka:
 <p>　　1、fetch-registry：表示是否从eureka server获取注册信息，如果是单一节点，不需要同步其他eureka server节点，则可以设置为false，但此处为集群，应该设置为true，默认为true，可不设置。</p>
 <p>　　2、register-with-eureka：表示是否将自己注册到eureka server，因为要构建集群环境，需要将自己注册到及群众，所以应该开启。默认为true，可不显式设置。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/16/springcloud-er/006.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/16/springcloud-er/006.png" alt></p>
 <blockquote>
 <p>运行：</p>
 </blockquote>
@@ -401,7 +401,7 @@ java <span class="token operator">-</span>jar eureka <span class="token number">
 <blockquote>
 <p>访问localhost:8090</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/16/springcloud-er/005.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/16/springcloud-er/005.png" alt></p>
 
             </div>
             <hr>
@@ -423,7 +423,7 @@ java <span class="token operator">-</span>jar eureka <span class="token number">
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/06/16/springcloud-er/" class="b-link-green">SpringCloud（二）</a>
                 </p>

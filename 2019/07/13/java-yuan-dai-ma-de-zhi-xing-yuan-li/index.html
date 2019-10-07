@@ -293,7 +293,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="解析java执行内幕"><a href="#解析java执行内幕" class="headerlink" title="解析java执行内幕"></a>解析java执行内幕</h1><p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/Snipaste_2019-07-16_08-02-00.png" alt></p>
+                <h1 id="解析java执行内幕"><a href="#解析java执行内幕" class="headerlink" title="解析java执行内幕"></a>解析java执行内幕</h1><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/Snipaste_2019-07-16_08-02-00.png" alt></p>
 <h4 id="一-编写java源程序"><a href="#一-编写java源程序" class="headerlink" title="一 编写java源程序"></a>一 编写java源程序</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test02</span> <span class="token punctuation">{</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -307,7 +307,7 @@
 <h4 id="二-编译java源代码"><a href="#二-编译java源代码" class="headerlink" title="二 编译java源代码"></a>二 编译java源代码</h4><blockquote>
 <p>idea自带命令行工具切换到Test02目录下：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/001.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/001.png" alt></p>
 <blockquote>
 <p>Javac 编译Test02.java文件</p>
 <p>Tip:当javac.exe编译java源代码时，java源代码有几个类，就会编译成一个对应的字节码文件(.class文件)，</p>
@@ -318,7 +318,7 @@
 <h4 id="三-执行java源文件"><a href="#三-执行java源文件" class="headerlink" title="三 执行java源文件"></a>三 执行java源文件</h4><blockquote>
 <p>执行步骤：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/003.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/003.png" alt></p>
 <blockquote>
 <p>如上总结，已经抽象化了在JVM中的执行，接下来，我们将分析，字节码文件（.calss文件）如何在虚拟机中一步一执行的。</p>
 </blockquote>
@@ -350,7 +350,7 @@
 <p>磁盘装载相应的类，如Java API类等。</p>
 <p>用户自定义装载类，按照用户自定义的方式来装载类。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/004.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/004.png" alt></p>
 <h5 id="（二）将字节码文件存储在JVM内存区"><a href="#（二）将字节码文件存储在JVM内存区" class="headerlink" title="（二）将字节码文件存储在JVM内存区"></a><strong>（二）将字节码文件存储在JVM内存区</strong></h5><blockquote>
 <p>当JAVA虚拟机运行一个程序时，它需要内存来存储许多东西，如字节码，从已装载的class文件中得到的其他信息，程序创建的对象，传递给</p>
 <p>方法的参数，返回值，局部变量以及运算的中间结果等，这些相关信息被组织到“运行时数据区”。</p>
@@ -371,20 +371,20 @@
 <h6 id="4-栈区"><a href="#4-栈区" class="headerlink" title="4.栈区"></a>4.栈区</h6><blockquote>
 <p>栈区主要用来存储值类型的，如基本数据类型，需要注意的时，String为引用类型，是存在堆中的。Java栈是由许多栈帧组成的，一个栈帧包含一个Java方法调用的状态，当线程调用一个方法时，虚拟机压入一个新的栈帧到该线程的Java栈中，当该方法返回时，这个栈帧从Java栈中弹出。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/005.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/005.png" alt></p>
 <h5 id="（三）执行引擎与运行时数据区交互"><a href="#（三）执行引擎与运行时数据区交互" class="headerlink" title="（三）执行引擎与运行时数据区交互"></a><strong>（三）执行引擎与运行时数据区交互</strong></h5><blockquote>
 <p>运行时数据区为执行引擎提供了执行环境和相关数据，执行引擎通过与运行时数据区交互，从而获取</p>
 <p>执行时需要的相关信息，存储执行的中间结果等</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/006.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/006.png" alt></p>
 <h5 id="（四）执行引擎与本地方法接口"><a href="#（四）执行引擎与本地方法接口" class="headerlink" title="（四）执行引擎与本地方法接口"></a><strong>（四）执行引擎与本地方法接口</strong></h5><blockquote>
 <p>当要执行本地方法时，执行引擎将调用本地方法接口来获取相关OS本地方法，需要注意的是，本地方法与操作系统强耦合的。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/007.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/007.png" alt></p>
 <h5 id="（五）JVM在具体操作系统上执行"><a href="#（五）JVM在具体操作系统上执行" class="headerlink" title="（五）JVM在具体操作系统上执行"></a><strong>（五）JVM在具体操作系统上执行</strong></h5><blockquote>
 <p>JVM通过调用本地接口来获取本地方法，从而实现在具体的平台上执行，如在Linux系统上执行，在Window系统上执行和在Unix系统上执行。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/008.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/008.png" alt></p>
 
             </div>
             <hr>
@@ -406,7 +406,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/13/java-yuan-dai-ma-de-zhi-xing-yuan-li/" class="b-link-green">java源代码的执行原理</a>
                 </p>

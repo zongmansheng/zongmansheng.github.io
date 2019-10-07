@@ -302,7 +302,7 @@ wget –no-cookies –no-check-certificate –header “Co">
 <h3 id="二、安装java环境"><a href="#二、安装java环境" class="headerlink" title="二、安装java环境"></a>二、安装java环境</h3><h4 id="下载jdk1-8"><a href="#下载jdk1-8" class="headerlink" title="下载jdk1.8"></a>下载jdk1.8</h4><blockquote>
 <p>wget –no-cookies –no-check-certificate –header “Cookie: gpw_e24=http%3A%2F%2F<a href="http://www.oracle.com%2F" target="_blank" rel="noopener">www.oracle.com%2F</a>; oraclelicense=accept-securebackup-cookie” “<a href="http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz&quot;" target="_blank" rel="noopener">http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz&quot;</a></p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/001.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/001.png" alt></p>
 <h4 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h4><pre><code>tar -zxvf jdk-8u131-linux-x64.tar.gz
 </code></pre><p>重命名</p>
 <pre><code>mv jdk-8u131-linux-x64.tar.gz /jdk8
@@ -327,7 +327,7 @@ export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
 
 cd libfastcommon-1.0.7/
 </code></pre><h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><pre><code>./make.sh
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/002.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/002.png" alt></p>
 <h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><pre><code>./make.sh install
 </code></pre><h4 id="设置几个软连接"><a href="#设置几个软连接" class="headerlink" title="设置几个软连接"></a>设置几个软连接</h4><pre><code>ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so
 ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so
@@ -340,7 +340,7 @@ ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so
 cd fastdfs-5.05/
 ./make.sh 
 ./make.sh install
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/003.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/003.png" alt></p>
 <h4 id="配置和启动tracker"><a href="#配置和启动tracker" class="headerlink" title="配置和启动tracker"></a>配置和启动tracker</h4><blockquote>
 <p>切换目录到： /etc/fdfs/ 目录下；</p>
 <p>拷贝一份新的tracker配置文件</p>
@@ -358,7 +358,7 @@ http.server_port  改为： 80
 </code></pre><blockquote>
 <p>注意：在/home/fastdfs/ 目录下生成两个目录， 一个是数据，一个是日志</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/004.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/004.png" alt></p>
 <h4 id="配置和启动storage"><a href="#配置和启动storage" class="headerlink" title="配置和启动storage"></a>配置和启动storage</h4><blockquote>
 <p>由于上面已经安装过FastDFS，这里只需要配置storage就好了；</p>
 <p>（1）切换目录到： /etc/fdfs/ 目录下；</p>
@@ -394,7 +394,7 @@ http.server_port=88
 </code></pre><blockquote>
 <p>启动完成后进入 /home/fdfs_storage/data 目录下，显示目录如下：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/005.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/005.png" alt></p>
 <h4 id="使用FastDFS自带工具测试"><a href="#使用FastDFS自带工具测试" class="headerlink" title="使用FastDFS自带工具测试"></a>使用FastDFS自带工具测试</h4><blockquote>
 <p>（1）切换目录到 /etc/fdfs/ 目录下；</p>
 <p>（2）拷贝一份新的client配置文件</p>
@@ -411,7 +411,7 @@ tracker_server = 118.24.39.10:22122
 <p>进行测试，运行如下：（运行测试程序，读取/etc/fdfs/client.conf 文件，上传/pic目录下的timg.jpg文件）</p>
 </blockquote>
 <pre><code>/usr/bin/fdfs_test /etc/fdfs/client.conf upload /pic/timg.jpg
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/006.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/006.png" alt></p>
 <h3 id="FastDFS-和nginx整合"><a href="#FastDFS-和nginx整合" class="headerlink" title="FastDFS 和nginx整合"></a>FastDFS 和nginx整合</h3><h4 id="下载nginx插件"><a href="#下载nginx插件" class="headerlink" title="下载nginx插件"></a>下载nginx插件</h4><pre><code>wget http://jaist.dl.sourceforge.NET/project/fastdfs/FastDFS%20Nginx%20Module%20Source%20Code/fastdfs-nginx-module_v1.16.tar.gz
 </code></pre><p>编辑Nginx模块的配置文件：</p>
 <blockquote>
@@ -452,8 +452,8 @@ store_path0=/home/fdfs_storage  #指定文件存储路径（上面配置的store
 </code></pre><h4 id="将libfdfsclient-so拷贝至-usr-lib下"><a href="#将libfdfsclient-so拷贝至-usr-lib下" class="headerlink" title="将libfdfsclient.so拷贝至/usr/lib下"></a>将libfdfsclient.so拷贝至/usr/lib下</h4><pre><code>cp /usr/lib64/libfdfsclient.so /usr/lib/
 </code></pre><h4 id="创建nginx-client目录"><a href="#创建nginx-client目录" class="headerlink" title="创建nginx/client目录"></a>创建nginx/client目录</h4><pre><code>mkdir -p /var/temp/nginx/client
 </code></pre><h4 id="修改nginx配置文件"><a href="#修改nginx配置文件" class="headerlink" title="修改nginx配置文件"></a>修改nginx配置文件</h4><pre><code>vi nginx.conf
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/007.png" alt></p>
-<p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/008.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/007.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/008.png" alt></p>
 <blockquote>
 <p><strong>说明</strong>：</p>
 <p>　　(a.) server_name指定本机ip；</p>
@@ -461,7 +461,7 @@ store_path0=/home/fdfs_storage  #指定文件存储路径（上面配置的store
 </blockquote>
 <h4 id="Nginx启动"><a href="#Nginx启动" class="headerlink" title="Nginx启动"></a>Nginx启动</h4><pre><code>cd /usr/local/nginx/sbin/
 ./nginx 
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/09/20/centos7-an-zhuang-java-huan-jing/009.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/20/centos7-an-zhuang-java-huan-jing/009.png" alt></p>
 <h3 id="在浏览器中访问上传到fastDFS的图片"><a href="#在浏览器中访问上传到fastDFS的图片" class="headerlink" title="在浏览器中访问上传到fastDFS的图片"></a>在浏览器中访问上传到fastDFS的图片</h3><p><a href="http://118.24.39.10/group1/M00/00/00/rBAAB12E7iyABm0TAACu49zL7nc697_big.jpg" target="_blank" rel="noopener">http://118.24.39.10/group1/M00/00/00/rBAAB12E7iyABm0TAACu49zL7nc697_big.jpg</a></p>
 
             </div>
@@ -484,7 +484,7 @@ store_path0=/home/fdfs_storage  #指定文件存储路径（上面配置的store
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/09/20/centos7-an-zhuang-java-huan-jing/" class="b-link-green">CentOS7安装软件</a>
                 </p>

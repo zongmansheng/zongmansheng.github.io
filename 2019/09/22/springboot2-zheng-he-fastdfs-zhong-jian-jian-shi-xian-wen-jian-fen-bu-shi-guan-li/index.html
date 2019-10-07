@@ -298,8 +298,8 @@
                 <h1 id="SpringBoot2整合FastDFS中间件-实现文件分布式管理"><a href="#SpringBoot2整合FastDFS中间件-实现文件分布式管理" class="headerlink" title="SpringBoot2整合FastDFS中间件,实现文件分布式管理"></a>SpringBoot2整合FastDFS中间件,实现文件分布式管理</h1><h3 id="一、FastDFS"><a href="#一、FastDFS" class="headerlink" title="一、FastDFS"></a>一、FastDFS</h3><blockquote>
 <p>​        FastDFS是由淘宝的余庆先⽣生所开发，是⼀一个轻量量级、⾼高性能的开源分布式⽂文件系统，⽤用纯C语⾔言开 发，包括⽂文件存储、⽂文件同步、⽂文件访问(上传、下载)、存取负载均衡、在线扩容、相同内容只存储 ⼀一份等功能，适合有⼤大容量量存储需求的应⽤用或系统。做分布式系统开发时，其中要解决的⼀一个问题就是 图⽚片、⾳音视频、⽂文件共享的问题，分布式⽂文件系统正好可以解决这个需求。同类的分布式⽂文件系统有⾕谷 歌的GFS、HDFS(Hadoop)、TFS(淘宝)等。 </p>
 </blockquote>
-<h3 id="二、FastDFS系统架构"><a href="#二、FastDFS系统架构" class="headerlink" title="二、FastDFS系统架构:"></a>二、FastDFS系统架构:</h3><p><img src="//zongmansheng.gitee.io/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/001.png" alt></p>
-<h3 id="三、FastDFS⽂文件上传流程"><a href="#三、FastDFS⽂文件上传流程" class="headerlink" title="三、FastDFS⽂文件上传流程"></a>三、FastDFS⽂文件上传流程</h3><p><img src="//zongmansheng.gitee.io/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/002.png" alt></p>
+<h3 id="二、FastDFS系统架构"><a href="#二、FastDFS系统架构" class="headerlink" title="二、FastDFS系统架构:"></a>二、FastDFS系统架构:</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/001.png" alt></p>
+<h3 id="三、FastDFS⽂文件上传流程"><a href="#三、FastDFS⽂文件上传流程" class="headerlink" title="三、FastDFS⽂文件上传流程"></a>三、FastDFS⽂文件上传流程</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/002.png" alt></p>
 <blockquote>
 <ol>
 <li>client询问tracker上传到的storage，不需要附加参数;</li>
@@ -307,7 +307,7 @@
 <li>client直接和storage通讯完成文件上传。</li>
 </ol>
 </blockquote>
-<h3 id="四、FastDFS文件下载流程"><a href="#四、FastDFS文件下载流程" class="headerlink" title="四、FastDFS文件下载流程"></a>四、FastDFS文件下载流程</h3><p><img src="//zongmansheng.gitee.io/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/003.png" alt></p>
+<h3 id="四、FastDFS文件下载流程"><a href="#四、FastDFS文件下载流程" class="headerlink" title="四、FastDFS文件下载流程"></a>四、FastDFS文件下载流程</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/003.png" alt></p>
 <blockquote>
 <ol>
 <li>client询问tracker下载文件的storage，参数为⽂文件标识(组名和⽂文件名);</li>
@@ -493,7 +493,7 @@ fdfs:
 <h3 id="七、启动并访问Swagger"><a href="#七、启动并访问Swagger" class="headerlink" title="七、启动并访问Swagger"></a>七、启动并访问Swagger</h3><blockquote>
 <p>访问地址：<a href="http://127.0.0.1:8122/swagger-ui.html#/" target="_blank" rel="noopener">http://127.0.0.1:8122/swagger-ui.html#/</a></p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/004.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/004.png" alt></p>
 <h3 id="八、源码地址"><a href="#八、源码地址" class="headerlink" title="八、源码地址"></a>八、源码地址</h3><blockquote>
 <p><a href="https://gitee.com/zongmansheng/springboot-zms" target="_blank" rel="noopener">https://gitee.com/zongmansheng/springboot-zms</a></p>
 </blockquote>
@@ -518,7 +518,7 @@ fdfs:
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/" class="b-link-green">SpringBoot2整合FastDFS中间件,实现文件分布式管理</a>
                 </p>
@@ -543,49 +543,30 @@ fdfs:
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/">
+                <a href="/2019/09/24/rabbitmq/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="SpringBoot2整合FastDFS中间件,实现文件分布式管理">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="RabbitMQ">
                         
-                        <span class="card-title">SpringBoot2整合FastDFS中间件,实现文件分布式管理</span>
+                        <span class="card-title">RabbitMQ</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">SpringBoot2整合FastDFS中间件,实现文件分布式管理一、FastDFS
-​        FastDFS是由淘宝的余庆先⽣生所开发，是⼀一个轻量量级、⾼高性能的开源分布式⽂文件系统，⽤用纯C语⾔言开 发，包括⽂文件存储、⽂文件</div>
+                    <div class="summary"></div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-24
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
-                                    SpringBoot
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            ZongMan
                             
                         </span>
                     </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/springboot/" target="_blank">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/fastDFS/" target="_blank">
-                        <span class="chip bg-color">fastDFS</span>
-                    </a>
-                    
                 </div>
                 
             </div>

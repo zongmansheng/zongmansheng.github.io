@@ -346,7 +346,7 @@
 <p>在主流的商用语言中（例如Java、C#）的主流实现中，都是通过可达性分析（Reachability Analysis）来判定对象是否存活的。这个算法的思路就是：</p>
 <p>通过一系列的称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain），当一个对象到GC Roots没有任何引用链相连时（也就是从GC Roots到这个对象不可达时 ），则说明此对象是不可用的。如下图所示，虽然Object5、Object6、Object7之间是相互关联的，但它们与GC Roots是断开的，所以它们被判定为可回收的对象。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/18/jvm-ru-he-pan-duan-dui-xiang-shi-fou-huan-cun-huo/001.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/18/jvm-ru-he-pan-duan-dui-xiang-shi-fou-huan-cun-huo/001.png" alt></p>
 <blockquote>
 <p>在java中，可作为GC Roots的对象有以下几种：</p>
 <ul>
@@ -405,7 +405,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/18/jvm-ru-he-pan-duan-dui-xiang-shi-fou-huan-cun-huo/" class="b-link-green">JVM如何判断对象是否还存活</a>
                 </p>

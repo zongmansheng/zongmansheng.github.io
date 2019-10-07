@@ -295,7 +295,7 @@
                 <h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><h4 id="一-原型模式介绍"><a href="#一-原型模式介绍" class="headerlink" title="一 原型模式介绍"></a>一 原型模式介绍</h4><pre><code>在面向对象系统中，使用原型模式来复制一个对象自身，从而克隆出多个与原型对象一模一样的对象。
 
 另外在软件系统中，有些对象的创建过程较为复杂，而且有时候需要频繁创建，原型模式通过给出一个原型对象来指明所要创建的对象的类型，然后用复制这个原型对象的办法创建出更多同类型的对象，这就是原型模式的意图所在。
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/04/19/yuan-xing-mo-shi/001.jpg" alt="001"></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/19/yuan-xing-mo-shi/001.jpg" alt="001"></p>
 <h5 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h5><p>GOF给出的原型模式定义如下：</p>
 <pre class=" language-java"><code class="language-java">Specify the kind of objects to create using a prototypical instance<span class="token punctuation">,</span> and create <span class="token keyword">new</span> <span class="token class-name">objects</span> by copying <span class="token keyword">this</span> prototype<span class="token punctuation">.</span> （使用原型实例指定将要创建的对象类型，通过复制这个实例创建新的对象。）
 </code></pre>
@@ -329,9 +329,9 @@
 2、在实现深克隆时需要编写较为复杂的代码。
 </code></pre><h4 id="二-示例程序"><a href="#二-示例程序" class="headerlink" title="二 示例程序"></a>二 示例程序</h4><p>下面示例程序的作用是将字符串放入方框中显示出来或者是加了下划线显示出来。</p>
 <p>类和接口一览表：</p>
-<p><img src="//zongmansheng.gitee.io/2019/04/19/yuan-xing-mo-shi/002.jpg" alt="002"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/19/yuan-xing-mo-shi/002.jpg" alt="002"></p>
 <p>示例程序类图：</p>
-<p><img src="//zongmansheng.gitee.io/2019/04/19/yuan-xing-mo-shi/003.jpg" alt="003"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/19/yuan-xing-mo-shi/003.jpg" alt="003"></p>
 <h5 id="2-1-Product接口-（Prototype）"><a href="#2-1-Product接口-（Prototype）" class="headerlink" title="2.1 Product接口 （Prototype）"></a>2.1 Product接口 （Prototype）</h5><pre><code>    Product接口是复制功能接口，该接口继承了java.lang.Cloneable(只有实现了该接口的类的实例才可以调用clone()方法复制实例,否则会抛出异常). 
     另外需要注意：`java.lang.Cloneable 只是起到告诉程序可以调用clone方法的作用，它本身并没有定义任何方法。
 </code></pre><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
@@ -468,12 +468,12 @@ public class Main {
     }
 }
 </code></pre><p>运行结果：</p>
-<p><img src="//zongmansheng.gitee.io/2019/04/19/yuan-xing-mo-shi/004.jpg" alt="004"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/19/yuan-xing-mo-shi/004.jpg" alt="004"></p>
 <h4 id="三-原型模式的角色分析"><a href="#三-原型模式的角色分析" class="headerlink" title="三 原型模式的角色分析"></a>三 原型模式的角色分析</h4><h5 id="3-1-Prototype（抽象原型类）"><a href="#3-1-Prototype（抽象原型类）" class="headerlink" title="3.1 Prototype（抽象原型类）"></a>3.1 Prototype（抽象原型类）</h5><pre><code>Product角色负责定义用于复制现有实例来生成新实例的方法。在示例程序中的Product接口就是该角色。
 </code></pre><h5 id="3-2-ConcretePrototype（具体原型类）"><a href="#3-2-ConcretePrototype（具体原型类）" class="headerlink" title="3.2 ConcretePrototype（具体原型类）"></a>3.2 ConcretePrototype（具体原型类）</h5><pre><code>ConcretePrototype角色负责实现复制现有实例并生成新实例的方法。在示例程序中，MessageBox和UnderlinePen都是该角色。
 </code></pre><h5 id="3-3-Client（客户类-使用者）"><a href="#3-3-Client（客户类-使用者）" class="headerlink" title="3.3 Client（客户类/使用者）"></a>3.3 Client（客户类/使用者）</h5><pre><code>Client角色负责使用复制实例的方法生成新的实例。在示例程序中，Manager类扮演的就是该角色。
 </code></pre><p>Prototype模式的类图：</p>
-<p><img src="//zongmansheng.gitee.io/2019/04/19/yuan-xing-mo-shi/005.jpg" alt="005"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/19/yuan-xing-mo-shi/005.jpg" alt="005"></p>
 <h4 id="四-原型模式的实际应用案例"><a href="#四-原型模式的实际应用案例" class="headerlink" title="四 原型模式的实际应用案例"></a>四 原型模式的实际应用案例</h4><pre><code>(1) 原型模式应用于很多软件中，如果每次创建一个对象要花大量时间，原型模式是最好的解决方案。很多软件提供的复制(Ctrl + C)和粘贴(Ctrl + V)操作就是原型模式的应用，复制得到的对象与原型对象是两个类型相同但内存地址不同的对象，通过原型模式可以大大提高对象的创建效率。
 
 (2) 在Struts2中为了保证线程的安全性，Action对象的创建使用了原型模式，访问一个已经存在的`Action对象时将通过克隆的方式创建出一个新的对象，从而保证其中定义的变量无须进行加锁实现同步，每一个Action中都有自己的成员变量，避免Struts1因使用单例模式而导致的并发和同步问题。
@@ -500,7 +500,7 @@ public class Main {
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/04/19/yuan-xing-mo-shi/" class="b-link-green">原型模式</a>
                 </p>

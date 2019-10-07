@@ -292,7 +292,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="装饰者设计模式"><a href="#装饰者设计模式" class="headerlink" title="装饰者设计模式"></a>装饰者设计模式</h1><h4 id="一、装饰者模式的概念"><a href="#一、装饰者模式的概念" class="headerlink" title="一、装饰者模式的概念"></a>一、装饰者模式的概念</h4><p>​    装饰者模式又名包装(Wrapper)模式。装饰者模式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案。</p>
-<h4 id="二、装饰者模式的结构"><a href="#二、装饰者模式的结构" class="headerlink" title="二、装饰者模式的结构"></a>二、装饰者模式的结构</h4><p>​    装饰者模式以对客户透明的方式动态地给一个对象附加上更多的责任。换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰者模式可以在不使用创造更多子类的情况下，将对象的功能加以扩展。<img src="//zongmansheng.gitee.io/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/个人学习文档\装饰者设计模式\Snipaste_2019-01-14_22-44-24.png" alt="Snipaste_2019-01-14_22-44-24"></p>
+<h4 id="二、装饰者模式的结构"><a href="#二、装饰者模式的结构" class="headerlink" title="二、装饰者模式的结构"></a>二、装饰者模式的结构</h4><p>​    装饰者模式以对客户透明的方式动态地给一个对象附加上更多的责任。换言之，客户端并不会觉得对象在装饰前和装饰后有什么不同。装饰者模式可以在不使用创造更多子类的情况下，将对象的功能加以扩展。<img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/个人学习文档\装饰者设计模式\Snipaste_2019-01-14_22-44-24.png" alt="Snipaste_2019-01-14_22-44-24"></p>
 <p>在装饰模式中的角色有：</p>
 <p>●　　抽象构件(Component)角色：给出一个抽象接口，以规范准备接收附加责任的对象。</p>
 <p>●　　具体构件(ConcreteComponent)角色：定义一个将要接收附加责任的类。</p>
@@ -300,7 +300,7 @@
 <p>●　　具体装饰(ConcreteDecorator)角色：负责给构件对象“贴上”附加的责任。</p>
 <h4 id="三、装饰者模式实例演示"><a href="#三、装饰者模式实例演示" class="headerlink" title="三、装饰者模式实例演示"></a>三、装饰者模式实例演示</h4><h5 id="齐天大圣的例子"><a href="#齐天大圣的例子" class="headerlink" title="齐天大圣的例子"></a>齐天大圣的例子</h5><p>​    孙悟空有七十二般变化，他的每一种变化都给他带来一种附加的本领。他变成鱼儿时，就可以到水里游泳；他变成鸟儿时，就可以在天上飞行。</p>
 <p>​    本例中，Component的角色便由鼎鼎大名的齐天大圣扮演；ConcreteComponent的角色属于大圣的本尊，就是猢狲本人；Decorator的角色由大圣的七十二变扮演。而ConcreteDecorator的角色便是鱼儿、鸟儿等七十二般变化</p>
-<p><img src="//zongmansheng.gitee.io/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/Snipaste_2019-01-14_22-47-58.png" alt="Snipaste_2019-01-14_22-47-58"></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/Snipaste_2019-01-14_22-47-58.png" alt="Snipaste_2019-01-14_22-47-58"></p>
 <h4 id="四、装饰者模式的优缺点"><a href="#四、装饰者模式的优缺点" class="headerlink" title="四、装饰者模式的优缺点"></a>四、装饰者模式的优缺点</h4><h5 id="装饰模式的优点"><a href="#装饰模式的优点" class="headerlink" title="装饰模式的优点"></a>装饰模式的优点</h5><p>（1）装饰模式与继承关系的目的都是要扩展对象的功能，但是装饰模式可以提供比继承更多的灵活性。装    饰模式允许系统动态决定“贴上”一个需要的“装饰”，或者除掉一个不需要的“装饰”。继承关系则不同，继承关系是静态的，它在系统运行前就决定了。</p>
 <p>（2）通过使用不同的具体装饰类以及这些装饰类的排列组合，设计师可以创造出很多不同行为的组合。</p>
 <h5 id="装饰模式的缺点"><a href="#装饰模式的缺点" class="headerlink" title="装饰模式的缺点"></a>装饰模式的缺点</h5><p>由于使用装饰模式，可以比使用继承关系需要较少数目的类。使用较少的类，当然使设计比较易于进行。但是，在另一方面，使用装饰模式会产生比使用继承关系更多的对象。更多的对象会使得查错变得困难，特别是这些对象看上去都很相像。</p>
@@ -325,7 +325,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/04/10/zhuang-shi-zhe-she-ji-mo-shi/" class="b-link-green">装饰者设计模式</a>
                 </p>

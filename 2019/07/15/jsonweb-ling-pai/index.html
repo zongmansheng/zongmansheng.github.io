@@ -301,7 +301,7 @@ Internet服务无法与用户身份验证分开。一般过程如下。
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="JSON-Web令牌（JWT）"><a href="#JSON-Web令牌（JWT）" class="headerlink" title="JSON Web令牌（JWT）"></a>JSON Web令牌（JWT）</h1><p><img src="//zongmansheng.gitee.io/2019/07/15/jsonweb-ling-pai/001.png" alt></p>
+                <h1 id="JSON-Web令牌（JWT）"><a href="#JSON-Web令牌（JWT）" class="headerlink" title="JSON Web令牌（JWT）"></a>JSON Web令牌（JWT）</h1><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/15/jsonweb-ling-pai/001.png" alt></p>
 <blockquote>
 <p>JSON Web Token（JWT）是目前最流行的跨域身份验证解决方案。</p>
 </blockquote>
@@ -313,17 +313,17 @@ Internet服务无法与用户身份验证分开。一般过程如下。
 <p>4.用户的每个后续请求都将通过在Cookie中取出session_id传给服务器。</p>
 <p>5.服务器收到session_id并对比之前保存的数据，确认用户的身份。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/15/jsonweb-ling-pai/002.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/15/jsonweb-ling-pai/002.png" alt></p>
 <blockquote>
 <p>这种模式最大的问题是，没有分布式架构，无法支持横向扩展。如果使用一个服务器，该模式完全没有问题。但是，如果它是服务器群集或面向服务的跨域体系结构的话，则需要一个统一的session数据库库来保存会话数据实现共享，这样负载均衡下的每个服务器才可以正确的验证用户身份。</p>
 <p>例如:举一个实际中常见的单点登陆的需求：站点A和站点B提供同一公司的相关服务。现在要求用户只需要登录其中一个网站，然后它就会自动登录到另一个网站。怎么做？</p>
 <p>一种解决方案是听过持久化session数据，写入数据库或文件持久层等。收到请求后，验证服务从持久层请求数据。该解决方案的优点在于架构清晰，而缺点是架构修改比较费劲，整个服务的验证逻辑层都需要重写，工作量相对较大。而且由于依赖于持久层的数据库或者问题系统，会有单点风险，如果持久层失败，整个认证体系都会挂掉。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/15/jsonweb-ling-pai/003.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/15/jsonweb-ling-pai/003.png" alt></p>
 <blockquote>
 <p>本文给大家介绍另外一种灵活的解决方案，通过客户端保存数据，而服务器根本不保存会话数据，每个请求都被发送回服务器。 JWT是这种解决方案的代表。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/15/jsonweb-ling-pai/004.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/15/jsonweb-ling-pai/004.png" alt></p>
 <h4 id="2-JWT的原则"><a href="#2-JWT的原则" class="headerlink" title="2. JWT的原则"></a>2. JWT的原则</h4><blockquote>
 <p>JWT的原则是在服务器身份验证之后，将生成一个JSON对象并将其发送回用户，如下所示。</p>
 <p>{</p>
@@ -339,7 +339,7 @@ Internet服务无法与用户身份验证分开。一般过程如下。
 <p>改对象为一个很长的字符串，字符之间通过”.”分隔符分为三个子串。注意JWT对象为一个长字串，各字串之间也没有换行符，此处为了演示需要，我们特意分行并用不同颜色表示了。每一个子串表示了一个功能块，总共有以下三个部分：</p>
 <p>JWT的三个部分如下。JWT头、有效载荷和签名，将它们写成一行如下。</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/07/15/jsonweb-ling-pai/005.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/07/15/jsonweb-ling-pai/005.png" alt></p>
 <blockquote>
 <p>我们将在下面介绍这三个部分。</p>
 </blockquote>
@@ -523,7 +523,7 @@ Internet服务无法与用户身份验证分开。一般过程如下。
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/07/15/jsonweb-ling-pai/" class="b-link-green">JSONWeb令牌</a>
                 </p>

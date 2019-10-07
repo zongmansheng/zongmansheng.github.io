@@ -297,12 +297,12 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Mac下docker环境安装ElasticSearch"><a href="#Mac下docker环境安装ElasticSearch" class="headerlink" title="Mac下docker环境安装ElasticSearch"></a>Mac下docker环境安装ElasticSearch</h1><h4 id="一、Mac上需要装有docker环境"><a href="#一、Mac上需要装有docker环境" class="headerlink" title="一、Mac上需要装有docker环境"></a>一、Mac上需要装有docker环境</h4><h5 id="1、下载镜像"><a href="#1、下载镜像" class="headerlink" title="1、下载镜像"></a>1、下载镜像</h5><pre><code>docker pull elasticsearch:6.5.3
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/001.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/001.png" alt></p>
 <h5 id="2、运行容器"><a href="#2、运行容器" class="headerlink" title="2、运行容器"></a>2、运行容器</h5><pre><code>docker run -d -p 9200:9200 -p 9300:9300 --name elasticsearch-6.5.3
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/002.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/002.png" alt></p>
 <h5 id="3、进入容器"><a href="#3、进入容器" class="headerlink" title="3、进入容器"></a>3、进入容器</h5><pre><code>docker exec -it elasticsearch-6.5.3 /bin/bash
 </code></pre><h5 id="4、安装ik分词器"><a href="#4、安装ik分词器" class="headerlink" title="4、安装ik分词器"></a>4、安装ik分词器</h5><pre><code>./bin/elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.3/elasticsearch-analysis-ik-6.5.3.zip
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/003.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/003.png" alt></p>
 <h5 id="5、修改es配置文件"><a href="#5、修改es配置文件" class="headerlink" title="5、修改es配置文件"></a>5、修改es配置文件</h5><pre><code>vi ./config/elasticsearch.yml
 </code></pre><pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">cluster.name</span><span class="token punctuation">:</span> <span class="token string">"docker-cluster"</span>
 <span class="token key atrule">network.host</span><span class="token punctuation">:</span> 0.0.0.0
@@ -343,7 +343,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/08/20/mac-xia-docker-huan-jing-an-zhuang-elasticsearch/" class="b-link-green">Mac下docker环境安装ElasticSearch</a>
                 </p>

@@ -298,7 +298,7 @@
 <p>（1）<strong>非叶子节点</strong>只能允许<strong>最多两个子节点</strong>存在。</p>
 <p>（2）每一个非叶子节点数据分布规则为<strong>左边的子节点小当前节点的值</strong>，<strong>右边的子节点大于当前节点的值</strong>(这里值是基于自己的算法规则而定的，比如hash值)；</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/001.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/001.png" alt></p>
 <blockquote>
 <p>平衡树的层级结构：因为平衡二叉树<strong>查询复杂度</strong>和<strong>树的层级（h高度）</strong>成反比，h值越小查询越快，为了保证树的左右两端数据大致平衡以<strong>降低二叉树的查询难度</strong>一般会采用一种算法机制实现<strong>节点数据结构的平</strong>衡，实现了这种算法的有比如<strong>AVL</strong>、<strong>Treap</strong>、<strong>红黑树</strong>等，使用平衡二叉树能保证数据的<strong>左右两边的节点层级相差不会大于1</strong>，这样可以避免树形结构由于删除增加变成线性链表进而影响查询效率。保证数据平衡的情况下查找数据的速度近于二分法查找。</p>
 </blockquote>
@@ -322,7 +322,7 @@
 </ol>
 <p>示意图如下图所示，这里假设字母的排序规则为A&gt;B&gt;C…：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/002.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/002.png" alt></p>
 <blockquote>
 <p>如上图我要从上图中找到E，查找流程如下</p>
 <ol>
@@ -334,7 +334,7 @@
 <h4 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h4><blockquote>
 <p><strong>概念：</strong>B+树是B树的一个升级版，相对于B树来说B+树更充分的利用了节点的空间，让查询速度更加稳定，其速度完全接近于二分法查找。为什么说B+树查找的效率要比B树更高、更稳定；</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/003.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/003.png" alt></p>
 <blockquote>
 <p>如上图所示，我们看看B+树遵循的规则：</p>
 <ol>
@@ -346,8 +346,8 @@
 </ol>
 <p>可能有的读者对上面的第1点不太理解，从图上看B树和B+树的节点中都是数字啊，有什么不一样，为什么说B+树的非叶子节点不保存关键字记录的指针？这里引入一个<strong>“卫星数据”</strong>的概念来给大家解释，所谓卫星数据，指的是<strong>索引元素所指向的数据记录</strong>，也就是我们这里说的<strong>“关键字记录的指针”</strong>，比如数据库中的某一行。在B树中，无论中间节点还是叶子节点都带有卫星数据，而B+树只有叶子节点才带有卫星数据，我们来给一张对比图：</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/004.png" alt></p>
-<p><img src="//zongmansheng.gitee.io/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/005.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/004.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/005.png" alt></p>
 <blockquote>
 <p>从上面两幅图就可以就看出，B树的每一个节点都有一个<strong>“关键字记录的指针”</strong>（即图中的data部分），而B+树只有叶子节点才有。</p>
 <p><strong>特点：</strong></p>
@@ -357,7 +357,7 @@
 <p>4、B+<strong>树全节点遍历更快：</strong>B+树遍历整棵树只需要遍历所有的<strong>叶子</strong>节点即可，，而不需要像B树一样需要对每一层进行遍历，这有利于数据库做全表扫描。</p>
 <p><strong>B树</strong>相对于<strong>B+树</strong>的优点是，如果经常访问的数据离根节点很近，而<strong>B树</strong>的<strong>非叶子</strong>节点本身存有关键字其数据的地址，所以这种数据检索的时候会要比<strong>B+树</strong>快</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/006.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/006.png" alt></p>
 <blockquote>
 <p>规则：B*树是B+树的变种，相对于B+树他们的不同之处如下：</p>
 <ol>
@@ -395,7 +395,7 @@
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/06/27/ping-heng-er-cha-shu-b-shu-b-shu-b-shu-de-qu-bie/" class="b-link-green">平衡二叉树、B树、B+树，B*树的区别</a>
                 </p>

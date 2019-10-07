@@ -345,7 +345,7 @@
 <h5 id="私有的声明-："><a href="#私有的声明-：" class="headerlink" title="私有的声明 ："></a>私有的声明 ：</h5><p>私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。</p>
 <h4 id="3、签名（signature-签名信息。"><a href="#3、签名（signature-签名信息。" class="headerlink" title="3、签名（signature) 签名信息。"></a>3、签名（signature) 签名信息。</h4><p>jwt的第三部分是一个签证信息，这个签证信息由三部分组成：header (base64后的)payload (base64后的)secret<br>这个部分需要base64加密后的header和base64加密后的payload使用.连接组成的字符串，然后通过header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分。<br>密钥secret是保存在服务端的，服务端会根据这个密钥进行生成token和进行验证，所以需要保护好。</p>
 </blockquote>
-<h3 id="JWT请求流程"><a href="#JWT请求流程" class="headerlink" title="JWT请求流程"></a>JWT请求流程</h3><p><img src="//zongmansheng.gitee.io/2019/05/07/springboot-yi/001.png" alt></p>
+<h3 id="JWT请求流程"><a href="#JWT请求流程" class="headerlink" title="JWT请求流程"></a>JWT请求流程</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/05/07/springboot-yi/001.png" alt></p>
 <blockquote>
 <ol>
 <li>用户使用账号和面发出post请求；</li>
@@ -665,16 +665,16 @@ debug<span class="token operator">:</span> <span class="token boolean">true</spa
 <blockquote>
 <p>不加注解的话默认不验证，登录接口一般是不验证的。在getMessage()中我加上了登录注解，说明该接口必须登录获取token后，在请求头中加上token并通过验证才可以访问</p>
 </blockquote>
-<h5 id="在没token的情况下访问api-getMessage接口"><a href="#在没token的情况下访问api-getMessage接口" class="headerlink" title="在没token的情况下访问api/getMessage接口"></a>在没token的情况下访问api/getMessage接口</h5><p><img src="//zongmansheng.gitee.io/2019/05/07/springboot-yi/002.png" alt></p>
+<h5 id="在没token的情况下访问api-getMessage接口"><a href="#在没token的情况下访问api-getMessage接口" class="headerlink" title="在没token的情况下访问api/getMessage接口"></a>在没token的情况下访问api/getMessage接口</h5><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/05/07/springboot-yi/002.png" alt></p>
 <blockquote>
 <p>使用了统一异常处理，所以只看到错误message</p>
 <p>下面进行登录，从而获取token</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/05/07/springboot-yi/003.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/05/07/springboot-yi/003.png" alt></p>
 <blockquote>
 <p>把token加在请求头中，再次访问api/getMessage接口</p>
 </blockquote>
-<p><img src="//zongmansheng.gitee.io/2019/05/07/springboot-yi/004.png" alt></p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/05/07/springboot-yi/004.png" alt></p>
 
             </div>
             <hr>
@@ -696,7 +696,7 @@ debug<span class="token operator">:</span> <span class="token boolean">true</spa
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/05/07/springboot-yi/" class="b-link-green">SpringBoot（一）</a>
                 </p>

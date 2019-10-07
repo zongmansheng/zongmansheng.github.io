@@ -316,7 +316,7 @@ mkdir /docker/redis/data
 touch /docker/redis/redis.conf
 touch /docker/redis/redis.bash
 </code></pre><h4 id="三、编辑配置文件"><a href="#三、编辑配置文件" class="headerlink" title="三、编辑配置文件"></a>三、编辑配置文件</h4><pre><code>vim /docker/redis/reoedis.conf
-</code></pre><p><img src="//zongmansheng.gitee.io/2019/08/21/mac-xia-docker-huan-jing-an-zhuang-redis/001.png" alt></p>
+</code></pre><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/08/21/mac-xia-docker-huan-jing-an-zhuang-redis/001.png" alt></p>
 <h4 id="四、编辑启动脚本"><a href="#四、编辑启动脚本" class="headerlink" title="四、编辑启动脚本"></a>四、编辑启动脚本</h4><pre><code>vi /docker/redis/redis.bash
 </code></pre><pre><code>docker run -p 6379:6379 --name redis -v /docker/redis/redis.conf:/etc/redis/redis.conf -v /docker/redis/data:/data -d redis redis-server /etc/redis/redis.conf 
 </code></pre><pre><code>docker run redis # 从redis镜像运行容器
@@ -357,7 +357,7 @@ docker exec -it redis redis-cli
                     <span class="reprint-tip">
                         <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
                     </span>
-                    <a href="http://zongmansheng.gitee.io" class="b-link-green">晓笙的BLOG</a>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
                     <a href="/2019/08/21/mac-xia-docker-huan-jing-an-zhuang-redis/" class="b-link-green">Mac下docker环境安装Redis</a>
                 </p>
@@ -384,18 +384,22 @@ docker exec -it redis redis-cli
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/07/liunx-xia-chang-yong-ming-ling/">
+                <a href="/2019/09/07/linux-xia-chang-yong-ming-ling/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Liunx下常用命令">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Linux下常用命令">
                         
-                        <span class="card-title">Liunx下常用命令</span>
+                        <span class="card-title">Linux下常用命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Liunx下常用命令一、Liunx
-</div>
+                    <div class="summary">Linux下常用命令一、Linux防火墙查看状态firewall、iptable
+一、iptables防火墙1、基本操作
+# 查看防火墙状态
+service iptables status  
+# 停止防火墙
+service iptable</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-07
@@ -404,8 +408,8 @@ docker exec -it redis redis-cli
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Liunx/" class="post-category" target="_blank">
-                                    Liunx
+                            <a href="/categories/Linux/" class="post-category" target="_blank">
+                                    Linux
                                 </a>
                             
                             
