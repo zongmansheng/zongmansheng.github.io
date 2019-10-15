@@ -5,8 +5,9 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="并发工具类和并发容器, 晓笙的BLOG">
-    <meta name="description" content="并发工具类和并发容器1.ConcurrentHashMap为什么要使用ConcurrentHashMap
-在多线程环境下，使用HashMap进行put操作会引起死循环，导致CPU利用率接近100%，HashMap在并发执行put操作时会引起">
+    <meta name="description" content="并发工具类和并发容器[TOC]
+1.ConcurrentHashMap为什么要使用ConcurrentHashMap
+在多线程环境下，使用HashMap进行put操作会引起死循环，导致CPU利用率接近100%，HashMap在并发执行put">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -291,7 +292,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="并发工具类和并发容器"><a href="#并发工具类和并发容器" class="headerlink" title="并发工具类和并发容器"></a>并发工具类和并发容器</h3><h4 id="1-ConcurrentHashMap"><a href="#1-ConcurrentHashMap" class="headerlink" title="1.ConcurrentHashMap"></a>1.ConcurrentHashMap</h4><h5 id="为什么要使用ConcurrentHashMap"><a href="#为什么要使用ConcurrentHashMap" class="headerlink" title="为什么要使用ConcurrentHashMap"></a>为什么要使用ConcurrentHashMap</h5><blockquote>
+                <h3 id="并发工具类和并发容器"><a href="#并发工具类和并发容器" class="headerlink" title="并发工具类和并发容器"></a>并发工具类和并发容器</h3><p>[TOC]</p>
+<h4 id="1-ConcurrentHashMap"><a href="#1-ConcurrentHashMap" class="headerlink" title="1.ConcurrentHashMap"></a>1.ConcurrentHashMap</h4><h5 id="为什么要使用ConcurrentHashMap"><a href="#为什么要使用ConcurrentHashMap" class="headerlink" title="为什么要使用ConcurrentHashMap"></a>为什么要使用ConcurrentHashMap</h5><blockquote>
 <p>在多线程环境下，使用HashMap进行put操作会引起死循环，导致CPU利用率接近100%，HashMap在并发执行put操作时会引起死循环，是因为多线程会导致HashMap的Entry链表</p>
 <p>形成环形数据结构，一旦形成环形数据结构，Entry的next节点永远不为空，就会产生死循环获取Entry。</p>
 <p>HashTable容器使用synchronized来保证线程安全，但在线程竞争激烈的情况下HashTable的效率非常低下。因为当一个线程访问HashTable的同步方法，其他线程也访问HashTable的同步方法时，会进入阻塞或轮询状态。如线程1使用put进行元素添加，线程2不但不能使用put方法添加元素，也不能使用get方法来获取元素，所以竞争越激烈效率越低。</p>
@@ -995,7 +997,7 @@ Java内存模型（Java Memory Model ,JMM）就是一种符合内存模型规范
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">174.7k</span>
+                <span class="white-color">182k</span>
             
 
             

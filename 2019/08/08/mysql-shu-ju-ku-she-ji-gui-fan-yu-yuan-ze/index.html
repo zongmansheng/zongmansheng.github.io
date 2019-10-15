@@ -5,11 +5,10 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="MYSQL数据库设计规范与原则, 晓笙的BLOG">
-    <meta name="description" content="MYSQL数据库设计规范与原则MYSQL数据库设计规范
-1、数据库命名规范
+    <meta name="description" content="MYSQL数据库设计规范与原则[TOC]
+一、MYSQL数据库设计规范1、数据库命名规范
     采用26个英文字母(区分大小写)和0-9的自然数(经常不需要)加上下划线&amp;#39;_&amp;#39;组成;
-    命名简洁明确(长度不能超过30个字符);
-  ">
+    命名简洁明确(长度不能超过30个">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -294,8 +293,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="MYSQL数据库设计规范与原则"><a href="#MYSQL数据库设计规范与原则" class="headerlink" title="MYSQL数据库设计规范与原则"></a>MYSQL数据库设计规范与原则</h1><p>MYSQL数据库设计规范</p>
-<pre><code>1、数据库命名规范
+                <h1 id="MYSQL数据库设计规范与原则"><a href="#MYSQL数据库设计规范与原则" class="headerlink" title="MYSQL数据库设计规范与原则"></a>MYSQL数据库设计规范与原则</h1><p>[TOC]</p>
+<h3 id="一、MYSQL数据库设计规范"><a href="#一、MYSQL数据库设计规范" class="headerlink" title="一、MYSQL数据库设计规范"></a>一、MYSQL数据库设计规范</h3><pre><code>1、数据库命名规范
     采用26个英文字母(区分大小写)和0-9的自然数(经常不需要)加上下划线&#39;_&#39;组成;
     命名简洁明确(长度不能超过30个字符);
     例如：user, stat, log, 也可以wifi_user, wifi_stat, wifi_log给数据库加个前缀;
@@ -341,8 +340,7 @@
 </code></pre><p>数据库的三范式：<br>①字段不可分。<br>②有主键，非主键字段依赖主键。<br>③非主键字段不能互相依赖。</p>
 <pre><code>    备注：往往我们在设计表中不能遵守第三范式,因为合理的沉余字段将会给我们减少join的查询;
           例如：相册表中会添加图片的点击数字段,在相册图片表中也会添加图片的点击数字段;
-</code></pre><p>MYSQL数据库设计原则</p>
-<pre><code>1、核心原则
+</code></pre><h3 id="二、MYSQL数据库设计原则"><a href="#二、MYSQL数据库设计原则" class="headerlink" title="二、MYSQL数据库设计原则"></a>二、MYSQL数据库设计原则</h3><pre><code>1、核心原则
     不在数据库做运算;
     cpu计算务必移至业务层;
     控制列数量(字段少而精,字段数建议在20以内);
@@ -548,7 +546,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">174.7k</span>
+                <span class="white-color">182k</span>
             
 
             

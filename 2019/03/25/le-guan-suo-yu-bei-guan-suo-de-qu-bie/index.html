@@ -5,8 +5,9 @@
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
     <meta name="keywords" content="乐观锁与悲观锁的区别, 晓笙的BLOG">
-    <meta name="description" content="悲观锁和乐观锁的区别一、悲观锁(Pessimistic Lock)
-​        总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程">
+    <meta name="description" content="悲观锁和乐观锁的区别[TOC]
+一、悲观锁(Pessimistic Lock)
+​        总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -291,7 +292,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="悲观锁和乐观锁的区别"><a href="#悲观锁和乐观锁的区别" class="headerlink" title="悲观锁和乐观锁的区别"></a>悲观锁和乐观锁的区别</h1><h4 id="一、悲观锁-Pessimistic-Lock"><a href="#一、悲观锁-Pessimistic-Lock" class="headerlink" title="一、悲观锁(Pessimistic Lock)"></a>一、悲观锁(Pessimistic Lock)</h4><blockquote>
+                <h1 id="悲观锁和乐观锁的区别"><a href="#悲观锁和乐观锁的区别" class="headerlink" title="悲观锁和乐观锁的区别"></a>悲观锁和乐观锁的区别</h1><p>[TOC]</p>
+<h4 id="一、悲观锁-Pessimistic-Lock"><a href="#一、悲观锁-Pessimistic-Lock" class="headerlink" title="一、悲观锁(Pessimistic Lock)"></a>一、悲观锁(Pessimistic Lock)</h4><blockquote>
 <p>​        总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻塞直到它拿到锁（共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程）。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中synchronized和ReentrantLock等独占锁就是悲观锁思想的实现。<br>​        它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。</p>
 </blockquote>
 <h4 id="二、乐观锁-Optimistic-Lock"><a href="#二、乐观锁-Optimistic-Lock" class="headerlink" title="二、乐观锁(Optimistic Lock)"></a>二、乐观锁(Optimistic Lock)</h4><blockquote>
@@ -471,7 +473,7 @@ ArrayList 的底层是数组队列，相当于动态数组。与 Java 中的数�
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">174.7k</span>
+                <span class="white-color">182k</span>
             
 
             
