@@ -1,0 +1,705 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="RabbitMQ个人总结, 晓笙的BLOG">
+    <meta name="description" content="RabbitMQ[TOC]
+一、RabbitMQ简介
+​        AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>RabbitMQ个人总结 | 晓笙的BLOG</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="container">
+            <div class="nav-wrapper">
+                <div class="brand-logo">
+                    <a href="/" class="waves-effect waves-light">
+                        
+                        <img src="/medias/logo.png" class="logo-img hide-on-small-only">
+                        
+                        <span class="logo-span">晓笙的BLOG</span>
+                    </a>
+                </div>
+                
+
+<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/Categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a id="toggleSearch" class="waves-effect waves-light">
+            <i id="searchIcon" class="mdi-action-search" title="搜索"></i>
+        </a>
+    </li>
+
+</ul>
+
+<div class="side-nav" id="mobile-nav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">晓笙的BLOG</div>
+        <div class="logo-desc">
+            
+            有人共享，快乐会加倍，忧愁会减半！! !
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/Categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+
+    <div class="social-link">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+</div>
+
+            </div>
+        </div>
+
+        
+    </nav>
+</header>
+
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        RabbitMQ个人总结
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/rabbitmq/" target="_blank">
+                                <span class="chip bg-color">rabbitmq</span>
+                            </a>
+                        
+                            <a href="/tags/消息中间件/" target="_blank">
+                                <span class="chip bg-color">消息中间件</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/消息中间件/" class="post-category" target="_blank">
+                                消息中间件
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-12-11
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        6.5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        22 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h1><p>[TOC]</p>
+<h3 id="一、RabbitMQ简介"><a href="#一、RabbitMQ简介" class="headerlink" title="一、RabbitMQ简介"></a>一、RabbitMQ简介</h3><blockquote>
+<p>​        AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于组件之间的解耦，消息的发送者无需知道消息使用者的存在，反之亦然。<br>​        AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。<br>RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端，如：Python、Ruby、.NET、Java、JMS、C、PHP、ActionScript、XMPP、STOMP等，支持AJAX。用于在分布式系统中存储转发消息，在易用性、扩展性、高可用性等方面表现不俗。</p>
+<p>​        RabbitMQ是一个实现了AMQP（Advanced Message Queuing Protocol）高级消息队列协议的消息队列服务，采用Erlang语言开发。</p>
+</blockquote>
+<h3 id="二、RabbitMQ优势"><a href="#二、RabbitMQ优势" class="headerlink" title="二、RabbitMQ优势"></a>二、RabbitMQ优势</h3><blockquote>
+<p>RabbitMQ是唯一一个实现了AMQP标准的消息服务器；</p>
+<p>可靠性，RabbitMQ的持久化支持，保证了消息的稳定性；</p>
+<p>高并发，RabbitMQ使用了Erlang开发语言，Erlang是为电话交换机开发的语言，天生自带高并发光环，和高可用特性；</p>
+<p>集群部署简单，正是应为Erlang使得RabbitMQ集群部署变的超级简单；</p>
+<p>社区活跃度高，根据网上资料来看，RabbitMQ也是首选；</p>
+</blockquote>
+<h3 id="三、RabbitMQ使用场景"><a href="#三、RabbitMQ使用场景" class="headerlink" title="三、RabbitMQ使用场景"></a>三、RabbitMQ使用场景</h3><h4 id="3-1、异步处理"><a href="#3-1、异步处理" class="headerlink" title="3.1、异步处理"></a>3.1、异步处理</h4><blockquote>
+<p>场景说明：用户注册后，需要发注册邮件和注册短信,传统的做法有两种：</p>
+</blockquote>
+<h5 id="3-1-1、串行的方式"><a href="#3-1-1、串行的方式" class="headerlink" title="3.1.1、串行的方式"></a>3.1.1、串行的方式</h5><blockquote>
+<p>串行方式:</p>
+<p>将注册信息写入数据库后,发送注册邮件,再发送注册短信,以上三个任务全部完成后才返回给客户端。 这有一个问题是,邮件,短信并不是必须的,它只是一个通知,而这种做法让客户端等待没有必要等待的东西。</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/001.png" alt></p>
+<h5 id="3-1-2、并行的方式"><a href="#3-1-2、并行的方式" class="headerlink" title="3.1.2、并行的方式"></a>3.1.2、并行的方式</h5><blockquote>
+<p>并行方式:</p>
+<p>将注册信息写入数据库后,发送邮件的同时,发送短信,以上三个任务完成后,返回给客户端,并行的方式能提高处理的时间。 </p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/002.png" alt></p>
+<blockquote>
+<p>假设三个业务节点分别使用50ms,串行方式使用时间150ms,并行使用时间100ms。虽然并性已经提高的处理时间,但是,前面说过,邮件和短信对我正常的使用网站没有任何影响，客户端没有必要等着其发送完成才显示注册成功,应该是写入数据库后就返回. </p>
+</blockquote>
+<h5 id="3-1-3、消息队列"><a href="#3-1-3、消息队列" class="headerlink" title="3.1.3、消息队列"></a>3.1.3、消息队列</h5><blockquote>
+<p>引入消息队列后，把发送邮件,短信不是必须的业务逻辑异步处理 </p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/003.png" alt></p>
+<blockquote>
+<p>由此可以看出,引入消息队列后，用户的响应时间就等于写入数据库的时间+写入消息队列的时间(可以忽略不计),引入消息队列后处理后,响应时间是串行的3倍,是并行的2倍。</p>
+</blockquote>
+<h4 id="3-2、应用解耦"><a href="#3-2、应用解耦" class="headerlink" title="3.2、应用解耦"></a>3.2、应用解耦</h4><blockquote>
+<p>场景：双11是购物狂节,用户下单后,订单系统需要通知库存系统,传统的做法就是订单系统调用库存系统的接口。</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/004.png" alt></p>
+<blockquote>
+<p>这种做法有一个缺点:</p>
+<ul>
+<li>当库存系统出现故障时,订单就会失败。</li>
+<li>订单系统和库存系统高耦合。<br>引入消息队列 </li>
+</ul>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/005.png" alt></p>
+<blockquote>
+<ul>
+<li>订单系统:用户下单后,订单系统完成持久化处理,将消息写入消息队列,返回用户订单下单成功。</li>
+<li>库存系统:订阅下单的消息，获取下单消息，进行库操作。<br>就算库存系统出现故障，消息队列也能保证消息的可靠投递，不会导致消息丢失</li>
+</ul>
+</blockquote>
+<h4 id="3-3、流量削峰"><a href="#3-3、流量削峰" class="headerlink" title="3.3、流量削峰"></a>3.3、流量削峰</h4><blockquote>
+<p>流量削峰一般在秒杀活动中应用广泛<br>场景:秒杀活动，一般会因为流量过大，导致应用挂掉,为了解决这个问题，一般在应用前端加入消息队列。<br>作用:<br>1.可以控制活动人数，超过此一定阀值的订单直接丢弃<br>2.可以缓解短时间的高流量压垮应用(应用程序按自己的最大处理能力获取订单) </p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/006.png" alt></p>
+<blockquote>
+<p>1.用户的请求,服务器收到之后,首先写入消息队列,加入消息队列长度超过最大值,则直接抛弃用户请求或跳转到错误页面.<br>2.秒杀业务根据消息队列中的请求信息，再做后续处理.</p>
+</blockquote>
+<h3 id="四、技术术语"><a href="#四、技术术语" class="headerlink" title="四、技术术语"></a>四、技术术语</h3><blockquote>
+<p>AMQP模型（AMQP Model）：一个由关键实体和语义表示的逻辑框架，遵从AMQP规范的服务器必须提供这些实体和语义。为了实现本规范中定义的语义，客户端可以发送命令来控制AMQP服务器。<br>连接（Connection）：一个网络连接，比如TCP/IP套接字连接。<br>会话（Session）：端点之间的命名对话。在一个会话上下文中，保证“恰好传递一次”。<br>信道（Channel）：多路复用连接中的一条独立的双向数据流通道。为会话提供物理传输介质。<br>客户端（Client）：AMQP连接或者会话的发起者。AMQP是非对称的，客户端生产和消费消息，服务器存储和路由这些消息。<br>服务器（Server）：接受客户端连接，实现AMQP消息队列和路由功能的进程。也称为“消息代理”。<br>端点（Peer）：AMQP对话的任意一方。一个AMQP连接包括两个端点（一个是客户端，一个是服务器）。<br>搭档（Partner）：当描述两个端点之间的交互过程时，使用术语“搭档”来表示“另一个”端点的简记法。比如我们定义端点A和端点B，当它们进行通信时，端点B是端点A的搭档，端点A是端点B的搭档。<br>片段集（Assembly）：段的有序集合，形成一个逻辑工作单元。<br>段（Segment）：帧的有序集合，形成片段集中一个完整子单元。<br>帧（Frame）：AMQP传输的一个原子单元。一个帧是一个段中的任意分片。<br>控制（Control）：单向指令，AMQP规范假设这些指令的传输是不可靠的。<br>命令（Command）：需要确认的指令，AMQP规范规定这些指令的传输是可靠的。<br>异常（Exception）：在执行一个或者多个命令时可能发生的错误状态。<br>类（Class）：一批用来描述某种特定功能的AMQP命令或者控制。<br>消息头（Header）：描述消息数据属性的一种特殊段。<br>消息体（Body）：包含应用程序数据的一种特殊段。消息体段对于服务器来说完全透明——服务器不能查看或者修改消息体。<br>消息内容（Content）：包含在消息体段中的的消息数据。<br>交换器（Exchange）：服务器中的实体，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。<br>交换器类型（Exchange Type）：基于不同路由语义的交换器类。<br>消息队列（Message Queue）：一个命名实体，用来保存消息直到发送给消费者。<br>绑定器（Binding）：消息队列和交换器之间的关联。<br>绑定器关键字（Binding Key）：绑定的名称。一些交换器类型可能使用这个名称作为定义绑定器路由行为的模式。<br>路由关键字（Routing Key）：一个消息头，交换器可以用这个消息头决定如何路由某条消息。<br>持久存储（Durable）：一种服务器资源，当服务器重启时，保存的消息数据不会丢失。<br>临时存储（Transient）：一种服务器资源，当服务器重启时，保存的消息数据会丢失。<br>持久化（Persistent）：服务器将消息保存在可靠磁盘存储中，当服务器重启时，消息不会丢失。<br>非持久化（Non-Persistent）：服务器将消息保存在内存中，当服务器重启时，消息可能丢失。<br>消费者（Consumer）：一个从消息队列中请求消息的客户端应用程序。<br>生产者（Producer）：一个向交换器发布消息的客户端应用程序。<br>虚拟主机（Virtual Host）：一批交换器、消息队列和相关对象。虚拟主机是共享相同的身份认证和加密环境的独立服务器域。客户端应用程序在登录到服务器之后，可以选择一个虚拟主机。</p>
+</blockquote>
+<h3 id="五、系统架构"><a href="#五、系统架构" class="headerlink" title="五、系统架构"></a>五、系统架构</h3><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/007.png" alt></p>
+<blockquote>
+<p>1.Channel（信道）：多路复用连接中的一条独立的双向数据流通道。信道是建立在真实的TCP连接内的虚拟连接，复用TCP连接的通道。<br>2.Producer（消息的生产者）：向消息队列发布消息的客户端应用程序。<br>3.Consumer（消息的消费者）：从消息队列取得消息的客户端应用程序。<br>4.Message（消息）：消息由消息头和消息体组成。消息体是不透明的，而消息头则由一系列的可选属性组成，这些属性包括routing-key（路由键）、priority（消息优先权）、delivery-mode（是否持久性存储）等。<br>5.Routing Key（路由键）：消息头的一个属性，用于标记消息的路由规则，决定了交换机的转发路径。最大长度255 字节。<br>6.Queue（消息队列）：存储消息的一种数据结构，用来保存消息，直到消息发送给消费者。它是消息的容器，也是消息的终点。一个消息可投入一个或多个队列。消息一直在队列里面，等待消费者连接到这个队列将消息取走。需要注意，当多个消费者订阅同一个Queue，这时Queue中的消息会被平均分摊给多个消费者进行处理，而不是每个消费者都收到所有的消息并处理，每一条消息只能被一个订阅者接收。<br>7.Exchange（交换器|路由器）：提供Producer到Queue之间的匹配，接收生产者发送的消息并将这些消息按照路由规则转发到消息队列。交换器用于转发消息，它不会存储消息 ，如果没有 Queue绑定到 Exchange 的话，它会直接丢弃掉 Producer 发送过来的消息。交换器有四种消息调度策略（下面会介绍），分别是fanout, direct, topic, headers。<br>8.Binding（绑定）：用于建立Exchange和Queue之间的关联。一个绑定就是基于Binding Key将Exchange和Queue连接起来的路由规则，所以可以将交换器理解成一个由Binding构成的路由表。<br>6.Binding Key（绑定键）：Exchange与Queue的绑定关系，用于匹配Routing Key。最大长度255 字节。<br>7.Broker：RabbitMQ Server，服务器实体。它提供一种传输服务,它的角色就是维护一条从生产者到消费者的路线，保证数据能按照指定的方式进行传输。</p>
+</blockquote>
+<h4 id="5-1、Exchange消息调度策略"><a href="#5-1、Exchange消息调度策略" class="headerlink" title="5.1、Exchange消息调度策略"></a>5.1、Exchange消息调度策略</h4><blockquote>
+<p>​        调度策略是指Exchange在收到生产者发送的消息后依据什么规则把消息转发到一个或多个队列中保存。调度策略与三个因素相关：</p>
+<p>Exchange Type（Exchange的类型）</p>
+<p>Binding Key（Exchange和Queue的绑定关系）</p>
+<p>消息的标记信息（Routing Key和headers）。<br>Exchange根据消息的Routing Key和Exchange绑定Queue的Binding Key分配消息。生产者在将消息发送给Exchange的时候，一般会指定一个Routing Key，来指定这个消息的路由规则，而这个Routing Key需要与Exchange Type及Binding Key联合使用才能最终生效。<br>在Exchange Type与Binding Key固定的情况下（一般这些内容都是固定配置好的），我们的生产者就可以在发送消息给Exchange时，通过指定Routing Key来决定消息流向哪里。</p>
+</blockquote>
+<h4 id="5-2、交换器有四种类型：Direct-topic-Headers-and-Fanout"><a href="#5-2、交换器有四种类型：Direct-topic-Headers-and-Fanout" class="headerlink" title="5.2、交换器有四种类型：Direct, topic, Headers and Fanout"></a>5.2、交换器有四种类型：Direct, topic, Headers and Fanout</h4><blockquote>
+<ul>
+<li>Direct：direct 类型的行为是”先匹配, 再投送”. 即在绑定时设定一个 routing_key, 消息的routing_key匹配时, 才会被交换器投送到绑定的队列中去.</li>
+<li>Topic：按规则转发消息（最灵活）</li>
+<li>Headers：设置header attribute参数类型的交换器</li>
+<li>Fanout：转发消息到所有绑定队列</li>
+</ul>
+</blockquote>
+<h5 id="5-2-1、Fanout-（订阅模式-广播模式）"><a href="#5-2-1、Fanout-（订阅模式-广播模式）" class="headerlink" title="5.2.1、Fanout （订阅模式|广播模式）"></a>5.2.1、Fanout （订阅模式|广播模式）</h5><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/008.png" alt></p>
+<blockquote>
+<p>交换器会把所有发送到该交换器的消息路由到所有与该交换器绑定的消息队列中。订阅模式<br>与Binding Key和Routing Key无关，交换器将接受到的消息分发给有绑定关系的所有消息队列队列（不论Binding Key和Routing Key是什么）。类似于子网广播，子网内的每台主机都获得了一份复制的消息。Fanout交换机转发消息是最快的。</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/009.png" alt></p>
+<h5 id="5-2-2、Direct（路由模式）"><a href="#5-2-2、Direct（路由模式）" class="headerlink" title="5.2.2、Direct（路由模式）"></a>5.2.2、Direct（路由模式）</h5><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/010.png" alt></p>
+<blockquote>
+<p>精确匹配：当消息的Routing Key与 Exchange和Queue 之间的Binding Key完全匹配，如果匹配成功，将消息分发到该Queue。只有当Routing Key和Binding Key完全匹配的时候，消息队列才可以获取消息。Direct是Exchange的默认模式。<br>RabbitMQ默认提供了一个Exchange，名字是空字符串，类型是Direct，绑定到所有的Queue（每一个Queue和这个无名Exchange之间的Binding Key是Queue的名字）。所以，有时候我们感觉不需要交换器也可以发送和接收消息，但是实际上是使用了RabbitMQ默认提供的Exchange。</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/011.png" alt></p>
+<h5 id="5-2-3、Topic-（通配符模式）"><a href="#5-2-3、Topic-（通配符模式）" class="headerlink" title="5.2.3、Topic （通配符模式）"></a>5.2.3、Topic （通配符模式）</h5><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/012.png" alt></p>
+<blockquote>
+<p>按照正则表达式模糊匹配：用消息的Routing Key与 Exchange和Queue 之间的Binding Key进行模糊匹配，如果匹配成功，将消息分发到该Queue。<br>Routing Key是一个句点号“. ”分隔的字符串（我们将被句点号“. ”分隔开的每一段独立的字符串称为一个单词）。Binding Key与Routing Key一样也是句点号“. ”分隔的字符串。Binding Key中可以存在两种特殊字符“ <em> ”与“#”，用于做模糊匹配，其中“</em>”用于匹配一个单词，“#”用于匹配多个单词（可以是零个）。</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/013.png" alt></p>
+<h5 id="5-2-4、Headers（键值对模式）"><a href="#5-2-4、Headers（键值对模式）" class="headerlink" title="5.2.4、Headers（键值对模式）"></a>5.2.4、Headers（键值对模式）</h5><blockquote>
+<p>Headers不依赖于Routing Key与Binding Key的匹配规则来转发消息，交换器的路由规则是通过消息头的Headers属性来进行匹配转发的，类似HTTP请求的Headers。<br>在绑定Queue与Exchange时指定一组键值对，键值对的Hash结构中要求携带一个键“x-match”，这个键的Value可以是any或all，代表消息携带的Hash是需要全部匹配(all)，还是仅匹配一个键(any)。<br>当消息发送到Exchange时，交换器会取到该消息的headers，对比其中的键值对是否完全匹配Queue与Exchange绑定时指定的键值对；如果完全匹配则消息会路由到该Queue，否则不会路由到该Queue。Headers交换机的优势是匹配的规则不被限定为字符串(String)，而是Object类型。</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/014.png" alt></p>
+<h4 id="5-3、RPC"><a href="#5-3、RPC" class="headerlink" title="5.3、RPC"></a>5.3、RPC</h4><p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/015.png" alt></p>
+<blockquote>
+<p>MQ本身是基于异步的消息处理，前面的示例中所有的生产者（P）将消息发送到RabbitMQ后不会知道消费者（C）处理成功或者失败，甚至连有没有消费者来处理这条消息都不知道。但实际的应用场景中，我们很可能需要一些同步处理，需要同步等待服务端将我的消息处理完成后再进行下一步处理。这相当于RPC（Remote Procedure Call，远程过程调用）。</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/11/rabbitmq-ge-ren-zong-jie/016.png" alt></p>
+<blockquote>
+<p>RabbitMQ中实现RPC的机制是：<br>一. 生产者发送请求（消息）时，在消息的属性（MessageProperties，在AMQP协议中定义了14个属性，这些属性会随着消息一起发送）中设置两个属性值replyTo（一个Queue名称，用于告诉消费者处理完成后将通知我的消息发送到这个Queue中）和correlationId（此次请求的标识号，消费者处理完成后需要将此属性返还，生产者将根据这个id了解哪条请求被成功执行了或执行失败）。<br>二. 消费者收到消息并处理。<br>三. 消费者处理完消息后，将生成一条应答消息到replyTo指定的Queue，同时带上correlationId属性。<br>四. 生产者之前已订阅replyTo指定的Queue，从中收到服务器的应答消息后，根据其中的correlationId属性分析哪条请求被执行了，根据执行结果进行后续业务处理。</p>
+</blockquote>
+<h4 id="5-4、消息确认-Message-acknowledgment"><a href="#5-4、消息确认-Message-acknowledgment" class="headerlink" title="5.4、消息确认:Message acknowledgment"></a>5.4、消息确认:Message acknowledgment</h4><blockquote>
+<p>在实际应用中，可能会发生消费者收到Queue中的消息，但没有处理完成就宕机（或出现其他意外）的情况，这种情况下就可能会导致消息丢失。为了避免这种情况发生，我们可以要求消费者在消费完消息后发送一个回执给RabbitMQ，RabbitMQ收到消息回执（Message acknowledgment）后才将该消息从Queue中移除；如果RabbitMQ没有收到回执并检测到消费者的RabbitMQ连接断开，则RabbitMQ会将该消息发送给其他消费者（如果存在多个消费者）进行处理。这里不存在Timeout概念，一个消费者处理消息时间再长也不会导致该消息被发送给其他消费者，除非它的RabbitMQ连接断开。<br>这里会产生另外一个问题，如果我们的开发人员在处理完业务逻辑后，忘记发送回执给RabbitMQ，这将会导致严重的问题，Queue中堆积的消息会越来越多，消费者重启后会重复消费这些消息并重复执行业务逻辑。<br>如果我们采用no-ack的方式进行确认，也就是说，每次Consumer接到数据后，而不管是否处理完成，RabbitMQ会立即把这个Message标记为完成，然后从queue中删除了。</p>
+</blockquote>
+<h4 id="5-5、消息持久化-Message-durability"><a href="#5-5、消息持久化-Message-durability" class="headerlink" title="5.5、消息持久化:Message durability"></a>5.5、消息持久化:Message durability</h4><blockquote>
+<p>如果我们希望即使在RabbitMQ服务重启的情况下，也不会丢失消息，我们可以将Queue与Message都设置为可持久化的（durable），这样可以保证绝大部分情况下我们的RabbitMQ消息不会丢失。但依然解决不了小概率丢失事件的发生（比如RabbitMQ服务器已经接收到生产者的消息，但还没来得及持久化该消息时RabbitMQ服务器就断电了），如果我们需要对这种小概率事件也要管理起来，那么我们要用到事务(下面再讲)。</p>
+</blockquote>
+<h4 id="5-6、分发机制"><a href="#5-6、分发机制" class="headerlink" title="5.6、分发机制"></a>5.6、分发机制</h4><blockquote>
+<p>我们在应用程序使用消息系统时，一般情况下生产者往队列里插入数据时速度是比较快的，但是消费者消费数据往往涉及到一些业务逻辑处理导致速度跟不上生产者生产数据。因此如果一个生产者对应一个消费者的话，很容易导致很多消息堆积在队列里。这时，就得使用工作队列了。一个队列有多个消费者同时消费数据。<br>工作队列有两种分发数据的方式：轮询分发（Round-robin）和 公平分发（Fair dispatch）。轮询分发：队列给每一个消费者发送数量一样的数据。公平分发：消费者设置每次从队列中取一条数据，并且消费完后手动应答，继续从队列取下一个数据。</p>
+</blockquote>
+<h5 id="5-6-1、轮询分发：Round-robin-dispatching"><a href="#5-6-1、轮询分发：Round-robin-dispatching" class="headerlink" title="5.6.1、轮询分发：Round-robin dispatching"></a>5.6.1、轮询分发：Round-robin dispatching</h5><blockquote>
+<p>如果工作队列中有两个消费者，两个消费者得到的数据量一样的，并不会因为两个消费者处理数据速度不一样使得两个消费者取得不一样数量的数据。但是这种分发方式存在着一些隐患，消费者虽然得到了消息，但是如果消费者没能成功处理业务逻辑，在RabbitMQ中也不存在这条消息。就会出现消息丢失并且业务逻辑没能成功处理的情况。</p>
+</blockquote>
+<h5 id="5-6-2、公平分发：Fair-dispatch"><a href="#5-6-2、公平分发：Fair-dispatch" class="headerlink" title="5.6.2、公平分发：Fair dispatch"></a>5.6.2、公平分发：Fair dispatch</h5><blockquote>
+<p>消费者设置每次从队列里取一条数据，并且关闭自动回复机制，每次取完一条数据后，手动回复并继续取下一条数据。与轮询分发不同的是，当每个消费都设置了每次只会从队列取一条数据时，并且关闭自动应答，在每次处理完数据后手动给队列发送确认收到数据。这样队列就会公平给每个消息费者发送数据，消费一条再发第二条，而且可以在管理界面中看到数据是一条条随着消费者消费完从而减少的，并不是一下子全部分发完了。采用公平分发方式就不会出现消息丢失并且业务逻辑没能成功处理的情况。</p>
+</blockquote>
+<h4 id="5-7、事务"><a href="#5-7、事务" class="headerlink" title="5.7、事务"></a>5.7、事务</h4><blockquote>
+<p>对事务的支持是AMQP协议的一个重要特性。假设当生产者将一个持久化消息发送给服务器时，因为consume命令本身没有任何Response返回，所以即使服务器崩溃，没有持久化该消息，生产者也无法获知该消息已经丢失。如果此时使用事务，即通过txSelect()开启一个事务，然后发送消息给服务器，然后通过txCommit()提交该事务，即可以保证，如果txCommit()提交了，则该消息一定会持久化，如果txCommit()还未提交即服务器崩溃，则该消息不会服务器接收。当然Rabbit MQ也提供了txRollback()命令用于回滚某一个事务。</p>
+</blockquote>
+<h4 id="5-8、Confirm机制"><a href="#5-8、Confirm机制" class="headerlink" title="5.8、Confirm机制"></a>5.8、Confirm机制</h4><blockquote>
+<p>使用事务固然可以保证只有提交的事务，才会被服务器执行。但是这样同时也将客户端与消息服务器同步起来，这背离了消息队列解耦的本质。Rabbit MQ提供了一个更加轻量级的机制来保证生产者可以感知服务器消息是否已被路由到正确的队列中——Confirm。如果设置channel为confirm状态，则通过该channel发送的消息都会被分配一个唯一的ID，然后一旦该消息被正确的路由到匹配的队列中后，服务器会返回给生产者一个Confirm，该Confirm包含该消息的ID，这样生产者就会知道该消息已被正确分发。对于持久化消息，只有该消息被持久化后，才会返回Confirm。Confirm机制的最大优点在于异步，生产者在发送消息以后，即可继续执行其他任务。而服务器返回Confirm后，会触发生产者的回调函数，生产者在回调函数中处理Confirm信息。如果消息服务器发生异常，导致该消息丢失，会返回给生产者一个nack，表示消息已经丢失，这样生产者就可以通过重发消息，保证消息不丢失。Confirm机制在性能上要比事务优越很多。但是Confirm机制，无法进行回滚，就是一旦服务器崩溃，生产者无法得到Confirm信息，生产者其实本身也不知道该消息是否已经被持久化，只有继续重发来保证消息不丢失，但是如果原先已经持久化的消息，并不会被回滚，这样队列中就会存在两条相同的消息，系统需要支持去重。</p>
+</blockquote>
+<h4 id="5-9、Alternate-Exchange（代替交换器）"><a href="#5-9、Alternate-Exchange（代替交换器）" class="headerlink" title="5.9、Alternate Exchange（代替交换器）"></a>5.9、Alternate Exchange（代替交换器）</h4><blockquote>
+<p>Alternate Exchange是Rabbitmq自己扩展的功能，不是AMQP协议定义的。<br>创建Exchange指定该Exchange的Alternate Exchange，发送消息的时候如果Exchange没有成功把消息路由到队列中去，这就会将此消息路由到Alternate Exchange属性指定的Exchange上了。需要在创建Exchange时添加alternate-exchange属性。如果Alternate Exchange也没能成功把消息路由到队列中去，这个消息就会丢失。可以触发publish confirm机制，表示这个消息没有确认。<br>创建交换器时需要指定如下属性</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Object<span class="token operator">></span> argsMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+argsMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>“alternate<span class="token operator">-</span>exchange”<span class="token punctuation">,</span>“Alternate Exchange Name”<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="5-10、TTL（生存时间）"><a href="#5-10、TTL（生存时间）" class="headerlink" title="5.10、TTL（生存时间）"></a>5.10、TTL（生存时间）</h4><blockquote>
+<p>RabbitMQ允许您为消息和队列设置TTL（生存时间）。 可以使用可选的队列参数或策略完成（推荐使用后一个选项）。 可以为单个队列，一组队列或单个消息应用消息TTL。</p>
+<p>设置消息的过期时间</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">MessageProperties messageProperties <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+messageProperties<span class="token punctuation">.</span><span class="token function">setExpiration</span><span class="token punctuation">(</span>“<span class="token number">30000</span>”<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>设置队列中消息的过期时间<br>在声明一个队列时，可以指定队列中消息的过期时间，需要添加x-message-ttl属性。</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> arguments <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+arguments<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>“x<span class="token operator">-</span>message<span class="token operator">-</span>ttl”<span class="token punctuation">,</span><span class="token number">30000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<blockquote>
+<p>如果同时制定了Message TTL，Queue TTL，则时间短的生效。</p>
+</blockquote>
+<h4 id="5-11、Queue-Length-Limit（队列长度限制）"><a href="#5-11、Queue-Length-Limit（队列长度限制）" class="headerlink" title="5.11、Queue Length Limit（队列长度限制）"></a>5.11、Queue Length Limit（队列长度限制）</h4><blockquote>
+<p>可以设置队列中消息数量的限制，如果测试队列中最多只有5个消息，当第六条消息发送过来的时候，会删除最早的那条消息。队列中永远只有5条消息。<br>使用代码声明含有x-max-length和x-max-length-bytes属性的队列<br>Max length(x-max-length) 用来控制队列中消息的数量。<br>如果超出数量，则先到达的消息将会被删除掉。</p>
+<p>Max length bytes(x-max-length-bytes) 用来控制队列中消息总的大小。<br>如果超过总大小，则最先到达的消息将会被删除，直到总大小不超过x-max-length-byte为止。</p>
+<p>Map&lt;String, Object&gt; arguments = new HashMap&lt;&gt;();<br>//表示队列中最多存放三条消息<br>arguments.put(“x-max-length”,3);<br>Map&lt;String, Object&gt; arguments = new HashMap&lt;&gt;();<br>//队列中消息总的空间大小<br>arguments.put(“x-max-length-bytes”,10);</p>
+</blockquote>
+
+            </div>
+            <hr>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">
+                        <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;转载请注明:
+                    </span>
+                    <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2019/12/11/rabbitmq-ge-ren-zong-jie/" class="b-link-green">RabbitMQ个人总结</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/12/11/rabbitmq-ge-ren-zong-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="RabbitMQ个人总结">
+                        
+                        <span class="card-title">RabbitMQ个人总结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">RabbitMQ[TOC]
+一、RabbitMQ简介
+​        AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/消息中间件/" class="post-category" target="_blank">
+                                    消息中间件
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/rabbitmq/" target="_blank">
+                        <span class="chip bg-color">rabbitmq</span>
+                    </a>
+                    
+                    <a href="/tags/消息中间件/" target="_blank">
+                        <span class="chip bg-color">消息中间件</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="JMeter性能测试入门">
+                        
+                        <span class="card-title">JMeter性能测试入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">JMeter性能测试入门[TOC]
+一、JMeter简介
+​        Apache JMeter是一款纯java编写负载功能测试和性能测试开源工具软件。相比Loadrunner而言，JMeter小巧轻便且免费，逐渐成为了主流的性能测试</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/测试/" class="post-category" target="_blank">
+                                    测试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Jmeter、性能测试/" target="_blank">
+                        <span class="chip bg-color">Jmeter、性能测试</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="#" target="_blank">ZongMan</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="#" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">194k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字" class="search-input" autofocus>
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/js/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=ZongMan"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'ZongMan');
+</script>
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":140,"height":260},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

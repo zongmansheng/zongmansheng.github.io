@@ -4,8 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="RabbitMQ, 晓笙的BLOG">
-    <meta name="description" content="RabbitMQ | 晓笙的BLOG">
+    <meta name="keywords" content="JMeter性能测试入门, 晓笙的BLOG">
+    <meta name="description" content="JMeter性能测试入门[TOC]
+一、JMeter简介
+​        Apache JMeter是一款纯java编写负载功能测试和性能测试开源工具软件。相比Loadrunner而言，JMeter小巧轻便且免费，逐渐成为了主流的性能测试">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>RabbitMQ | 晓笙的BLOG</title>
+    <title>JMeter性能测试入门 | 晓笙的BLOG</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -208,13 +210,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        RabbitMQ
+                        JMeter性能测试入门
                     </div>
                 </div>
             </div>
@@ -234,12 +236,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Jmeter、性能测试/" target="_blank">
+                                <span class="chip bg-color">Jmeter、性能测试</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/测试/" class="post-category" target="_blank">
+                                测试
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -247,21 +262,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-24
+                    2019-12-10
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        0
+                        1.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -277,7 +292,72 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="JMeter性能测试入门"><a href="#JMeter性能测试入门" class="headerlink" title="JMeter性能测试入门"></a>JMeter性能测试入门</h1><p>[TOC]</p>
+<h3 id="一、JMeter简介"><a href="#一、JMeter简介" class="headerlink" title="一、JMeter简介"></a>一、JMeter简介</h3><blockquote>
+<p>​        Apache JMeter是一款纯java编写负载功能测试和性能测试开源工具软件。相比Loadrunner而言，JMeter小巧轻便且免费，逐渐成为了主流的性能测试工具，是每个测试人员都必须要掌握的工具之一。</p>
+</blockquote>
+<h4 id="1-1、JMeter的作用"><a href="#1-1、JMeter的作用" class="headerlink" title="1.1、JMeter的作用"></a>1.1、<strong>JMeter的作用</strong></h4><blockquote>
+<p>1.能够对HTTP和FTP服务器进行压力和<a href="https://baike.baidu.com/item/性能测试" target="_blank" rel="noopener">性能测试</a>， 也可以对任何数据库进行同样的测试（通过JDBC）。</p>
+<p>2.完全的可移植性和100% 纯java。</p>
+<p>3.完全 Swing 和轻量组件支持（<a href="https://baike.baidu.com/item/预编译" target="_blank" rel="noopener">预编译</a>的JAR使用 javax.swing.*)包。</p>
+<p>4.完全多线程 框架允许通过多个线程并发取样和 通过单独的<a href="https://baike.baidu.com/item/线程组" target="_blank" rel="noopener">线程组</a>对不同的功能同时取样。</p>
+<p>5.精心的GUI设计允许快速操作和更精确的计时。</p>
+<p>6.缓存和离线分析/回放测试结果。</p>
+</blockquote>
+<h4 id="1-2、JMeter的高可扩展性"><a href="#1-2、JMeter的高可扩展性" class="headerlink" title="1.2、JMeter的高可扩展性"></a>1.2、<strong>JMeter的高可扩展性</strong></h4><blockquote>
+<p>1.可链接的取样器允许无限制的测试能力。</p>
+<p>2.各种负载统计表和可链接的<a href="https://baike.baidu.com/item/计时器" target="_blank" rel="noopener">计时器</a>可供选择。</p>
+<p>3.数据分析和可视化<a href="https://baike.baidu.com/item/插件" target="_blank" rel="noopener">插件</a>提供了很好的可扩展性以及个性化。</p>
+<p>4.具有提供动态输入到测试的功能（包括Javascript）。</p>
+<p>5.支持脚本编程的取样器（在1.9.2及以上版本支持BeanShell）。</p>
+</blockquote>
+<h4 id="1-3、意义"><a href="#1-3、意义" class="headerlink" title="1.3、意义"></a>1.3、意义</h4><blockquote>
+<p>1、Label： 定义的HTTP请求名称</p>
+<p>2、Samples： 表示这次测试中一共发出了多少个请求</p>
+<p>3、Average： 访问页面的平均响应时间</p>
+<p>4、Min: 访问页面的最小响应时间</p>
+<p>5、Max: 访问页面的最大响应时间</p>
+<p>6、Error%： 错误的请求的数量/请求的总数</p>
+<p>7、Throughput：每秒完成的请求数</p>
+<p>8、KB/Sec： 每秒从服务器端接收到的数据量</p>
+</blockquote>
+<h4 id="1-4、环境"><a href="#1-4、环境" class="headerlink" title="1.4、环境"></a>1.4、环境</h4><blockquote>
+<p>系统Mac os 、JDK版本1.8、Jmeter版本5.2.1</p>
+</blockquote>
+<h3 id="二、测试接口"><a href="#二、测试接口" class="headerlink" title="二、测试接口"></a>二、测试接口</h3><h4 id="2-1、自定义接口"><a href="#2-1、自定义接口" class="headerlink" title="2.1、自定义接口"></a>2.1、自定义接口</h4><blockquote>
+<p><a href="http://127.0.0.1:8080/zms/student/list" target="_blank" rel="noopener">http://127.0.0.1:8080/zms/student/list</a></p>
+<p><a href="http://127.0.0.1:8080/zms/student/delete/{id}" target="_blank" rel="noopener">http://127.0.0.1:8080/zms/student/delete/{id}</a></p>
+</blockquote>
+<h4 id="2-2、请求参数"><a href="#2-2、请求参数" class="headerlink" title="2.2、请求参数"></a>2.2、请求参数</h4><blockquote>
+<p>学生id</p>
+</blockquote>
+<h3 id="三、JMeter脚本编写"><a href="#三、JMeter脚本编写" class="headerlink" title="三、JMeter脚本编写"></a>三、JMeter脚本编写</h3><h4 id="3-1、添加线程组"><a href="#3-1、添加线程组" class="headerlink" title="3.1、添加线程组"></a>3.1、添加线程组</h4><blockquote>
+<p>右键点击—&gt;测试计划—&gt;添加—&gt;线程（用户）—&gt;线程组</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/001.png" alt></p>
+<blockquote>
+<p>这里可以配置线程组名称，线程数，准备时长（Ramp-Up Period(in seconds)）循环次数，调度器等参数： </p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/002.png" alt></p>
+<blockquote>
+<p>线程组参数详解：</p>
+<p>1、 线程数：虚拟用户数。一个虚拟用户占用一个进程或线程。设置多少虚拟用户数在这里也就是设置多少个        线程数。<br>2、 Ramp-Up 时间(秒)准备时长：设置的虚拟用户数需要多长时间全部启动。如果线程数为10，准备时长为        2，那么需要2秒钟启动10个线程，也就是每秒钟启动5个线程。<br>3、 循环次数：每个线程发送请求的次数。如果线程数为10，循环次数为100，那么每个线程发送100次请        求。总请求数为10*100=1000 。如果勾选了“永远”，那么所有线程会一直发送请求，一到选择停止运行        脚本。<br>4、 Delay Thread creation until needed：直到需要时延迟线程的创建。<br>5、 调度器：设置线程组启动的开始时间和结束时间(配置调度器时，需要勾选循环次数为永远)<br>持续时间（秒）：测试持续时间，会覆盖结束时间<br>启动延迟（秒）：测试延迟启动时间，会覆盖启动时间<br>启动时间：测试启动时间，启动延迟会覆盖它。当启动时间已过，手动只需测试时当前时间也会覆盖它。<br>结束时间：测试结束时间，持续时间会覆盖它。</p>
+</blockquote>
+<h4 id="3-2、添加HTTP请求"><a href="#3-2、添加HTTP请求" class="headerlink" title="3.2、添加HTTP请求"></a>3.2、添加HTTP请求</h4><blockquote>
+<p>右键点击—&gt;线程组– -&gt; 添加—&gt;取样器(Sampler) —&gt; HTTP请求</p>
+</blockquote>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/003.png" alt></p>
+<p>接口测试：</p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/004.png" alt></p>
+<blockquote>
+<p>Http请求主要参数详解：</p>
+<p>1、Web服务器<br>协议：向目标服务器发送HTTP请求协议，可以是HTTP或HTTPS，默认为HTTP<br>服务器名称或IP ：HTTP请求发送的目标服务器名称或IP<br>端口号：目标服务器的端口号，默认值为80<br>2、Http请求<br>方法：发送HTTP请求的方法，可用方法包括GET、POST、HEAD、PUT、OPTIONS、TRACE、DELETE等。<br>路径：目标URL路径（URL中去掉服务器地址、端口及参数后剩余部分）<br>Content encoding ：编码方式，默认为ISO-8859-1编码，这里配置为utf-8<br>同请求一起发送参数<br>在请求中发送的URL参数，用户可以将URL中所有参数设置在本表中，表中每行为一个参数（对应URL中的 name=value），注意参数传入中文时需要勾选“编码”</p>
+</blockquote>
+<h4 id="3-3、添加察看结果树"><a href="#3-3、添加察看结果树" class="headerlink" title="3.3、添加察看结果树"></a>3.3、添加察看结果树</h4><p>右键—&gt;添加—&gt;监听器—&gt;察看结果树</p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/005.png" alt></p>
+<p>结果：</p>
+<p><img src="//github.com/zongmansheng/zongmansheng.github.io.git/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/006.png" alt></p>
+<h3 id="3-4、用户自定义变量"><a href="#3-4、用户自定义变量" class="headerlink" title="3.4、用户自定义变量"></a>3.4、用户自定义变量</h3>
             </div>
             <hr>
 
@@ -300,7 +380,7 @@
                     </span>
                     <a href="https://github.com/zongmansheng/zongmansheng.github.io.git" class="b-link-green">晓笙的BLOG</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/09/24/rabbitmq/" class="b-link-green">RabbitMQ</a>
+                    <a href="/2019/12/10/jmeter-xing-neng-ce-shi-ru-men/" class="b-link-green">JMeter性能测试入门</a>
                 </p>
             </div>
         </div>
@@ -325,29 +405,29 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/10/11/mysql-mian-shi-ji-jin/">
+                <a href="/2019/12/11/rabbitmq-ge-ren-zong-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Mysql面试集锦">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="RabbitMQ个人总结">
                         
-                        <span class="card-title">Mysql面试集锦</span>
+                        <span class="card-title">RabbitMQ个人总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Mysql面试集锦[TOC]
-1.索引是什么？有什么作用以及缺点
-​        索引是对数据库表中一列或多列的值进行排序的一种结构，使用索引可快速访问数据库表中的特定信息。也可以理解为索引就是一本书的目录，创建索引和维护索引要耗费时间，</div>
+                    <div class="summary">RabbitMQ[TOC]
+一、RabbitMQ简介
+​        AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-11
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-12-11
                         </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/面试题/" class="post-category" target="_blank">
-                                    面试题
+                            <a href="/categories/消息中间件/" class="post-category" target="_blank">
+                                    消息中间件
                                 </a>
                             
                             
@@ -357,8 +437,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MySql/" target="_blank">
-                        <span class="chip bg-color">MySql</span>
+                    <a href="/tags/rabbitmq/" target="_blank">
+                        <span class="chip bg-color">rabbitmq</span>
+                    </a>
+                    
+                    <a href="/tags/消息中间件/" target="_blank">
+                        <span class="chip bg-color">消息中间件</span>
                     </a>
                     
                 </div>
@@ -372,28 +456,29 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/22/springboot2-zheng-he-fastdfs-zhong-jian-jian-shi-xian-wen-jian-fen-bu-shi-guan-li/">
+                <a href="/2019/11/26/gong-han-fang-fa-she-ji-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="SpringBoot2整合FastDFS中间件,实现文件分布式管理">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="工厂方法设计模式">
                         
-                        <span class="card-title">SpringBoot2整合FastDFS中间件,实现文件分布式管理</span>
+                        <span class="card-title">工厂方法设计模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">SpringBoot2整合FastDFS中间件,实现文件分布式管理一、FastDFS
-​        FastDFS是由淘宝的余庆先⽣生所开发，是⼀一个轻量量级、⾼高性能的开源分布式⽂文件系统，⽤用纯C语⾔言开 发，包括⽂文件存储、⽂文件</div>
+                    <div class="summary">工厂方法模式[TOC]
+一、模式的定义与特点
+工厂方法（FactoryMethod）模式的定义：定义一个创建产品对象的工厂接口，将产品对象的实际创建工作推迟到具体子工厂类当中。这满足创建型模式中所要求的“创建与使用相分离”的特点。 如果要创</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-22
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-26
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SpringBoot/" class="post-category" target="_blank">
-                                    SpringBoot
+                            <a href="/categories/设计模式/" class="post-category" target="_blank">
+                                    设计模式
                                 </a>
                             
                             
@@ -403,12 +488,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/springboot/" target="_blank">
-                        <span class="chip bg-color">springboot</span>
-                    </a>
-                    
-                    <a href="/tags/fastDFS/" target="_blank">
-                        <span class="chip bg-color">fastDFS</span>
+                    <a href="/tags/factory-method/" target="_blank">
+                        <span class="chip bg-color">factory method</span>
                     </a>
                     
                 </div>
@@ -435,7 +516,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">182k</span>
+                <span class="white-color">194k</span>
             
 
             
